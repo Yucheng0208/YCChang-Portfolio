@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>科技藍風格網站</title>
+    <title>首頁 - 科技藍風格網站</title>
     <!-- 引入 Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <!-- 引入自訂 CSS -->
@@ -14,7 +14,6 @@
     <!-- 1. 滿版輪播圖 -->
     <header class="hero-slider">
         <div class="swiper">
-            <!-- ... 你的 swiper-wrapper 和 slides 內容照舊 ... -->
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
                 <div class="swiper-slide" style="background-image: url('images/slide-1.jpg');">
@@ -38,20 +37,20 @@
                     </div>
                 </div>
             </div>
-            <!-- 如果需要分頁器 -->
+            <!-- 分頁器 -->
             <div class="swiper-pagination"></div>
-            <!-- 如果需要導航按鈕 -->
-            <div class="swiper-button-next"></div>
+            <!-- 導航按鈕 -->
             <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
 
-        <!-- ===== 新增的向下滾動箭頭 ===== -->
-        <a href="#home" class="scroll-down-arrow" aria-label="Scroll to content">
+        <!-- 向下滾動箭頭，指向頁面內容 -->
+        <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content">
             <!-- 箭頭本身將由 CSS 繪製 -->
         </a>
     </header>
 
-    <!-- 2. Navbar -->
+    <!-- 2. Navbar (所有頁面共用此結構) -->
     <nav class="main-nav">
         <div class="nav-container">
             <!-- 手機版 Logo 和標題 -->
@@ -60,17 +59,17 @@
                 <h1 class="site-title">科技網站</h1>
             </div>
 
-            <!-- 導覽連結 -->
+            <!-- 導覽連結 (注意 href 已改為指向 .html 檔案) -->
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#honor">Honor</a></li>
-                <li><a href="#publication">Publication</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#highlight">Highlight</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#medium">Medium</a></li>
-                <li><a href="#chatgpt">ChatGPT</a></li>
-                <li><a href="#partners">Partners</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="honor.html">Honor</a></li>
+                <li><a href="publication.html">Publication</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="highlight.html">Highlight</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="medium.html">Medium</a></li>
+                <li><a href="chatgpt.html">ChatGPT</a></li>
+                <li><a href="partners.html">Partners</a></li>
             </ul>
 
             <!-- 搜索和漢堡按鈕 -->
@@ -87,18 +86,12 @@
         </div>
     </nav>
 
-    <!-- 3. 網頁主要內容區塊 -->
-    <main>
-        <!-- 每個 section 的 id 對應 navbar 的 href -->
-        <section id="home"><h1>Home</h1></section>
-        <section id="honor"><h1>Honor</h1></section>
-        <section id="publication"><h1>Publication</h1></section>
-        <section id="portfolio"><h1>Portfolio</h1></section>
-        <section id="highlight"><h1>Highlight</h1></section>
-        <section id="certifications"><h1>Certifications</h1></section>
-        <section id="medium"><h1>Medium</h1></section>
-        <section id="chatgpt"><h1>ChatGPT</h1></section>
-        <section id="partners"><h1>Partners</h1></section>
+    <!-- 3. 首頁主要內容 -->
+    <main id="page-content">
+        <div class="page-container">
+            <h1>歡迎來到我的首頁</h1>
+            <p>這裡是網站的主要入口，展示了最新的動態與核心價值。您可以在上方導覽列中探索更多關於我的榮譽、作品集與認證等資訊。</p>
+        </div>
     </main>
 
     <!-- 引入 Swiper.js JS -->
