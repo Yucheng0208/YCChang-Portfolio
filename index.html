@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技藍風格網站</title>
+    <!-- 引入 Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <!-- 引入自訂 CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. 滿版輪播圖 -->
+    <header class="hero-slider">
+        <div class="swiper">
+            <!-- ... 你的 swiper-wrapper 和 slides 內容照舊 ... -->
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide" style="background-image: url('images/slide-1.jpg');">
+                    <div class="slide-content">
+                        <h1>探索未來科技</h1>
+                        <p>創新、智能，引領下一個世代的變革。</p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide" style="background-image: url('images/slide-2.jpg');">
+                    <div class="slide-content">
+                        <h1>數據驅動決策</h1>
+                        <p>從海量資訊中，提煉出最有價值的洞見。</p>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide" style="background-image: url('images/slide-3.jpg');">
+                    <div class="slide-content">
+                        <h1>無縫使用者體驗</h1>
+                        <p>設計不僅是外觀，更是與使用者之間的對話。</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 如果需要分頁器 -->
+            <div class="swiper-pagination"></div>
+            <!-- 如果需要導航按鈕 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <!-- ===== 新增的向下滾動箭頭 ===== -->
+        <a href="#home" class="scroll-down-arrow" aria-label="Scroll to content">
+            <!-- 箭頭本身將由 CSS 繪製 -->
+        </a>
+    </header>
+
+    <!-- 2. Navbar -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <!-- 手機版 Logo 和標題 -->
+            <div class="mobile-brand">
+                <img src="images/logo.svg" alt="Logo" class="mobile-logo">
+                <h1 class="site-title">科技網站</h1>
+            </div>
+
+            <!-- 導覽連結 -->
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#honor">Honor</a></li>
+                <li><a href="#publication">Publication</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#highlight">Highlight</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#medium">Medium</a></li>
+                <li><a href="#chatgpt">ChatGPT</a></li>
+                <li><a href="#partners">Partners</a></li>
+            </ul>
+
+            <!-- 搜索和漢堡按鈕 -->
+            <div class="nav-controls">
+                <div class="search-icon">
+                    <img src="images/search.svg" alt="Search">
+                </div>
+                <button class="hamburger-btn" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. 網頁主要內容區塊 -->
+    <main>
+        <!-- 每個 section 的 id 對應 navbar 的 href -->
+        <section id="home"><h1>Home</h1></section>
+        <section id="honor"><h1>Honor</h1></section>
+        <section id="publication"><h1>Publication</h1></section>
+        <section id="portfolio"><h1>Portfolio</h1></section>
+        <section id="highlight"><h1>Highlight</h1></section>
+        <section id="certifications"><h1>Certifications</h1></section>
+        <section id="medium"><h1>Medium</h1></section>
+        <section id="chatgpt"><h1>ChatGPT</h1></section>
+        <section id="partners"><h1>Partners</h1></section>
+    </main>
+
+    <!-- 引入 Swiper.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- 引入自訂 JS -->
+    <script src="script.js"></script>
+
+</body>
+</html>
