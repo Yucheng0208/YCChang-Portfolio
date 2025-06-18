@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         async function loadPublications() {
             try {
                 // 1. 獲取 publications.yaml 檔案
-                const response = await fetch('publications.yaml');
+                const response = await fetch('./publications.yaml');
                 if (!response.ok) throw new Error('Cannot find publications.yaml');
                 const yamlContent = await response.text();
 
