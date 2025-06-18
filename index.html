@@ -37,17 +37,11 @@
                     </div>
                 </div>
             </div>
-            <!-- 分頁器 -->
             <div class="swiper-pagination"></div>
-            <!-- 導航按鈕 -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
         </div>
-
-        <!-- 向下滾動箭頭，指向頁面內容 -->
-        <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content">
-            <!-- 箭頭本身將由 CSS 繪製 -->
-        </a>
+        <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content"></a>
     </header>
 
     <!-- 2. Navbar (所有頁面共用此結構) -->
@@ -59,7 +53,7 @@
                 <h1 class="site-title">科技網站</h1>
             </div>
 
-            <!-- 導覽連結 (注意 href 已改為指向 .html 檔案) -->
+            <!-- 導覽連結 -->
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honor.html">Honor</a></li>
@@ -70,17 +64,18 @@
                 <li><a href="medium.html">Medium</a></li>
                 <li><a href="chatgpt.html">ChatGPT</a></li>
                 <li><a href="partners.html">Partners</a></li>
+                <!-- 搜尋圖示 (使用 CSS Mask 的新結構) -->
+                <li class="search-item">
+                    <a href="#" id="search-btn" aria-label="Open search">
+                        <span class="search-icon-mask"></span>
+                    </a>
+                </li>
             </ul>
 
-            <!-- 搜索和漢堡按鈕 -->
+            <!-- 漢堡按鈕 -->
             <div class="nav-controls">
-                <div class="search-icon">
-                    <img src="images/search.svg" alt="Search">
-                </div>
                 <button class="hamburger-btn" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
@@ -98,6 +93,16 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- 引入自訂 JS -->
     <script src="script.js"></script>
+
+    <!-- 4. 搜尋浮層 (所有頁面都需要) -->
+    <div id="search-overlay" class="search-overlay">
+        <button class="close-btn" aria-label="Close search">×</button>
+        <div class="search-box">
+            <form id="search-form">
+                <input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off">
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>
