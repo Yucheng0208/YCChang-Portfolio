@@ -76,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     ${pub.links.researchgate ? `<a href="${pub.links.researchgate}" target="_blank" rel="noopener noreferrer" class="action-btn">ResearchGate</a>` : ''}
                     ${pub.links.ieee ? `<a href="${pub.links.ieee}" target="_blank" rel="noopener noreferrer" class="action-btn">IEEE Explore</a>` : ''}
                     ${pub.links.pdf ? `<a href="${pub.links.pdf}" target="_blank" rel="noopener noreferrer" class="action-btn">PDF</a>` : ''}
-                    ${pub.links.other ? `<a href="${pub.links.other}" target="_blank" rel="noopener noreferrer" class="action-btn">Other</a>` : ''}
+                    ${pub.links.isbn ? `<a href="${pub.links.isbn}" target="_blank" rel="noopener noreferrer" class="action-btn">ISBN</a>` : ''}
                 </div>`;
                 const row = document.createElement('tr');
-                row.innerHTML = `<td data-label="#">${index + 1}</td><td data-label="Title">${pub.title}</td><td data-label="Authors">${pub.authors}</td><td data-label="Venue">${pub.venue}</td><td data-label="Date">${pub.date}</td><td data-label="Links">${linksHTML}</td>`;
+                row.innerHTML = `<td data-label="#">${index + 1}</td><td data-label="Title">${pub.title}</td><td data-label="Authors">${pub.authors}</td><td data-label="Venue">${pub.venue}</td><td data-label="Date">${pub.date}</td><td data-label="Links">${linksHTML}</td><td data-label="Author Role">${pub.authorrole}</td>`;
                 tableBody.appendChild(row);
             });
         }

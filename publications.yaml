@@ -9,4 +9,7 @@
     pdf: ''
     other: ''
     isbn: ''
+  authorrole: 'Corresponding Author'
+  # Co-Author(s), First Author, Corresponding Author
   date: '2025-08-25'
+
