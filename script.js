@@ -97,6 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td data-label="Authors">${pub.authors}</td>
                 <td data-label="Venue">${pub.venue}</td>
                 <td data-label="Links">${linksHTML}</td>
+                <td data-label="Date">${pub.date || 'N/A'}</td>
+                <td data-label="Author Role">${pub.authorrole || 'N/A'}</td>
+                
             `;
             tableBody.appendChild(row);
         });
