@@ -38,84 +38,81 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('publication-search');
         const noResultsDiv = document.getElementById('no-results');
 
-        // 主函數：加載並處理單一 YAML 檔案
         async function loadPublications() {
             try {
-                // 1. 獲取 publications.yaml 檔案
                 const response = await fetch('./publications.yaml');
                 if (!response.ok) throw new Error('Cannot find publications.yaml');
                 const yamlContent = await response.text();
-
-                // 2. 使用 js-yaml 解析檔案內容
-                // window.jsyaml 是由我們引入的 js-yaml 函式庫提供的
                 allPublications = window.jsyaml.load(yamlContent);
                 
                 if (!Array.isArray(allPublications)) {
                     throw new Error('YAML file is not a valid list.');
                 }
-                
-                // 3. 初始渲染
                 updateDisplay();
-
             } catch (error) {
                 console.error("Failed to load publications:", error);
-                tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: #ff4d4d;">Error loading publication data. Please check the console.</td></tr>`;
+                tableBody.innerHTML = `<tr><td style="text-align:center; color: #ff4d4d;">Error loading publication data. Please check the console.</td></tr>`;
             }
         }
         
-        // 渲染表格的函數 (無需修改)
+        // 【簡化版】渲染表格的函數
         function renderTable(publications) {
             tableBody.innerHTML = '';
-            if (publications.length === 0) { noResultsDiv.style.display = 'block'; tableBody.parentElement.style.display = 'none'; return; }
+            if (publications.length === 0) {
+                noResultsDiv.style.display = 'block';
+                tableBody.closest('.table-container').style.display = 'none';
+                return;
+            }
             noResultsDiv.style.display = 'none';
-            tableBody.parentElement.style.display = '';
+            tableBody.closest('.table-container').style.display = '';
 
             publications.forEach((pub, index) => {
-                let linksHTML = ''; // 先宣告一個空字串
-                // 檢查 pub.links 是否存在，並且裡面至少有一個連結
                 const hasLinks = pub.links && Object.keys(pub.links).length > 0;
+                let linksHTML = '';
                 if (hasLinks) {
-                // 如果有連結，就正常生成按鈕
                     linksHTML = `
-                <div class="action-buttons">
-                    ${pub.links.scholar ? `<a href="${pub.links.scholar}" target="_blank" rel="noopener noreferrer" class="action-btn">Google Scholar</a>` : ''}
-                    ${pub.links.researchgate ? `<a href="${pub.links.researchgate}" target="_blank" rel="noopener noreferrer" class="action-btn">ResearchGate</a>` : ''}
-                    ${pub.links.ieee ? `<a href="${pub.links.ieee}" target="_blank" rel="noopener noreferrer" class="action-btn">IEEE Explore</a>` : ''}
-                    ${pub.links.pdf ? `<a href="${pub.links.pdf}" target="_blank" rel="noopener noreferrer" class="action-btn">PDF</a>` : ''}
-                    ${pub.links.isbn ? `<a href="${pub.links.isbn}" target="_blank" rel="noopener noreferrer" class="action-btn">ISBN</a>` : ''}
-                </div>
-                `;
-            } else {
-            // 如果沒有連結，就給一個不斷行的空格當作佔位符
-                linksHTML = ' ';
-            }
+                        <div class="action-buttons">
+                            ${pub.links.scholar ? `<a href="${pub.links.scholar}" target="_blank" rel="noopener noreferrer" class="action-btn">Google Scholar</a>` : ''}
+                            ${pub.links.researchgate ? `<a href="${pub.links.researchgate}" target="_blank" rel="noopener noreferrer" class="action-btn">ResearchGate</a>` : ''}
+                            ${pub.links.ieee ? `<a href="${pub.links.ieee}" target="_blank" rel="noopener noreferrer" class="action-btn">IEEE Explore</a>` : ''}
+                            ${pub.links.pdf ? `<a href="${pub.links.pdf}" target="_blank" rel="noopener noreferrer" class="action-btn">PDF</a>` : ''}
+                            ${pub.links.isbn ? `<a href="${pub.links.isbn}" target="_blank" rel="noopener noreferrer" class="action-btn">ISBN</a>` : ''}
+                            ${pub.links.patentnum ? `<a href="${pub.links.patentnum}" target="_blank" rel="noopener noreferrer" class="action-btn">Patent No.</a>` : ''}
+                            ${pub.links.url ? `<a href="${pub.links.url}" target="_blank" rel="noopener noreferrer" class="action-btn">URL</a>` : ''}
+                        </div>
+                    `;
+                }
 
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td data-label="#">${index + 1}</td>
-                <td data-label="Title">${pub.title}</td>
-                <td data-label="Authors">${pub.authors}</td>
-                <td data-label="Venue">${pub.venue}</td>
-                <td data-label="Links">${linksHTML}</td>
-                <td data-label="Date">${pub.date || 'N/A'}</td>
-                <td data-label="Author Role">${pub.authorrole || 'N/A'}</td>
-                
-            `;
-            tableBody.appendChild(row);
-        });
+                // 生成最簡單、扁平化的 HTML 結構
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td data-label="#">${index + 1}</td>
+                    <td data-label="Title">${pub.title}</td>
+                    <td data-label="Authors">${pub.authors}</td>
+                    <td data-label="Venue">${pub.venue}</td>
+                    <td data-label="Date">${pub.date || 'N/A'}</td>
+                    <td data-label="Author Role">${pub.authorrole || 'N/A'}</td>
+                    ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+                `;
+                tableBody.appendChild(row);
+            });
         }
 
-        // 更新顯示的函數 (無需修改)
         function updateDisplay() {
             const activeFilter = document.querySelector('#publication-filter button.active').dataset.filter;
             const searchTerm = searchInput.value.toLowerCase().trim();
             let filteredPublications = allPublications;
             if (activeFilter !== 'all') { filteredPublications = filteredPublications.filter(pub => pub.category === activeFilter); }
-            if (searchTerm) { filteredPublications = filteredPublications.filter(pub => pub.title.toLowerCase().includes(searchTerm) || pub.authors.toLowerCase().includes(searchTerm) || pub.venue.toLowerCase().includes(searchTerm)); }
+            if (searchTerm) {
+                filteredPublications = filteredPublications.filter(pub => 
+                    Object.values(pub).some(value => 
+                        String(value).toLowerCase().includes(searchTerm)
+                    )
+                );
+            }
             renderTable(filteredPublications);
         }
 
-        // 添加事件監聽 (無需修改)
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -124,29 +121,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         searchInput.addEventListener('input', updateDisplay);
-
-        // 啟動加載過程
         loadPublications();
     }
         
     // --- 9. Back to Top Button Logic ---
     const backToTopBtn = document.getElementById('back-to-top-btn');
-
     if (backToTopBtn) {
-        // 監聽頁面滾動
         window.addEventListener('scroll', () => {
-            // 如果滾動距離超過 300px，就顯示按鈕
             if (window.scrollY > 300) {
                 backToTopBtn.classList.add('is-visible');
             } else {
                 backToTopBtn.classList.remove('is-visible');
             }
         });
-
-        // 監聽按鈕點擊
         backToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // 阻止 a 標籤的預設跳轉行為
-            // 平滑滾動到頁面頂部
+            e.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'

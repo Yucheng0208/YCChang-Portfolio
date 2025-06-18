@@ -4,11 +4,11 @@
   venue: 'WASN 2025'
   links:
     scholar: ''
-    researchgate: ''
-    ieee: ''
-    pdf: ''
-    other: ''
+    researchgate: 'Ｘ'
+    ieee: 'Ｘ'
+    pdf: 'Ｘ'
     isbn: ''
+    url: ''
   authorrole: 'Corresponding Author'
   # Co-Author(s), First Author, Corresponding Author
   date: '2025-08-25'
