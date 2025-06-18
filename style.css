@@ -44,24 +44,12 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; padding: 10px 15px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; transition: color 0.3s ease; }
 .nav-links li.active-link { border-color: var(--tech-cyan); }
 .nav-links li.active-link.temporarily-hidden { border-color: transparent; }
-
-/* 懸停效果 (科技藍漸層) */
 .nav-links li a::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50px; background: linear-gradient(to right, var(--tech-blue), var(--tech-cyan)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); z-index: -1; }
 .nav-links li:hover a::before { transform: scaleX(1); }
-/* 注意：這條規則現在只對文字連結有效，對 img 無效 */
 .nav-links li:hover a { color: var(--dark-bg); }
-
-/* ===== 搜尋圖示樣式 (已改回使用 img) ===== */
-.search-item a {
-    padding: 12px;
-}
-.search-icon-svg {
-    display: block;
-    width: 20px;
-    height: 20px;
-}
-/* Mask 和 filter 的相關樣式已全部移除 */
-
+.search-item a { padding: 12px; }
+.search-icon-svg { display: block; width: 20px; height: 20px; }
+.mobile-brand { display: none; } /* 電腦版預設隱藏 */
 
 /* --- 3. Search Overlay --- */
 .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 17, 23, 0.95); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s 0.4s; }
@@ -73,18 +61,63 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 #search-input { width: 100%; background: none; border: none; border-bottom: 2px solid var(--tech-cyan); color: #fff; font-size: 2.5rem; padding: 1rem 0; text-align: center; outline: none; }
 #search-input::placeholder { color: rgba(255, 255, 255, 0.4); }
 
-/* --- 4. RWD --- */
-.nav-controls { position: absolute; right: 20px; }
-.hamburger-btn { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
-.hamburger-btn span { display: block; width: 25px; height: 2px; background-color: var(--text-color); margin: 5px 0; transition: all 0.4s ease; border-radius: 2px; }
-.hamburger-btn span:nth-child(2) { width: 20px; }
-.mobile-brand { display: none; }
+/* --- 4. 聯繫我區塊 --- */
+.contact-section {
+    background-color: var(--light-bg);
+    padding: 5rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+.contact-section h2 {
+    font-size: 2.5rem;
+    color: var(--tech-cyan);
+    margin-bottom: 1rem;
+}
+.contact-section p {
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+.contact-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 162, 255, 0.3);
+    color: #fff; /* 確保懸停時文字顏色不變 */
+}
 
+/* --- 5. 頁腳 --- */
+.site-footer {
+    padding: 2.5rem 0;
+    text-align: center;
+    background-color: var(--dark-bg); /* 和主背景色一樣，但由聯繫區塊分隔 */
+}
+.site-footer p {
+    color: rgba(201, 209, 217, 0.6);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- 6. RWD --- */
 @media (max-width: 1200px) {
     .nav-container { justify-content: space-between; position: relative; }
     .nav-controls { display: flex; align-items: center; }
     .hamburger-btn { display: block; }
-    .mobile-brand { display: flex; align-items: center; gap: 12px; }
+    .mobile-brand { display: flex; } /* 在小螢幕上顯示 */
     .mobile-logo { height: 35px; }
     .site-title { font-size: 1.5rem; font-weight: 600; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
     .nav-links .search-item { display: none; }
@@ -105,4 +138,6 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .scroll-down-arrow::after { width: 10px; height: 10px; }
     #search-input { font-size: 1.5rem; }
     .close-btn { top: 20px; right: 20px; }
+    .contact-section { padding: 4rem 1.5rem; }
+    .contact-section h2 { font-size: 2rem; }
 }

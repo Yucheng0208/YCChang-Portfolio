@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首頁 - 科技藍風格網站</title>
-    <!-- 引入 Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <!-- 引入自訂 CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,45 +13,19 @@
     <header class="hero-slider">
         <div class="swiper">
             <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide" style="background-image: url('images/slide-1.jpg');">
-                    <div class="slide-content">
-                        <h1>探索未來科技</h1>
-                        <p>創新、智能，引領下一個世代的變革。</p>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="swiper-slide" style="background-image: url('images/slide-2.jpg');">
-                    <div class="slide-content">
-                        <h1>數據驅動決策</h1>
-                        <p>從海量資訊中，提煉出最有價值的洞見。</p>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="swiper-slide" style="background-image: url('images/slide-3.jpg');">
-                    <div class="slide-content">
-                        <h1>無縫使用者體驗</h1>
-                        <p>設計不僅是外觀，更是與使用者之間的對話。</p>
-                    </div>
-                </div>
+                <div class="swiper-slide" style="background-image: url('images/slide-1.jpg');"><div class="slide-content"><h1>探索未來科技</h1><p>創新、智能，引領下一個世代的變革。</p></div></div>
+                <div class="swiper-slide" style="background-image: url('images/slide-2.jpg');"><div class="slide-content"><h1>數據驅動決策</h1><p>從海量資訊中，提煉出最有價值的洞見。</p></div></div>
+                <div class="swiper-slide" style="background-image: url('images/slide-3.jpg');"><div class="slide-content"><h1>無縫使用者體驗</h1><p>設計不僅是外觀，更是與使用者之間的對話。</p></div></div>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
         </div>
         <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content"></a>
     </header>
 
-    <!-- 2. Navbar (所有頁面共用此結構) -->
+    <!-- 2. Navbar -->
     <nav class="main-nav">
         <div class="nav-container">
-            <!-- 手機版 Logo 和標題 -->
-            <div class="mobile-brand">
-                <img src="images/logo.svg" alt="Logo" class="mobile-logo">
-                <h1 class="site-title">科技網站</h1>
-            </div>
-
-            <!-- 導覽連結 -->
+            <div class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">科技網站</h1></div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honor.html">Honor</a></li>
@@ -64,21 +36,9 @@
                 <li><a href="medium.html">Medium</a></li>
                 <li><a href="chatgpt.html">ChatGPT</a></li>
                 <li><a href="partners.html">Partners</a></li>
-                
-                <!-- 搜尋圖示 (使用 img 標籤顯示原始 SVG 顏色) -->
-                <li class="search-item">
-                    <a href="#" id="search-btn" aria-label="Open search">
-                        <img src="images/search.svg" alt="Search" class="search-icon-svg">
-                    </a>
-                </li>
+                <li class="search-item"><a href="#" id="search-btn" aria-label="Open search"><img src="images/search.svg" alt="Search" class="search-icon-svg"></a></li>
             </ul>
-
-            <!-- 漢堡按鈕 -->
-            <div class="nav-controls">
-                <button class="hamburger-btn" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+            <div class="nav-controls"><button class="hamburger-btn" aria-label="Toggle navigation"><span></span><span></span><span></span></button></div>
         </div>
     </nav>
 
@@ -90,19 +50,28 @@
         </div>
     </main>
 
-    <!-- 引入 Swiper.js JS -->
+    <!-- 4. 聯繫我區塊 -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <h2>保持聯繫</h2>
+            <p>如果您有任何專案合作、技術問題，或只是想聊聊，都非常歡迎！請透過下方的按鈕與我聯繫。</p>
+            <a href="mailto:your-email@example.com" class="contact-btn">發送訊息</a>
+        </div>
+    </section>
+
+    <!-- 5. 頁腳 -->
+    <footer class="site-footer">
+        <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
+    </footer>
+
+    <!-- 引入 JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- 引入自訂 JS -->
     <script src="script.js"></script>
 
-    <!-- 4. 搜尋浮層 (所有頁面都需要) -->
+    <!-- 搜尋浮層 -->
     <div id="search-overlay" class="search-overlay">
         <button class="close-btn" aria-label="Close search">×</button>
-        <div class="search-box">
-            <form id="search-form">
-                <input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off">
-            </form>
-        </div>
+        <div class="search-box"><form id="search-form"><input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off"></form></div>
     </div>
 
 </body>
