@@ -71,17 +71,35 @@ document.addEventListener('DOMContentLoaded', function () {
             tableBody.parentElement.style.display = '';
 
             publications.forEach((pub, index) => {
-                const linksHTML = `<div class="action-buttons">
+                let linksHTML = ''; // 先宣告一個空字串
+                // 檢查 pub.links 是否存在，並且裡面至少有一個連結
+                const hasLinks = pub.links && Object.keys(pub.links).length > 0;
+                if (hasLinks) {
+                // 如果有連結，就正常生成按鈕
+                    linksHTML = `
+                <div class="action-buttons">
                     ${pub.links.scholar ? `<a href="${pub.links.scholar}" target="_blank" rel="noopener noreferrer" class="action-btn">Google Scholar</a>` : ''}
                     ${pub.links.researchgate ? `<a href="${pub.links.researchgate}" target="_blank" rel="noopener noreferrer" class="action-btn">ResearchGate</a>` : ''}
                     ${pub.links.ieee ? `<a href="${pub.links.ieee}" target="_blank" rel="noopener noreferrer" class="action-btn">IEEE Explore</a>` : ''}
                     ${pub.links.pdf ? `<a href="${pub.links.pdf}" target="_blank" rel="noopener noreferrer" class="action-btn">PDF</a>` : ''}
                     ${pub.links.isbn ? `<a href="${pub.links.isbn}" target="_blank" rel="noopener noreferrer" class="action-btn">ISBN</a>` : ''}
-                </div>`;
-                const row = document.createElement('tr');
-                row.innerHTML = `<td data-label="#">${index + 1}</td><td data-label="Title">${pub.title}</td><td data-label="Authors">${pub.authors}</td><td data-label="Venue">${pub.venue}</td><td data-label="Date">${pub.date}</td><td data-label="Links">${linksHTML}</td><td data-label="Author Role">${pub.authorrole}</td>`;
-                tableBody.appendChild(row);
-            });
+                </div>
+                `;
+            } else {
+            // 如果沒有連結，就給一個不斷行的空格當作佔位符
+                linksHTML = ' ';
+            }
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td data-label="#">${index + 1}</td>
+                <td data-label="Title">${pub.title}</td>
+                <td data-label="Authors">${pub.authors}</td>
+                <td data-label="Venue">${pub.venue}</td>
+                <td data-label="Links">${linksHTML}</td>
+            `;
+            tableBody.appendChild(row);
+        });
         }
 
         // 更新顯示的函數 (無需修改)
