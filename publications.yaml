@@ -1,0 +1,6 @@
+- category: 'test'
+  title: 'Test Paper'
+  authors: 'Test Author'
+  venue: 'Test Venue 2024'
+  links:
+    scholar: '#'

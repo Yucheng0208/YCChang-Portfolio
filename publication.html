@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publication - Yu-Cheng Chang</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"><link rel="shortcut icon" href="images/favicon.ico"><meta name="theme-color" content="#0d1117">
+    <!-- 引入 js-yaml 來解析 YAML 檔案 -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+</head>
+<body>
+    <!-- Navbar (與其他頁面共用) -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">科技網站</h1></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Honor <span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="competitions.html">Competitions</a></li>
+                        <li><a href="inventions.html">Inventions</a></li>
+                    </ul>
+                </li>
+                <li><a href="publication.html">Publication</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="highlight.html">Highlight</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="medium.html">Medium</a></li>
+                <li><a href="chatgpt.html">ChatGPT</a></li>
+                <li><a href="partners.html">Partners</a></li>
+                <li class="search-item"><a href="#" id="search-btn" aria-label="Open search"><img src="images/search.svg" alt="Search" class="search-icon-svg"></a></li>
+            </ul>
+            <div class="nav-controls"><button class="hamburger-btn" aria-label="Toggle navigation"><span></span><span></span><span></span></button></div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區塊 -->
+    <main>
+        <div class="page-container publication-page">
+            <h1>Publications</h1>
+            
+            <!-- 控制項：篩選和搜索 -->
+            <div class="controls-container">
+                <!-- 膠囊狀篩選 Bar -->
+                <div class="filter-bar" id="publication-filter">
+                    <button class="active" data-filter="all">All</button>
+                    <button data-filter="conference">Conference</button>
+                    <button data-filter="journal">Journal</button>
+                    <button data-filter="preprint">Preprint</button>
+                </div>
+                <!-- 搜索框 -->
+                <div class="search-container">
+                    <input type="text" id="publication-search" placeholder="Search title, author, venue...">
+                </div>
+            </div>
+
+            <!-- 論文表格 -->
+            <div class="table-container">
+                <table class="publication-table">
+                    <thead>
+                        <tr>
+                            <th class="col-num">#</th>
+                            <th class="col-title">Title</th>
+                            <th class="col-authors">Authors</th>
+                            <th class="col-venue">Venue</th>
+                            <th class="col-links">Links</th>
+                        </tr>
+                    </thead>
+                    <tbody id="publication-table-body">
+                        <!-- 內容將由 JavaScript 動態生成 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 找不到結果時顯示的訊息 -->
+            <div id="no-results" class="no-results" style="display: none;">
+                <p>No publications found matching your criteria.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 聯繫我區塊 (與其他頁面共用) -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <h2>保持聯繫</h2>
+            <p>如果您有任何專案合作、技術問題，或只是想聊聊，都非常歡迎！請透過下方的按鈕與我聯繫。</p>
+            <a href="mailto:a97496@gmail.com" class="contact-btn">發送訊息</a>
+        </div>
+    </section>
+
+    <!-- 頁腳 (與其他頁面共用) -->
+    <footer class="site-footer">
+        <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+
+    <!-- 搜尋浮層 -->
+    <div id="search-overlay" class="search-overlay">
+        <button class="close-btn" aria-label="Close search">×</button>
+        <div class="search-box"><form id="search-form"><input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off"></form></div>
+    </div>
+
+        <!-- ===== 新增的「回到頂部」按鈕 ===== -->
+    <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
+        <!-- 箭頭本身將由 CSS 繪製 -->
+    </a>
+
+</body>
+</html>

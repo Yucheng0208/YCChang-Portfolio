@@ -70,62 +70,41 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .site-footer { padding: 2.5rem 0; text-align: center; background-color: var(--dark-bg); }
 .site-footer p { color: rgba(201, 209, 217, 0.6); font-size: 0.9rem; letter-spacing: 0.5px; }
 
-/* --- 6. RWD --- */
+/* --- 6. Publication Page --- */
+.publication-page .page-container { max-width: 1200px; }
+.controls-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin: 2rem 0; }
+.filter-bar { display: flex; background-color: var(--light-bg); border-radius: 50px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.1); }
+.filter-bar button { background: none; border: none; color: var(--text-color); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
+.filter-bar button.active { background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); color: var(--dark-bg); box-shadow: 0 2px 8px rgba(0, 162, 255, 0.2); }
+.filter-bar button:not(.active):hover { background-color: rgba(255, 255, 255, 0.05); }
+.search-container input { background-color: var(--light-bg); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; padding: 12px 20px; color: var(--text-color); width: 300px; font-size: 0.9rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+.search-container input:focus { border-color: var(--tech-cyan); box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2); }
+.table-container { overflow-x: auto; }
+.publication-table { width: 100%; border-collapse: collapse; margin-top: 1rem; text-align: left; font-size: 0.95rem; }
+.publication-table thead { background-color: var(--light-bg); }
+.publication-table th, .publication-table td { padding: 15px; border-bottom: 1px solid var(--light-bg); vertical-align: middle; }
+.publication-table th { font-weight: 600; color: var(--tech-cyan); }
+.publication-table tr:not(:first-child):hover { background-color: rgba(255, 255, 255, 0.03); }
+.publication-table .col-num { width: 5%; }
+.publication-table .col-title { width: 35%; }
+.publication-table .col-authors { width: 25%; font-style: italic; color: rgba(201, 209, 217, 0.8); }
+.publication-table .col-venue { width: 20%; }
+.publication-table .col-links { width: 15%; text-align: right; }
+.action-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+.action-btn { display: inline-block; padding: 6px 12px; background-color: var(--light-bg); color: var(--text-color); text-decoration: none; border-radius: 5px; font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+.action-btn:hover { transform: translateY(-2px); background-color: var(--tech-cyan); color: var(--dark-bg); box-shadow: 0 4px 10px rgba(100, 210, 255, 0.2); }
+.no-results { text-align: center; padding: 3rem; color: var(--text-color); background-color: var(--light-bg); border-radius: 8px; margin-top: 2rem; }
+
+/* --- 7. RWD --- */
 .nav-controls { position: absolute; right: 20px; }
-
-/* ===== 漢堡選單 (現代感線條) ===== */
-.hamburger-btn {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001;
-    width: 45px;
-    height: 45px;
-    position: relative;
-}
-
-.hamburger-btn span {
-    display: block;
-    width: 28px;
-    height: 2px;
-    background-color: var(--text-color);
-    border-radius: 2px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.hamburger-btn span:nth-child(1) {
-    top: 13px;
-    transform: translateX(-50%) rotate(0deg); /* 初始狀態 */
-}
-
-.hamburger-btn span:nth-child(2) {
-    top: 21px;
-    opacity: 1; /* 初始狀態 */
-}
-
-.hamburger-btn span:nth-child(3) {
-    top: 29px;
-    transform: translateX(-50%) rotate(0deg); /* 初始狀態 */
-}
-
-/* "X" 形變換動畫 */
-.hamburger-btn.is-active span:nth-child(1) {
-    transform: translate(-50%, 8px) rotate(45deg);
-}
-
-.hamburger-btn.is-active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-btn.is-active span:nth-child(3) {
-    transform: translate(-50%, -8px) rotate(-45deg);
-}
-
+.hamburger-btn { display: none; background: none; border: none; cursor: pointer; padding: 0; z-index: 1001; width: 45px; height: 45px; position: relative; }
+.hamburger-btn span { display: block; width: 28px; height: 2px; background-color: var(--text-color); border-radius: 2px; position: absolute; left: 50%; transform: translateX(-50%); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+.hamburger-btn span:nth-child(1) { top: 13px; transform: translateX(-50%) rotate(0deg); }
+.hamburger-btn span:nth-child(2) { top: 21px; opacity: 1; }
+.hamburger-btn span:nth-child(3) { top: 29px; transform: translateX(-50%) rotate(0deg); }
+.hamburger-btn.is-active span:nth-child(1) { transform: translate(-50%, 8px) rotate(45deg); }
+.hamburger-btn.is-active span:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-active span:nth-child(3) { transform: translate(-50%, -8px) rotate(-45deg); }
 
 @media (max-width: 1200px) {
     .nav-container { justify-content: space-between; position: relative; }
@@ -133,11 +112,23 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .hamburger-btn { display: block; }
     .mobile-brand { display: flex; }
     .mobile-logo { height: 35px; }
-    .site-title { font-size: 1.5rem; font-weight: 600; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); padding-left: 0.8rem; }
+    .site-title { font-size: 1.5rem; font-weight: 600; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
     .nav-links .search-item, .nav-item-dropdown { display: none; }
     .nav-links { position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background-color: var(--light-bg); flex-direction: column; justify-content: center; align-items: center; gap: 20px; transform: translateX(100%); transition: transform 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
     .nav-links.is-active { transform: translateX(0); }
     .nav-links li { width: 80%; text-align: center; }
+}
+
+@media (max-width: 992px) {
+    .publication-page .controls-container { flex-direction: column; align-items: stretch; }
+    .publication-page .search-container input { width: 100%; }
+    .publication-page .publication-table thead { display: none; }
+    .publication-page .publication-table, .publication-page .publication-table tbody, .publication-page .publication-table tr, .publication-page .publication-table td { display: block; width: 100%; }
+    .publication-page .publication-table tr { margin-bottom: 2rem; background-color: var(--light-bg); border-radius: 8px; padding: 1rem; border-bottom: none; }
+    .publication-page .publication-table td { padding: 12px 1rem 12px 50%; position: relative; text-align: right; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); }
+    .publication-page .publication-table td:last-child { border-bottom: none; }
+    .publication-page .publication-table td::before { content: attr(data-label); position: absolute; left: 1rem; width: 45%; text-align: left; font-weight: 600; color: var(--tech-cyan); }
+    .publication-page .publication-table .col-links, .publication-page .publication-table td[data-label="Links"] .action-buttons { justify-content: flex-start; padding-top: 10px; }
 }
 
 @media (max-width: 768px) {
@@ -151,4 +142,60 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .close-btn { top: 20px; right: 20px; }
     .contact-section { padding: 4rem 1.5rem; }
     .contact-section h2 { font-size: 2rem; }
+}
+
+/* --- 8. Back to Top Button --- */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    
+    width: 50px;
+    height: 50px;
+    background-color: var(--light-bg);
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    cursor: pointer;
+    text-decoration: none;
+
+    /* 預設隱藏 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+}
+
+/* 按鈕顯示時的樣式 */
+.back-to-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 使用 ::after 偽元素來繪製向上的箭頭 */
+.back-to-top-btn::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid var(--tech-cyan);
+    border-left: 2px solid var(--tech-cyan);
+    
+    /* 關鍵：先向上平移一點點，再旋轉 */
+    transform: translateY(25%) rotate(45deg);
+    
+    transition: border-color 0.3s ease;
+}
+
+/* 滑鼠懸停效果 */
+.back-to-top-btn:hover {
+    background-color: var(--tech-cyan);
+}
+.back-to-top-btn:hover::after {
+    border-color: var(--dark-bg);
 }
