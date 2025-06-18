@@ -72,12 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             publications.forEach((pub, index) => {
                 const linksHTML = `<div class="action-buttons">
-                    ${pub.links.scholar ? `<a href="${pub.links.scholar}" target="_blank" rel="noopener noreferrer" class="action-btn">Scholar</a>` : ''}
-                    ${pub.links.researchgate ? `<a href="${pub.links.researchgate}" target="_blank" rel="noopener noreferrer" class="action-btn">RG</a>` : ''}
-                    ${pub.links.ieee ? `<a href="${pub.links.ieee}" target="_blank" rel="noopener noreferrer" class="action-btn">IEEE</a>` : ''}
+                    ${pub.links.scholar ? `<a href="${pub.links.scholar}" target="_blank" rel="noopener noreferrer" class="action-btn">Google Scholar</a>` : ''}
+                    ${pub.links.researchgate ? `<a href="${pub.links.researchgate}" target="_blank" rel="noopener noreferrer" class="action-btn">ResearchGate</a>` : ''}
+                    ${pub.links.ieee ? `<a href="${pub.links.ieee}" target="_blank" rel="noopener noreferrer" class="action-btn">IEEE Explore</a>` : ''}
+                    ${pub.links.pdf ? `<a href="${pub.links.pdf}" target="_blank" rel="noopener noreferrer" class="action-btn">PDF</a>` : ''}
+                    ${pub.links.other ? `<a href="${pub.links.other}" target="_blank" rel="noopener noreferrer" class="action-btn">Other</a>` : ''}
                 </div>`;
                 const row = document.createElement('tr');
-                row.innerHTML = `<td data-label="#">${index + 1}</td><td data-label="Title">${pub.title}</td><td data-label="Authors">${pub.authors}</td><td data-label="Venue">${pub.venue}</td><td data-label="Links">${linksHTML}</td>`;
+                row.innerHTML = `<td data-label="#">${index + 1}</td><td data-label="Title">${pub.title}</td><td data-label="Authors">${pub.authors}</td><td data-label="Venue">${pub.venue}</td><td data-label="Date">${pub.date}</td><td data-label="Links">${linksHTML}</td>`;
                 tableBody.appendChild(row);
             });
         }
