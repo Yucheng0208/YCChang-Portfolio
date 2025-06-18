@@ -3,22 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Yu-Cheng</title>
-    <!-- 引入 Swiper.js CSS -->
+    <title>Yu-Cheng Chang</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <!-- 引入自訂 CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- ===== Favicon (網站標籤圖示) ===== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <meta name="theme-color" content="#0d1117">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"><link rel="shortcut icon" href="images/favicon.ico"><meta name="theme-color" content="#0d1117">
 </head>
 <body>
-
-    <!-- 1. 滿版輪播圖 -->
+    <!-- 1. 輪播圖 -->
     <header class="hero-slider">
         <div class="swiper">
             <div class="swiper-wrapper">
@@ -37,10 +29,34 @@
             <div class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="honor.html">Honor</a></li>
-                <li><a href="publication.html">Publication</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="highlight.html">Highlight</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Honor <span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="competitions.html">Competitions</a></li>
+                        <li><a href="inventions.html">Inventions</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Publication<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="confernece-paper.html">Conference Paper</a></li>
+                        <li><a href="joural-paper.html">Journal Paper</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Portfolio<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="work.html">Work</a></li>
+                        <li><a href="project.html">Project</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Highlight<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="media.html">Media</a></li>
+                        <li><a href="talks.html">Talks</a></li>
+                    </ul>
+                </li>
                 <li><a href="certifications.html">Certifications</a></li>
                 <li><a href="medium.html">Medium</a></li>
                 <li><a href="chatgpt.html">ChatGPT</a></li>
@@ -51,7 +67,7 @@
         </div>
     </nav>
 
-    <!-- 3. 首頁主要內容 -->
+    <!-- 3. 主內容 -->
     <main id="page-content">
         <div class="page-container">
             <h1>歡迎來到我的首頁</h1>
@@ -59,7 +75,7 @@
         </div>
     </main>
 
-    <!-- 4. 聯繫我區塊 -->
+    <!-- 4. 聯繫我 -->
     <section class="contact-section">
         <div class="contact-container">
             <h2>保持聯繫</h2>
@@ -73,7 +89,7 @@
         <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
     </footer>
 
-    <!-- 引入 JS -->
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 
@@ -82,6 +98,5 @@
         <button class="close-btn" aria-label="Close search">×</button>
         <div class="search-box"><form id="search-form"><input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off"></form></div>
     </div>
-
 </body>
 </html>
