@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <td data-label="Title">${pub.title}</td>
             <td data-label="Authors">${pub.authors}</td>
             <td data-label="Venue">${pub.venue}</td>
-            <td data-label="Date">${pub.date || 'N/A'}</td>
-            <td data-label="Author Role">${pub.authorrole || 'N/A'}</td>
+            <td data-label="Date">${pub.date || 'TBA'}</td>
+            <td data-label="Author Role">${pub.authorrole}</td>
             ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
         `;
         return row;
@@ -214,11 +214,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <td data-label="Title">${honor.title}</td>
             <td data-label="Event">${honor.event}</td>
             <td data-label="Organizer">${honor.organizer}</td>
-            <td data-label="Award">${honor.award || 'N/A'}</td>
-            <td data-label="Bonus">${honor.bonus || 'N/A'}</td>
+            <td data-label="Award">${honor.award || 'TBA'}</td>
+            <td data-label="Bonus">${honor.bonus}</td>
             ${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}
             ${honor.supervisor ? `<td data-label="Supervisor">${honor.supervisor}</td>` : ''}
-            <td data-label="Date">${honor.date || 'N/A'}</td>
+            <td data-label="Date">${honor.date || 'TBA'}</td>
             ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
         `;
         return row;
