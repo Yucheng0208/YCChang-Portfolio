@@ -252,10 +252,54 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .mobile-brand { display: flex; }
     .mobile-logo { height: 35px; }
     .site-title { font-size: 1.5rem; font-weight: 600; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
-    .nav-links .search-item, .nav-item-dropdown { display: none; }
+    
+    /* ===== CSS 修改 1: 移除 .nav-item-dropdown 的 display: none ===== */
+    /* 只隱藏搜尋按鈕，因為它有獨立的全螢幕搜尋介面 */
+    .nav-links .search-item { display: none; }
+    
     .nav-links { position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background-color: var(--light-bg); flex-direction: column; justify-content: center; align-items: center; gap: 20px; transform: translateX(100%); transition: transform 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
     .nav-links.is-active { transform: translateX(0); }
     .nav-links li { width: 80%; text-align: center; }
+    
+    /* ===== CSS 修改 2: 新增手機版下拉選單的樣式 ===== */
+    .nav-item-dropdown {
+        width: 100%;
+        text-align: center;
+        /* 讓父元素可以包裹子元素 */
+        flex-wrap: wrap; 
+    }
+
+    /* 覆蓋桌面版的絕對定位，使其在滑出選單內展開 */
+    .nav-item-dropdown .dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 10px 0 0 20px; /* 向上和向左加一點內距，製造層級感 */
+        min-width: auto;
+        width: 100%;
+        /* 使用 max-height 製作展開/收合動畫 */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+
+    /* 當父元素被 JS 添加 .is-open class 時，展開子選單 */
+    .nav-item-dropdown.is-open .dropdown-menu {
+        max-height: 200px; /* 給一個足夠大的高度讓內容顯示 */
+    }
+    
+    /* 同時旋轉箭頭 */
+    .nav-item-dropdown.is-open .dropdown-arrow {
+        transform: rotate(225deg);
+    }
+    
+    /* 移除桌面版的 hover 效果，避免在手機上點擊時觸發奇怪的行為 */
+    .nav-item-dropdown:hover .dropdown-menu {
+        top: auto;
+    }
 }
 
 @media (max-width: 992px) {
@@ -367,4 +411,213 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .item-enter {
     opacity: 0; /* Start invisible */
     animation: slide-in-from-right 0.4s ease-out forwards;
+}
+
+/* --- 11. 友善連結展示區塊 (新增) --- */
+.link-showcase-section {
+    padding-top: 2rem;
+}
+
+.page-container > h1, 
+.page-container > p {
+    text-align: center;
+}
+
+.link-groups-container {
+    display: grid;
+    /* 在空間足夠時顯示最多3欄，不足時會自動變2欄或1欄 */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.link-group {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.link-group:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.link-group h3 {
+    font-size: 1.5rem;
+    color: #fff; /* 使用白色，與您圖片中的橘色和綠色不同，以保持風格統一 */
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* 按鈕之間的間距 */
+    margin-top: auto; /* 將按鈕推到底部，當卡片高度不一時能對齊 */
+}
+
+.link-button {
+    display: inline-block;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    padding: 8px 18px;
+    border-radius: 50px; /* 圓弧外觀 */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.link-button:hover {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+}
+
+/* --- 1ˇ. 友善連結展示區塊 (不分類版本) --- */
+.link-showcase-section {
+    padding-top: 2rem; /* 與上方介紹區塊的間隔 */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* 加上一條分隔線 */
+}
+
+.unified-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 900px;
+    margin: 2rem auto 0 auto;
+}
+
+.link-button {
+    display: inline-block;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.link-button:hover {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 162, 255, 0.25);
+}
+
+
+/* --- RWD 調整 for 新增區塊 --- */
+@media (max-width: 768px) {
+    .intro-section {
+        flex-direction: column; /* 垂直堆疊 */
+        text-align: center;
+        gap: 2.5 rem; /* 調整間距 */
+    }
+
+    .profile-header {
+        flex-basis: auto;
+        width: 100%
+    }
+
+    .profile-name {
+        font-size: 2.2rem;
+        margin-top: 1rem; /* 手機版，姓名和圖片的間距更小 */
+    }
+
+    .intro-text p:first-of-type {
+        margin-top: 0;
+    }
+
+    /* 確保手機版時，介紹區的文字也置中 */
+    .intro-text h1
+    {
+        text-align: center;
+        font-size: 1rem; /* 調整字體大小 */
+    }
+
+    .intro-text p {
+        text-align: justify;
+    }
+
+    .intro-image {
+        width: 300px;
+        height: 300px;
+        order: -1; /* 將圖片顯示在文字的上方 */
+    }
+
+    .intro-text h1 {
+        font-size: 2.5rem;
+    }
+}
+
+.intro-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    text-align: justify; /* 讓段落文字兩端對齊 */
+    line-height: 1.8; /* 稍微增加行高，讓英文段落更易讀 */
+    color: rgba(201, 209, 217, 0.9);
+}
+
+/* 座右銘的專屬樣式 (更新後，電腦/手機皆置中) */
+.motto {
+    /* 1. 變成塊級元素，但寬度由內容決定 */
+    display: table; 
+    
+    /* 2. 使用 margin: auto 來實現水平置中 */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* 3. 上方間距和分隔線 */
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    /* 4. 文字樣式 */
+    font-style: italic;
+    color: rgba(201, 209, 217, 0.7);
+    text-align: center; /* 雖然已置中，但保留以防萬一 */
+    
+    /* 5. 限制最大寬度，避免在某些情況下過長 */
+    max-width: 80%; 
+}
+.intro-image {
+    flex-basis: 300px; /* 給予一個基礎寬度 */
+    flex-shrink: 0;
+    text-align: center; /* 讓圖片在容器內置中 */
+}
+
+/* 針對 Q 版頭像的圖片樣式 */
+.intro-image img {
+    max-width: 100%;
+    height: auto; /* 高度自動，保持圖片原始比例 */
+    border-radius: 16px; /* 使用圓角矩形，而非正圓 */
+    object-fit: contain; /* 確保完整顯示圖片，不裁剪 */
+    
+    /* 移除之前的邊框和陰影，因為圖片自帶白色背景 */
+    border: none; 
+    box-shadow: none;
 }

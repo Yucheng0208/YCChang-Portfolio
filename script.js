@@ -16,8 +16,27 @@ document.addEventListener('DOMContentLoaded', function () {
     if(searchBtn && searchOverlay){ const closeBtn = searchOverlay.querySelector('.close-btn'); const searchForm = document.getElementById('search-form'); const searchInput = document.getElementById('search-input'); searchBtn.addEventListener('click', (e) => { e.preventDefault(); searchOverlay.classList.add('is-visible'); searchInput.focus(); }); const closeSearch = () => { searchOverlay.classList.remove('is-visible'); }; closeBtn.addEventListener('click', closeSearch); searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) { closeSearch(); } }); document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchOverlay.classList.contains('is-visible')) { closeSearch(); } }); searchForm.addEventListener('submit', (e) => { e.preventDefault(); const query = searchInput.value.trim(); if (query) { alert(`您搜尋了: ${query}`); closeSearch(); searchInput.value = ''; } });}
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) { yearSpan.textContent = new Date().getFullYear(); }
+    
+    // ===== JS 修改：更新下拉選單的處理邏輯 =====
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-    dropdownToggles.forEach(toggle => { toggle.addEventListener('click', (event) => { event.preventDefault(); }); });
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            // 阻止連結的默認跳轉行為
+            event.preventDefault();
+            
+            // 檢查是否處於手機模式 (判斷漢堡按鈕是否可見)
+            const isMobileView = window.getComputedStyle(hamburgerBtn).display !== 'none';
+            
+            if (isMobileView) {
+                // 在手機模式下，點擊會開/關子選單
+                const parentLi = toggle.closest('.nav-item-dropdown');
+                if (parentLi) {
+                    parentLi.classList.toggle('is-open');
+                }
+            }
+            // 在桌面模式下，此點擊事件不做任何事，保留 CSS hover 效果
+        });
+    });
 
     // --- Publication Page Logic ---
     const publicationPage = document.querySelector('.publication-page');
@@ -68,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function populateTable(publicationsToShow) {
             tableBody.innerHTML = '';
             publicationsToShow.forEach((pub, index) => {
-                const globalIndex = (currentPage - 1) * itemsPerPage + index + 1;
+                const globalIndex = (currentPage - 1) * itemsPerPage + index + 1 + '.'; // +1 for 1-based index
                 
                 // --- 【核心修改】更嚴謹的連結判斷邏輯 ---
                 let linksHTML = ''; // 預設為空
