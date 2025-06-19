@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // --- Navbar, Search, Footer Year, etc. (No changes needed) ---
+    // --- 1. 通用功能 (Navbar, Search, Footer Year, etc.) ---
+    // (這部分程式碼與您原本的相同，保持不變)
     const swiperElement = document.querySelector('.swiper');
     if (swiperElement) { new Swiper('.swiper', { loop: true, autoplay: { delay: 4000, disableOnInteraction: false }, pagination: { el: '.swiper-pagination', clickable: true }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, }); }
     const hamburgerBtn = document.querySelector('.hamburger-btn');
@@ -16,127 +17,92 @@ document.addEventListener('DOMContentLoaded', function () {
     if(searchBtn && searchOverlay){ const closeBtn = searchOverlay.querySelector('.close-btn'); const searchForm = document.getElementById('search-form'); const searchInput = document.getElementById('search-input'); searchBtn.addEventListener('click', (e) => { e.preventDefault(); searchOverlay.classList.add('is-visible'); searchInput.focus(); }); const closeSearch = () => { searchOverlay.classList.remove('is-visible'); }; closeBtn.addEventListener('click', closeSearch); searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) { closeSearch(); } }); document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchOverlay.classList.contains('is-visible')) { closeSearch(); } }); searchForm.addEventListener('submit', (e) => { e.preventDefault(); const query = searchInput.value.trim(); if (query) { alert(`您搜尋了: ${query}`); closeSearch(); searchInput.value = ''; } });}
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) { yearSpan.textContent = new Date().getFullYear(); }
-    
-    // ===== JS 修改：更新下拉選單的處理邏輯 =====
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', (event) => {
-            // 阻止連結的默認跳轉行為
             event.preventDefault();
-            
-            // 檢查是否處於手機模式 (判斷漢堡按鈕是否可見)
             const isMobileView = window.getComputedStyle(hamburgerBtn).display !== 'none';
-            
             if (isMobileView) {
-                // 在手機模式下，點擊會開/關子選單
                 const parentLi = toggle.closest('.nav-item-dropdown');
                 if (parentLi) {
                     parentLi.classList.toggle('is-open');
                 }
             }
-            // 在桌面模式下，此點擊事件不做任何事，保留 CSS hover 效果
         });
     });
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => { window.scrollY > 300 ? backToTopBtn.classList.add('is-visible') : backToTopBtn.classList.remove('is-visible'); });
+        backToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
 
-    // --- Publication Page Logic ---
-    const publicationPage = document.querySelector('.publication-page');
-    if (publicationPage) {
-        
-        let allPublications = [];
-        let filteredPublications = [];
+    // --- 2. 可複用的列表頁面初始化函式 ---
+    function initializeListPage(config) {
+        const pageContainer = document.querySelector(config.pageSelector);
+        if (!pageContainer) return;
+
+        let allItems = [];
+        let filteredItems = [];
         let currentPage = 1;
         const itemsPerPage = 10;
 
-        const tableBody = document.getElementById('publication-table-body');
-        const filterButtons = document.querySelectorAll('#publication-filter button');
-        const searchInput = document.getElementById('publication-search');
-        const noResultsDiv = document.getElementById('no-results');
-        const paginationContainer = document.getElementById('pagination-container');
-        const pageInfoSpan = document.getElementById('page-info');
-        const pageInput = document.getElementById('page-input');
-        const firstPageBtn = document.getElementById('first-page');
-        const prevPageBtn = document.getElementById('prev-page');
-        const nextPageBtn = document.getElementById('next-page');
-        const lastPageBtn = document.getElementById('last-page');
+        const tableBody = document.getElementById(config.tableBodyId);
+        const filterButtons = document.querySelectorAll(`#${config.filterBarId} button`);
+        const searchInput = document.getElementById(config.searchInputId);
+        const noResultsDiv = document.getElementById(config.noResultsId);
+        const paginationContainer = document.getElementById(config.paginationContainerId);
+        const pageInfoSpan = document.getElementById(config.pageInfoId);
+        const pageInput = document.getElementById(config.pageInputId);
+        const firstPageBtn = document.getElementById(config.firstPageBtnId);
+        const prevPageBtn = document.getElementById(config.prevPageBtnId);
+        const nextPageBtn = document.getElementById(config.nextPageBtnId);
+        const lastPageBtn = document.getElementById(config.lastPageBtnId);
 
-        async function loadPublications() {
+        async function loadData() {
             try {
-                const response = await fetch('./publications.yaml');
-                if (!response.ok) throw new Error('Cannot find publications.yaml');
+                const response = await fetch(config.yamlPath);
+                if (!response.ok) throw new Error(`Cannot find ${config.yamlPath}`);
                 const yamlContent = await response.text();
-                allPublications = window.jsyaml.load(yamlContent) || [];
+                allItems = window.jsyaml.load(yamlContent) || [];
                 updateDisplay();
             } catch (error) {
-                console.error("Failed to load publications:", error);
-                tableBody.innerHTML = `<tr><td style="text-align:center; color: #ff4d4d;">Error loading data.</td></tr>`;
+                console.error(`Failed to load data for ${config.pageSelector}:`, error);
+                tableBody.innerHTML = `<tr><td style="text-align:center; color: #ff4d4d;">Error loading data. Please check the console.</td></tr>`;
             }
         }
-        
-        function renderPage(publicationsToShow) {
+
+        function renderPage(itemsToShow) {
             const children = Array.from(tableBody.children);
             if (children.length > 0) {
                 children.forEach(row => row.classList.add('item-exit'));
-                setTimeout(() => {
-                    populateTable(publicationsToShow);
-                }, 300); // Wait for exit animation
+                setTimeout(() => populateTable(itemsToShow), 300);
             } else {
-                populateTable(publicationsToShow);
+                populateTable(itemsToShow);
             }
         }
 
-        function populateTable(publicationsToShow) {
+        function populateTable(itemsToShow) {
             tableBody.innerHTML = '';
-            publicationsToShow.forEach((pub, index) => {
-                const globalIndex = (currentPage - 1) * itemsPerPage + index + 1 + '.'; // +1 for 1-based index
-                
-                // --- 【核心修改】更嚴謹的連結判斷邏輯 ---
-                let linksHTML = ''; // 預設為空
-                // 1. 檢查 pub.links 是否存在且為一個物件
-                if (pub.links && typeof pub.links === 'object') {
-                    // 2. 過濾出所有「網址不為空」的連結
-                    const validLinks = Object.entries(pub.links).filter(([name, url]) => url && url.trim() !== '');
-
-                    // 3. 只有在存在至少一個有效連結時，才生成 HTML
-                    if (validLinks.length > 0) {
-                        linksHTML = `<div class="action-buttons">
-                            ${validLinks.map(([name, url]) => 
-                                `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name.charAt(0).toUpperCase() + name.slice(1)}</a>`
-                            ).join('')}
-                        </div>`;
-                    }
-                }
-                // --- 修改結束 ---
-
-                const row = document.createElement('tr');
+            itemsToShow.forEach((item, index) => {
+                const globalIndex = (currentPage - 1) * itemsPerPage + index + 1;
+                const row = config.renderRowFunction(item, globalIndex);
                 row.classList.add('item-enter');
                 row.style.animationDelay = `${index * 0.05}s`;
-                row.innerHTML = `
-                    <td data-label="#">${globalIndex}</td>
-                    <td data-label="Title">${pub.title}</td>
-                    <td data-label="Authors">${pub.authors}</td>
-                    <td data-label="Venue">${pub.venue}</td>
-                    <td data-label="Date">${pub.date || 'N/A'}</td>
-                    <td data-label="Author Role">${pub.authorrole || 'N/A'}</td>
-                    ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
-                `;
                 tableBody.appendChild(row);
             });
         }
 
         function setupPagination() {
-            const totalItems = filteredPublications.length;
+            const totalItems = filteredItems.length;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
-
             if (totalPages <= 1) {
                 paginationContainer.style.display = 'none';
                 return;
             }
             paginationContainer.style.display = 'flex';
-
             pageInfoSpan.textContent = `Page ${currentPage} of ${totalPages}`;
             pageInput.value = currentPage;
             pageInput.max = totalPages;
-
             firstPageBtn.disabled = currentPage === 1;
             prevPageBtn.disabled = currentPage === 1;
             nextPageBtn.disabled = currentPage === totalPages;
@@ -147,30 +113,29 @@ document.addEventListener('DOMContentLoaded', function () {
             currentPage = page;
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-            const paginatedItems = filteredPublications.slice(start, end);
-            
+            const paginatedItems = filteredItems.slice(start, end);
             renderPage(paginatedItems);
             setupPagination();
         }
 
         function updateDisplay() {
-            const activeFilter = document.querySelector('#publication-filter button.active').dataset.filter;
+            const activeFilter = document.querySelector(`#${config.filterBarId} button.active`).dataset.filter;
             const searchTerm = searchInput.value.toLowerCase().trim();
             
-            let tempFiltered = allPublications;
+            let tempFiltered = allItems;
             if (activeFilter !== 'all') {
-                tempFiltered = tempFiltered.filter(pub => pub.category === activeFilter);
+                tempFiltered = tempFiltered.filter(item => item.category === activeFilter);
             }
             if (searchTerm) {
-                tempFiltered = tempFiltered.filter(pub => 
-                    Object.values(pub).some(value => 
+                tempFiltered = tempFiltered.filter(item =>
+                    Object.values(item).some(value =>
                         String(value).toLowerCase().includes(searchTerm)
                     )
                 );
             }
-            filteredPublications = tempFiltered;
+            filteredItems = tempFiltered;
 
-            if (filteredPublications.length === 0) {
+            if (filteredItems.length === 0) {
                 noResultsDiv.style.display = 'block';
                 tableBody.innerHTML = '';
                 paginationContainer.style.display = 'none';
@@ -188,41 +153,112 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         searchInput.addEventListener('input', updateDisplay);
-
         firstPageBtn.addEventListener('click', () => displayPage(1));
-        prevPageBtn.addEventListener('click', () => { if(currentPage > 1) displayPage(currentPage - 1); });
+        prevPageBtn.addEventListener('click', () => { if (currentPage > 1) displayPage(currentPage - 1); });
         nextPageBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredPublications.length / itemsPerPage);
-            if(currentPage < totalPages) displayPage(currentPage + 1);
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+            if (currentPage < totalPages) displayPage(currentPage + 1);
         });
         lastPageBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredPublications.length / itemsPerPage);
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
             displayPage(totalPages);
         });
         pageInput.addEventListener('change', () => {
-            const totalPages = Math.ceil(filteredPublications.length / itemsPerPage);
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
             let page = parseInt(pageInput.value, 10);
             if (isNaN(page) || page < 1) page = 1;
             if (page > totalPages) page = totalPages;
             displayPage(page);
         });
 
-        loadPublications();
+        loadData();
     }
-        
-    // --- Back to Top Button Logic ---
-    const backToTopBtn = document.getElementById('back-to-top-btn');
-    if (backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('is-visible');
-            } else {
-                backToTopBtn.classList.remove('is-visible');
+    
+    // --- 3. 用於生成不同頁面內容的函式 ---
+    
+    // 函式：生成 Publication 的每一行 HTML
+    function renderPublicationRow(pub, globalIndex) {
+        let linksHTML = '';
+        if (pub.links && typeof pub.links === 'object') {
+            const validLinks = Object.entries(pub.links).filter(([name, url]) => url && url.trim() !== '');
+            if (validLinks.length > 0) {
+                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name.charAt(0).toUpperCase() + name.slice(1)}</a>`).join('')}</div>`;
             }
-        });
-        backToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        }
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td data-label="#">${globalIndex}.</td>
+            <td data-label="Title">${pub.title}</td>
+            <td data-label="Authors">${pub.authors}</td>
+            <td data-label="Venue">${pub.venue}</td>
+            <td data-label="Date">${pub.date || 'N/A'}</td>
+            <td data-label="Author Role">${pub.authorrole || 'N/A'}</td>
+            ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+        `;
+        return row;
     }
+
+    // 函式：生成 Honor 的每一行 HTML
+    function renderHonorRow(honor, globalIndex) {
+        let linksHTML = '';
+        if (honor.links && typeof honor.links === 'object') {
+            const validLinks = Object.entries(honor.links).filter(([name, url]) => url && url.trim() !== '');
+            if (validLinks.length > 0) {
+                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
+            }
+        }
+        const row = document.createElement('tr');
+        // 注意：這裡的 data-label 對應了 CSS 中的樣式
+        row.innerHTML = `
+            <td data-label="#">${globalIndex}.</td>
+            <td data-label="Title">${honor.title}</td>
+            <td data-label="Event">${honor.event}</td>
+            <td data-label="Organizer">${honor.organizer}</td>
+            <td data-label="Date">${honor.date || 'N/A'}</td>
+            <td data-label="Award">${honor.award || 'N/A'}</td>
+            <td data-label="Bonus">${honor.bonus || 'N/A'}</td>
+            ${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}
+            ${honor.supervisor ? `<td data-label="Supervisor">${honor.supervisor}</td>` : ''}
+            ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+        `;
+        return row;
+    }
+
+    // --- 4. 根據目前頁面，執行對應的初始化設定 ---
+    
+    // 如果是 Publication 頁面
+    initializeListPage({
+        pageSelector: '.publication-page',
+        yamlPath: './publications.yaml',
+        tableBodyId: 'publication-table-body',
+        filterBarId: 'publication-filter',
+        searchInputId: 'publication-search',
+        noResultsId: 'no-results',
+        paginationContainerId: 'pagination-container',
+        pageInfoId: 'page-info',
+        pageInputId: 'page-input',
+        firstPageBtnId: 'first-page',
+        prevPageBtnId: 'prev-page',
+        nextPageBtnId: 'next-page',
+        lastPageBtnId: 'last-page',
+        renderRowFunction: renderPublicationRow
+    });
+
+    // 如果是新的 Honor 頁面
+    initializeListPage({
+        pageSelector: '.honor-page',
+        yamlPath: './honors.yaml',
+        tableBodyId: 'honor-table-body',
+        filterBarId: 'honor-filter',
+        searchInputId: 'honor-search',
+        noResultsId: 'no-results-honor',
+        paginationContainerId: 'pagination-container-honor',
+        pageInfoId: 'page-info-honor',
+        pageInputId: 'page-input-honor',
+        firstPageBtnId: 'first-page-honor',
+        prevPageBtnId: 'prev-page-honor',
+        nextPageBtnId: 'next-page-honor',
+        lastPageBtnId: 'last-page-honor',
+        renderRowFunction: renderHonorRow
+    });
 });

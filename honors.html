@@ -1,15 +1,14 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu-Cheng Chang</title>
+    <title>Honor - Yu-Cheng Chang</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js">
     <link rel="stylesheet" href="style.css">
-    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
-    <!-- 引入 js-yaml 來解析 YAML 檔案 -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
 </head>
 <body>
     <!-- 2. Navbar -->
@@ -55,84 +54,61 @@
         </div>
     </nav>
 
-    <!-- 主要內容區塊 -->
-    <main>
-        <div class="page-container publication-page">
-            <h1>Publications</h1>
-            
-            <!-- 控制項：篩選和搜索 -->
+    <main id="page-content">
+        <!-- 加上 'honor-page' class 來區分頁面 -->
+        <div class="page-container honor-page">
+            <h1>Honors</h1>
+            <p>A collection of my recognitions from competitions, inventions, and other significant achievements.</p>
+
+            <!-- 控制項：篩選和搜尋 -->
             <div class="controls-container">
-                <div class="filter-bar" id="publication-filter">
+                <div id="honor-filter" class="filter-bar">
                     <button class="active" data-filter="all">All</button>
-                    <button data-filter="conference">Conference</button>
-                    <button data-filter="journal">Journal</button>
-                    <button data-filter="preprint">Preprint</button>
-                    <button data-filter="book">Book</button>
+                    <button data-filter="Competition">Competition</button>
+                    <button data-filter="Invention">Invention</button>
+                    <button data-filter="Other">Other</button>
                 </div>
                 <div class="search-container">
-                    <input type="text" id="publication-search" placeholder="Search title, author, venue, link, date...">
+                    <input type="text" id="honor-search" placeholder="Search in honors...">
                 </div>
             </div>
 
-            <!-- 論文表格 -->
+            <!-- 獎項列表表格 -->
             <div class="table-container">
                 <table class="publication-table">
-                    <thead>
-                        <tr>
-                            <th class="col-num">#</th>
-                            <th class="col-title">Title</th>
-                            <th class="col-authors">Authors</th>
-                            <th class="col-venue">Venue</th>
-                            <th class="col-links">Links</th>
-                            <th class="col-date">Date</th>
-                            <th class="col-authorrole">Author Role</th>
-                        </tr>
-                    </thead>
-                    <tbody id="publication-table-body">
-                        <!-- 內容將由 JavaScript 動態生成 -->
-                    </tbody>
+                    <!-- 表格tbody，內容將由JS動態生成 -->
+                    <tbody id="honor-table-body"></tbody>
                 </table>
             </div>
 
-            <!-- 【新增】換頁控制器 -->
-            <div id="pagination-container" class="pagination-container" style="display: none;">
-                <button id="first-page" class="pagination-btn">« First</button>
-                <button id="prev-page" class="pagination-btn">‹ Prev</button>
-                
-                <div class="page-jump-section">
-                    <span id="page-info"></span>
-                    <input type="number" id="page-input" min="1">
-                </div>
-                
-                <button id="next-page" class="pagination-btn">Next ›</button>
-                <button id="last-page" class="pagination-btn">Last »</button>
+            <!-- 無結果時顯示 -->
+            <div id="no-results-honor" class="no-results" style="display: none;">
+                <p>No honors found matching your criteria.</p>
             </div>
 
-            <!-- 找不到結果時顯示的訊息 -->
-            <div id="no-results" class="no-results" style="display: none;">
-                <p>No publications found matching your criteria.</p>
+            <!-- 分頁控制項 -->
+            <div id="pagination-container-honor" class="pagination-container" style="display: none;">
+                <button id="first-page-honor" class="pagination-btn">First</button>
+                <button id="prev-page-honor" class="pagination-btn">Previous</button>
+                <div class="page-jump-section">
+                    <span id="page-info-honor"></span>
+                    <input type="number" id="page-input-honor" min="1">
+                </div>
+                <button id="next-page-honor" class="pagination-btn">Next</button>
+                <button id="last-page-honor" class="pagination-btn">Last</button>
             </div>
         </div>
     </main>
-
-    <!-- 聯繫我區塊 (與其他頁面共用) -->
-    <!--<section class="contact-section">
-        <div class="contact-container">
-            <h2>保持聯繫</h2>
-            <p>如果您有任何專案合作、技術問題，或只是想聊聊，都非常歡迎！請透過下方的按鈕與我聯繫。</p>
-            <a href="mailto:a97496@gmail.com" class="contact-btn">發送訊息</a>
-        </div>
-    </section>-->
 
     <!-- 頁腳 (與其他頁面共用) -->
     <footer class="site-footer">
         <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
     </footer>
-
-    <!-- JS -->
+    
+    <!-- JS 檔案 -->
     <script src="script.js"></script>
 
-    <!-- 搜尋浮層 -->
+             <!-- 搜尋浮層 -->
     <div id="search-overlay" class="search-overlay">
         <button class="close-btn" aria-label="Close search">×</button>
         <div class="search-box"><form id="search-form"><input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off"></form></div>
@@ -140,5 +116,6 @@
 
     <!-- 回到頂部按鈕 -->
     <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
+
 </body>
 </html>

@@ -48,7 +48,8 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .dropdown-menu li a::before { display: none; }
 .dropdown-menu li:hover { background-color: rgba(100, 210, 255, 0.1); }
 .dropdown-menu li:hover a { color: var(--tech-cyan); }
-
+.nav-links .dropdown-menu li a { font-weight: 400; padding: 12px 20px; color: #ffffff; justify-content: flex-start; border-radius: 0;
+}
 /* --- 3. Search Overlay --- */
 .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 17, 23, 0.95); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s 0.4s; }
 .search-overlay.is-visible { opacity: 1; visibility: visible; transition: opacity 0.4s ease, visibility 0s; }
@@ -376,10 +377,28 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     color: var(--text-color);
     border-radius: 5px;
     padding: 8px;
+    appearance: textfield;
     -moz-appearance: textfield;
 }
 #page-input::-webkit-outer-spin-button,
 #page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#page-input-honor {
+    width: 60px;
+    text-align: center;
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    border-radius: 5px;
+    padding: 8px;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+#page-input-honor::-webkit-outer-spin-button,
+#page-inpu-honor::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
