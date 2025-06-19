@@ -1,3 +1,5 @@
+// script.js (完整修正版)
+
 document.addEventListener('DOMContentLoaded', function () {
 
     // --- 1. 通用功能 (Navbar, Search, Footer Year, etc.) ---
@@ -67,7 +69,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateDisplay();
             } catch (error) {
                 console.error(`Failed to load data for ${config.pageSelector}:`, error);
-                tableBody.innerHTML = `<tr><td style="text-align:center; color: #ff4d4d;">Error loading data. Please check the console.</td></tr>`;
+                if (tableBody) {
+                    tableBody.innerHTML = `<tr><td style="text-align:center; color: #ff4d4d;">Error loading data. Please check the console.</td></tr>`;
+                }
             }
         }
 
@@ -93,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function setupPagination() {
+            if (!paginationContainer) return; // Add safety check
             const totalItems = filteredItems.length;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
             if (totalPages <= 1) {
@@ -119,7 +124,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function updateDisplay() {
-            const activeFilter = document.querySelector(`#${config.filterBarId} button.active`).dataset.filter;
+            const activeFilterButton = document.querySelector(`#${config.filterBarId} button.active`);
+            if (!activeFilterButton) return; // Add safety check
+            
+            const activeFilter = activeFilterButton.dataset.filter;
             const searchTerm = searchInput.value.toLowerCase().trim();
             
             let tempFiltered = allItems;
@@ -138,32 +146,34 @@ document.addEventListener('DOMContentLoaded', function () {
             if (filteredItems.length === 0) {
                 noResultsDiv.style.display = 'block';
                 tableBody.innerHTML = '';
-                paginationContainer.style.display = 'none';
+                if (paginationContainer) paginationContainer.style.display = 'none';
             } else {
                 noResultsDiv.style.display = 'none';
                 displayPage(1);
             }
         }
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                updateDisplay();
+        if (filterButtons.length > 0) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    updateDisplay();
+                });
             });
-        });
-        searchInput.addEventListener('input', updateDisplay);
-        firstPageBtn.addEventListener('click', () => displayPage(1));
-        prevPageBtn.addEventListener('click', () => { if (currentPage > 1) displayPage(currentPage - 1); });
-        nextPageBtn.addEventListener('click', () => {
+        }
+        if (searchInput) searchInput.addEventListener('input', updateDisplay);
+        if (firstPageBtn) firstPageBtn.addEventListener('click', () => displayPage(1));
+        if (prevPageBtn) prevPageBtn.addEventListener('click', () => { if (currentPage > 1) displayPage(currentPage - 1); });
+        if (nextPageBtn) nextPageBtn.addEventListener('click', () => {
             const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
             if (currentPage < totalPages) displayPage(currentPage + 1);
         });
-        lastPageBtn.addEventListener('click', () => {
+        if (lastPageBtn) lastPageBtn.addEventListener('click', () => {
             const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
             displayPage(totalPages);
         });
-        pageInput.addEventListener('change', () => {
+        if (pageInput) pageInput.addEventListener('change', () => {
             const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
             let page = parseInt(pageInput.value, 10);
             if (isNaN(page) || page < 1) page = 1;
@@ -176,13 +186,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // --- 3. 用於生成不同頁面內容的函式 ---
     
-    // 函式：生成 Publication 的每一行 HTML
     function renderPublicationRow(pub, globalIndex) {
         let linksHTML = '';
         if (pub.links && typeof pub.links === 'object') {
             const validLinks = Object.entries(pub.links).filter(([name, url]) => url && url.trim() !== '');
             if (validLinks.length > 0) {
-                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name.charAt(0).toUpperCase() + name.slice(1)}</a>`).join('')}</div>`;
+                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
             }
         }
         const row = document.createElement('tr');
@@ -198,7 +207,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return row;
     }
 
-    // 函式：生成 Honor 的每一行 HTML
     function renderHonorRow(honor, globalIndex) {
         let linksHTML = '';
         if (honor.links && typeof honor.links === 'object') {
@@ -208,14 +216,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         const row = document.createElement('tr');
-        // 注意：這裡的 data-label 對應了 CSS 中的樣式
         row.innerHTML = `
             <td data-label="#">${globalIndex}.</td>
             <td data-label="Title">${honor.title}</td>
             <td data-label="Event">${honor.event}</td>
             <td data-label="Organizer">${honor.organizer}</td>
-            <td data-label="Award">${honor.award || 'TBA'}</td>
-            <td data-label="Bonus">${honor.bonus}</td>
+            ${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}
+            ${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}
             ${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}
             ${honor.supervisor ? `<td data-label="Supervisor">${honor.supervisor}</td>` : ''}
             <td data-label="Date">${honor.date || 'TBA'}</td>
@@ -224,9 +231,35 @@ document.addEventListener('DOMContentLoaded', function () {
         return row;
     }
 
+    // [修正] 專為 Highlight 設計的 render 函式
+    function renderHighlightRow(highlight, globalIndex) {
+        // 處理 YAML 中的拼寫錯誤 `localtion`，使其更健壯
+        const location = highlight.localtion || highlight.location || '';
+        
+        // 處理 YAML 中單一的 `link` 字串
+        let linkHTML = '';
+        if (highlight.link && String(highlight.link).trim() !== '') {
+            linkHTML = `<div class="action-buttons">
+                            <a href="${highlight.link}" target="_blank" rel="noopener noreferrer" class="action-btn">查看連結</a>
+                        </div>`;
+        }
+
+        const row = document.createElement('tr');
+        // [修正] 內部所有變數都使用 `highlight`，並且只顯示有值的欄位
+        row.innerHTML = `
+            <td data-label="#">${globalIndex}.</td>
+            <td data-label="Title">${highlight.title || 'No Title'}</td>
+            ${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}
+            ${location ? `<td data-label="Location">${location}</td>` : ''}
+            ${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}
+            <td data-label="Date">${highlight.date || 'TBA'}</td>
+            ${linkHTML ? `<td data-label="Links">${linkHTML}</td>` : ''}
+        `;
+        return row;
+    }
+
     // --- 4. 根據目前頁面，執行對應的初始化設定 ---
     
-    // 如果是 Publication 頁面
     initializeListPage({
         pageSelector: '.publication-page',
         yamlPath: './publications.yaml',
@@ -244,7 +277,6 @@ document.addEventListener('DOMContentLoaded', function () {
         renderRowFunction: renderPublicationRow
     });
 
-    // 如果是新的 Honor 頁面
     initializeListPage({
         pageSelector: '.honor-page',
         yamlPath: './honors.yaml',
@@ -260,5 +292,23 @@ document.addEventListener('DOMContentLoaded', function () {
         nextPageBtnId: 'next-page-honor',
         lastPageBtnId: 'last-page-honor',
         renderRowFunction: renderHonorRow
+    });
+
+    // [新增] 啟動 Highlight 頁面的功能
+    initializeListPage({
+        pageSelector: '.highlight-page',
+        yamlPath: './highlights.yaml', // 確保這個檔案存在
+        tableBodyId: 'highlight-table-body',
+        filterBarId: 'highlight-filter',
+        searchInputId: 'highlight-search',
+        noResultsId: 'no-results-highlight',
+        paginationContainerId: 'pagination-container-highlight',
+        pageInfoId: 'page-info-highlight',
+        pageInputId: 'page-input-highlight',
+        firstPageBtnId: 'first-page-highlight',
+        prevPageBtnId: 'prev-page-highlight',
+        nextPageBtnId: 'next-page-highlight',
+        lastPageBtnId: 'last-page-highlight',
+        renderRowFunction: renderHighlightRow // 使用修正後的函式
     });
 });
