@@ -130,6 +130,7 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .publication-table, .publication-table tbody {
     display: block;
     width: 100%;
+    position: relative; /* For animation positioning */
 }
 .publication-table {
     border-collapse: collapse;
@@ -158,11 +159,9 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     border: none;
     display: block;
 }
-/* 隱藏 data-label，除了 Links 以外 */
 .publication-table td::before {
     display: none;
 }
-
 .publication-table td[data-label="#"] {
     font-size: 1.5rem;
     font-weight: 700;
@@ -185,27 +184,25 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     font-size: 0.95rem;
     line-height: 1.5;
 }
-
-/* 4. 連結區塊 */
 .publication-table td[data-label="Links"] {
     margin-top: 0.5rem;
     padding-top: 1.25rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex; /* 讓 label 和按鈕可以對齊 */
+    display: flex;
     align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem;
 }
-/* 【修改一】新增 "Links:" 標籤 */
 .publication-table td[data-label="Links"]::before {
     content: 'Links:';
-    display: inline-block; /* 讓它可以和按鈕並排 */
+    display: inline-block;
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--text-color);
-    margin-right: 1rem; /* 與按鈕的間距 */
+    white-space: nowrap; /* Prevent "Links:" from breaking */
 }
-/* 【修改二】調整按鈕容器，讓它可以和 label 並排 */
 .action-buttons {
-    display: inline-flex; /* inline-flex 是關鍵 */
+    display: inline-flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-start;
@@ -278,47 +275,96 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .close-btn { top: 20px; right: 20px; }
     .contact-section { padding: 4rem 1.5rem; }
     .contact-section h2 { font-size: 2rem; }
-    .publication-table td[data-label="Links"] { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .pagination-container { flex-wrap: wrap; justify-content: space-around; }
+    .page-jump-section { width: 100%; justify-content: center; order: -1; margin-bottom: 1rem; }
 }
 
 /* --- 8. Back to Top Button --- */
-.back-to-top-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 999;
-    width: 50px;
-    height: 50px;
-    background-color: var(--light-bg);
-    border: 2px solid var(--tech-cyan);
-    border-radius: 50%;
+.back-to-top-btn { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 50px; height: 50px; background-color: var(--light-bg); border: 2px solid var(--tech-cyan); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; text-decoration: none; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease; }
+.back-to-top-btn.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top-btn::after { content: ''; width: 12px; height: 12px; border-top: 2px solid var(--tech-cyan); border-left: 2px solid var(--tech-cyan); transform: translateY(25%) rotate(45deg); transition: border-color 0.3s ease; }
+.back-to-top-btn:hover { background-color: var(--tech-cyan); }
+.back-to-top-btn:hover::after { border-color: var(--dark-bg); }
+
+/* --- 9. Pagination --- */
+.pagination-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+    padding: 2rem 0;
+    user-select: none;
+}
+.pagination-btn {
+    background-color: var(--light-bg);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-color);
+    padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
-    text-decoration: none;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
-.back-to-top-btn.is-visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-.back-to-top-btn::after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid var(--tech-cyan);
-    border-left: 2px solid var(--tech-cyan);
-    transform: translateY(25%) rotate(45deg);
-    transition: border-color 0.3s ease;
-}
-.back-to-top-btn:hover {
+.pagination-btn:hover:not(:disabled) {
     background-color: var(--tech-cyan);
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
 }
-.back-to-top-btn:hover::after {
-    border-color: var(--dark-bg);
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.page-jump-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 10px;
+}
+#page-info {
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.8);
+}
+#page-input {
+    width: 60px;
+    text-align: center;
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    border-radius: 5px;
+    padding: 8px;
+    -moz-appearance: textfield;
+}
+#page-input::-webkit-outer-spin-button,
+#page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* --- 10. Animations --- */
+@keyframes slide-out-to-right {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}
+@keyframes slide-in-from-right {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.item-exit {
+    animation: slide-out-to-right 0.3s ease-out forwards;
+}
+.item-enter {
+    opacity: 0; /* Start invisible */
+    animation: slide-in-from-right 0.4s ease-out forwards;
 }

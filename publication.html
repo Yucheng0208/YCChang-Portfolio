@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yu-Cheng Chang</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -45,16 +45,13 @@
             
             <!-- 控制項：篩選和搜索 -->
             <div class="controls-container">
-                <!-- 膠囊狀篩選 Bar -->
                 <div class="filter-bar" id="publication-filter">
                     <button class="active" data-filter="all">All</button>
                     <button data-filter="conference">Conference</button>
                     <button data-filter="journal">Journal</button>
                     <button data-filter="preprint">Preprint</button>
                     <button data-filter="book">Book</button>
-                    <button data-filter="thesis">Patent</button>
                 </div>
-                <!-- 搜索框 -->
                 <div class="search-container">
                     <input type="text" id="publication-search" placeholder="Search title, author, venue, link, date...">
                 </div>
@@ -78,6 +75,20 @@
                         <!-- 內容將由 JavaScript 動態生成 -->
                     </tbody>
                 </table>
+            </div>
+
+            <!-- 【新增】換頁控制器 -->
+            <div id="pagination-container" class="pagination-container" style="display: none;">
+                <button id="first-page" class="pagination-btn">« First</button>
+                <button id="prev-page" class="pagination-btn">‹ Prev</button>
+                
+                <div class="page-jump-section">
+                    <span id="page-info"></span>
+                    <input type="number" id="page-input" min="1">
+                </div>
+                
+                <button id="next-page" class="pagination-btn">Next ›</button>
+                <button id="last-page" class="pagination-btn">Last »</button>
             </div>
 
             <!-- 找不到結果時顯示的訊息 -->
@@ -110,10 +121,7 @@
         <div class="search-box"><form id="search-form"><input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off"></form></div>
     </div>
 
-        <!-- ===== 新增的「回到頂部」按鈕 ===== -->
-    <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
-        <!-- 箭頭本身將由 CSS 繪製 -->
-    </a>
-
+    <!-- 回到頂部按鈕 -->
+    <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
 </body>
 </html>
