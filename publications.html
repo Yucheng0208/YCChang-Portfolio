@@ -6,20 +6,23 @@
     <title>Yu-Cheng Chang</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style.css">
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
     <!-- 引入 js-yaml 來解析 YAML 檔案 -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="/pagefind/pagefind-ui.js"></script>
 </head>
 <body>
+    
     <!-- 2. Navbar -->
     <nav class="main-nav">
         <div class="nav-container">
-            <div class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></div>
+            <a href="index.html" class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honors.html">Honors</a></li>
-                <li><a href="publication.html">Publication</a></li>
+                <li><a href="publications.html">Publications</a></li>
                 <li class="nav-item-dropdown">
                     <a href="#" class="dropdown-toggle">Experience<span class="dropdown-arrow"></span></a>
                     <ul class="dropdown-menu">
@@ -42,9 +45,22 @@
                         <li><a href="https://chatgpt.com/g/g-6847fa761ce48191bec65762eed2f7f6-lexi">Lexi</a></li>         
                     </ul>
                 </li>
-                <li class="search-item"><a href="#" id="search-btn" aria-label="Open search"><img src="images/search.svg" alt="Search" class="search-icon-svg"></a></li>
+                <!-- [桌面版搜索按钮] - 放在链接列表的最后 -->
+                <li class="search-item desktop-search">
+                    <a href="#" id="search-btn-desktop" aria-label="Open search">
+                        <img src="images/search.svg" alt="Search" class="search-icon-svg">
+                    </a>
+                </li>
             </ul>
-            <div class="nav-controls"><button class="hamburger-btn" aria-label="Toggle navigation"><span></span><span></span><span></span></button></div>
+            <div class="nav-controls">
+                <!-- 將 search-item 移到這裡 -->
+                <a href="#" id="search-btn" class="nav-search-btn" aria-label="Open search">
+                    <img src="images/search.svg" alt="Search" class="search-icon-svg">
+                </a>
+                <button class="hamburger-btn" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -122,9 +138,6 @@
         <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
     </footer>
 
-    <!-- JS -->
-    <script src="script.js"></script>
-
     <!-- 搜尋浮層 -->
     <div id="search-overlay" class="search-overlay">
         <button class="close-btn" aria-label="Close search">×</button>
@@ -133,5 +146,8 @@
 
     <!-- 回到頂部按鈕 -->
     <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
+
+    <!-- JS -->
+    <script src="script.js"></script>
 </body>
 </html>

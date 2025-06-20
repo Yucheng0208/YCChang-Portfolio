@@ -20,3 +20,9 @@
     ├── slide-1.jpg
     └── ...
 ```
+
+## Pagefind Build 網站全域搜索
+
+```bash
+npx pagefind --site "."
+```
