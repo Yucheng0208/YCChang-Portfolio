@@ -15,10 +15,23 @@
 </head>
 <bodyy>
     
-    <!-- 2. Navbar (與其他頁面共用) -->
+    <!-- Navbar (Shared across pages) -->
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></a>
+            <!-- ▼▼▼ 這個 nav-header 區塊是手機版頂部標頭的標準結構 ▼▼▼ -->
+            <div class="nav-header">
+                <a href="index.html" class="mobile-brand">
+                    <img src="images/logo.svg" alt="Logo" class="mobile-logo">
+                    <h1 class="site-title">Yu-Cheng Chang</h1>
+                </a>
+                <button class="hamburger-btn" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- ▼▼▼ 這是桌面版連結，在手機上會變成滑出式選單 ▼▼▼ -->
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honors.html">Honors</a></li>
