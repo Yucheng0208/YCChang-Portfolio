@@ -13,11 +13,25 @@
 </head>
 <body>
     
-    <!-- 2. Navbar (與其他頁面共用，無需修改) -->
+    <!-- Navbar (Shared across pages) -->
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></a>
-            <ul class="nav-links">
+            <!-- Mobile Controls: Brand and Hamburger Button -->
+            <div class="nav-controls">
+                <a href="index.html" class="mobile-brand">
+                    <img src="images/logo.svg" alt="Logo" class="mobile-logo">
+                    <h1 class="site-title">Yu-Cheng Chang</h1>
+                </a>
+                <!-- ▼▼▼ 【重要】新增的漢堡按鈕 ▼▼▼ -->
+                <button class="hamburger-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="nav-links-list">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Navigation Links List -->
+            <ul class="nav-links" id="nav-links-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honors.html">Honors</a></li>
                 <li><a href="publications.html">Publications</a></li>
@@ -43,10 +57,7 @@
                         <li><a href="https://chatgpt.com/g/g-6847fa761ce48191bec65762eed2f7f6-lexi">Lexi</a></li>         
                     </ul>
                 </li>
-            </ul>
-            <button class="hamburger-btn" aria-label="Toggle navigation">
-                <span></span><span></span><span></span>
-            </button>
+            </ul> 
         </div>
     </nav>
     

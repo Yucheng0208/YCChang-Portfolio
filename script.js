@@ -279,4 +279,32 @@ document.addEventListener('DOMContentLoaded', function () {
         renderRowFunction: renderWorkRow
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdownToggles = document.querySelectorAll('.nav-item-dropdown .dropdown-toggle');
+
+    // Toggle mobile navigation menu
+    if (hamburgerBtn && navLinks) {
+        hamburgerBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('is-active');
+            const isExpanded = navLinks.classList.contains('is-active');
+            hamburgerBtn.setAttribute('aria-expanded', isExpanded);
+            hamburgerBtn.classList.toggle('is-active', isExpanded);
+        });
+    }
+
+    // Toggle dropdowns in mobile view
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            // Check if we are in mobile view
+            if (window.innerWidth <= 1200) {
+                event.preventDefault(); // Prevent default link behavior
+                const parentDropdown = toggle.closest('.nav-item-dropdown');
+                parentDropdown.classList.toggle('is-open');
+            }
+        });
+    });
+});
+
 });

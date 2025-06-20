@@ -6,24 +6,51 @@
     <title>Yu-Cheng Chang</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style.css">
-    <link href="./pagefind/pagefind-ui.css" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <meta name="theme-color" content="#0d1117">
+
     <!-- js-yaml for parsing YAML files -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     
 </head>
 <body>
-    
+    <!-- 1. 輪播圖 -->
+    <header class="hero-slider">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('images/slide-1.jpg');"><div class="slide-content"><h1>探索未來科技</h1><p>創新、智能，引領下一個世代的變革。</p></div></div>
+                <div class="swiper-slide" style="background-image: url('images/slide-2.jpg');"><div class="slide-content"><h1>數據驅動決策</h1><p>從海量資訊中，提煉出最有價值的洞見。</p></div></div>
+                <div class="swiper-slide" style="background-image: url('images/slide-3.jpg');"><div class="slide-content"><h1>無縫使用者體驗</h1><p>設計不僅是外觀，更是與使用者之間的對話。</p></div></div>
+            </div>
+            <div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
+        </div>
+        <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content"></a>
+    </header>
+
     <!-- Navbar (Shared across pages) -->
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></a>
-            <ul class="nav-links">
+            <!-- Mobile Controls: Brand and Hamburger Button -->
+            <div class="nav-controls">
+                <a href="index.html" class="mobile-brand">
+                    <img src="images/logo.svg" alt="Logo" class="mobile-logo">
+                    <h1 class="site-title">Yu-Cheng Chang</h1>
+                </a>
+                <!-- ▼▼▼ 【重要】新增的漢堡按鈕 ▼▼▼ -->
+                <button class="hamburger-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="nav-links-list">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Navigation Links List -->
+            <ul class="nav-links" id="nav-links-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honors.html">Honors</a></li>
                 <li><a href="publications.html">Publications</a></li>
@@ -72,63 +99,43 @@
                 </div>
             </div>
             <!-- End of Introduction Section -->
-            <!-- ===== 個人介紹區塊結束 (End of Introduction Section) ===== -->
 
-
-            <!-- ============================================= -->
-            <!-- =====   學歷時間軸 (Education Timeline)   ===== -->
-            <!-- ============================================= -->
+            <!-- Education Timeline -->
             <section class="education-section">
                 <div class="education-container">
                     <h2>Education</h2>
                     <div class="timeline-wrapper">
-
                         <!-- Timeline Item 1: Master's Degree -->
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
                             <div class="timeline-content">
                                 <span class="timeline-date">September 2024 - Present</span>
                                 <h3>Master of Science in Computer Science and Information Engineering</h3>
                                 <p class="timeline-university">National Taipei University of Technology</p>
                             </div>
                         </div>
-
                         <!-- Timeline Item 2: Bachelor's Degree -->
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
                             <div class="timeline-content">
                                 <span class="timeline-date">September 2020 - June 2024</span>
                                 <h3>Bachelor of Science in Computer Information and Network Engineering</h3>
                                 <p class="timeline-university">Lunghwa University of Science and Technology</p>
                             </div>
                         </div>
-
                         <!-- Timeline Item 3: High School's Degree -->
                         <div class="timeline-item">
-                            <div class="timeline-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
+                            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
                             <div class="timeline-content">
                                 <span class="timeline-date">September 2018 - June 2020</span>
                                 <h3>Vocational High School Diploma in Department of Electrical Engineering</h3>
                                 <p class="timeline-university">New Taipei Municipal Tamsui Commercial Industrial Vocational Senior High School</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
-            <!-- ============================================= -->
-            <!-- =====     學歷時間軸結束 (End of Timeline)    ===== -->
-            <!-- ============================================= -->
-
-
-
-
+            <!-- End of Education Timeline -->
         </div> <!-- End of .page-container -->
         
         <!-- Contact Section -->
@@ -139,7 +146,6 @@
                 <a href="mailto:a97496@gmail.com" class="contact-btn">Send a Message</a>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->

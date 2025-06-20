@@ -12,19 +12,28 @@
     <!-- 引入 js-yaml 來解析 YAML 檔案 -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     
-    <!-- 【最終完美修正版】
-         1. 使用相對路徑 ./pagefind/ 確保能找到檔案。
-         2. 加上 data-pagefind-disable-ui 屬性來阻止 Pagefind 自動執行。
-    -->
-    <script src="./pagefind/pagefind-ui.js" data-pagefind-disable-ui></script>
 </head>
 <body data-pagefind-body>
     
-    <!-- 2. Navbar (與其他頁面共用) -->
+    <!-- Navbar (Shared across pages) -->
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></a>
-            <ul class="nav-links">
+            <!-- Mobile Controls: Brand and Hamburger Button -->
+            <div class="nav-controls">
+                <a href="index.html" class="mobile-brand">
+                    <img src="images/logo.svg" alt="Logo" class="mobile-logo">
+                    <h1 class="site-title">Yu-Cheng Chang</h1>
+                </a>
+                <!-- ▼▼▼ 【重要】新增的漢堡按鈕 ▼▼▼ -->
+                <button class="hamburger-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="nav-links-list">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Navigation Links List -->
+            <ul class="nav-links" id="nav-links-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honors.html">Honors</a></li>
                 <li><a href="publications.html">Publications</a></li>
@@ -50,30 +59,11 @@
                         <li><a href="https://chatgpt.com/g/g-6847fa761ce48191bec65762eed2f7f6-lexi">Lexi</a></li>         
                     </ul>
                 </li>
-                <!-- [桌面版搜索按钮] - 放在链接列表的最后 -->
-                 <!--
-                <li class="search-item desktop-search">
-                    <a href="#" id="search-btn-desktop" aria-label="Open search">
-                        <img src="images/search.svg" alt="Search" class="search-icon-svg">
-                    </a>
-                </li>-->
             </ul> 
-            <!--<div class="nav-controls">
-                <!-- 將 search-item 移到這裡 -->
-                <!--<a href="#" id="search-btn" class="nav-search-btn" aria-label="Open search">
-                    <img src="images/search.svg" alt="Search" class="search-icon-svg">
-                </a>
-                <button class="hamburger-btn" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>-->
         </div>
     </nav>
 
-        <!-- 【Pagefind 搜尋元件】 -->
-        <!--<div id="pagefind-embed-container">
-            <div data-pagefind-ui></div>
-        </div>-->
+    
 
     <main id="page-content">
         <!-- 加上 'honor-page' class 來區分頁面 -->
