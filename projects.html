@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu-Cheng Chang - Highlights</title>
+    <title>Yu-Cheng Chang - Projects</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style.css">
     <link href="./pagefind/pagefind-ui.css" rel="stylesheet">
@@ -74,49 +74,49 @@
         <!--<div id="pagefind-embed-container">
             <div data-pagefind-ui></div>
         </div>-->
-
+    
     <main id="page-content">
-        <!-- 加上 'hohighlight-page' class 來區分頁面 -->
-        <div class="page-container highlight-page">
-            <h1>Highlights</h1>
-            <p>This section compiles my professional engagements and activities that extend beyond traditional research. It showcases my commitment to knowledge dissemination and community outreach through various channels: Media features and interviews, public Talks and presentations, and my contributions to Instruction and educational programs.</p>
+        <!-- 加上 'project-page' class 來區分頁面 -->
+        <div class="page-container project-page">
+            <h1>Projects</h1>
+            <p>A curated list of my key research and development projects, showcasing my technical skills and collaborative experiences.</p>
 
             <!-- 控制項：篩選和搜尋 -->
             <div class="controls-container">
-                <div id="highlight-filter" class="filter-bar">
+                <div id="project-filter" class="filter-bar">
                     <button class="active" data-filter="all">All</button>
-                    <button data-filter="Media">Media</button>
-                    <button data-filter="Talk">Talk</button>
-                    <button data-filter="Instruction">Instruction</button>
+                    <button data-filter="Research">Research</button>
+                    <button data-filter="Development">Development</button>
+                    <button data-filter="Collaboration">Collaboration</button>
                 </div>
                 <div class="search-container">
-                    <input type="text" id="highlight-search" placeholder="Search in highlight...">
+                    <input type="text" id="project-search" placeholder="Search in projects...">
                 </div>
             </div>
 
-            <!-- 獎項列表表格 -->
+            <!-- 計畫列表表格 -->
             <div class="table-container">
                 <table class="publication-table">
                     <!-- 表格tbody，內容將由JS動態生成 -->
-                    <tbody id="highlight-table-body"></tbody>
+                    <tbody id="project-table-body"></tbody>
                 </table>
             </div>
 
             <!-- 無結果時顯示 -->
-            <div id="no-results-highlight" class="no-results" style="display: none;">
-                <p>No highlight found matching your criteria.</p>
+            <div id="no-results-project" class="no-results" style="display: none;">
+                <p>No projects found matching your criteria.</p>
             </div>
 
             <!-- 分頁控制項 -->
-            <div id="pagination-container-highlight" class="pagination-container" style="display: none;">
-                <button id="first-page-highlight" class="pagination-btn">First</button>
-                <button id="prev-page-highlight" class="pagination-btn">Previous</button>
+            <div id="pagination-container-project" class="pagination-container" style="display: none;">
+                <button id="first-page-project" class="pagination-btn">First</button>
+                <button id="prev-page-project" class="pagination-btn">Previous</button>
                 <div class="page-jump-section">
-                    <span id="page-info-highlight"></span>
-                    <input type="number" id="page-input-highlight" min="1">
+                    <span id="page-info-project"></span>
+                    <input type="number" id="page-input-project" min="1">
                 </div>
-                <button id="next-page-highlight" class="pagination-btn">Next</button>
-                <button id="last-page-highlight" class="pagination-btn">Last</button>
+                <button id="next-page-project" class="pagination-btn">Next</button>
+                <button id="last-page-project" class="pagination-btn">Last</button>
             </div>
         </div>
     </main>
@@ -125,20 +125,14 @@
     <footer class="site-footer">
         <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
     </footer>
-    
 
-
-             <!-- 搜尋浮層 -->
-    <div id="search-overlay" class="search-overlay">
-        <button class="close-btn" aria-label="Close search">×</button>
-        <div class="search-box"><form id="search-form"><input type="text" id="search-input" placeholder="輸入關鍵字並按下 Enter..." autocomplete="off"></form></div>
-    </div>
+     <!-- 搜尋浮層 (【已修改】簡化成一個空的容器) -->
+    <!--<div id="search-overlay"></div>-->
 
     <!-- 回到頂部按鈕 -->
     <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
 
     <!-- JS 檔案 -->
     <script src="script.js"></script>
-
 </body>
 </html>

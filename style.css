@@ -29,66 +29,13 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .main-nav { position: sticky; top: 0; z-index: 1000; width: 100%; background-color: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 30px var(--shadow-color); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; height: 70px; display: flex; justify-content: center; align-items: center; position: relative; }
 .nav-links { list-style: none; display: flex; align-items: center; gap: 10px; }
-
-/* 1. 移除 li 上的 padding 和視覺樣式 */
-.nav-links li {
-    position: relative;
-    padding: 0;
-}
-
-/* 4. 修正 temporarily-hidden 的邏輯，使其作用於 a 和 a::before */
-.nav-links li.active-link.temporarily-hidden > a::before {
-    transform: scaleX(0) !important;
-    transition: transform 0.3s ease-out !important;
-}
-.nav-links li.active-link.temporarily-hidden > a {
-    color: var(--text-color) !important;
-    transition: color 0.3s ease-out !important;
-}
-
-/* 2. 將所有視覺樣式（形狀、大小）集中到 a 標籤 */
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    transition: color 0.3s ease;
-    border-radius: 50px;
-    overflow: hidden; /* 非常重要，確保背景不會超出圓角 */
-}
-
-/* 3. 統一定義 hover 和 active-link 狀態下的樣式 */
-.nav-links li:hover > a,
-.nav-links li.active-link > a {
-    color: var(--dark-bg);
-}
-
-.nav-links li:hover > a::before,
-.nav-links li.active-link > a::before {
-    transform: scaleX(1);
-}
-
-/* 偽元素作為背景層 */
-.nav-links li a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50px; /* 與 <a> 保持一致 */
-    background: linear-gradient(to right, var(--tech-blue), var(--tech-cyan));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    z-index: -1;
-}
-
+.nav-links li { position: relative; padding: 0; }
+.nav-links li.active-link.temporarily-hidden > a::before { transform: scaleX(0) !important; transition: transform 0.3s ease-out !important; }
+.nav-links li.active-link.temporarily-hidden > a { color: var(--text-color) !important; transition: color 0.3s ease-out !important; }
+.nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; padding: 12px 20px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; transition: color 0.3s ease; border-radius: 50px; overflow: hidden; }
+.nav-links li:hover > a, .nav-links li.active-link > a { color: var(--dark-bg); }
+.nav-links li:hover > a::before, .nav-links li.active-link > a::before { transform: scaleX(1); }
+.nav-links li a::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50px; background: linear-gradient(to right, var(--tech-blue), var(--tech-cyan)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); z-index: -1; }
 .search-icon-svg { display: block; width: 20px; height: 20px; }
 .nav-item-dropdown a { gap: 8px; }
 .dropdown-arrow { border: solid currentColor; border-width: 0 2px 2px 0; display: inline-block; padding: 3px; transform: rotate(45deg); transition: transform 0.3s ease; }
@@ -104,7 +51,9 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .mobile-brand { display: none; }
 .nav-controls { display: none; }
 
-/* --- 3. Search Overlay --- */
+/* --- 3. Search Overlay (舊的，未使用) --- */
+/* 【註解】以下為舊的搜尋樣式，已註解 */
+/*
 .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 17, 23, 0.95); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s 0.4s; }
 .search-overlay.is-visible { opacity: 1; visibility: visible; transition: opacity 0.4s ease, visibility 0s; }
 .close-btn { position: absolute; top: 40px; right: 40px; background: none; border: none; font-size: 3rem; color: #fff; cursor: pointer; line-height: 1; opacity: 0.8; transition: opacity 0.3s; }
@@ -113,6 +62,7 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .search-overlay.is-visible .search-box { transform: scale(1); }
 #search-input { width: 100%; background: none; border: none; border-bottom: 2px solid var(--tech-cyan); color: #fff; font-size: 2.5rem; padding: 1rem 0; text-align: center; outline: none; }
 #search-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+*/
 
 /* --- 4. 聯繫我區塊 --- */
 .contact-section { background-color: var(--light-bg); padding: 5rem 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); }
@@ -126,13 +76,8 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .site-footer { padding: 2.5rem 0; text-align: center; background-color: var(--dark-bg); }
 .site-footer p { color: rgba(201, 209, 217, 0.6); font-size: 0.9rem; letter-spacing: 0.5px; }
 
-/* --- 6. 列表頁通用樣式 (Publication, Honor, Highlight, Project) --- */
-.publication-page .page-container, 
-.honor-page .page-container, 
-.highlight-page .page-container,
-.project-page .page-container {
-    max-width: 1200px;
-}
+/* --- 6. 列表頁通用樣式 --- */
+.publication-page .page-container, .honor-page .page-container, .highlight-page .page-container, .project-page .page-container { max-width: 1200px; }
 .controls-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin: 2rem 0; }
 .filter-bar { display: flex; background-color: var(--light-bg); border-radius: 50px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.1); }
 .filter-bar button { background: none; border: none; color: var(--text-color); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
@@ -150,28 +95,7 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .publication-table td::before { display: none; }
 .publication-table td[data-label="#"] { font-size: 1.5rem; font-weight: 700; color: var(--tech-cyan); line-height: 1; }
 .publication-table td[data-label="Title"] { font-size: 1.2rem; font-weight: 600; color: #fff; line-height: 1.4; margin-top: -0.5rem; }
-
-/* 【已更新】將所有次要資訊欄位加入此通用規則 */
-.publication-table td[data-label="Authors"],
-.publication-table td[data-label="Venue"],
-.publication-table td[data-label="Date"],
-.publication-table td[data-label="Author Role"],
-.publication-table td[data-label="Event"],
-.publication-table td[data-label="Organizer"],
-.publication-table td[data-label="Award"],
-.publication-table td[data-label="Bonus"],
-.publication-table td[data-label="Members"],
-.publication-table td[data-label="Supervisor"],
-.publication-table td[data-label="Position"],
-.publication-table td[data-label="Location"],
-.publication-table td[data-label="Project ID"],
-.publication-table td[data-label="Duration"] {
-    font-style: normal;
-    color: rgba(201, 209, 217, 0.85);
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
+.publication-table td[data-label="Authors"], .publication-table td[data-label="Venue"], .publication-table td[data-label="Date"], .publication-table td[data-label="Author Role"], .publication-table td[data-label="Event"], .publication-table td[data-label="Organizer"], .publication-table td[data-label="Award"], .publication-table td[data-label="Bonus"], .publication-table td[data-label="Members"], .publication-table td[data-label="Supervisor"], .publication-table td[data-label="Position"], .publication-table td[data-label="Location"], .publication-table td[data-label="Project ID"], .publication-table td[data-label="Duration"] { font-style: normal; color: rgba(201, 209, 217, 0.85); font-size: 0.95rem; line-height: 1.5; }
 .publication-table td[data-label="Links"] { margin-top: 0.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
 .publication-table td[data-label="Links"]::before { content: 'Links:'; display: inline-block; font-weight: 600; font-size: 0.95rem; color: var(--text-color); white-space: nowrap; }
 .action-buttons { display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
@@ -188,7 +112,6 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .hamburger-btn.is-active span:nth-child(1) { transform: translate(-50%, 8px) rotate(45deg); }
 .hamburger-btn.is-active span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-active span:nth-child(3) { transform: translate(-50%, -8px) rotate(-45deg); }
-
 @media (max-width: 1200px) {
     .nav-container { justify-content: space-between; }
     .nav-links { position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background-color: var(--light-bg); flex-direction: column; justify-content: center; align-items: center; gap: 20px; transform: translateX(100%); transition: transform 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
@@ -202,20 +125,47 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .hamburger-btn { display: flex; }
     .nav-search-btn { display: block; padding: 8px; line-height: 0; }
     .nav-search-btn .search-icon-svg { width: 24px; height: 24px; }
-    .nav-item-dropdown { width: 100%; text-align: center; flex-wrap: wrap; }
-    .nav-item-dropdown .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; background-color: transparent; box-shadow: none; padding: 10px 0 0 20px; min-width: auto; width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-    .nav-item-dropdown.is-open .dropdown-menu { max-height: 200px; }
-    .nav-item-dropdown.is-open .dropdown-arrow { transform: rotate(225deg); }
-    .nav-item-dropdown:hover .dropdown-menu { top: auto; }
+    
+    /* 【修改】行動版下拉選單樣式 */
+    .nav-item-dropdown {
+        width: 100%;
+        text-align: center;
+    }
+    .nav-item-dropdown .dropdown-menu {
+        position: absolute;
+        background-color: var(--dark-bg);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%) translateX(10px);
+        margin-left: 15px;
+        min-width: 180px;
+        width: auto;
+        padding: 10px 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .nav-item-dropdown.is-open .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+    }
+    .nav-item-dropdown.is-open .dropdown-arrow {
+        transform: rotate(225deg);
+    }
+    .nav-item-dropdown:hover .dropdown-menu {
+        top: auto;
+    }
 }
-
 @media (max-width: 992px) {
     .controls-container { flex-direction: column; align-items: stretch; gap: 20px; }
     .filter-bar { flex-wrap: wrap; justify-content: center; border-radius: 20px; }
     .search-container input { width: 100%; }
     .publication-table tr { padding: 1.5rem; }
 }
-
 @media (max-width: 768px) {
     .page-container h1 { font-size: 2rem; }
     .slide-content { padding: 1.5rem; max-width: 90%; }
@@ -223,8 +173,8 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .slide-content p { font-size: 1rem; }
     .scroll-down-arrow { width: 40px; height: 40px; bottom: 20px; }
     .scroll-down-arrow::after { width: 10px; height: 10px; }
-    #search-input { font-size: 1.5rem; }
-    .close-btn { top: 20px; right: 20px; }
+    /* #search-input { font-size: 1.5rem; } */ /* 由於搜尋功能已註解，此行可省略或保留 */
+    /* .close-btn { top: 20px; right: 20px; } */ /* 由於搜尋功能已註解，此行可省略或保留 */
     .contact-section { padding: 4rem 1.5rem; }
     .contact-section h2 { font-size: 2rem; }
     .pagination-container { flex-wrap: wrap; justify-content: space-around; }
@@ -247,47 +197,21 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .pagination-btn:hover:not(:disabled) { background-color: var(--tech-cyan); color: var(--dark-bg); border-color: var(--tech-cyan); }
 .pagination-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .page-jump-section { display: flex; align-items: center; gap: 15px; margin: 0 10px; }
+#page-info, #page-info-honor, #page-info-highlight, #page-info-project { font-size: 0.9rem; color: rgba(201, 209, 217, 0.8); }
+#page-input, #page-input-honor, #page-input-highlight, #page-input-project { width: 60px; text-align: center; background-color: var(--dark-bg); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-color); border-radius: 5px; padding: 8px; appearance: textfield; -moz-appearance: textfield; }
+#page-input::-webkit-outer-spin-button, #page-input::-webkit-inner-spin-button, #page-input-honor::-webkit-outer-spin-button, #page-input-honor::-webkit-inner-spin-button, #page-input-highlight::-webkit-outer-spin-button, #page-input-highlight::-webkit-inner-spin-button, #page-input-project::-webkit-outer-spin-button, #page-input-project::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-#page-info, #page-info-honor, #page-info-highlight, #page-info-project {
-    font-size: 0.9rem;
-    color: rgba(201, 209, 217, 0.8);
-}
-#page-input, #page-input-honor, #page-input-highlight, #page-input-project {
-    width: 60px;
-    text-align: center;
-    background-color: var(--dark-bg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-color);
-    border-radius: 5px;
-    padding: 8px;
-    appearance: textfield;
-    -moz-appearance: textfield;
-}
-#page-input::-webkit-outer-spin-button, 
-#page-input::-webkit-inner-spin-button,
-#page-input-honor::-webkit-outer-spin-button,
-#page-input-honor::-webkit-inner-spin-button,
-#page-input-highlight::-webkit-outer-spin-button,
-#page-input-highlight::-webkit-inner-spin-button,
-#page-input-project::-webkit-outer-spin-button,
-#page-input-project::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* --- 10. Animations (最終優雅版) --- */
+/* --- 10. Animations --- */
 @keyframes slide-in-from-right { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes slide-out-to-left { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
 @keyframes slide-in-from-left { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes slide-out-to-right { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(50px); } }
 @keyframes slide-in-from-down { from { opacity: 0; transform: translateY(0px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-
 .item-enter-from-right, .item-enter-from-left, .item-enter-from-down { opacity: 0; animation-duration: 0.4s; animation-timing-function: ease-out; animation-fill-mode: forwards; }
 .item-enter-from-right { animation-name: slide-in-from-right; }
 .item-enter-from-left { animation-name: slide-in-from-left; }
 .item-enter-from-down { animation-name: slide-in-from-down; }
-
 .item-exit-to-left, .item-exit-to-right, .item-exit-fade { animation-duration: 0.3s; animation-timing-function: ease-out; animation-fill-mode: forwards; position: absolute; width: 100%; left: 0; right: 0; }
 .item-exit-to-left { animation-name: slide-out-to-left; }
 .item-exit-to-right { animation-name: slide-out-to-right; }
@@ -323,28 +247,138 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .intro-text h1 { font-size: 2.5rem; }
 }
 
-/* --- 重置 Pagefind 搜尋按鈕的樣式 --- */
-#search-btn-desktop,
-#search-btn {
-    background: none;
-    border: none;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-}
-#search-btn-desktop:focus,
-#search-btn:focus,
-#search-btn-desktop:focus-visible,
-#search-btn:focus-visible {
-    outline: none;
-    box-shadow: none;
+/* --- 13. 重置 Pagefind 搜尋按鈕的樣式 --- */
+/* 【註解】以下為 Pagefind 按鈕樣式，已註解 */
+/*
+#search-btn-desktop, #search-btn { background: none; border: none; margin: 0; padding: 0; cursor: pointer; }
+#search-btn-desktop:focus, #search-btn:focus, #search-btn-desktop:focus-visible, #search-btn:focus-visible { outline: none; box-shadow: none; }
+*/
+
+/*
+██████╗  █████╗ ██████╗ ███████╗███████╗███╗   ██╗██████╗ 
+██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝████╗  ██║██╔══██╗
+██████╔╝███████║██║  ██║█████╗  █████╗  ██╔██╗ ██║██║  ██║
+██╔═══╝ ██╔══██║██║  ██║██╔══╝  ██╔══╝  ██║╚██╗██║██║  ██║
+██║     ██║  ██║██████╔╝███████╗███████╗██║ ╚████║██████╔╝
+╚═╝     ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═══╝╚═════╝ 
+*/
+/* --- 14. 美化 Pagefind 搜尋介面 (內嵌觸發模式) --- */
+/* 【註解】以下為 Pagefind UI 美化樣式，已註解 */
+/*
+#pagefind-embed-container {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* --- 13. 強制修正 Pagefind UI 層級 --- */
-/* 
-  這個規則的目的是要強制提高 Pagefind 搜尋視窗的顯示層級(z-index)，
-  確保它不會被頁面上的導覽列或其他元素擋住。
-*/
-#search-overlay .pagefind-ui__drawer {
-    z-index: 99999 !important; 
+#pagefind-embed-container.is-visible {
+    max-height: 80vh; 
+    opacity: 1;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem; 
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    border-width: 1px;
 }
+
+.pagefind-ui {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 1rem; 
+}
+@media (max-width: 768px) {
+    .pagefind-ui {
+        padding: 0;
+    }
+}
+
+.pagefind-ui__form {
+    border-bottom: 2px solid var(--tech-cyan);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    position: relative;
+}
+
+.pagefind-ui__search-input {
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    padding: 0.5rem 0 !important;
+    width: 100%;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-appearance: none;
+}
+.pagefind-ui__search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.pagefind-ui__search-icon {
+    display: none !important;
+}
+
+.pagefind-ui__results-area {
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-right: 10px;
+}
+
+.pagefind-ui__result {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0 !important;
+    margin-bottom: 1rem !important;
+    padding: 0.5rem 0.5rem 1rem 0.5rem !important;
+    transition: background-color 0.3s ease;
+}
+.pagefind-ui__result:last-child {
+    border-bottom: none !important;
+}
+.pagefind-ui__result:hover {
+    background-color: rgba(100, 210, 255, 0.05) !important;
+    border-radius: 8px;
+}
+a.pagefind-ui__result-link {
+    text-decoration: none !important;
+}
+
+.pagefind-ui__result-title {
+    color: var(--tech-cyan) !important;
+    font-size: 1.1rem !important;
+    font-weight: 600;
+}
+.pagefind-ui__result-excerpt {
+    color: var(--text-color) !important;
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+}
+.pagefind-ui__result-excerpt mark {
+    background-color: var(--tech-blue) !important;
+    color: #ffffff !important;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+.pagefind-ui__footer, .pagefind-ui__search-clear {
+    display: none !important;
+}
+
+.pagefind-ui__message {
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+*/

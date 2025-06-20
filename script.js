@@ -1,10 +1,12 @@
-console.log("--- SCRIPT.JS V2 LOADED ---"); // <--- 將這行加到檔案最頂端
+// 【修改】更新 Log，表明 Pagefind 功能已停用
+console.log("--- SCRIPT.JS V3 (Pagefind functionality disabled) LOADED ---");
+
 // =======================================================
 // 第一部分：DOMContentLoaded 事件監聽器
 // =======================================================
 document.addEventListener('DOMContentLoaded', function () {
 
-    // --- 1. 通用功能 (此部分保持不變) ---
+    // --- 1. 通用功能 ---
     (function setupCommonFeatures() {
         const swiperElement = document.querySelector('.swiper'); 
         if (swiperElement) { new Swiper('.swiper', { loop: true, autoplay: { delay: 4000, disableOnInteraction: false }, pagination: { el: '.swiper-pagination', clickable: true }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, }); }
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (backToTopBtn) { window.addEventListener('scroll', () => { window.scrollY > 300 ? backToTopBtn.classList.add('is-visible') : backToTopBtn.classList.remove('is-visible'); }); backToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
     })();
 
-    // --- 2. 列表頁初始化（動畫最終完美版） ---
+    // --- 2. 列表頁初始化 ---
     function initializeListPage(config) {
         const pageContainer = document.querySelector(config.pageSelector);
         if (!pageContainer) return;
@@ -33,7 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const itemsPerPage = 10;
         const tableBody = document.getElementById(config.tableBodyId);
         const filterButtons = document.querySelectorAll(`#${config.filterBarId} button`);
-        const searchInput = document.getElementById(config.searchInputId);
+        
+        const searchInput = config.searchInputId ? document.getElementById(config.searchInputId) : null;
+        
         const noResultsDiv = document.getElementById(config.noResultsId);
         const paginationContainer = document.getElementById(config.paginationContainerId);
         const pageInfoSpan = document.getElementById(config.pageInfoId);
@@ -56,22 +60,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         
-        // 【已修改】處理 'none' 動畫類型
         function renderPage(itemsToShow, animationOptions) {
             if (!tableBody) return;
-
-            // 如果動畫類型是 'none'，則直接填充新表格，不等待
             if (animationOptions.type === 'none') {
                 populateTable(itemsToShow, animationOptions);
-                return; // 提前結束函式
+                return;
             }
-
             const children = Array.from(tableBody.children);
             if (children.length > 0) {
                 let exitClass;
                 if (animationOptions.type === 'refresh') {
                     exitClass = 'item-exit-fade'; 
-                } else { // 'slide'
+                } else {
                     exitClass = animationOptions.direction === 'right' ? 'item-exit-to-left' : 'item-exit-to-right';
                 }
                 children.forEach(row => row.className = exitClass);
@@ -81,22 +81,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // 【已修改】優化入場動畫邏輯
         function populateTable(itemsToShow, animationOptions) {
             tableBody.innerHTML = '';
-            let enterClass = 'item-enter-from-down'; // 預設使用簡單的向下淡入
-
-            // 只有 'slide' 類型才使用左右滑入
+            let enterClass = 'item-enter-from-down';
             if (animationOptions.type === 'slide') {
                 enterClass = animationOptions.direction === 'right' ? 'item-enter-from-right' : 'item-enter-from-left';
             }
-
             itemsToShow.forEach((item, index) => {
                 const globalIndex = (currentPage - 1) * itemsPerPage + index + 1;
                 const row = config.renderRowFunction(item, globalIndex);
                 row.className = enterClass;
-                
-                // 只有 'slide' 類型不使用延遲，其他都有
                 if (animationOptions.type === 'slide') {
                      row.style.animationDelay = '0s';
                 } else {
@@ -132,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function updateDisplay(animationOptions) {
             const activeFilterButton = document.querySelector(`#${config.filterBarId} button.active`);
             const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : "";
+            
             let tempFiltered = allItems;
             if (activeFilterButton) {
                 const activeFilter = activeFilterButton.dataset.filter;
@@ -163,34 +158,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.addEventListener('click', () => {
                     const currentActiveButton = document.querySelector(`#${config.filterBarId} button.active`);
                     if (button === currentActiveButton) return;
-
                     const newFilter = button.dataset.filter;
                     const oldFilter = currentActiveButton ? currentActiveButton.dataset.filter : 'all';
                     
-                    // 【已修改】判斷動畫類型的邏輯
                     let animationOptions;
-                    // 當點擊 "All" 或 "Certification" 按鈕時，不使用過渡動畫
                     if (newFilter === 'all' || newFilter === 'Certification') {
                         animationOptions = { type: 'none' };
                     } 
-                    // 當從 "All" 或 "Certification" 切換到其他按鈕時，使用刷新動畫
                     else if (oldFilter === 'all' || oldFilter === 'Certification') {
                         animationOptions = { type: 'refresh' };
                     }
-                    // 其他按鈕之間切換時，使用滑動動畫
                     else {
                         const allButtons = Array.from(filterButtons);
                         const oldIndex = allButtons.indexOf(currentActiveButton);
                         const newIndex = allButtons.indexOf(button);
-                        animationOptions = {
-                            type: 'slide',
-                            direction: newIndex > oldIndex ? 'right' : 'left'
-                        };
+                        animationOptions = { type: 'slide', direction: newIndex > oldIndex ? 'right' : 'left' };
                     }
                     
-                    if (currentActiveButton) {
-                        currentActiveButton.classList.remove('active');
-                    }
+                    if (currentActiveButton) { currentActiveButton.classList.remove('active'); }
                     button.classList.add('active');
                     updateDisplay(animationOptions);
                 });
@@ -213,97 +198,123 @@ document.addEventListener('DOMContentLoaded', function () {
         loadData();
     }
 
-    // --- 表格渲染輔助函式 ---
+    // --- 3. 表格渲染輔助函式 ---
     function renderPublicationRow(pub, globalIndex) {
-        let linksHTML = '';
-        if (pub.links && typeof pub.links === 'object') {
-            const validLinks = Object.entries(pub.links).filter(([_, url]) => url && String(url).trim() !== '');
-            if (validLinks.length > 0) {
-                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
-            }
-        }
-        const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${pub.authors || ''}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
-        return row;
+        let linksHTML = ''; if (pub.links && typeof pub.links === 'object') { const validLinks = Object.entries(pub.links).filter(([_, url]) => url && String(url).trim() !== ''); if (validLinks.length > 0) { linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`; } }
+        const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${pub.authors || ''}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`; return row;
     }
-
     function renderHonorRow(honor, globalIndex) {
-        let linksHTML = '';
-        if (honor.links && typeof honor.links === 'object') {
-            const validLinks = Object.entries(honor.links).filter(([_, url]) => url && String(url).trim() !== '');
-            if (validLinks.length > 0) {
-                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
-            }
-        }
-        const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${honor.title || ''}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">${honor.supervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
-        return row;
+        let linksHTML = ''; if (honor.links && typeof honor.links === 'object') { const validLinks = Object.entries(honor.links).filter(([_, url]) => url && String(url).trim() !== ''); if (validLinks.length > 0) { linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`; } }
+        const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${honor.title || ''}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">${honor.supervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`; return row;
     }
-
     function renderHighlightRow(highlight, globalIndex) {
-        const location = highlight.localtion || highlight.location || '';
-        let linksHTML = '';
-        if (highlight.links && typeof highlight.links === 'object') {
-            const validLinks = Object.entries(highlight.links).filter(([_, url]) => url && String(url).trim() !== '');
-            if (validLinks.length > 0) {
-                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
-            }
-        }
-        const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
-        return row;
+        const location = highlight.localtion || highlight.location || ''; let linksHTML = ''; if (highlight.links && typeof highlight.links === 'object') { const validLinks = Object.entries(highlight.links).filter(([_, url]) => url && String(url).trim() !== ''); if (validLinks.length > 0) { linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`; } }
+        const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`; return row;
     }
-    
     function renderProjectRow(project, globalIndex) {
-        let linksHTML = '';
-        if (project.links && typeof project.links === 'object') {
-            const validLinks = Object.entries(project.links).filter(([_, url]) => url && String(url).trim() !== '');
-            if (validLinks.length > 0) {
-                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
-            }
-        }
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td data-label="#">${globalIndex}.</td>
-            <td data-label="Title">${project.title || ''}</td>
-            <td data-label="Project ID">${project.number || ''}</td>
-            <td data-label="Duration">${project.date || 'TBA'}</td>
-            <td data-label="Supervisor">${project.supervisor || ''}</td>
-            ${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}
-            ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
-        `;
-        return row;
+        let linksHTML = ''; if (project.links && typeof project.links === 'object') { const validLinks = Object.entries(project.links).filter(([_, url]) => url && String(url).trim() !== ''); if (validLinks.length > 0) { linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`; } }
+        const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${project.title || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="Supervisor">${project.supervisor || ''}</td>${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`; return row;
     }
 
-    // --- 初始化所有列表頁 ---
+    // --- 4. 初始化所有列表頁 ---
     initializeListPage({ pageSelector: '.publication-page', yamlPath: './publications.yaml', tableBodyId: 'publication-table-body', filterBarId: 'publication-filter', searchInputId: 'publication-search', noResultsId: 'no-results', paginationContainerId: 'pagination-container', pageInfoId: 'page-info', pageInputId: 'page-input', firstPageBtnId: 'first-page', prevPageBtnId: 'prev-page', nextPageBtnId: 'next-page', lastPageBtnId: 'last-page', renderRowFunction: renderPublicationRow });
     initializeListPage({ pageSelector: '.honor-page', yamlPath: './honors.yaml', tableBodyId: 'honor-table-body', filterBarId: 'honor-filter', searchInputId: 'honor-search', noResultsId: 'no-results-honor', paginationContainerId: 'pagination-container-honor', pageInfoId: 'page-info-honor', pageInputId: 'page-input-honor', firstPageBtnId: 'first-page-honor', prevPageBtnId: 'prev-page-honor', nextPageBtnId: 'next-page-honor', lastPageBtnId: 'last-page-honor', renderRowFunction: renderHonorRow });
     initializeListPage({ pageSelector: '.highlight-page', yamlPath: './highlights.yaml', tableBodyId: 'highlight-table-body', filterBarId: 'highlight-filter', searchInputId: 'highlight-search', noResultsId: 'no-results-highlight', paginationContainerId: 'pagination-container-highlight', pageInfoId: 'page-info-highlight', pageInputId: 'page-input-highlight', firstPageBtnId: 'first-page-highlight', prevPageBtnId: 'prev-page-highlight', nextPageBtnId: 'next-page-highlight', lastPageBtnId: 'last-page-highlight', renderRowFunction: renderHighlightRow });
-    initializeListPage({ pageSelector: '.project-page', yamlPath: './projects.yaml', tableBodyId: 'project-table-body', filterBarId: 'project-filter', searchInputId: 'project-search', noResultsId: 'no-results-project', paginationContainerId: 'pagination-container-project', pageInfoId: 'page-info-project', pageInputId: 'page-input-project', firstPageBtnId: 'first-page-project', prevPageBtnId: 'prev-page-project', nextPageBtnId: 'next-page-project', lastPageBtnId: 'last-page-project', renderRowFunction: renderProjectRow });
+    
+    initializeListPage({ 
+        pageSelector: '.project-page', 
+        yamlPath: './projects.yaml', 
+        tableBodyId: 'project-table-body', 
+        filterBarId: 'project-filter', 
+        searchInputId: null, 
+        noResultsId: 'no-results-project', 
+        paginationContainerId: 'pagination-container-project', 
+        pageInfoId: 'page-info-project', 
+        pageInputId: 'page-input-project', 
+        firstPageBtnId: 'first-page-project', 
+        prevPageBtnId: 'prev-page-project', 
+        nextPageBtnId: 'next-page-project', 
+        lastPageBtnId: 'last-page-project', 
+        renderRowFunction: renderProjectRow 
+    });
 
 });
 
+
 // =======================================================
-// Pagefind 初始化函式 (獨立在全域)
+// 第二部分：Pagefind 初始化函式 (內嵌觸發模式)
 // =======================================================
+/* 【註解】以下為 Pagefind 功能相關的 JS，已全部註解
+
 function initPagefind() {
+    // 1. 找到我們在 HTML 中設定的相關元素
+    const pagefindContainer = document.getElementById('pagefind-embed-container');
+    const desktopSearchBtn = document.getElementById('search-btn-desktop');
+    const mobileSearchBtn = document.getElementById('search-btn');
+
+    // 如果頁面上沒有放置 Pagefind 的容器，就直接結束，不做任何事
+    if (!pagefindContainer) {
+        console.log("Pagefind container not found on this page. Skipping initialization.");
+        return;
+    }
+    
+    // 2. 檢查 PagefindUI 是否可用
     if (window.PagefindUI) {
         try {
-            // 【最終修正版】
-            // 這裡只需要 trigger 選項，來啟用「點擊按鈕彈出視窗」的模式。
-            // 不要加入 element 選項。
-            new PagefindUI({ 
+            // 初始化 Pagefind，但這次我們指定 element，告訴它在哪裡渲染
+            new PagefindUI({
+                element: pagefindContainer, // 【重要】指定渲染的容器
                 showSubResults: true,
-                trigger: "#search-btn-desktop, #search-btn"
             });
-            console.log("Pagefind UI initialized and listeners attached.");
+            console.log("Pagefind UI initialized in embedded mode.");
+
         } catch (e) {
             console.error("Failed to initialize Pagefind UI:", e);
+            return; // 初始化失敗就結束
         }
     } else {
-        console.error("PagefindUI is not available. Check if pagefind-ui.js is loaded correctly.");
+        console.error("PagefindUI is not available.");
+        return;
     }
+
+    // 3. 為放大鏡按鈕添加點擊事件監聽
+    function toggleSearch(event) {
+        event.preventDefault(); // 阻止連結跳轉
+        event.stopPropagation(); // 阻止事件冒泡
+
+        // 切換容器的 'is-visible' class
+        pagefindContainer.classList.toggle('is-visible');
+
+        // 如果搜尋框變為可見，就自動對焦到輸入框
+        if (pagefindContainer.classList.contains('is-visible')) {
+            const input = pagefindContainer.querySelector('.pagefind-ui__search-input');
+            if (input) {
+                // 使用一個小的延遲確保元素已經完全顯示並可交互
+                setTimeout(() => input.focus(), 50); 
+            }
+        }
+    }
+
+    if (desktopSearchBtn) {
+        desktopSearchBtn.addEventListener('click', toggleSearch);
+    }
+    if (mobileSearchBtn) {
+        mobileSearchBtn.addEventListener('click', toggleSearch);
+    }
+    
+    // 4. (推薦) 點擊頁面其他地方時，關閉搜尋框
+    document.addEventListener('click', function(event) {
+        // 確保點擊的目標不是觸發按鈕或其子元素
+        const isTriggerClick = desktopSearchBtn?.contains(event.target) || mobileSearchBtn?.contains(event.target);
+        
+        // 如果搜尋框是可見的，並且點擊的地方不是搜尋框內部，也不是觸發按鈕
+        if (pagefindContainer.classList.contains('is-visible') && !pagefindContainer.contains(event.target) && !isTriggerClick) {
+            pagefindContainer.classList.remove('is-visible');
+        }
+    });
+
 }
 
-// 【修正】確保 DOMContentLoaded 後再執行 Pagefind 初始化
+// 等待 DOM 載入完成後執行我們的 Pagefind 初始化函數
 document.addEventListener('DOMContentLoaded', initPagefind);
+*/
