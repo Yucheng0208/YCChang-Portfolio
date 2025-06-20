@@ -749,7 +749,7 @@ body {
 
 @media (max-width: 768px) {
     .page-container {
-        padding: 4rem 1rem; /* Reduce side padding on very small screens */
+        padding: 4rem 1rem;
     }
     .page-container h1 { font-size: 2rem; }
     .slide-content { padding: 1.5rem; max-width: 90%; }
@@ -1168,7 +1168,7 @@ body {
 
 .timeline-icon {
     position: absolute;
-    top: 15px;
+    top: 25px; /* Adjusted for better vertical alignment */
     z-index: 10;
     width: 50px;
     height: 50px;
@@ -1180,16 +1180,17 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     color: var(--tech-cyan);
+    transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease;
 }
 
 .timeline-item:nth-child(odd) .timeline-icon {
     right: -25px;
-    transform: translateY(-50%) translateX(50%);
+    transform: translateX(0); /* On desktop, let right property handle it */
 }
 
 .timeline-item:nth-child(even) .timeline-icon {
     left: -25px;
-    transform: translateY(-50%) translateX(-50%);
+    transform: translateX(0); /* On desktop, let left property handle it */
 }
 
 .timeline-content {
@@ -1209,10 +1210,11 @@ body {
 .timeline-content::before {
     content: '';
     position: absolute;
-    top: 20px;
+    top: 30px; /* Adjusted for better vertical alignment */
     width: 0;
     height: 0;
     border: 10px solid transparent;
+    transition: top 0.3s ease;
 }
 
 .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
@@ -1256,14 +1258,13 @@ body {
 @media (max-width: 992px) {
     .timeline-wrapper::before {
         left: 25px;
-        transform: translateX(0);
+        transform: none; /* Reset transform */
     }
 
     .timeline-item {
         width: 100%;
-        /* [FIX] Adjusted padding for better alignment and space */
         padding-left: 65px; 
-        padding-right: 10px;
+        padding-right: 15px; /* Add some right padding */
         left: 0 !important;
     }
     
@@ -1271,24 +1272,29 @@ body {
     .timeline-item:nth-child(even) {
         text-align: left;
     }
-    
-    /* [FIX] Correctly center the icon on the timeline */
-    .timeline-icon {
-        left: 25px; /* Align with the timeline's position */
-        transform: translateX(-50%) translateY(0); /* Center icon on line, adjusted vertical alignment */
-        top: 25px; /* Align icon better with content start */
-    }
 
-    /* [FIX] Correctly position the arrow to point to the icon */
+    /* ▼▼▼ 【THE FIX】 ▼▼▼ */
+    /* This rule has the same specificity as the desktop rules, so it overrides them correctly. */
+    .timeline-item:nth-child(odd) .timeline-icon,
+    .timeline-item:nth-child(even) .timeline-icon {
+        /* Set position from the left edge of the parent (.timeline-item) */
+        left: 25px;
+        /* CRUCIAL: Nullify the 'right' property from the desktop 'odd' rule */
+        right: auto;
+        /* Center the icon perfectly on the 25px line */
+        transform: translateX(-50%);
+        top: 25px;
+    }
+    
     .timeline-content::before {
-        top: 30px; /* Align arrow vertically with icon */
+        top: 30px;
         left: -20px; /* Recalculated position for the arrow tip */
         right: auto;
         border-left-color: transparent;
         border-right-color: #30363d;
     }
 
-    /* Scale down icon and fonts on smaller screens */
+    /* Scale down icon and fonts for a better fit */
     .timeline-icon {
         width: 40px;
         height: 40px;
