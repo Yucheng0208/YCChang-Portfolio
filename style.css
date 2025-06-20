@@ -29,13 +29,66 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .main-nav { position: sticky; top: 0; z-index: 1000; width: 100%; background-color: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 30px var(--shadow-color); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; height: 70px; display: flex; justify-content: center; align-items: center; position: relative; }
 .nav-links { list-style: none; display: flex; align-items: center; gap: 10px; }
-.nav-links li { position: relative; padding: 5px; border-radius: 50px; transition: border-color 0.3s ease; border: 2px solid transparent; }
-.nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; padding: 10px 15px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; transition: color 0.3s ease; }
-.nav-links li.active-link { border-color: var(--tech-cyan); }
-.nav-links li.active-link.temporarily-hidden { border-color: transparent; }
-.nav-links li a::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50px; background: linear-gradient(to right, var(--tech-blue), var(--tech-cyan)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); z-index: -1; }
-.nav-links li:hover a::before { transform: scaleX(1); }
-.nav-links li:hover > a { color: var(--dark-bg); } /* [修正] 使用 > 避免影響下拉選單 */
+
+/* 1. 移除 li 上的 padding 和視覺樣式 */
+.nav-links li {
+    position: relative;
+    padding: 0;
+}
+
+/* 4. 修正 temporarily-hidden 的邏輯，使其作用於 a 和 a::before */
+.nav-links li.active-link.temporarily-hidden > a::before {
+    transform: scaleX(0) !important;
+    transition: transform 0.3s ease-out !important;
+}
+.nav-links li.active-link.temporarily-hidden > a {
+    color: var(--text-color) !important;
+    transition: color 0.3s ease-out !important;
+}
+
+/* 2. 將所有視覺樣式（形狀、大小）集中到 a 標籤 */
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+    border-radius: 50px;
+    overflow: hidden; /* 非常重要，確保背景不會超出圓角 */
+}
+
+/* 3. 統一定義 hover 和 active-link 狀態下的樣式 */
+.nav-links li:hover > a,
+.nav-links li.active-link > a {
+    color: var(--dark-bg);
+}
+
+.nav-links li:hover > a::before,
+.nav-links li.active-link > a::before {
+    transform: scaleX(1);
+}
+
+/* 偽元素作為背景層 */
+.nav-links li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px; /* 與 <a> 保持一致 */
+    background: linear-gradient(to right, var(--tech-blue), var(--tech-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: -1;
+}
+
 .search-icon-svg { display: block; width: 20px; height: 20px; }
 .nav-item-dropdown a { gap: 8px; }
 .dropdown-arrow { border: solid currentColor; border-width: 0 2px 2px 0; display: inline-block; padding: 3px; transform: rotate(45deg); transition: transform 0.3s ease; }
@@ -47,8 +100,6 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .dropdown-menu li a::before { display: none; }
 .dropdown-menu li:hover { background-color: rgba(100, 210, 255, 0.1); }
 .dropdown-menu li:hover a { color: var(--tech-cyan); }
-
-/* 【修改】將 a 選擇器改為 button，以對應 HTML 的變更 */
 .desktop-search button { padding: 12px; }
 .mobile-brand { display: none; }
 .nav-controls { display: none; }
@@ -75,8 +126,13 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .site-footer { padding: 2.5rem 0; text-align: center; background-color: var(--dark-bg); }
 .site-footer p { color: rgba(201, 209, 217, 0.6); font-size: 0.9rem; letter-spacing: 0.5px; }
 
-/* --- 6. 列表頁通用樣式 (Publication, Honor, Highlight) --- */
-.publication-page .page-container, .honor-page .page-container, .highlight-page .page-container { max-width: 1200px; }
+/* --- 6. 列表頁通用樣式 (Publication, Honor, Highlight, Project) --- */
+.publication-page .page-container, 
+.honor-page .page-container, 
+.highlight-page .page-container,
+.project-page .page-container {
+    max-width: 1200px;
+}
 .controls-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin: 2rem 0; }
 .filter-bar { display: flex; background-color: var(--light-bg); border-radius: 50px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.1); }
 .filter-bar button { background: none; border: none; color: var(--text-color); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
@@ -94,7 +150,28 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .publication-table td::before { display: none; }
 .publication-table td[data-label="#"] { font-size: 1.5rem; font-weight: 700; color: var(--tech-cyan); line-height: 1; }
 .publication-table td[data-label="Title"] { font-size: 1.2rem; font-weight: 600; color: #fff; line-height: 1.4; margin-top: -0.5rem; }
-.publication-table td[data-label="Authors"], .publication-table td[data-label="Venue"], .publication-table td[data-label="Date"], .publication-table td[data-label="Author Role"], .publication-table td[data-label="Event"], .publication-table td[data-label="Organizer"], .publication-table td[data-label="Award"], .publication-table td[data-label="Bonus"], .publication-table td[data-label="Members"], .publication-table td[data-label="Supervisor"], .publication-table td[data-label="Position"], .publication-table td[data-label="Location"] { font-style: normal; color: rgba(201, 209, 217, 0.85); font-size: 0.95rem; line-height: 1.5; }
+
+/* 【已更新】將所有次要資訊欄位加入此通用規則 */
+.publication-table td[data-label="Authors"],
+.publication-table td[data-label="Venue"],
+.publication-table td[data-label="Date"],
+.publication-table td[data-label="Author Role"],
+.publication-table td[data-label="Event"],
+.publication-table td[data-label="Organizer"],
+.publication-table td[data-label="Award"],
+.publication-table td[data-label="Bonus"],
+.publication-table td[data-label="Members"],
+.publication-table td[data-label="Supervisor"],
+.publication-table td[data-label="Position"],
+.publication-table td[data-label="Location"],
+.publication-table td[data-label="Project ID"],
+.publication-table td[data-label="Duration"] {
+    font-style: normal;
+    color: rgba(201, 209, 217, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
 .publication-table td[data-label="Links"] { margin-top: 0.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
 .publication-table td[data-label="Links"]::before { content: 'Links:'; display: inline-block; font-weight: 600; font-size: 0.95rem; color: var(--text-color); white-space: nowrap; }
 .action-buttons { display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
@@ -123,8 +200,8 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .site-title { font-size: 1.5rem; font-weight: 600; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
     .nav-controls { display: flex; align-items: center; gap: 8px; position: static; transform: none; }
     .hamburger-btn { display: flex; }
-    .mobile-search { display: block; padding: 8px; line-height: 0; }
-    .mobile-search .search-icon-svg { width: 24px; height: 24px; }
+    .nav-search-btn { display: block; padding: 8px; line-height: 0; }
+    .nav-search-btn .search-icon-svg { width: 24px; height: 24px; }
     .nav-item-dropdown { width: 100%; text-align: center; flex-wrap: wrap; }
     .nav-item-dropdown .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; background-color: transparent; box-shadow: none; padding: 10px 0 0 20px; min-width: auto; width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
     .nav-item-dropdown.is-open .dropdown-menu { max-height: 200px; }
@@ -170,15 +247,51 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
 .pagination-btn:hover:not(:disabled) { background-color: var(--tech-cyan); color: var(--dark-bg); border-color: var(--tech-cyan); }
 .pagination-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .page-jump-section { display: flex; align-items: center; gap: 15px; margin: 0 10px; }
-#page-info, #page-info-honor, #page-info-highlight { font-size: 0.9rem; color: rgba(201, 209, 217, 0.8); }
-#page-input, #page-input-honor, #page-input-highlight { width: 60px; text-align: center; background-color: var(--dark-bg); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-color); border-radius: 5px; padding: 8px; appearance: textfield; -moz-appearance: textfield; }
-#page-input::-webkit-outer-spin-button, #page-input::-webkit-inner-spin-button, #page-input-honor::-webkit-outer-spin-button, #page-input-honor::-webkit-inner-spin-button, #page-input-highlight::-webkit-outer-spin-button, #page-input-highlight::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* --- 10. Animations --- */
-@keyframes slide-out-to-right { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(50px); } }
+#page-info, #page-info-honor, #page-info-highlight, #page-info-project {
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.8);
+}
+#page-input, #page-input-honor, #page-input-highlight, #page-input-project {
+    width: 60px;
+    text-align: center;
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    border-radius: 5px;
+    padding: 8px;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+#page-input::-webkit-outer-spin-button, 
+#page-input::-webkit-inner-spin-button,
+#page-input-honor::-webkit-outer-spin-button,
+#page-input-honor::-webkit-inner-spin-button,
+#page-input-highlight::-webkit-outer-spin-button,
+#page-input-highlight::-webkit-inner-spin-button,
+#page-input-project::-webkit-outer-spin-button,
+#page-input-project::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* --- 10. Animations (最終優雅版) --- */
 @keyframes slide-in-from-right { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-.item-exit { animation: slide-out-to-right 0.3s ease-out forwards; }
-.item-enter { opacity: 0; animation: slide-in-from-right 0.4s ease-out forwards; }
+@keyframes slide-out-to-left { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
+@keyframes slide-in-from-left { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slide-out-to-right { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(50px); } }
+@keyframes slide-in-from-down { from { opacity: 0; transform: translateY(0px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+.item-enter-from-right, .item-enter-from-left, .item-enter-from-down { opacity: 0; animation-duration: 0.4s; animation-timing-function: ease-out; animation-fill-mode: forwards; }
+.item-enter-from-right { animation-name: slide-in-from-right; }
+.item-enter-from-left { animation-name: slide-in-from-left; }
+.item-enter-from-down { animation-name: slide-in-from-down; }
+
+.item-exit-to-left, .item-exit-to-right, .item-exit-fade { animation-duration: 0.3s; animation-timing-function: ease-out; animation-fill-mode: forwards; position: absolute; width: 100%; left: 0; right: 0; }
+.item-exit-to-left { animation-name: slide-out-to-left; }
+.item-exit-to-right { animation-name: slide-out-to-right; }
+.item-exit-fade { animation-name: fade-out; }
 
 /* --- 11. Friend Links / Misc Sections --- */
 .link-showcase-section { padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
@@ -210,21 +323,28 @@ body { background-color: var(--dark-bg); color: var(--text-color); font-family: 
     .intro-text h1 { font-size: 2.5rem; }
 }
 
-/* --- 【新增】重置 Pagefind 搜尋按鈕的樣式 --- */
-/* 因為搜尋觸發器從 <a> 標籤改為 <button>，我們需要移除按鈕的預設背景、邊框等樣式，讓它看起來就像一個純粹的圖示。 */
+/* --- 重置 Pagefind 搜尋按鈕的樣式 --- */
 #search-btn-desktop,
-#search-btn-mobile {
-    background: none;       /* 移除背景 */
-    border: none;         /* 移除邊框 */
-    margin: 0;            /* 移除外邊距 */
-    cursor: pointer;      /* 保持手形游標 */
+#search-btn {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 }
-
-/* 移除點擊或聚焦時的預設外框 */
 #search-btn-desktop:focus,
-#search-btn-mobile:focus,
+#search-btn:focus,
 #search-btn-desktop:focus-visible,
-#search-btn-mobile:focus-visible {
+#search-btn:focus-visible {
     outline: none;
     box-shadow: none;
+}
+
+/* --- 13. 強制修正 Pagefind UI 層級 --- */
+/* 
+  這個規則的目的是要強制提高 Pagefind 搜尋視窗的顯示層級(z-index)，
+  確保它不會被頁面上的導覽列或其他元素擋住。
+*/
+#search-overlay .pagefind-ui__drawer {
+    z-index: 99999 !important; 
 }
