@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu-Cheng Chang - Projects</title>
+    <title>Yu-Cheng Chang - Works</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style.css">
-    <link href="./pagefind/pagefind-ui.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
     <!-- 引入 js-yaml 來解析 YAML 檔案 -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-
 </head>
-<bodyy>
+<body>
     
-    <!-- 2. Navbar (與其他頁面共用) -->
+    <!-- 2. Navbar (與其他頁面共用，無需修改) -->
     <nav class="main-nav">
         <div class="nav-container">
             <a href="index.html" class="mobile-brand"><img src="images/logo.svg" alt="Logo" class="mobile-logo"><h1 class="site-title">Yu-Cheng Chang</h1></a>
@@ -45,52 +43,52 @@
                         <li><a href="https://chatgpt.com/g/g-6847fa761ce48191bec65762eed2f7f6-lexi">Lexi</a></li>         
                     </ul>
                 </li>
-            </ul> 
+            </ul>
+            <button class="hamburger-btn" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
-
+    
     <main id="page-content">
-        <!-- 加上 'project-page' class 來區分頁面 -->
-        <div class="page-container project-page">
-            <h1>Projects</h1>
-            <p>A curated list of my key research and development projects, showcasing my technical skills and collaborative experiences.</p>
+        <!-- 【修改】加上 'work-page' class 來區分頁面 -->
+        <div class="page-container work-page">
+            <h1>Works</h1>
+            <p>A detailed timeline of my professional roles in both academic and industry settings, highlighting my diverse skills and contributions.</p>
 
-            <!-- 控制項：篩選和搜尋 -->
+            <!-- 【修改】控制項：僅保留篩選 -->
             <div class="controls-container">
-                <div id="project-filter" class="filter-bar">
+                <div id="work-filter" class="filter-bar">
                     <button class="active" data-filter="all">All</button>
-                    <button data-filter="Research">Research</button>
-                    <button data-filter="Development">Development</button>
-                    <button data-filter="Collaboration">Collaboration</button>
+                    <button data-filter="academic">Academic</button>
+                    <button data-filter="industry">Industry</button>
                 </div>
-                <div class="search-container">
-                    <input type="text" id="project-search" placeholder="Search in projects...">
-                </div>
+                <!-- 移除了搜尋框 -->
             </div>
 
-            <!-- 計畫列表表格 -->
+            <!-- 工作經歷列表表格 -->
             <div class="table-container">
                 <table class="publication-table">
-                    <!-- 表格tbody，內容將由JS動態生成 -->
-                    <tbody id="project-table-body"></tbody>
+                    <!-- 【修改】表格tbody ID -->
+                    <tbody id="work-table-body"></tbody>
                 </table>
             </div>
 
-            <!-- 無結果時顯示 -->
-            <div id="no-results-project" class="no-results" style="display: none;">
-                <p>No projects found matching your criteria.</p>
+            <!-- 【修改】無結果時顯示 ID 和文字 -->
+            <div id="no-results-work" class="no-results" style="display: none;">
+                <p>No work experience found matching your criteria.</p>
             </div>
 
-            <!-- 分頁控制項 -->
-            <div id="pagination-container-project" class="pagination-container" style="display: none;">
-                <button id="first-page-project" class="pagination-btn">First</button>
-                <button id="prev-page-project" class="pagination-btn">Previous</button>
+            <!-- 【修改】分頁控制項所有 ID -->
+            <div id="pagination-container-work" class="pagination-container" style="display: none;">
+                <button id="first-page-work" class="pagination-btn">First</button>
+                <button id="prev-page-work" class="pagination-btn">Previous</button>
                 <div class="page-jump-section">
-                    <span id="page-info-project"></span>
-                    <input type="number" id="page-input-project" min="1">
+                    <span id="page-info-work"></span>
+                    <input type="number" id="page-input-work" min="1">
                 </div>
-                <button id="next-page-project" class="pagination-btn">Next</button>
-                <button id="last-page-project" class="pagination-btn">Last</button>
+                <button id="next-page-work" class="pagination-btn">Next</button>
+                <button id="last-page-work" class="pagination-btn">Last</button>
             </div>
         </div>
     </main>

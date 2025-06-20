@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const oldFilter = currentActiveButton ? currentActiveButton.dataset.filter : 'all';
                     
                     let animationOptions;
-                    if (newFilter === 'all' || newFilter === 'Certification') {
+                    if (newFilter === 'all' || newFilter === 'Certification' || newFilter === 'academic' || newFilter === 'industry') { // 【修改】為Works頁面增加無動畫的條件
                         animationOptions = { type: 'none' };
                     } 
                     else if (oldFilter === 'all' || oldFilter === 'Certification') {
@@ -209,11 +209,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     function renderHighlightRow(highlight, globalIndex) {
         const location = highlight.localtion || highlight.location || ''; let linksHTML = ''; if (highlight.links && typeof highlight.links === 'object') { const validLinks = Object.entries(highlight.links).filter(([_, url]) => url && String(url).trim() !== ''); if (validLinks.length > 0) { linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`; } }
-        const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`; return row;
+        const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data--label="Links">${linksHTML}</td>` : ''}`; return row;
     }
     function renderProjectRow(project, globalIndex) {
         let linksHTML = ''; if (project.links && typeof project.links === 'object') { const validLinks = Object.entries(project.links).filter(([_, url]) => url && String(url).trim() !== ''); if (validLinks.length > 0) { linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`; } }
         const row = document.createElement('tr'); row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${project.title || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="Supervisor">${project.supervisor || ''}</td>${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`; return row;
+    }
+
+    // 【新增】Works 頁面的渲染函式
+    function renderWorkRow(work, globalIndex) {
+        let linksHTML = '';
+        if (work.links && typeof work.links === 'object') {
+            const validLinks = Object.entries(work.links).filter(([_, url]) => url && String(url).trim() !== '');
+            if (validLinks.length > 0) {
+                linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
+            }
+        }
+    
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td data-label="Organization">${work.organization || ''}</td>
+            <td data-label="Position">${work.position || ''}</td>
+            ${work.crn ? `<td data-label="CRN">Company Registration Numbers: ${work.crn}</td>` : ''}
+            <td data-label="Date">${work.date || 'TBA'}</td>
+            ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+        `;
+        // 我們不需要顯示編號，所以移除了 <td data-label="#">${globalIndex}.</td>
+        return row;
     }
 
     // --- 4. 初始化所有列表頁 ---
@@ -221,12 +243,13 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeListPage({ pageSelector: '.honor-page', yamlPath: './honors.yaml', tableBodyId: 'honor-table-body', filterBarId: 'honor-filter', searchInputId: 'honor-search', noResultsId: 'no-results-honor', paginationContainerId: 'pagination-container-honor', pageInfoId: 'page-info-honor', pageInputId: 'page-input-honor', firstPageBtnId: 'first-page-honor', prevPageBtnId: 'prev-page-honor', nextPageBtnId: 'next-page-honor', lastPageBtnId: 'last-page-honor', renderRowFunction: renderHonorRow });
     initializeListPage({ pageSelector: '.highlight-page', yamlPath: './highlights.yaml', tableBodyId: 'highlight-table-body', filterBarId: 'highlight-filter', searchInputId: 'highlight-search', noResultsId: 'no-results-highlight', paginationContainerId: 'pagination-container-highlight', pageInfoId: 'page-info-highlight', pageInputId: 'page-input-highlight', firstPageBtnId: 'first-page-highlight', prevPageBtnId: 'prev-page-highlight', nextPageBtnId: 'next-page-highlight', lastPageBtnId: 'last-page-highlight', renderRowFunction: renderHighlightRow });
     
+    // 【修改】Projects 頁面的初始化，將 searchInputId 從 null 改回 'project-search'
     initializeListPage({ 
         pageSelector: '.project-page', 
         yamlPath: './projects.yaml', 
         tableBodyId: 'project-table-body', 
         filterBarId: 'project-filter', 
-        searchInputId: null, 
+        searchInputId: 'project-search', // 恢復搜尋框功能
         noResultsId: 'no-results-project', 
         paginationContainerId: 'pagination-container-project', 
         pageInfoId: 'page-info-project', 
@@ -238,83 +261,22 @@ document.addEventListener('DOMContentLoaded', function () {
         renderRowFunction: renderProjectRow 
     });
 
-});
-
-
-// =======================================================
-// 第二部分：Pagefind 初始化函式 (內嵌觸發模式)
-// =======================================================
-/* 【註解】以下為 Pagefind 功能相關的 JS，已全部註解
-
-function initPagefind() {
-    // 1. 找到我們在 HTML 中設定的相關元素
-    const pagefindContainer = document.getElementById('pagefind-embed-container');
-    const desktopSearchBtn = document.getElementById('search-btn-desktop');
-    const mobileSearchBtn = document.getElementById('search-btn');
-
-    // 如果頁面上沒有放置 Pagefind 的容器，就直接結束，不做任何事
-    if (!pagefindContainer) {
-        console.log("Pagefind container not found on this page. Skipping initialization.");
-        return;
-    }
-    
-    // 2. 檢查 PagefindUI 是否可用
-    if (window.PagefindUI) {
-        try {
-            // 初始化 Pagefind，但這次我們指定 element，告訴它在哪裡渲染
-            new PagefindUI({
-                element: pagefindContainer, // 【重要】指定渲染的容器
-                showSubResults: true,
-            });
-            console.log("Pagefind UI initialized in embedded mode.");
-
-        } catch (e) {
-            console.error("Failed to initialize Pagefind UI:", e);
-            return; // 初始化失敗就結束
-        }
-    } else {
-        console.error("PagefindUI is not available.");
-        return;
-    }
-
-    // 3. 為放大鏡按鈕添加點擊事件監聽
-    function toggleSearch(event) {
-        event.preventDefault(); // 阻止連結跳轉
-        event.stopPropagation(); // 阻止事件冒泡
-
-        // 切換容器的 'is-visible' class
-        pagefindContainer.classList.toggle('is-visible');
-
-        // 如果搜尋框變為可見，就自動對焦到輸入框
-        if (pagefindContainer.classList.contains('is-visible')) {
-            const input = pagefindContainer.querySelector('.pagefind-ui__search-input');
-            if (input) {
-                // 使用一個小的延遲確保元素已經完全顯示並可交互
-                setTimeout(() => input.focus(), 50); 
-            }
-        }
-    }
-
-    if (desktopSearchBtn) {
-        desktopSearchBtn.addEventListener('click', toggleSearch);
-    }
-    if (mobileSearchBtn) {
-        mobileSearchBtn.addEventListener('click', toggleSearch);
-    }
-    
-    // 4. (推薦) 點擊頁面其他地方時，關閉搜尋框
-    document.addEventListener('click', function(event) {
-        // 確保點擊的目標不是觸發按鈕或其子元素
-        const isTriggerClick = desktopSearchBtn?.contains(event.target) || mobileSearchBtn?.contains(event.target);
-        
-        // 如果搜尋框是可見的，並且點擊的地方不是搜尋框內部，也不是觸發按鈕
-        if (pagefindContainer.classList.contains('is-visible') && !pagefindContainer.contains(event.target) && !isTriggerClick) {
-            pagefindContainer.classList.remove('is-visible');
-        }
+    // 【新增】Works 頁面的初始化
+    initializeListPage({ 
+        pageSelector: '.work-page', 
+        yamlPath: './works.yaml', 
+        tableBodyId: 'work-table-body', 
+        filterBarId: 'work-filter', 
+        searchInputId: null,
+        noResultsId: 'no-results-work', 
+        paginationContainerId: 'pagination-container-work', 
+        pageInfoId: 'page-info-work', 
+        pageInputId: 'page-input-work', 
+        firstPageBtnId: 'first-page-work', 
+        prevPageBtnId: 'prev-page-work', 
+        nextPageBtnId: 'next-page-work', 
+        lastPageBtnId: 'last-page-work', 
+        renderRowFunction: renderWorkRow
     });
 
-}
-
-// 等待 DOM 載入完成後執行我們的 Pagefind 初始化函數
-document.addEventListener('DOMContentLoaded', initPagefind);
-*/
+});

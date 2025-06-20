@@ -11,14 +11,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
     <!-- 引入 js-yaml 來解析 YAML 檔案 -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-    
-    <!-- 【最終完美修正版】
-         1. 使用相對路徑 ./pagefind/ 確保能找到檔案。
-         2. 加上 data-pagefind-disable-ui 屬性來阻止 Pagefind 自動執行。
-    -->
-    <script src="./pagefind/pagefind-ui.js" data-pagefind-disable-ui></script>
+
 </head>
-<body data-pagefind-body>
+<body>
     
     <!-- 2. Navbar (與其他頁面共用) -->
     <nav class="main-nav">
@@ -134,15 +129,6 @@
             </div>
         </div>
     </main>
-
-    <!-- 聯繫我區塊 (與其他頁面共用) -->
-    <!--<section class="contact-section">
-        <div class="contact-container">
-            <h2>保持聯繫</h2>
-            <p>如果您有任何專案合作、技術問題，或只是想聊聊，都非常歡迎！請透過下方的按鈕與我聯繫。</p>
-            <a href="mailto:a97496@gmail.com" class="contact-btn">發送訊息</a>
-        </div>
-    </section>-->
 
     <!-- 頁腳 (與其他頁面共用) -->
     <footer class="site-footer">
