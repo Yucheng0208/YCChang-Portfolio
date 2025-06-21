@@ -1,28 +1,24 @@
-# Folder Router
+# YU-CHENG CHANG's Portfolio
+
+## Folder Tree
 ```
 │
-├── index.html          # 首頁 (Home)
-├── honor.html          # Honor 頁面
-├── publication.html    # Publication 頁面
-├── portfolio.html      # ...以此類推
-├── highlight.html
-├── certifications.html
-├── medium.html
-├── chatgpt.html
-├── partners.html
-│
-├── style.css           # 共用的樣式檔案
-├── script.js           # 共用的 JS 檔案
+├── index.html           # Home
+├── honors.html          # Honors
+├── publications.html    # Publications
+├── projects.html        # Projects
+├── works.html           # Works
+├── highlights.html      # Highlights
+├── honors.yaml          # Honors Data
+├── publications.yaml    # Publications Data
+├── project.yaml         # Projects Data
+├── works.yaml           # Works Data
+├── highlights.yaml      # Highlight Data
+├── style.css            # Website Style
+├── script.js            # Website Script
 │
 └── images/
     ├── logo.svg
-    ├── search.svg
-    ├── slide-1.jpg
-    └── ...
-```
-
-## Pagefind Build 網站全域搜索
-
-```bash
-npx pagefind --site "."
+    ├── slide.png
+    └── slide1.png
 ```
