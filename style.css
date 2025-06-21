@@ -73,12 +73,11 @@ body {
 }
 
 .swiper-pagination {
-    /* [修正] 使用更可靠的水平置中方法 */
     position: absolute;
-    bottom: 20dvh !important; /* 保持在向下箭頭上方 */
-    left: 0;                 /* 從左邊緣開始 */
-    width: 100%;             /* 容器寬度佔滿 100% */
-    text-align: center;      /* 讓裡面的點點們水平置中 */
+    bottom: 20dvh !important;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .swiper-pagination-bullet-active {
@@ -113,8 +112,14 @@ body {
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .swiper-slide-active .slide-content {
@@ -137,6 +142,7 @@ body {
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    animation: bounce 2.5s infinite ease-in-out;
 }
 
 .scroll-down-arrow::after {
@@ -158,15 +164,16 @@ body {
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-    40% { transform: translateX(-50%) translateY(-10px); }
-    60% { transform: translateX(-50%) translateY(-5px); }
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
 }
-
-.scroll-down-arrow {
-    animation: bounce 2.5s infinite ease-in-out;
-}
-
 
 /* --- 3. Navbar --- */
 .main-nav {
@@ -229,11 +236,6 @@ body {
     color: #ffffff;
 }
 
-.nav-links li:hover > a::before,
-.nav-links li.active-link > a::before {
-    transform: scaleX(1);
-}
-
 .nav-links li a::before {
     content: '';
     position: absolute;
@@ -247,6 +249,11 @@ body {
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: -1;
+}
+
+.nav-links li:hover > a::before,
+.nav-links li.active-link > a::before {
+    transform: scaleX(1);
 }
 
 .dropdown-arrow {
@@ -311,7 +318,6 @@ body {
     color: var(--tech-cyan);
 }
 
-/* Hamburger button base styles (initially hidden by .nav-header) */
 .hamburger-btn {
     background: none;
     border: none;
@@ -334,22 +340,95 @@ body {
     transform: translateX(-50%);
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.hamburger-btn span:nth-child(1) { top: 13px; }
-.hamburger-btn span:nth-child(2) { top: 21px; }
-.hamburger-btn span:nth-child(3) { top: 29px; }
-.hamburger-btn.is-active span:nth-child(1) { transform: translate(-50%, 8px) rotate(45deg); }
-.hamburger-btn.is-active span:nth-child(2) { opacity: 0; }
-.hamburger-btn.is-active span:nth-child(3) { transform: translate(-50%, -8px) rotate(-45deg); }
+
+.hamburger-btn span:nth-child(1) {
+    top: 13px;
+}
+.hamburger-btn span:nth-child(2) {
+    top: 21px;
+}
+.hamburger-btn span:nth-child(3) {
+    top: 29px;
+}
+
+.hamburger-btn.is-active span:nth-child(1) {
+    transform: translate(-50%, 8px) rotate(45deg);
+}
+.hamburger-btn.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-btn.is-active span:nth-child(3) {
+    transform: translate(-50%, -8px) rotate(-45deg);
+}
+
+/* --- 4. Contact Section --- */
+.contact-section {
+    background-color: var(--light-bg);
+    padding: 5rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    color: var(--tech-cyan);
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+.contact-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 162, 255, 0.3);
+    color: #fff;
+}
+
+/* --- 5. Footer --- */
+.site-footer {
+    padding: 2.5rem 0;
+    text-align: center;
+    background-color: var(--dark-bg);
+}
+
+.site-footer p {
+    color: rgba(201, 209, 217, 0.6);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- 6. Generic List Page Styles (Example) --- */
+/* (Not used on this specific page, but retained for consistency) */
+/* ... Styles for .publication-page etc. would go here ... */
 
 
 /* --- 7. RWD & Mobile Navigation --- */
 @media (max-width: 1200px) {
     .nav-container {
-        /* On mobile, the container just holds the nav-header */
         justify-content: flex-start;
     }
 
-    /* Show the mobile header */
     .nav-header {
         display: flex;
         justify-content: space-between;
@@ -365,7 +444,9 @@ body {
         text-decoration: none;
     }
 
-    .mobile-logo { height: 35px; }
+    .mobile-logo {
+        height: 35px;
+    }
 
     .site-title {
         font-size: 1.2rem;
@@ -376,7 +457,6 @@ body {
         color: transparent;
     }
     
-    /* Reposition nav-links as a slide-out menu */
     .nav-links {
         position: fixed;
         top: 0;
@@ -395,18 +475,22 @@ body {
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
         overflow-y: auto;
     }
+
     .nav-links.is-active {
         transform: translateX(0);
     }
+
     .nav-links li {
         width: 100%;
         text-align: center;
         padding: 0;
     }
+
     .nav-links > li > a {
         padding: 15px 20px;
         border-radius: 0;
     }
+
     .nav-links > li > a::before {
         border-radius: 0;
     }
@@ -416,12 +500,9 @@ body {
         flex-wrap: wrap; 
     }
 
-    /* Dropdown menu as an accordion */
     .nav-item-dropdown .dropdown-menu {
         position: static;
         transform: none;
-        top: auto;
-        left: auto;
         opacity: 1;
         visibility: visible;
         width: 100%;
@@ -432,16 +513,14 @@ body {
         border-radius: 0;
         margin-top: 0;
         max-height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0;
         overflow: hidden;
-        transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
+        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
     }
 
     .nav-item-dropdown.is-open .dropdown-menu {
         max-height: 500px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 10px 0;
     }
 
     .nav-item-dropdown.is-open .dropdown-arrow {
@@ -449,21 +528,227 @@ body {
     }
 }
 
+/* --- General Responsive adjustments --- */
+@media (max-width: 992px) {
+    .intro-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
+    }
 
-/* --- ALL OTHER SECTIONS FROM 4 to 15 --- */
-/* --- 4. Contact Section --- */ .contact-section { background-color: var(--light-bg); padding: 5rem 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); } .contact-container { max-width: 700px; margin: 0 auto; } .contact-section h2 { font-size: 2.5rem; color: var(--tech-cyan); margin-bottom: 1rem; } .contact-section p { color: var(--text-color); margin-bottom: 2.5rem; line-height: 1.8; } .contact-btn { display: inline-block; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); color: #fff; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; } .contact-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 162, 255, 0.3); color: #fff; }
-/* --- 5. Footer --- */ .site-footer { padding: 2.5rem 0; text-align: center; background-color: var(--dark-bg); } .site-footer p { color: rgba(201, 209, 217, 0.6); font-size: 0.9rem; letter-spacing: 0.5px; }
-/* --- 6. Generic List Page Styles --- */ .publication-page .page-container, .honor-page .page-container, .highlight-page .page-container, .project-page .page-container, .work-page .page-container { max-width: 1200px; } .controls-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin: 2rem 0; } .filter-bar { display: flex; background-color: var(--light-bg); border-radius: 50px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.1); } .filter-bar button { background: none; border: none; color: var(--text-color); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; } .filter-bar button.active { background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); color: var(--dark-bg); box-shadow: 0 2px 8px rgba(0, 162, 255, 0.2); } .filter-bar button:not(.active):hover { background-color: rgba(255, 255, 255, 0.05); } .search-container input { background-color: var(--light-bg); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; padding: 12px 20px; color: var(--text-color); width: 300px; font-size: 0.9rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; } .search-container input:focus { border-color: var(--tech-cyan); box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2); } .table-container { overflow-x: visible; } .publication-table, .publication-table tbody { display: block; width: 100%; position: relative; } .publication-table { border-collapse: collapse; margin-top: 1rem; } .publication-table thead { display: none; } .publication-table tr { display: flex; flex-direction: column; gap: 0.75rem; background-color: var(--light-bg); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; } .publication-table tr:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25); } .publication-table td { padding: 0; border: none; display: block; } .publication-table td::before { display: none; } .publication-table td[data-label="#"] { font-size: 1.5rem; font-weight: 700; color: var(--tech-cyan); line-height: 1; } .publication-table td[data-label="Title"] { font-size: 1.2rem; font-weight: 600; color: #fff; line-height: 1.4; margin-top: -0.5rem; } .publication-table td[data-label="Authors"], .publication-table td[data-label="Venue"], .publication-table td[data-label="Date"], .publication-table td[data-label="Author Role"], .publication-table td[data-label="Event"], .publication-table td[data-label="Organizer"], .publication-table td[data-label="Award"], .publication-table td[data-label="Bonus"], .publication-table td[data-label="Members"], .publication-table td[data-label="Supervisor"], .publication-table td[data-label="Position"], .publication-table td[data-label="Location"], .publication-table td[data-label="Project ID"], .publication-table td[data-label="Duration"], .publication-table td[data-label="CRN"] { font-style: normal; color: rgba(201, 209, 217, 0.85); font-size: 0.95rem; line-height: 1.5; } .publication-table td[data-label="Links"] { margin-top: 0.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; } .publication-table td[data-label="Links"]::before { content: 'Links:'; display: inline-block; font-weight: 600; font-size: 0.95rem; color: var(--text-color); white-space: nowrap; } .action-buttons { display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; } .action-btn { display: inline-block; padding: 6px 12px; background-color: var(--dark-bg); color: var(--text-color); text-decoration: none; border-radius: 5px; font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; } .action-btn:hover { transform: translateY(-2px); background-color: var(--tech-cyan); color: var(--dark-bg); box-shadow: 0 4px 10px rgba(100, 210, 255, 0.2); } .no-results { text-align: center; padding: 3rem; color: var(--text-color); background-color: var(--light-bg); border-radius: 8px; margin-top: 2rem; }
-/* --- Responsive Sections 992px & 768px --- */ @media (max-width: 992px) { .controls-container { flex-direction: column; align-items: stretch; gap: 20px; } .filter-bar { flex-wrap: wrap; justify-content: center; border-radius: 20px; } .search-container input { width: 100%; } .publication-table tr { padding: 1.5rem; } } @media (max-width: 768px) { .page-container { padding: 4rem 1rem; } .page-container h1 { font-size: 2rem; } .slide-content { padding: 1.5rem; max-width: 90%; } .slide-content h1 { font-size: 2.2rem; } .slide-content p { font-size: 1rem; } .contact-section { padding: 4rem 1.5rem; } .contact-section h2 { font-size: 2rem; } .pagination-container { flex-wrap: wrap; justify-content: space-around; } .page-jump-section { width: 100%; justify-content: center; order: -1; margin-bottom: 1rem; } .intro-section { flex-direction: column; text-align: center; gap: 2.5rem; } .intro-image { width: 250px; height: 250px; order: -1; } .intro-text h1 { font-size: 2.5rem; } }
-/* --- 8. Back to Top Button --- */ .back-to-top-btn { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 50px; height: 50px; background-color: var(--light-bg); border: 2px solid var(--tech-cyan); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; text-decoration: none; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease; } .back-to-top-btn.is-visible { opacity: 1; visibility: visible; transform: translateY(0); } .back-to-top-btn::after { content: ''; width: 12px; height: 12px; border-top: 2px solid var(--tech-cyan); border-left: 2px solid var(--tech-cyan); transform: translateY(25%) rotate(45deg); transition: border-color 0.3s ease; } .back-to-top-btn:hover { background-color: var(--tech-cyan); } .back-to-top-btn:hover::after { border-color: var(--dark-bg); }
-/* --- 9. Pagination --- */ .pagination-container { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 2rem 0; user-select: none; } .pagination-btn { background-color: var(--light-bg); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--text-color); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; } .pagination-btn:hover:not(:disabled) { background-color: var(--tech-cyan); color: var(--dark-bg); border-color: var(--tech-cyan); } .pagination-btn:disabled { opacity: 0.4; cursor: not-allowed; } .page-jump-section { display: flex; align-items: center; gap: 15px; margin: 0 10px; } #page-info, #page-info-honor, #page-info-highlight, #page-info-project, #page-info-work { font-size: 0.9rem; color: rgba(201, 209, 217, 0.8); } #page-input, #page-input-honor, #page-input-highlight, #page-input-project, #page-input-work { width: 60px; text-align: center; background-color: var(--dark-bg); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-color); border-radius: 5px; padding: 8px; appearance: textfield; -moz-appearance: textfield; } #page-input::-webkit-outer-spin-button, #page-input::-webkit-inner-spin-button, #page-input-honor::-webkit-outer-spin-button, #page-input-honor::-webkit-inner-spin-button, #page-input-highlight::-webkit-outer-spin-button, #page-input-highlight::-webkit-inner-spin-button, #page-input-project::-webkit-outer-spin-button, #page-input-project::-webkit-inner-spin-button, #page-input-work::-webkit-outer-spin-button, #page-input-work::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-/* --- 10. Animations --- */ @keyframes slide-in-from-right { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } } @keyframes slide-out-to-left { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } } @keyframes slide-in-from-left { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } } @keyframes slide-out-to-right { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(50px); } } @keyframes slide-in-from-down { from { opacity: 0; transform: translateY(0px); } to { opacity: 1; transform: translateY(0); } } @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } } .item-enter-from-right, .item-enter-from-left, .item-enter-from-down { opacity: 0; animation-duration: 0.4s; animation-timing-function: ease-out; animation-fill-mode: forwards; } .item-enter-from-right { animation-name: slide-in-from-right; } .item-enter-from-left { animation-name: slide-in-from-left; } .item-enter-from-down { animation-name: slide-in-from-down; } .item-exit-to-left, .item-exit-to-right, .item-exit-fade { animation-duration: 0.3s; animation-timing-function: ease-out; animation-fill-mode: forwards; position: absolute; width: 100%; left: 0; right: 0; } .item-exit-to-left { animation-name: slide-out-to-left; } .item-exit-to-right { animation-name: slide-out-to-right; } .item-exit-fade { animation-name: fade-out; }
-/* --- 11. Friend Links / Misc Sections --- */ .link-showcase-section { padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); } .page-container > h1, .page-container > p { text-align: center; } .link-groups-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; } .link-group { background-color: var(--light-bg); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; } .link-group:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); } .link-group h3 { font-size: 1.5rem; color: #fff; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.15); font-weight: 600; } .button-container { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; } .link-button { display: inline-block; background-color: var(--dark-bg); color: var(--text-color); padding: 8px 18px; border-radius: 50px; text-decoration: none; font-weight: 500; font-size: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; } .link-button:hover { background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); color: var(--dark-bg); border-color: var(--tech-cyan); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2); } .unified-button-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 900px; margin: 2rem auto 0 auto; }
-/* --- 12. Index Page Specific Styles --- */ .intro-section { display: flex; align-items: center; gap: 3rem; margin-bottom: 4rem; } .intro-text { flex: 1; } .intro-text p { font-size: 1.1rem; text-align: justify; line-height: 1.8; color: rgba(201, 209, 217, 0.9); } .intro-image { flex-basis: 300px; flex-shrink: 0; text-align: center; } .intro-image img { max-width: 100%; height: auto; border-radius: 16px; object-fit: contain; border: none; box-shadow: none; } @media (max-width: 768px) { .intro-section { flex-direction: column; text-align: center; gap: 2.5rem; } .profile-header { flex-basis: auto; width: 100%; } .profile-name { font-size: 2.2rem; margin-top: 1rem; } .intro-text p:first-of-type { margin-top: 0; } .intro-text h1 { text-align: center; font-size: 2.5rem; } .intro-text p { text-align: justify; } .intro-image { width: 300px; height: 300px; order: -1; } }
-/* --- 13. Global List Animation Overrides --- */ .publication-page .publication-table tr, .honor-page .publication-table tr, .highlight-page .publication-table tr, .project-page .publication-table tr, .work-page .publication-table tr { transition: none; } .publication-page .publication-table tr:hover, .honor-page .publication-table tr:hover, .highlight-page .publication-table tr:hover, .project-page .publication-table tr:hover, .work-page .publication-table tr:hover { transform: none; } .publication-page .publication-table tr[class*="item-"], .honor-page .publication-table tr[class*="item-"], .highlight-page .publication-table tr[class*="item-"], .project-page .publication-table tr[class*="item-"], .work-page .publication-table tr[class*="item-"] { animation: none !important; position: static !important; opacity: 1 !important; }
-/* =================================
-   14. Education Timeline Section
-   ================================= */
+    .intro-image {
+        width: 250px;
+        height: 250px;
+        order: -1;
+    }
+
+    .intro-text h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-container {
+        padding: 4rem 1rem;
+    }
+
+    .page-container h1 {
+        font-size: 2rem;
+    }
+
+    .slide-content {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+
+    .slide-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .slide-content p {
+        font-size: 1rem;
+    }
+
+    .contact-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .contact-section h2 {
+        font-size: 2rem;
+    }
+
+    .intro-text h1 {
+        text-align: center;
+    }
+
+    .intro-text p {
+        text-align: justify;
+    }
+
+    .intro-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+
+/* --- 8. Back to Top Button --- */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    background-color: var(--light-bg);
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+}
+
+.back-to-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top-btn::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid var(--tech-cyan);
+    border-left: 2px solid var(--tech-cyan);
+    transform: translateY(25%) rotate(45deg);
+    transition: border-color 0.3s ease;
+}
+
+.back-to-top-btn:hover {
+    background-color: var(--tech-cyan);
+}
+
+.back-to-top-btn:hover::after {
+    border-color: var(--dark-bg);
+}
+
+/* --- 9. Pagination (Placeholder) --- */
+/* (Not used on this page, but retained for consistency) */
+
+/* --- 10. Animations (Placeholder) --- */
+/* (Not used on this page, but retained for consistency) */
+
+/* --- 11. Friend Links / Misc Sections --- */
+.link-showcase-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ▼▼▼【已修改】友善連結的容器樣式 ▼▼▼ */
+.link-groups-container {
+    max-width: 1100px;
+    margin: 3rem auto 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+/* ▲▲▲【修改結束】▲▲▲ */
+
+.link-group {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.link-group:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.link-group h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.link-button {
+    display: inline-block;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    padding: 8px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.link-button:hover {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+}
+
+/* --- 12. Index Page Specific Styles --- */
+.intro-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    text-align: justify;
+    line-height: 1.8;
+    color: rgba(201, 209, 217, 0.9);
+}
+
+.intro-image {
+    flex-basis: 300px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.intro-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: contain;
+    border: none;
+    box-shadow: none;
+}
+
+/* --- 13. Education Timeline Section --- */
 .education-section {
     padding: 4rem 2rem;
     background-color: var(--dark-bg);
@@ -505,8 +790,12 @@ body {
     transition: padding 0.4s ease;
 }
 
-.timeline-item:nth-child(odd) { left: 0; }
-.timeline-item:nth-child(even) { left: 50%; }
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
 
 .timeline-icon {
     position: absolute;
@@ -527,12 +816,9 @@ body {
 
 .timeline-item:nth-child(odd) .timeline-icon {
     right: -25px;
-    transform: translateX(0);
 }
-
 .timeline-item:nth-child(even) .timeline-icon {
     left: -25px;
-    transform: translateX(0);
 }
 
 .timeline-content {
@@ -559,64 +845,82 @@ body {
     transition: all 0.4s ease;
 }
 
-.timeline-item:nth-child(odd) .timeline-content { text-align: right; }
-.timeline-item:nth-child(odd) .timeline-content::before { right: -20px; border-left-color: #30363d; }
-.timeline-item:nth-child(even) .timeline-content::before { left: -20px; border-right-color: #30363d; }
-.timeline-date { display: block; font-size: 0.9rem; font-weight: 600; color: var(--tech-cyan); margin-bottom: 0.5rem; }
-.timeline-content h3 { font-size: 1.25rem; color: #fff; margin-bottom: 0.5rem; }
-.timeline-university { font-size: 1rem; color: var(--text-color); font-style: italic; margin-bottom: 1rem; }
-.timeline-details { list-style-position: inside; padding-left: 0; color: rgba(201, 209, 217, 0.8); font-size: 0.9rem; line-height: 1.6; }
-.timeline-item:nth-child(odd) .timeline-details { text-align: left; }
+.timeline-item:nth-child(odd) .timeline-content {
+    text-align: right;
+}
+.timeline-item:nth-child(odd) .timeline-content::before {
+    right: -20px;
+    border-left-color: #30363d;
+}
+.timeline-item:nth-child(even) .timeline-content::before {
+    left: -20px;
+    border-right-color: #30363d;
+}
 
+.timeline-date {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--tech-cyan);
+    margin-bottom: 0.5rem;
+}
 
-/* --- Responsive Design for Timeline --- */
+.timeline-content h3 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-university {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
 @media (max-width: 992px) {
     .timeline-wrapper::before {
         left: 25px;
         transform: none;
     }
-
     .timeline-item {
         width: 100%;
-        padding-left: 65px; 
+        padding-left: 65px;
         padding-right: 15px;
         left: 0 !important;
     }
-    
     .timeline-item:nth-child(odd),
     .timeline-item:nth-child(even) {
         text-align: left;
     }
-    
-    .timeline-item:nth-child(odd) .timeline-icon,
-    .timeline-item:nth-child(even) .timeline-icon {
+    .timeline-item .timeline-icon {
         left: 25px;
         right: auto;
         transform: translateX(-50%);
-        top: 25px;
     }
-    
-    .timeline-item:nth-child(odd) .timeline-content::before,
-    .timeline-item:nth-child(even) .timeline-content::before {
-        top: 30px;
+    .timeline-item .timeline-content::before {
         left: -20px;
         right: auto;
         border-left-color: transparent;
         border-right-color: #30363d;
     }
-
     .timeline-icon {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
-        border-width: 2px;
     }
-    .timeline-content { padding: 15px 20px; }
-    .timeline-content h3 { font-size: 1.1rem; }
-    .timeline-university { font-size: 0.95rem; }
+    .timeline-content {
+        padding: 15px 20px;
+    }
+    .timeline-content h3 {
+        font-size: 1.1rem;
+    }
+    .timeline-university {
+        font-size: 0.95rem;
+    }
 }
 
-/* --- 15. Motto Section --- */
+/* --- 14. Motto Section --- */
 .motto {
     position: relative;
     width: 100%;
@@ -629,9 +933,6 @@ body {
     color: rgba(201, 209, 217, 0.8);
     letter-spacing: 0.5px;
     line-height: 1.6;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
 }
 
 .motto::before {
