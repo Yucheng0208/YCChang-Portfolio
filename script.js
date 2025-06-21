@@ -31,8 +31,6 @@
 })();
 
 
-// 【修改】更新 Log，表明 Pagefind 功能已停用
-console.log("--- SCRIPT.JS V3 (Pagefind functionality disabled) LOADED ---");
 
 // =======================================================
 // 第一部分：DOMContentLoaded 事件監聽器
