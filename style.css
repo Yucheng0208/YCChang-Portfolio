@@ -50,12 +50,19 @@ body {
     position: relative;
 }
 
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
 .swiper-slide {
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
+    height: 100%;
 }
 
 .swiper-button-next,
@@ -66,13 +73,12 @@ body {
 }
 
 .swiper-pagination {
-    /* [FIX] Use responsive vh unit for positioning */
-    bottom: 12vh !important;
-    min-bottom: 80px !important; /* Safeguard for very short screens */
-    left: 50%;
-    transform: translateX(-50%);
+    /* [修正] 使用更可靠的水平置中方法 */
     position: absolute;
-    width: auto !important;
+    bottom: 20dvh !important; /* 保持在向下箭頭上方 */
+    left: 0;                 /* 從左邊緣開始 */
+    width: 100%;             /* 容器寬度佔滿 100% */
+    text-align: center;      /* 讓裡面的點點們水平置中 */
 }
 
 .swiper-pagination-bullet-active {
@@ -118,9 +124,7 @@ body {
 
 .scroll-down-arrow {
     position: absolute;
-    /* [FIX] Use responsive vh unit for positioning */
-    bottom: 5vh;
-    min-bottom: 20px; /* Safeguard for very short screens */
+    bottom: 4vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -162,6 +166,7 @@ body {
 .scroll-down-arrow {
     animation: bounce 2.5s infinite ease-in-out;
 }
+
 
 /* --- 3. Navbar --- */
 .main-nav {
@@ -446,7 +451,6 @@ body {
 
 
 /* --- ALL OTHER SECTIONS FROM 4 to 15 --- */
-/* (The rest of the CSS is identical to the previous answer, so I'll put placeholders) */
 /* --- 4. Contact Section --- */ .contact-section { background-color: var(--light-bg); padding: 5rem 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); } .contact-container { max-width: 700px; margin: 0 auto; } .contact-section h2 { font-size: 2.5rem; color: var(--tech-cyan); margin-bottom: 1rem; } .contact-section p { color: var(--text-color); margin-bottom: 2.5rem; line-height: 1.8; } .contact-btn { display: inline-block; background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); color: #fff; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; } .contact-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 162, 255, 0.3); color: #fff; }
 /* --- 5. Footer --- */ .site-footer { padding: 2.5rem 0; text-align: center; background-color: var(--dark-bg); } .site-footer p { color: rgba(201, 209, 217, 0.6); font-size: 0.9rem; letter-spacing: 0.5px; }
 /* --- 6. Generic List Page Styles --- */ .publication-page .page-container, .honor-page .page-container, .highlight-page .page-container, .project-page .page-container, .work-page .page-container { max-width: 1200px; } .controls-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin: 2rem 0; } .filter-bar { display: flex; background-color: var(--light-bg); border-radius: 50px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.1); } .filter-bar button { background: none; border: none; color: var(--text-color); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; } .filter-bar button.active { background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan)); color: var(--dark-bg); box-shadow: 0 2px 8px rgba(0, 162, 255, 0.2); } .filter-bar button:not(.active):hover { background-color: rgba(255, 255, 255, 0.05); } .search-container input { background-color: var(--light-bg); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; padding: 12px 20px; color: var(--text-color); width: 300px; font-size: 0.9rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; } .search-container input:focus { border-color: var(--tech-cyan); box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2); } .table-container { overflow-x: visible; } .publication-table, .publication-table tbody { display: block; width: 100%; position: relative; } .publication-table { border-collapse: collapse; margin-top: 1rem; } .publication-table thead { display: none; } .publication-table tr { display: flex; flex-direction: column; gap: 0.75rem; background-color: var(--light-bg); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; } .publication-table tr:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25); } .publication-table td { padding: 0; border: none; display: block; } .publication-table td::before { display: none; } .publication-table td[data-label="#"] { font-size: 1.5rem; font-weight: 700; color: var(--tech-cyan); line-height: 1; } .publication-table td[data-label="Title"] { font-size: 1.2rem; font-weight: 600; color: #fff; line-height: 1.4; margin-top: -0.5rem; } .publication-table td[data-label="Authors"], .publication-table td[data-label="Venue"], .publication-table td[data-label="Date"], .publication-table td[data-label="Author Role"], .publication-table td[data-label="Event"], .publication-table td[data-label="Organizer"], .publication-table td[data-label="Award"], .publication-table td[data-label="Bonus"], .publication-table td[data-label="Members"], .publication-table td[data-label="Supervisor"], .publication-table td[data-label="Position"], .publication-table td[data-label="Location"], .publication-table td[data-label="Project ID"], .publication-table td[data-label="Duration"], .publication-table td[data-label="CRN"] { font-style: normal; color: rgba(201, 209, 217, 0.85); font-size: 0.95rem; line-height: 1.5; } .publication-table td[data-label="Links"] { margin-top: 0.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; } .publication-table td[data-label="Links"]::before { content: 'Links:'; display: inline-block; font-weight: 600; font-size: 0.95rem; color: var(--text-color); white-space: nowrap; } .action-buttons { display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; } .action-btn { display: inline-block; padding: 6px 12px; background-color: var(--dark-bg); color: var(--text-color); text-decoration: none; border-radius: 5px; font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; } .action-btn:hover { transform: translateY(-2px); background-color: var(--tech-cyan); color: var(--dark-bg); box-shadow: 0 4px 10px rgba(100, 210, 255, 0.2); } .no-results { text-align: center; padding: 3rem; color: var(--text-color); background-color: var(--light-bg); border-radius: 8px; margin-top: 2rem; }
