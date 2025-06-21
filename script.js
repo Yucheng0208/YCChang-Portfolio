@@ -402,7 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return row;
     }
 
-    // 【新增】Works 頁面的渲染函式
     function renderWorkRow(work, globalIndex) {
         let linksHTML = '';
         if (work.links && typeof work.links === 'object') {
@@ -473,13 +472,12 @@ document.addEventListener('DOMContentLoaded', function() {
         renderRowFunction: renderHighlightRow
     });
 
-    // 【修改】Projects 頁面的初始化，將 searchInputId 從 null 改回 'project-search'
     initializeListPage({
         pageSelector: '.project-page',
         yamlPath: './projects.yaml',
         tableBodyId: 'project-table-body',
         filterBarId: 'project-filter',
-        searchInputId: 'project-search', // 恢復搜尋框功能
+        searchInputId: 'project-search',
         noResultsId: 'no-results-project',
         paginationContainerId: 'pagination-container-project',
         pageInfoId: 'page-info-project',
@@ -491,7 +489,6 @@ document.addEventListener('DOMContentLoaded', function() {
         renderRowFunction: renderProjectRow
     });
 
-    // 【新增】Works 頁面的初始化
     initializeListPage({
         pageSelector: '.work-page',
         yamlPath: './works.yaml',
@@ -508,4 +505,67 @@ document.addEventListener('DOMContentLoaded', function() {
         lastPageBtnId: 'last-page-work',
         renderRowFunction: renderWorkRow
     });
+
+    // --- 5. 首頁影音滑動視窗 ---
+    (function setupVideoWindow() {
+        // 在這裡編輯要顯示的 YouTube 影片 ID 列表
+        const videoIds = ["4RvHph2q0Hc", "4RvHph2q0Hc", "4RvHph2q0Hc"];
+        
+        let currentIndex = 0;
+        const container = document.querySelector('.video-window-glw0pyx-wrapper');
+        
+        // 如果此頁面沒有影音區塊，或沒有提供影片ID，則不執行任何操作
+        if (!container || videoIds.length === 0) return;
+        
+        const displayArea = container.querySelector('.video-window-glw0pyx-display-area');
+        const prevBtn = container.querySelector('.video-window-glw0pyx-prev-btn');
+        const nextBtn = container.querySelector('.video-window-glw0pyx-next-btn');
+        const slots = {
+            left: container.querySelector('.slot-left iframe'),
+            center: container.querySelector('.slot-center iframe'),
+            right: container.querySelector('.slot-right iframe')
+        };
+        const isMobile = window.innerWidth <= 768;
+        const n = videoIds.length;
+
+        function render(index) {
+            displayArea.style.opacity = 0;
+            setTimeout(() => {
+                if (isMobile) {
+                    // 手機版只顯示中間的影片
+                    slots.center.src = `https://www.youtube.com/embed/${videoIds[index]}`;
+                } else {
+                    // 桌面版邏輯
+                    if (n < 3) {
+                        // 如果影片總數少於3個，只顯示中間的，並隱藏旁邊的
+                        slots.center.src = `https://www.youtube.com/embed/${videoIds[index]}`;
+                        container.querySelector('.slot-left').style.display = 'none';
+                        container.querySelector('.slot-right').style.display = 'none';
+                        prevBtn.style.display = 'none';
+                        nextBtn.style.display = 'none';
+                    } else {
+                        // 正常顯示三個影片，實現循環播放
+                        slots.left.src = `https://www.youtube.com/embed/${videoIds[index]}`;
+                        slots.center.src = `https://www.youtube.com/embed/${videoIds[(index + 1) % n]}`;
+                        slots.right.src = `https://www.youtube.com/embed/${videoIds[(index + 2) % n]}`;
+                    }
+                }
+                displayArea.style.opacity = 1;
+            }, 300); // 等待淡出動畫完成
+        }
+
+        if (n > 0) {
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + n) % n;
+                render(currentIndex);
+            });
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % n;
+                render(currentIndex);
+            });
+            // 初始渲染
+            render(currentIndex);
+        }
+    })();
+    
 });
