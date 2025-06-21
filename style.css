@@ -329,25 +329,63 @@ body {
     position: relative;
 }
 
+/* --- 所有線條的通用樣式 --- */
 .hamburger-btn span {
     display: block;
-    width: 28px;
     height: 2px;
     background-color: var(--text-color);
     border-radius: 2px;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 8px; /* 修改: 讓所有線條基準點靠右對齊 */
+    transform-origin: center; /* 修改: 讓旋轉和縮放以中心為基準 */
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    /* 刪除舊的 left 和 transform: translateX */
 }
 
-.hamburger-btn span:nth-child(1) { top: 13px; }
-.hamburger-btn span:nth-child(2) { top: 21px; }
-.hamburger-btn span:nth-child(3) { top: 29px; }
+/* --- 初始狀態：設定不等長線條和位置 --- */
+.hamburger-btn span:nth-child(1) {
+    top: 13px;
+    width: 20px; /* 短線條 */
+}
 
-.hamburger-btn.is-active span:nth-child(1) { transform: translate(-50%, 8px) rotate(45deg); }
-.hamburger-btn.is-active span:nth-child(2) { opacity: 0; }
-.hamburger-btn.is-active span:nth-child(3) { transform: translate(-50%, -8px) rotate(-45deg); }
+.hamburger-btn span:nth-child(2) {
+    top: 21px;
+    width: 28px; /* 長線條 (原始寬度) */
+    transition-delay: 0.1s; /* 給中間線條一點延遲，讓動畫更有層次 */
+}
+
+.hamburger-btn span:nth-child(3) {
+    top: 29px;
+    width: 20px; /* 短線條 */
+}
+
+/* --- 激活狀態 (is-active)：變成 'X' --- */
+
+/* 1. 旋轉中間線條使其"消失" */
+.hamburger-btn.is-active span:nth-child(2) {
+    transform: scaleX(0); /* 從中間向兩側縮放至消失 */
+    opacity: 0;
+}
+
+/* 2. 移動並旋轉頂部和底部線條 */
+.hamburger-btn.is-active span:nth-child(1),
+.hamburger-btn.is-active span:nth-child(3) {
+    /* 移動到中心位置 */
+    top: 21px;
+    /* 讓線條變回標準長度，形成對稱的 'X' */
+    width: 28px; 
+}
+
+/* 3. 分別旋轉成斜線 */
+.hamburger-btn.is-active span:nth-child(1) {
+    transform: rotate(45deg);
+    transition-delay: 0.1s; /* 讓X的形成稍微延遲，更有動感 */
+}
+
+.hamburger-btn.is-active span:nth-child(3) {
+    transform: rotate(-45deg);
+    transition-delay: 0.1s;
+}
 
 /* --- 4. Main Content & Index Page Specifics --- */
 .intro-section {
