@@ -1,15 +1,21 @@
 - title: "I-MAS 2.0 (Intelligent Moto Alert System)"
   number: "NSTC 112-2813-C-262-010-E"
+  class:  "NSTC College Student Research Scholarship"
   date: "July 1, 2023 ~ February 28, 2024"
-  supervisor: "陳彥達 教授"
-  bonus: "NT$ 58,000"
+  position: "Project Leader (under the supervision of Prof. Yen-Da Chen)"
+  members: ""
+  bonus: "NTD$ 58,000"
   category: "Research" # 對應篩選按鈕的 data-filter
   links:
     Report: ""
 
 - title: "I-MAS (Intelligent Moto Assistance System)"
   number: "NSTC 111-2813-C-262-010-E"
+  class:  "NSTC College Student Research Scholarship"
   date: "July 1, 2022 ~ February 28, 2023"
-  supervisor: "陳彥達 教授"
-  bonus: "NT$ 58,000"
+  position: "Project Leader (under the supervision of Prof. Yen-Da Chen)"
+  members: ""
+  bonus: "NTD$ 58,000"
   category: "Research" # 對應篩選按鈕的 data-filter
+  links:
+    Report: ""
