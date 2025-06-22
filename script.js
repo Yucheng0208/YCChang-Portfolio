@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const navLinks = document.querySelector('.nav-links');
         if (hamburgerBtn && navLinks) {
             hamburgerBtn.addEventListener('click', () => {
+                // === MODIFIED: Add/remove class on body to control scrolling ===
+                document.body.classList.toggle('menu-open');
+
                 hamburgerBtn.classList.toggle('is-active');
                 navLinks.classList.toggle('is-active');
             });

@@ -64,6 +64,12 @@ body {
     overflow-x: hidden;
 }
 
+/* === MODIFIED: Added to prevent scroll jump when mobile menu is open === */
+body.menu-open {
+    overflow: hidden; /* 當選單打開時，禁止背景滾動 */
+}
+
+
 /* === ADDED === Scroll Behavior Fix for Sticky Navbar */
 /*
 * This rule prevents content from being hidden under the sticky navbar
@@ -1804,7 +1810,7 @@ body.show-zh .lang-en { display: none; }
         right: 0;
         width: 80dvw;
         max-width: 280px;
-        height: auto;
+        height: 100dvh; /* === MODIFIED: Make mobile menu full height === */
         background-color: var(--light-bg);
         flex-direction: column;
         justify-content: flex-start;
