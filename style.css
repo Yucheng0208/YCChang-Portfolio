@@ -12,8 +12,6 @@ TABLE OF CONTENTS:
     - Back to Top Button
     - Pagination
 4.  HEADER & NAVIGATION
-    - Main Navigation
-    - Hamburger Menu
 5.  HERO SLIDER
 6.  PAGE-SPECIFIC SECTIONS
     - Static Page Header (for inner pages)
@@ -38,6 +36,7 @@ TABLE OF CONTENTS:
 
 /* --- 0. Global Settings & Variables --- */
 :root {
+    --navbar-height: 70px; /* === ADDED === Height of the sticky navbar for reuse */
     --tech-blue: #0a84ff;
     --tech-cyan: #64d2ff;
     --dark-bg: #0d1117;
@@ -64,6 +63,16 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif;
     overflow-x: hidden;
 }
+
+/* === ADDED === Scroll Behavior Fix for Sticky Navbar */
+/*
+* This rule prevents content from being hidden under the sticky navbar
+* when jumping to an anchor link (e.g., from the hero's scroll-down arrow).
+*/
+#page-content {
+    scroll-margin-top: var(--navbar-height);
+}
+
 
 .page-container {
     max-width: 1100px;
@@ -299,7 +308,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
-    height: 70px;
+    height: var(--navbar-height); /* === MODIFIED === Using CSS variable */
     display: flex;
     justify-content: center;
     position: relative;
