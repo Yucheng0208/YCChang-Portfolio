@@ -1781,6 +1781,10 @@ body {
     .course-materials-list {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .controls-container .lang-toggle-btn{
+        background-color: #00a6ed;
+    }
 }
 
 /* --- Large Mobiles & Tablet Portrait (max-width: 768px) --- */
@@ -1898,7 +1902,7 @@ body {
         vertical-align: middle;
     }
     
-    .course-block {
+    .course-block lang-toggle-btn{
         padding: 8px;
         font-size: 13px;
         line-height: 1.4;

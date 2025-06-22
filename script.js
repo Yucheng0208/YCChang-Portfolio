@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
 
-    // --- 2. 列表頁初始化 ---
+    // --- 2. 列表頁初始化 (通用表格) ---
     function initializeListPage(config) {
         const pageContainer = document.querySelector(config.pageSelector);
         if (!pageContainer) return;
@@ -294,14 +294,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const oldFilter = currentActiveButton ? currentActiveButton.dataset.filter : 'all';
 
                     let animationOptions;
-                    if (newFilter === 'all' || newFilter === 'Certification' || newFilter === 'academic' || newFilter === 'industry') { // 【修改】為Works頁面增加無動畫的條件
-                        animationOptions = {
-                            type: 'none'
-                        };
+                    if (newFilter === 'all' || newFilter === 'Certification' || newFilter === 'academic' || newFilter === 'industry') {
+                        animationOptions = { type: 'none' };
                     } else if (oldFilter === 'all' || oldFilter === 'Certification') {
-                        animationOptions = {
-                            type: 'refresh'
-                        };
+                        animationOptions = { type: 'refresh' };
                     } else {
                         const allButtons = Array.from(filterButtons);
                         const oldIndex = allButtons.indexOf(currentActiveButton);
@@ -321,9 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        const refreshAnimation = {
-            type: 'refresh'
-        };
+        const refreshAnimation = { type: 'refresh' };
         if (searchInput) searchInput.addEventListener('input', () => updateDisplay(refreshAnimation));
         if (firstPageBtn) firstPageBtn.addEventListener('click', () => displayPage(1, refreshAnimation));
         if (prevPageBtn) prevPageBtn.addEventListener('click', () => {
@@ -422,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return row;
     }
 
-    // --- 4. 初始化所有列表頁 ---
+    // --- 4. 初始化所有列表頁 (表格) ---
     initializeListPage({
         pageSelector: '.publication-page',
         yamlPath: './publications.yaml',
@@ -471,7 +465,6 @@ document.addEventListener('DOMContentLoaded', function() {
         lastPageBtnId: 'last-page-highlight',
         renderRowFunction: renderHighlightRow
     });
-
     initializeListPage({
         pageSelector: '.project-page',
         yamlPath: './projects.yaml',
@@ -488,7 +481,6 @@ document.addEventListener('DOMContentLoaded', function() {
         lastPageBtnId: 'last-page-project',
         renderRowFunction: renderProjectRow
     });
-
     initializeListPage({
         pageSelector: '.work-page',
         yamlPath: './works.yaml',
@@ -505,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lastPageBtnId: 'last-page-work',
         renderRowFunction: renderWorkRow
     });
-
+    
     // --- 5. 首頁影音滑動視窗 ---
     (function setupVideoWindow() {
         // 在這裡編輯要顯示的 YouTube 影片 ID 列表
@@ -514,7 +506,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentIndex = 0;
         const container = document.querySelector('.video-window-glw0pyx-wrapper');
         
-        // 如果此頁面沒有影音區塊，或沒有提供影片ID，則不執行任何操作
         if (!container || videoIds.length === 0) return;
         
         const displayArea = container.querySelector('.video-window-glw0pyx-display-area');
@@ -532,26 +523,22 @@ document.addEventListener('DOMContentLoaded', function() {
             displayArea.style.opacity = 0;
             setTimeout(() => {
                 if (isMobile) {
-                    // 手機版只顯示中間的影片
                     slots.center.src = `https://www.youtube.com/embed/${videoIds[index]}`;
                 } else {
-                    // 桌面版邏輯
                     if (n < 3) {
-                        // 如果影片總數少於3個，只顯示中間的，並隱藏旁邊的
                         slots.center.src = `https://www.youtube.com/embed/${videoIds[index]}`;
                         container.querySelector('.slot-left').style.display = 'none';
                         container.querySelector('.slot-right').style.display = 'none';
                         prevBtn.style.display = 'none';
                         nextBtn.style.display = 'none';
                     } else {
-                        // 正常顯示三個影片，實現循環播放
                         slots.left.src = `https://www.youtube.com/embed/${videoIds[index]}`;
                         slots.center.src = `https://www.youtube.com/embed/${videoIds[(index + 1) % n]}`;
                         slots.right.src = `https://www.youtube.com/embed/${videoIds[(index + 2) % n]}`;
                     }
                 }
                 displayArea.style.opacity = 1;
-            }, 300); // 等待淡出動畫完成
+            }, 300);
         }
 
         if (n > 0) {
@@ -563,56 +550,206 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentIndex = (currentIndex + 1) % n;
                 render(currentIndex);
             });
-            // 初始渲染
             render(currentIndex);
         }
     })();
-    
-});
 
-// --- Skills Section Progress Bar Animation (with text sync) ---
-document.addEventListener("DOMContentLoaded", function() {
-  
-  const skillsSection = document.querySelector('#skills');
-  if (!skillsSection) return;
+    // --- 6. 教材頁 (Materials Page) 專用邏輯 ---
+    (function setupMaterialsPage() {
+        const pageContainer = document.querySelector('.materials-page');
+        if (!pageContainer) return; // 只在教材頁執行
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.2 
-  };
+        const listContainer = document.getElementById('materials-list-container');
+        const noResultsDiv = document.getElementById('no-results-materials');
+        const schoolFilterContainer = document.getElementById('school-filter');
+        const yearFilter = document.getElementById('year-filter');
+        const semesterFilter = document.getElementById('semester-filter');
+        const searchInput = document.getElementById('materials-search');
+        const langToggleButton = document.getElementById('lang-toggle');
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const progressBars = skillsSection.querySelectorAll('.progress-bar');
-        
-        progressBars.forEach(bar => {
-          // 1. 從 data-width 屬性讀取目標值
-          const targetWidth = bar.dataset.width;
-          
-          // 2. 將目標值設定給進度條的寬度，觸發動畫
-          bar.style.width = targetWidth;
+        let allCourses = [];
 
-          // 3. (新增功能) 找到對應的文字標籤並填入數值
-          //    - .closest('.skill-item') 找到最近的父層 skill-item 容器
-          //    - .querySelector('.text-muted') 在該容器中找到要填寫的 span
-          const skillItem = bar.closest('.skill-item');
-          if (skillItem) {
-            const textSpan = skillItem.querySelector('.text-muted');
-            if (textSpan) {
-              // 將目標值寫入文字標籤
-              textSpan.textContent = targetWidth;
-            }
-          }
+        langToggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('show-zh');
         });
-        
-        // 動畫觸發後，停止觀察
-        observer.unobserve(skillsSection);
-      }
-    });
-  }, observerOptions);
 
-  // 開始觀察
-  observer.observe(skillsSection);
+        async function loadMaterials() {
+            try {
+                const response = await fetch('materials.yaml');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const yamlText = await response.text();
+                allCourses = jsyaml.load(yamlText) || [];
+                
+                allCourses.sort((a, b) => {
+                    if (a.academicYear !== b.academicYear) return b.academicYear.localeCompare(a.academicYear);
+                    return b.semester.localeCompare(a.semester);
+                });
+
+                populateFilters();
+                filterAndRender(); // 初始渲染
+            } catch (error) {
+                console.error('Failed to load or parse materials.yml:', error);
+                listContainer.innerHTML = '<p style="color: red;">Error loading course data. Please check the console.</p>';
+            }
+        }
+
+        function populateFilters() {
+            const years = [...new Set(allCourses.map(c => c.academicYear))];
+            const semesters = [...new Set(allCourses.map(c => c.semester))];
+
+            years.sort().reverse().forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = `${year} 學年度 (AY)`;
+                yearFilter.appendChild(option);
+            });
+            
+            // 修正下拉選單中英切換問題
+            const semesterOptionMap = {};
+            semesters.sort().forEach(semester => {
+                const option = document.createElement('option');
+                option.value = semester;
+                semesterFilter.appendChild(option);
+                semesterOptionMap[semester] = option;
+            });
+            
+            const updateSemesterOptionsText = () => {
+                const isZh = document.body.classList.contains('show-zh');
+                if (semesterFilter.value === 'all') {
+                    const allOption = semesterFilter.querySelector('option[value="all"]');
+                    allOption.textContent = isZh ? '所有學期' : 'All Semesters';
+                }
+                 semesters.forEach(semester => {
+                     const option = semesterOptionMap[semester];
+                     option.textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
+                 });
+            };
+
+            const langObserver = new MutationObserver(updateSemesterOptionsText);
+            langObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            updateSemesterOptionsText(); // 初始設定
+        }
+
+        function renderCourses(courses) {
+            listContainer.innerHTML = '';
+            noResultsDiv.style.display = courses.length === 0 ? 'block' : 'none';
+            if (courses.length === 0) return;
+
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                const links = course.links || {};
+
+                courseCard.innerHTML = `
+                    <h3>
+                        <span class="lang-en">${course.courseName.en}</span>
+                        <span class="lang-zh">${course.courseName.zh}</span>
+                        <span style="font-size: 0.6em; color: #8b949e; font-weight: normal;">
+                            (${course.academicYear}-${course.semester} @ ${course.school})
+                        </span>
+                    </h3>
+                    <div class="course-details">
+                        <p>
+                            <strong><span class="lang-en">Lecture Time</span><span class="lang-zh">授課時間</span>:</strong>
+                            <span class="lang-en">${course.lectureTime.en}</span><span class="lang-zh">${course.lectureTime.zh}</span>
+                        </p>
+                        <p>
+                            <strong><span class="lang-en">Office Hours</span><span class="lang-zh">輔導時間</span>:</strong>
+                            <span class="lang-en">${course.officeHours.en}</span><span class="lang-zh">${course.officeHours.zh}</span>
+                        </p>
+                        <p>
+                            <strong><span class="lang-en">Language</span><span class="lang-zh">授課語言</span>:</strong>
+                            <span class="lang-en">${course.language.en}</span><span class="lang-zh">${course.language.zh}</span>
+                        </p>
+                        <p>
+                            <strong><span class="lang-en">TA</span><span class="lang-zh">助教</span>:</strong>
+                            ${course.ta}
+                        </p>
+                        <p>
+                            <strong><span class="lang-en">Description</span><span class="lang-zh">課程簡介</span>:</strong>
+                            <span class="lang-en">${course.description.en}</span><span class="lang-zh">${course.description.zh}</span>
+                        </p>
+                    </div>
+                    <div class="course-links">
+                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn">
+                            <span class="lang-en">Contact Me</span><span class="lang-zh">寄信給我</span>
+                        </a>
+                        ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn"><span class="lang-en">Materials</span><span class="lang-zh">課程教材</span></a>` : ''}
+                        ${links.group ? `<a href="${links.group}" target="_blank" class="btn"><span class="lang-en">Group Chat</span><span class="lang-zh">課程群組</span></a>` : ''}
+                        ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn"><span class="lang-en">Announcements</span><span class="lang-zh">課程公告</span></a>` : ''}
+                    </div>
+                `;
+                listContainer.appendChild(courseCard);
+            });
+        }
+
+        function filterAndRender() {
+            const activeSchool = schoolFilterContainer.querySelector('.active').dataset.filter;
+            const selectedYear = yearFilter.value;
+            const selectedSemester = semesterFilter.value;
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            const filteredCourses = allCourses.filter(course => {
+                const schoolMatch = activeSchool === 'all' || course.school === activeSchool;
+                const yearMatch = selectedYear === 'all' || course.academicYear === selectedYear;
+                const semesterMatch = selectedSemester === 'all' || course.semester === selectedSemester;
+                const searchMatch = !searchTerm ||
+                    (course.courseName.en && course.courseName.en.toLowerCase().includes(searchTerm)) ||
+                    (course.courseName.zh && course.courseName.zh.toLowerCase().includes(searchTerm)) ||
+                    (course.description.en && course.description.en.toLowerCase().includes(searchTerm)) ||
+                    (course.description.zh && course.description.zh.toLowerCase().includes(searchTerm)) ||
+                    course.school.toLowerCase().includes(searchTerm);
+                return schoolMatch && yearMatch && semesterMatch && searchMatch;
+            });
+            renderCourses(filteredCourses);
+        }
+
+        schoolFilterContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                schoolFilterContainer.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                filterAndRender();
+            }
+        });
+
+        yearFilter.addEventListener('change', filterAndRender);
+        semesterFilter.addEventListener('change', filterAndRender);
+        searchInput.addEventListener('input', filterAndRender);
+
+        loadMaterials();
+    })();
+    
+    // --- 7. Skills Section Progress Bar Animation ---
+    (function setupSkillsObserver() {
+        const skillsSection = document.querySelector('#skills');
+        if (!skillsSection) return;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = skillsSection.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        const targetWidth = bar.dataset.width;
+                        bar.style.width = targetWidth;
+                        const skillItem = bar.closest('.skill-item');
+                        if (skillItem) {
+                            const textSpan = skillItem.querySelector('.text-muted');
+                            if (textSpan) {
+                                textSpan.textContent = targetWidth;
+                            }
+                        }
+                    });
+                    observer.unobserve(skillsSection);
+                }
+            });
+        }, observerOptions);
+        observer.observe(skillsSection);
+    })();
+
 });

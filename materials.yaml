@@ -1,0 +1,30 @@
+# _data/materials.yml
+# 課程資料範本
+# academicYear: 學年度 (例如: 112)
+# semester: 學期 (例如: 1 或 2)
+# school: 學校縮寫 (SMSH, LHU, TTU)
+
+- academicYear: "113"
+  semester: "1"
+  school: ""
+  courseName:
+    zh: "即將公告..."
+    en: "Coming Soon..."
+  lectureTime:
+    zh: "即將公告..."
+    en: "Coming Soon..."
+  officeHours:
+    zh: "採預約制"
+    en: "By Appointment"
+  description:
+    zh: "即將公告..."
+    en: "Coming Soon..."
+  language:
+    zh: "即將公告..."
+    en: "Coming Soon..."
+  ta: "尚無 (N/A)"
+  contactEmailPlaceholder: "#"
+  links:
+    materials: "#"
+    group: "#"
+    announcements: "#"
