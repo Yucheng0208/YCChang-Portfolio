@@ -1793,8 +1793,8 @@ body.show-zh .lang-en { display: none; }
         position: fixed;
         top: 0;
         right: 0;
-        width: 70%;
-        max-width: 300px;
+        width: 80dvw;
+        max-width: 280px;
         height: 100vh;
         background-color: var(--light-bg);
         flex-direction: column;
