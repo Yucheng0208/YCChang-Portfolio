@@ -672,7 +672,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="course-links">
                         <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn">
-                            <span class="lang-en">Contact Me</span><span class="lang-zh">寄信給我</span>
+                            <span class="lang-en">Contact Me</span><span class="lang-zh">聯繫我</span>
                         </a>
                         ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn"><span class="lang-en">Materials</span><span class="lang-zh">課程教材</span></a>` : ''}
                         ${links.group ? `<a href="${links.group}" target="_blank" class="btn"><span class="lang-en">Group Chat</span><span class="lang-zh">課程群組</span></a>` : ''}
