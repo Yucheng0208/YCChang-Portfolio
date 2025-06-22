@@ -33,12 +33,12 @@
 
 
 // =======================================================
-// 第一部分：DOMContentLoaded 事件監聽器
+//  DOMContentLoaded 事件監聽器
 // =======================================================
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- 1. 通用功能 ---
-    (function setupCommonFeatures() {
+    // --- 函式：初始化所有通用功能 (包含導覽列、頁尾等) ---
+    function initializeCommonFeatures() {
         // Swiper Initialization
         const swiperElement = document.querySelector('.swiper');
         if (swiperElement) {
@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         dropdownToggles.forEach(toggle => {
             toggle.addEventListener('click', (event) => {
+                // 檢查是否在手機模式下 (漢堡按鈕是可見的)
                 if (hamburgerBtn && window.getComputedStyle(hamburgerBtn).display !== 'none') {
                     event.preventDefault();
                     const parentLi = toggle.closest('.nav-item-dropdown');
@@ -144,7 +145,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
-    })();
+    }
+    
+    // --- 函式：載入導覽列並初始化 ---
+    async function loadNavbarAndInit() {
+        const navbarContainer = document.getElementById('navbar-container');
+        if (!navbarContainer) {
+            // 如果頁面沒有導覽列容器，仍然執行通用功能初始化 (例如頁尾年份)
+            console.warn('Navbar container (#navbar-container) not found. Initializing other common features.');
+            initializeCommonFeatures(); 
+            return;
+        }
+
+        try {
+            const response = await fetch('navbar.html');
+            if (!response.ok) {
+                throw new Error(`Failed to load navbar.html: ${response.status} ${response.statusText}`);
+            }
+            const navbarHTML = await response.text();
+            navbarContainer.innerHTML = navbarHTML;
+
+            // **關鍵步驟**：在導覽列的 HTML 被插入到頁面後，才執行初始化
+            initializeCommonFeatures();
+
+        } catch (error) {
+            console.error('Error loading navbar:', error);
+            navbarContainer.innerHTML = '<p style="color: red; text-align: center; padding: 1rem;">Error: Navigation bar could not be loaded.</p>';
+        }
+    }
+
+    // --- 執行載入與初始化 ---
+    loadNavbarAndInit();
+
 
     // --- 2. 列表頁初始化 (通用表格) ---
     function initializeListPage(config) {
@@ -157,9 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const itemsPerPage = 10;
         const tableBody = document.getElementById(config.tableBodyId);
         const filterButtons = document.querySelectorAll(`#${config.filterBarId} button`);
-
         const searchInput = config.searchInputId ? document.getElementById(config.searchInputId) : null;
-
         const noResultsDiv = document.getElementById(config.noResultsId);
         const paginationContainer = document.getElementById(config.paginationContainerId);
         const pageInfoSpan = document.getElementById(config.pageInfoId);
@@ -256,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function updateDisplay(animationOptions) {
             const activeFilterButton = document.querySelector(`#${config.filterBarId} button.active`);
             const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : "";
-
             let tempFiltered = allItems;
             if (activeFilterButton) {
                 const activeFilter = activeFilterButton.dataset.filter;
@@ -269,7 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             filteredItems = tempFiltered;
             if (noResultsDiv) noResultsDiv.style.display = filteredItems.length === 0 ? 'block' : 'none';
-
             if (filteredItems.length === 0) {
                 const children = Array.from(tableBody.children);
                 if (children.length > 0) {
@@ -292,12 +320,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (button === currentActiveButton) return;
                     const newFilter = button.dataset.filter;
                     const oldFilter = currentActiveButton ? currentActiveButton.dataset.filter : 'all';
-
                     let animationOptions;
                     if (newFilter === 'all' || newFilter === 'Certification' || newFilter === 'academic' || newFilter === 'industry') {
-                        animationOptions = { type: 'none' };
+                        animationOptions = {
+                            type: 'none'
+                        };
                     } else if (oldFilter === 'all' || oldFilter === 'Certification') {
-                        animationOptions = { type: 'refresh' };
+                        animationOptions = {
+                            type: 'refresh'
+                        };
                     } else {
                         const allButtons = Array.from(filterButtons);
                         const oldIndex = allButtons.indexOf(currentActiveButton);
@@ -307,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             direction: newIndex > oldIndex ? 'right' : 'left'
                         };
                     }
-
                     if (currentActiveButton) {
                         currentActiveButton.classList.remove('active');
                     }
@@ -316,8 +346,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
-
-        const refreshAnimation = { type: 'refresh' };
+        const refreshAnimation = {
+            type: 'refresh'
+        };
         if (searchInput) searchInput.addEventListener('input', () => updateDisplay(refreshAnimation));
         if (firstPageBtn) firstPageBtn.addEventListener('click', () => displayPage(1, refreshAnimation));
         if (prevPageBtn) prevPageBtn.addEventListener('click', () => {
@@ -338,7 +369,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (page > totalPages) page = totalPages;
             displayPage(page, refreshAnimation);
         });
-
         loadData();
     }
 
@@ -404,7 +434,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
             }
         }
-
         const row = document.createElement('tr');
         row.innerHTML = `
             <td data-label="Organization">${work.organization || ''}</td>
@@ -497,17 +526,13 @@ document.addEventListener('DOMContentLoaded', function() {
         lastPageBtnId: 'last-page-work',
         renderRowFunction: renderWorkRow
     });
-    
+
     // --- 5. 首頁影音滑動視窗 ---
     (function setupVideoWindow() {
-        // 在這裡編輯要顯示的 YouTube 影片 ID 列表
         const videoIds = ["4RvHph2q0Hc", "4RvHph2q0Hc", "4RvHph2q0Hc"];
-        
         let currentIndex = 0;
         const container = document.querySelector('.video-window-glw0pyx-wrapper');
-        
         if (!container || videoIds.length === 0) return;
-        
         const displayArea = container.querySelector('.video-window-glw0pyx-display-area');
         const prevBtn = container.querySelector('.video-window-glw0pyx-prev-btn');
         const nextBtn = container.querySelector('.video-window-glw0pyx-next-btn');
@@ -540,7 +565,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayArea.style.opacity = 1;
             }, 300);
         }
-
         if (n > 0) {
             prevBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + n) % n;
@@ -554,11 +578,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
 
-    // --- 6. 教材頁 (Materials Page) 專用邏輯 (MODIFIED & RESTRUCTURED) ---
+    // --- 6. 教材頁 (Materials Page) 專用邏輯 ---
     (function setupMaterialsPage() {
         const pageContainer = document.querySelector('.materials-page');
-        if (!pageContainer) return; // 只在教材頁執行
-
+        if (!pageContainer) return;
         const listContainer = document.getElementById('materials-list-container');
         const noResultsDiv = document.getElementById('no-results-materials');
         const schoolFilterContainer = document.getElementById('school-filter');
@@ -566,17 +589,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const semesterFilter = document.getElementById('semester-filter');
         const searchInput = document.getElementById('materials-search');
         const langToggleButton = document.getElementById('lang-toggle');
-
         let allCourses = [];
-        // [MODIFIED] 用來儲存選項元素，方便後續更新文字
         const yearOptionMap = {};
         const semesterOptionMap = {};
 
-        // [NEW] 新增一個專門更新下拉選單語言的函式
         function updateDropdownLanguage() {
             const isZh = document.body.classList.contains('show-zh');
-
-            // 更新 "Year" 下拉選單
             const allYearOption = yearFilter.querySelector('option[value="all"]');
             if (allYearOption) {
                 allYearOption.textContent = isZh ? '所有學年度' : 'All Academic Years';
@@ -584,8 +602,6 @@ document.addEventListener('DOMContentLoaded', function() {
             for (const year in yearOptionMap) {
                 yearOptionMap[year].textContent = isZh ? `${year} 學年度` : `Academic Year ${year}`;
             }
-
-            // 更新 "Semester" 下拉選單
             const allSemesterOption = semesterFilter.querySelector('option[value="all"]');
             if (allSemesterOption) {
                 allSemesterOption.textContent = isZh ? '所有學期' : 'All Semesters';
@@ -594,30 +610,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 semesterOptionMap[semester].textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
             }
         }
-
-        // [MODIFIED] 修改語言切換按鈕的事件
         if (langToggleButton) {
             langToggleButton.addEventListener('click', () => {
                 document.body.classList.toggle('show-zh');
-                // 直接調用函式更新文字，比 MutationObserver 更簡單直接
                 updateDropdownLanguage();
             });
         }
-
         async function loadMaterials() {
             try {
                 const response = await fetch('materials.yaml');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const yamlText = await response.text();
                 allCourses = jsyaml.load(yamlText) || [];
-
                 allCourses.sort((a, b) => {
                     if (a.academicYear !== b.academicYear) return b.academicYear.localeCompare(a.academicYear);
                     return b.semester.localeCompare(a.semester);
                 });
-
                 populateFilters();
-                filterAndRender(); // 初始渲染
+                filterAndRender();
             } catch (error) {
                 console.error('Failed to load or parse materials.yml:', error);
                 if (listContainer) {
@@ -626,51 +636,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // [MODIFIED] 修改 populateFilters 邏輯
         function populateFilters() {
             const years = [...new Set(allCourses.map(c => c.academicYear))];
             const semesters = [...new Set(allCourses.map(c => c.semester))];
-
-            // 清空現有選項 (除了 "all")
             yearFilter.innerHTML = '<option value="all">All Academic Years</option>';
             semesterFilter.innerHTML = '<option value="all">All Semesters</option>';
-
-            // 填充學年度選項
             years.sort().reverse().forEach(year => {
                 const option = document.createElement('option');
                 option.value = year;
-                option.textContent = `${year} (AY)`; // 先設定預設英文
+                option.textContent = `${year} (AY)`;
                 yearFilter.appendChild(option);
-                yearOptionMap[year] = option; // 儲存起來
+                yearOptionMap[year] = option;
             });
-
-            // 填充學期選項
             semesters.sort().forEach(semester => {
                 const option = document.createElement('option');
                 option.value = semester;
-                option.textContent = `Semester ${semester}`; // 先設定預設英文
+                option.textContent = `Semester ${semester}`;
                 semesterFilter.appendChild(option);
-                semesterOptionMap[semester] = option; // 儲存起來
+                semesterOptionMap[semester] = option;
             });
-
-            // 頁面載入後，立即根據當前語言設定一次文字
             updateDropdownLanguage();
         }
 
-        // [MODIFIED] 修正課程卡片渲染邏輯
         function renderCourses(courses) {
             listContainer.innerHTML = '';
             if (noResultsDiv) {
                 noResultsDiv.style.display = courses.length === 0 ? 'block' : 'none';
             }
             if (courses.length === 0) return;
-
             courses.forEach(course => {
                 const courseCard = document.createElement('div');
                 courseCard.className = 'course-card';
                 const links = course.links || {};
-
-                // 使用模板字符串，結構更清晰，並修正了標籤
                 courseCard.innerHTML = `
                     <h3>
                         <span class="lang-en">${course.courseName.en}</span>
@@ -680,31 +677,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         </span>
                     </h3>
                     <div class="course-details">
-                        <p>
-                            <strong><span class="lang-en">Lecture Time</span><span class="lang-zh">授課時間</span>:</strong>
-                            <span class="lang-en">${course.lectureTime.en}</span><span class="lang-zh">${course.lectureTime.zh}</span>
-                        </p>
-                        <p>
-                            <strong><span class="lang-en">Office Hours</span><span class="lang-zh">輔導時間</span>:</strong>
-                            <span class="lang-en">${course.officeHours.en}</span><span class="lang-zh">${course.officeHours.zh}</span>
-                        </p>
-                        <p>
-                            <strong><span class="lang-en">Language</span><span class="lang-zh">授課語言</span>:</strong>
-                            <span class="lang-en">${course.language.en}</span><span class="lang-zh">${course.language.zh}</span>
-                        </p>
-                        <p>
-                            <strong><span class="lang-en">TA</span><span class="lang-zh">助教</span>:</strong>
-                            <span>${course.ta || 'N/A'}</span>
-                        </p>
-                        <p>
-                            <strong><span class="lang-en">Description</span><span class="lang-zh">課程簡介</span>:</strong>
-                            <span class="lang-en">${course.description.en}</span><span class="lang-zh">${course.description.zh}</span>
-                        </p>
+                        <p><strong><span class="lang-en">Lecture Time</span><span class="lang-zh">授課時間</span>:</strong> <span class="lang-en">${course.lectureTime.en}</span><span class="lang-zh">${course.lectureTime.zh}</span></p>
+                        <p><strong><span class="lang-en">Office Hours</span><span class="lang-zh">輔導時間</span>:</strong> <span class="lang-en">${course.officeHours.en}</span><span class="lang-zh">${course.officeHours.zh}</span></p>
+                        <p><strong><span class="lang-en">Language</span><span class="lang-zh">授課語言</span>:</strong> <span class="lang-en">${course.language.en}</span><span class="lang-zh">${course.language.zh}</span></p>
+                        <p><strong><span class="lang-en">TA</span><span class="lang-zh">助教</span>:</strong> <span>${course.ta || 'N/A'}</span></p>
+                        <p><strong><span class="lang-en">Description</span><span class="lang-zh">課程簡介</span>:</strong> <span class="lang-en">${course.description.en}</span><span class="lang-zh">${course.description.zh}</span></p>
                     </div>
                     <div class="course-links">
-                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn">
-                            <span class="lang-en">Contact Me</span><span class="lang-zh">聯繫我</span>
-                        </a>
+                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn"><span class="lang-en">Contact Me</span><span class="lang-zh">聯繫我</span></a>
                         ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn"><span class="lang-en">Materials</span><span class="lang-zh">課程教材</span></a>` : ''}
                         ${links.group ? `<a href="${links.group}" target="_blank" class="btn"><span class="lang-en">Group Chat</span><span class="lang-zh">課程群組</span></a>` : ''}
                         ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn"><span class="lang-en">Announcements</span><span class="lang-zh">課程公告</span></a>` : ''}
@@ -717,42 +697,32 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!schoolFilterContainer) return;
             const activeSchoolButton = schoolFilterContainer.querySelector('.active');
             if (!activeSchoolButton) return;
-
             const activeSchool = activeSchoolButton.dataset.filter;
             const selectedYear = yearFilter.value;
             const selectedSemester = semesterFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
-
             const filteredCourses = allCourses.filter(course => {
                 const schoolMatch = activeSchool === 'all' || course.school === activeSchool;
                 const yearMatch = selectedYear === 'all' || course.academicYear === selectedYear;
                 const semesterMatch = selectedSemester === 'all' || course.semester === selectedSemester;
-                const searchMatch = !searchTerm ||
-                    (course.courseName.en && course.courseName.en.toLowerCase().includes(searchTerm)) ||
-                    (course.courseName.zh && course.courseName.zh.toLowerCase().includes(searchTerm)) ||
-                    (course.description.en && course.description.en.toLowerCase().includes(searchTerm)) ||
-                    (course.description.zh && course.description.zh.toLowerCase().includes(searchTerm)) ||
-                    course.school.toLowerCase().includes(searchTerm);
+                const searchMatch = !searchTerm || (course.courseName.en && course.courseName.en.toLowerCase().includes(searchTerm)) || (course.courseName.zh && course.courseName.zh.toLowerCase().includes(searchTerm)) || (course.description.en && course.description.en.toLowerCase().includes(searchTerm)) || (course.description.zh && course.description.zh.toLowerCase().includes(searchTerm)) || course.school.toLowerCase().includes(searchTerm);
                 return schoolMatch && yearMatch && semesterMatch && searchMatch;
             });
             renderCourses(filteredCourses);
         }
-
         if (schoolFilterContainer) {
             schoolFilterContainer.addEventListener('click', (e) => {
                 if (e.target.tagName === 'BUTTON') {
                     const currentActive = schoolFilterContainer.querySelector('.active');
-                    if(currentActive) currentActive.classList.remove('active');
+                    if (currentActive) currentActive.classList.remove('active');
                     e.target.classList.add('active');
                     filterAndRender();
                 }
             });
         }
-
         if (yearFilter) yearFilter.addEventListener('change', filterAndRender);
         if (semesterFilter) semesterFilter.addEventListener('change', filterAndRender);
         if (searchInput) searchInput.addEventListener('input', filterAndRender);
-
         loadMaterials();
     })();
 
@@ -760,13 +730,11 @@ document.addEventListener('DOMContentLoaded', function() {
     (function setupSkillsObserver() {
         const skillsSection = document.querySelector('#skills');
         if (!skillsSection) return;
-
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.2
         };
-    
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -789,35 +757,24 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(skillsSection);
     })();
 
-    // --- 8. 課表頁 (Schedule Page) 專用邏輯 (NEW) ---
+    // --- 8. 課表頁 (Schedule Page) 專用邏輯 ---
     (function setupSchedulePage() {
         const pageContainer = document.querySelector('.schedule-page');
-        if (!pageContainer) return; // 只在課表頁執行
-
+        if (!pageContainer) return;
         const filterContainer = document.getElementById('schedule-filter');
         const scheduleWrappers = document.querySelectorAll('.schedule-wrapper');
-
         if (!filterContainer) return;
-
         filterContainer.addEventListener('click', (e) => {
-            // 確保點擊到的是按鈕
             if (e.target.tagName !== 'BUTTON') {
                 return;
             }
-
             const targetScheduleId = e.target.dataset.schedule;
             if (!targetScheduleId) return;
-
-            // 1. 更新按鈕的 active 狀態
             filterContainer.querySelector('.active').classList.remove('active');
             e.target.classList.add('active');
-
-            // 2. 隱藏所有的課表
             scheduleWrappers.forEach(wrapper => {
                 wrapper.style.display = 'none';
             });
-
-            // 3. 顯示目標課表
             const targetWrapper = document.getElementById(targetScheduleId + '-schedule');
             if (targetWrapper) {
                 targetWrapper.style.display = 'block';

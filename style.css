@@ -302,7 +302,6 @@ body {
     height: 70px;
     display: flex;
     justify-content: center;
-    align-items: center;
     position: relative;
 }
 
@@ -313,13 +312,15 @@ body {
 .nav-links {
     list-style: none;
     display: flex;
-    align-items: center;
+    align-items: center; /* 這個可以保留，或者用 align-items: stretch; */
     gap: 10px;
+    height: 100%; /* 新增：讓 ul 填滿高度 */
 }
 
 .nav-links li {
     position: relative;
     padding: 0;
+    height: 100%; /* 新增：讓 li 填滿高度 */
 }
 
 .nav-links a {
@@ -335,6 +336,7 @@ body {
     transition: color 0.3s ease;
     border-radius: 50px;
     overflow: hidden;
+    align-items: center; /* 這個本身就有，確保文字在 a 內部垂直置中 */
 }
 
 .nav-links li:hover > a,
