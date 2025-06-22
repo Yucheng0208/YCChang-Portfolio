@@ -34,10 +34,9 @@
         <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content"></a>
     </header>
 
-    <!-- Navbar (Shared across pages) -->
+    <!-- Navbar (Copied from your index.html for consistency) -->
     <nav class="main-nav">
         <div class="nav-container">
-            <!-- ▼▼▼ 這個 nav-header 區塊是手機版頂部標頭的標準結構 ▼▼▼ -->
             <div class="nav-header">
                 <a href="index.html" class="mobile-brand">
                     <img src="images/logo.svg" alt="Logo" class="mobile-logo">
@@ -49,8 +48,6 @@
                     <span></span>
                 </button>
             </div>
-
-            <!-- ▼▼▼ 這是桌面版連結，在手機上會變成滑出式選單 ▼▼▼ -->
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="honors.html">Honors</a></li>
@@ -59,7 +56,7 @@
                     <a href="#" class="dropdown-toggle">Experience<span class="dropdown-arrow"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="projects.html">Projects</a></li>
-                        <li><a href="works.html">Works</a></li>          
+                        <li><a href="works.html">Works</a></li>
                     </ul>
                 </li>
                 <li><a href="highlights.html">Highlights</a></li>
@@ -77,10 +74,17 @@
                         <li><a href="https://chatgpt.com/g/g-6847fa761ce48191bec65762eed2f7f6-lexi">Lexi</a></li>         
                     </ul>
                 </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Course<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="schedule.html">Schedule</a></li>
+                        <li><a href="materials.html">Materials</a></li>
+                    </ul>
+                </li>
             </ul> 
         </div>
     </nav>
-        
+            
     <!-- Main Content -->
     <main id="page-content">
         <div class="page-container">
@@ -144,6 +148,9 @@
         <div class="video-window-glw0pyx-wrapper">
             <header class="video-window-glw0pyx-header">
                 <div class="video-window-glw0pyx-title">Video</div>
+                <p class="text-muted">
+                     A collection of videos showcasing my projects, competitions, and technical demonstrations.
+                </p>
             </header>
             <div class="video-window-glw0pyx-display-area">
                 <div class="video-window-glw0pyx-slot slot-left">
@@ -163,14 +170,253 @@
             <a href="https://www.youtube.com/@Ryan.02.08" class="video-window-glw0pyx-more-btn">Go to YouTube ›</a>
         </div>
         <!-- End of Sliding Window Video Section -->
-  
-                <!-- ===== 新增的友善連結區塊 ===== -->
-        <section class="link-showcase-section">
-            <div class="link-groups-container">
 
+        <!-- ===== Skills Section (Single Source of Truth HTML) ===== -->
+        <section id="skills" class="skills-section">
+            <div class="skills-container">
+                <div class="skills-text-center mb-5">
+                    <h2 class="section-title">Professional Fields & Research Expertise</h2>
+                    <p class="text-muted">
+                    My research and teaching expertise covers multiple interdisciplinary fields including AI, IoT, design thinking, and innovation & entrepreneurship.
+                    </p>
+                </br>
+                    <p>This part is coming soon...</p>
+                </div>
+            
+                <div class="skills-row">
+                    <!-- 1. 人工智慧 -->
+                    <div class="skills-col">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon bg-primary"><i class="fas fa-brain"></i></div>
+                                <h3 class="skill-title">Artificial Intelligence</h3>
+                            </div>
+                            <div class="skill-body">
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 2. 物聯網 -->
+                    <div class="skills-col">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon bg-info"><i class="fas fa-network-wired"></i></div>
+                                <h3 class="skill-title">Internet of Things</h3>
+                            </div>
+                            <div class="skill-body">
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 3. 設計思考與創新創業 -->
+                    <div class="skills-col">
+                        <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon bg-success"><i class="fas fa-lightbulb"></i></div>
+                            <h3 class="skill-title">Design & Innovation</h3>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div> <!-- 例如這裡改成 1% -->
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                    <div class="skills-col">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon bg-warning"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <h3 class="skill-title">Artificial Intelligence</h3>
+                            </div>
+                            <div class="skill-body">
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">N/A</span>
+                                        <span class="text-muted"></span>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar bg-primary" data-width="0%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 2. 物聯網 -->
+                    <div class="skills-col">
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon bg-danger"><i class="fas fa-handshake text-danger"></i></div>
+                                <h3 class="skill-title">Internet of Things</h3>
+                            </div>
+                            <div class="skill-body">
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                                </div>
+                                <div class="progress"><div class="progress-bar bg-info" data-width="0%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 3. 設計思考與創新創業 -->
+                    <div class="skills-col">
+                        <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon bg-secondary"><i class="fas fa-chalkboard-teacher text-secondary"></i></div>
+                            <h3 class="skill-title">Design & Innovation</h3>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-medium">N/A</span><span class="text-muted"></span>
+                            </div>
+                            <div class="progress"><div class="progress-bar bg-success" data-width="0%"></div></div> <!-- 例如這裡改成 1% -->
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ===== Skills Section End ===== -->
+        
+        <!-- ===== 新增的友善連結區塊 ===== -->
+        <section class="link-showcase-section">
+            <h2>Friendly Links</h2>
+            <div class="link-groups-container">
                 <!-- 分組 1: 聯繫方式 -->
                 <div class="link-group">
-                    <h3>Friendly Links</h3>
                     <!--<h3>Contact Methods</h3>-->
                     <div class="button-container">
                         <a href="mailto:a97496@gmail.com" target="_blank" rel="noopener noreferrer" class="link-button">Gmail</a>
@@ -183,7 +429,7 @@
                     </br>
                     <!--<h3>Multimedia & Code</h3>
                     <div class="button-container">-->
-                        <a href="https://www.youtube.com/@yucheng208" target="_blank" rel="noopener noreferrer" class="link-button">YouTube</a>
+                        <a href="https://www.youtube.com/@Ryan.02.08" target="_blank" rel="noopener noreferrer" class="link-button">YouTube</a>
                         <a href="https://github.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitHub</a>
                         <a href="https://gitlab.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitLab</a>
                         <a href="https://hackmd.io/@Yucheng208" target="_blank" rel="noopener noreferrer" class="link-button">HackMD</a>
@@ -204,7 +450,35 @@
             </div>
         </section>
         <!-- ===== 友善連結區塊結束 ===== -->
-    </br>
+
+        <!-- ===== 合作機構區塊 ===== -->
+        <section class="partner-showcase-section">
+            <h2>Partner Institutions</h2>
+            <div class="partner-groups-container">
+                <!-- 分組 1: 聯繫方式 -->
+                <div class="partner-group">
+                    <!--<h3>Contact Methods</h3>-->
+                    <div class="button-container">
+                        <a href="https://www.ntut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NTUT</a>
+                        <a href="https://www.nkust.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NKUST</a>
+                        <a href="https://www.yuntech.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NYUST</a>
+                        <a href="https://www.tku.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TKU</a>
+                        <a href="https://www.ttu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TTU</a>
+                        <a href="https://nfu.edu.tw/zh/" target="_blank" rel="noopener noreferrer" class="partner-button">NFU</a>
+                        <a href="https://www.ncut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NCUT</a>
+                        <a href="https://www.nqu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NQU</a>
+                        <a href="https://www.lhu.edu.tw/" class="partner-button">LHU</a>
+                        <a href="https://www.smsh.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">SMSH</a>
+                        <a href="https://www.saihs.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">SAIHS</a>
+                        <a href="https://www.tsvs.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TSVS</a>
+                        <a href="https://tarc.edu.my/" target="_blank" rel="noopener noreferrer" class="partner-button">TAR UMT</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ===== 合作機構區塊結束 ===== -->
+
+
         <!-- Contact Section -->
         <section class="contact-section">
             <div class="contact-container">

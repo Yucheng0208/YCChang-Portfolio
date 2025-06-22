@@ -1862,7 +1862,15 @@ body {
     text-align: left;
 }
 
-.course-schedule th,
+.course-schedule th {
+    background-color: #161b22;
+    font-weight: 600;
+    text-align: center;      /* 水平置中 */
+    vertical-align: middle;  /* 垂直置中 (新增或確認) */
+    padding: 12px 8px;
+    color: #c9d1d9;
+}
+
 .course-schedule td {
     border: 1px solid #30363d; /* Subtle border color from GitHub's dark theme */
     padding: 8px;
@@ -2128,5 +2136,91 @@ body {
     .material-download-btn {
         width: 100%;
         text-align: center;
+    }
+}
+
+/* ===================================================================
+   NEW & IMPROVED: Responsive adjustments for Course Schedule
+====================================================================== */
+
+/* 當螢幕寬度小於或等於 768px 時 (適用於平板和手機) */
+@media (max-width: 768px) {
+
+    /* 1. 允許表格內容自然換行，並移除固定的最小寬度限制 */
+    .course-schedule {
+        min-width: 100%; /* 讓表格寬度自適應容器 */
+        table-layout: auto; /* 讓欄寬根據內容自動調整，而不是固定 */
+    }
+
+    /* 2. 調整儲存格樣式，提供更多空間 */
+    .course-schedule th,
+    .course-schedule td {
+        padding: 8px 4px; /* 垂直邊距不變，水平邊距縮小 */
+        height: auto;     /* 讓儲存格高度可以根據內容自動增長 */
+        min-height: 80px; /* 保持一個最小高度，避免空儲存格太扁 */
+    }
+
+    /* 3. 優化左側時間欄，允許文字換行 */
+    .course-schedule td:first-child {
+        width: 80px; /* 給予一個合理的寬度 */
+        font-size: 13px;
+        word-break: break-all; /* 如果時間文字太長，強制換行 */
+        line-height: 1.5;
+    }
+
+    /* 4. 這是避免「文字炸裂」的關鍵：優化課程區塊佈局 */
+    .course-block {
+        padding: 8px;
+        font-size: 13px; /* 保持可讀的字體大小 */
+        line-height: 1.4;
+        height: 100%; /* 確保區塊能填滿儲存格 */
+        display: flex;
+        flex-direction: column; /* 垂直堆疊內容 */
+        justify-content: center; /* 垂直置中 */
+        align-items: center;     /* 水平置中 */
+        text-align: center;
+    }
+
+    /* 5. 確保課程資訊之間有適當的間距 */
+    .course-block strong {
+        font-weight: 600;
+        margin-bottom: 4px; /* 與下方元素間的距離 */
+    }
+
+    .course-block .course-code {
+        font-size: 11px;
+        opacity: 0.8;
+        margin-bottom: 4px;
+    }
+    
+    .course-block .course-location {
+        font-size: 11px;
+    }
+
+    /* 6. 在課程地點文字和圖示之間增加一點空間 */
+    .course-block .course-location i {
+       margin-right: 4px;
+    }
+    
+    /* 7. 如果有 rowspan 跨越多行的儲存格，確保內容垂直置中 */
+    .course-schedule td[rowspan] {
+        vertical-align: middle;
+    }
+}
+
+/* 針對更小的螢幕 (例如 iPhone SE) 的微調 */
+@media (max-width: 480px) {
+    .course-schedule th {
+        font-size: 12px; /* 在極小螢幕上稍微縮小日期標題 */
+        padding: 6px 2px;
+    }
+
+    .course-schedule td:first-child {
+        width: 70px; /* 進一步縮小時間欄寬度 */
+        font-size: 12px;
+    }
+    
+    .course-block {
+        font-size: 12px; /* 稍微縮小課程文字 */
     }
 }
