@@ -1831,6 +1831,8 @@ body.show-zh .lang-en { display: none; }
         width: 100%;
         text-align: center;
         padding: 0;
+        margin: 0; /* <--- 新增這一行來移除 li 的 margin */
+        
     }
 
     .nav-links > li > a {
