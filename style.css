@@ -1,4 +1,42 @@
-/* --- 1. Global Settings & Variables --- */
+/*
+======================================================================
+                        PERSONAL WEBSITE STYLESHEET
+======================================================================
+TABLE OF CONTENTS:
+------------------
+0.  GLOBAL SETTINGS & VARIABLES
+1.  BASE & LAYOUT STYLES
+2.  KEYFRAMES & ANIMATIONS
+3.  REUSABLE COMPONENTS
+    - Action Buttons
+    - Back to Top Button
+    - Pagination
+4.  HEADER & NAVIGATION
+    - Main Navigation
+    - Hamburger Menu
+5.  HERO SLIDER
+6.  PAGE-SPECIFIC SECTIONS
+    - Static Page Header (for inner pages)
+    - Intro Section (Index Page)
+    - Skills Section
+    - Education Timeline
+    - Sliding Window Video Section
+    - Showcase Sections (Friendly Links & Partners)
+    - List/Table Pages (Publications, Honors, etc.)
+    - Course Schedule Page
+    - Course Materials Page
+    - Motto Section
+    - Contact Section
+7.  FOOTER
+8.  MASTER RESPONSIVE STYLES
+    - max-width: 1200px (Mobile Nav Trigger)
+    - max-width: 992px (Tablet)
+    - max-width: 768px (Large Mobile & Tablet Portrait)
+    - max-width: 480px (Small Mobile)
+======================================================================
+*/
+
+/* --- 0. Global Settings & Variables --- */
 :root {
     --tech-blue: #0a84ff;
     --tech-cyan: #64d2ff;
@@ -9,6 +47,7 @@
     --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
+/* --- 1. Base & Layout Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -43,74 +82,20 @@ body {
     line-height: 1.7;
 }
 
-/* --- 2. Hero Slider --- */
-.hero-slider {
-    width: 100%;
-    height: 100dvh;
-    position: relative;
+.table-container {
+    overflow-x: visible;
 }
 
-.swiper {
-    width: 100%;
-    height: 100%;
-}
-
-.swiper-slide {
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    height: 100%;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: var(--tech-cyan);
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.swiper-pagination {
-    position: absolute;
-    bottom: 1dvh !important;
-    left: 0;
-    width: 100%;
+.no-results {
     text-align: center;
+    padding: 3rem;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    margin-top: 2rem;
 }
 
-.swiper-pagination-bullet-active {
-    background: var(--tech-cyan);
-}
-
-.slide-content {
-    text-align: center;
-    color: #ffffff;
-    padding: 2rem 3rem;
-    background: rgba(13, 17, 23, 0.6);
-    border-radius: 12px;
-    max-width: 80%;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.slide-content h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    color: #fff;
-}
-
-.slide-content p {
-    font-size: 1.25rem;
-    font-weight: 300;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
+/* --- 2. Keyframes & Animations --- */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -120,47 +105,6 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.swiper-slide-active .slide-content {
-    animation: fadeInUp 0.8s ease-out 0.3s forwards;
-    opacity: 0;
-}
-
-.scroll-down-arrow {
-    position: absolute;
-    bottom: 4vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    width: 50px;
-    height: 50px;
-    border: 2px solid var(--tech-cyan);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    animation: bounce 2.5s infinite ease-in-out;
-}
-
-.scroll-down-arrow::after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-bottom: 2px solid var(--tech-cyan);
-    border-right: 2px solid var(--tech-cyan);
-    transform: translateY(-25%) rotate(45deg);
-    transition: border-color 0.3s ease;
-}
-
-.scroll-down-arrow:hover {
-    background-color: rgba(100, 210, 255, 0.2);
-}
-
-.scroll-down-arrow:hover::after {
-    border-color: #fff;
 }
 
 @keyframes bounce {
@@ -175,7 +119,170 @@ body {
     }
 }
 
-/* --- 3. Navbar --- */
+/* List Item Animations (Currently commented out) */
+@keyframes slide-in-from-right { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slide-out-to-left { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
+@keyframes slide-in-from-left { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slide-out-to-right { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(50px); } }
+@keyframes slide-in-from-down { from { opacity: 0; transform: translateY(0px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* --- 3. Reusable Components --- */
+
+/* Action Buttons (used in tables) */
+.action-buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--tech-cyan);
+    color: var(--dark-bg);
+    box-shadow: 0 4px 10px rgba(100, 210, 255, 0.2);
+}
+
+/* Back to Top Button */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    background-color: var(--light-bg);
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+}
+
+.back-to-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top-btn::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid var(--tech-cyan);
+    border-left: 2px solid var(--tech-cyan);
+    transform: translateY(25%) rotate(45deg);
+    transition: border-color 0.3s ease;
+}
+
+.back-to-top-btn:hover {
+    background-color: var(--tech-cyan);
+}
+
+.back-to-top-btn:hover::after {
+    border-color: var(--dark-bg);
+}
+
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 2rem 0;
+    user-select: none;
+}
+
+.pagination-btn {
+    background-color: var(--light-bg);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-color);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: var(--tech-cyan);
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-jump-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 10px;
+}
+
+#page-info,
+#page-info-honor,
+#page-info-highlight,
+#page-info-project,
+#page-info-work {
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.8);
+}
+
+#page-input,
+#page-input-honor,
+#page-input-highlight,
+#page-input-project,
+#page-input-work {
+    width: 60px;
+    text-align: center;
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    border-radius: 5px;
+    padding: 8px;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+#page-input::-webkit-outer-spin-button,
+#page-input::-webkit-inner-spin-button,
+#page-input-honor::-webkit-outer-spin-button,
+#page-input-honor::-webkit-inner-spin-button,
+#page-input-highlight::-webkit-outer-spin-button,
+#page-input-highlight::-webkit-inner-spin-button,
+#page-input-project::-webkit-outer-spin-button,
+#page-input-project::-webkit-inner-spin-button,
+#page-input-work::-webkit-outer-spin-button,
+#page-input-work::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* --- 4. Header & Navigation --- */
 .main-nav {
     position: sticky;
     top: 0;
@@ -318,6 +425,7 @@ body {
     color: var(--tech-cyan);
 }
 
+/* Hamburger Menu Icon */
 .hamburger-btn {
     background: none;
     border: none;
@@ -329,57 +437,47 @@ body {
     position: relative;
 }
 
-/* --- 所有線條的通用樣式 --- */
 .hamburger-btn span {
     display: block;
     height: 2px;
     background-color: var(--text-color);
     border-radius: 2px;
     position: absolute;
-    right: 8px; /* 修改: 讓所有線條基準點靠右對齊 */
-    transform-origin: center; /* 修改: 讓旋轉和縮放以中心為基準 */
+    right: 8px;
+    transform-origin: center;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    /* 刪除舊的 left 和 transform: translateX */
 }
 
-/* --- 初始狀態：設定不等長線條和位置 --- */
 .hamburger-btn span:nth-child(1) {
     top: 13px;
-    width: 20px; /* 短線條 */
+    width: 20px;
 }
 
 .hamburger-btn span:nth-child(2) {
     top: 21px;
-    width: 28px; /* 長線條 (原始寬度) */
-    transition-delay: 0.1s; /* 給中間線條一點延遲，讓動畫更有層次 */
+    width: 28px;
+    transition-delay: 0.1s;
 }
 
 .hamburger-btn span:nth-child(3) {
     top: 29px;
-    width: 20px; /* 短線條 */
+    width: 20px;
 }
 
-/* --- 激活狀態 (is-active)：變成 'X' --- */
-
-/* 1. 旋轉中間線條使其"消失" */
 .hamburger-btn.is-active span:nth-child(2) {
-    transform: scaleX(0); /* 從中間向兩側縮放至消失 */
+    transform: scaleX(0);
     opacity: 0;
 }
 
-/* 2. 移動並旋轉頂部和底部線條 */
 .hamburger-btn.is-active span:nth-child(1),
 .hamburger-btn.is-active span:nth-child(3) {
-    /* 移動到中心位置 */
     top: 21px;
-    /* 讓線條變回標準長度，形成對稱的 'X' */
-    width: 28px; 
+    width: 28px;
 }
 
-/* 3. 分別旋轉成斜線 */
 .hamburger-btn.is-active span:nth-child(1) {
     transform: rotate(45deg);
-    transition-delay: 0.1s; /* 讓X的形成稍微延遲，更有動感 */
+    transition-delay: 0.1s;
 }
 
 .hamburger-btn.is-active span:nth-child(3) {
@@ -387,7 +485,145 @@ body {
     transition-delay: 0.1s;
 }
 
-/* --- 4. Main Content & Index Page Specifics --- */
+/* --- 5. Hero Slider --- */
+.hero-slider {
+    width: 100%;
+    height: 100dvh;
+    position: relative;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--tech-cyan);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 1dvh !important;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--tech-cyan);
+}
+
+.slide-content {
+    text-align: center;
+    color: #ffffff;
+    padding: 2rem 3rem;
+    background: rgba(13, 17, 23, 0.6);
+    border-radius: 12px;
+    max-width: 80%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.slide-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+.slide-content p {
+    font-size: 1.25rem;
+    font-weight: 300;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.swiper-slide-active .slide-content {
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+.scroll-down-arrow {
+    position: absolute;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: bounce 2.5s infinite ease-in-out;
+}
+
+.scroll-down-arrow::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-bottom: 2px solid var(--tech-cyan);
+    border-right: 2px solid var(--tech-cyan);
+    transform: translateY(-25%) rotate(45deg);
+    transition: border-color 0.3s ease;
+}
+
+.scroll-down-arrow:hover {
+    background-color: rgba(100, 210, 255, 0.2);
+}
+
+.scroll-down-arrow:hover::after {
+    border-color: #fff;
+}
+
+
+/* --- 6. Page-Specific Sections --- */
+
+/* Static Page Header (for inner pages like Schedule, Materials) */
+.page-header-static {
+    background-color: #0d1117;
+    background-image: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.9)), url('images/slide.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+}
+
+.page-header-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.page-header-content p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Intro Section (Index Page) */
 .intro-section {
     display: flex;
     align-items: center;
@@ -419,13 +655,139 @@ body {
     object-fit: contain;
 }
 
-/* --- 5. Education Timeline --- */
+/* Skills Section */
+.skills-section {
+    padding: 80px 0;
+    background-color: #0d1117;
+}
+
+.skills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.skills-text-center {
+    text-align: center;
+    margin-bottom: 3rem !important;
+}
+
+.skills-text-center .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.skills-text-center .text-muted {
+    font-size: 1.1rem;
+    color: #8b949e;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.skills-col {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.skill-card {
+    background-color: #161b22;
+    border-radius: 10px;
+    padding: 2rem;
+    height: 100%;
+    border: 1px solid #30363d;
+    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    border-color: #58a6ff;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.skill-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    border-radius: 50%;
+}
+
+.skill-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #f0f6fc;
+}
+
+.skill-body .skill-item { margin-bottom: 1rem; }
+.skill-body .skill-item:last-child { margin-bottom: 0; }
+
+.d-flex { display: flex !important; }
+.justify-content-between { justify-content: space-between !important; }
+.fw-medium { font-weight: 500; color: #c9d1d9; }
+.skill-card .text-muted { color: #8b949e; }
+
+.progress {
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    transition: width 1.5s ease-out;
+    border-radius: inherit;
+}
+
+.skill-icon.bg-primary   { background-color: rgba(88, 166, 255, 0.15) !important; }
+.skill-icon.bg-info      { background-color: rgba(56, 189, 248, 0.15) !important; }
+.skill-icon.bg-success   { background-color: rgba(34, 197, 94, 0.15) !important; }
+.skill-icon.bg-warning   { background-color: rgba(245, 158, 11, 0.15) !important; }
+.skill-icon.bg-danger    { background-color: rgba(244, 63, 94, 0.15) !important; }
+.skill-icon.bg-secondary { background-color: rgba(139, 92, 246, 0.15) !important; }
+
+.progress-bar.bg-primary   { background-color: #58a6ff !important; }
+.progress-bar.bg-info      { background-color: #38bdf8 !important; }
+.progress-bar.bg-success   { background-color: #20a352 !important; }
+.progress-bar.bg-warning   { background-color: #f59e0b !important; }
+.progress-bar.bg-danger    { background-color: #f43f5e !important; }
+.progress-bar.bg-secondary { background-color: #8b5cf6 !important; }
+
+.skill-icon.bg-primary i   { color: #58a6ff !important; }
+.skill-icon.bg-info i      { color: #38bdf8 !important; }
+.skill-icon.bg-success i   { color: #20a352 !important; }
+.skill-icon.bg-warning i   { color: #f59e0b !important; }
+.skill-icon.bg-danger i    { color: #f43f5e !important; }
+.skill-icon.bg-secondary i { color: #8b5cf6 !important; }
+
+/* Education Timeline */
 .education-section {
     padding: 4rem 2rem;
     background-color: var(--dark-bg);
     border-bottom: none;
 }
-
 
 .education-container {
     max-width: 900px;
@@ -535,7 +897,211 @@ body {
     margin-bottom: 1rem;
 }
 
-/* --- 6. Generic List Page Styles (Honors, Publications, etc.) --- */
+/* Sliding Window Video Section */
+.video-window-glw0pyx-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto, sans-serif;
+    text-align: center;
+    padding: 40px 0;
+    overflow: hidden;
+    background-color: var(--dark-bg);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.video-window-glw0pyx-wrapper .text-muted {
+    color: #8b949e;
+    font-size: 1.1rem;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.video-window-glw0pyx-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.video-window-glw0pyx-subtitle {
+    display: none;
+}
+
+.video-window-glw0pyx-display-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5%;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.video-window-glw0pyx-slot {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.video-window-glw0pyx-iframe-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+}
+
+.video-window-glw0pyx-iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-window-glw0pyx-slot.slot-left,
+.video-window-glw0pyx-slot.slot-right {
+    flex: 0 0 30%;
+    transform: scale(0.85);
+    opacity: 0.7;
+}
+
+.video-window-glw0pyx-slot.slot-center {
+    flex: 0 0 35%;
+    transform: scale(1);
+    z-index: 10;
+    border: 2px solid var(--tech-cyan);
+}
+
+.video-window-glw0pyx-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.video-window-glw0pyx-nav button {
+    background-color: var(--light-bg);
+    border: 1px solid var(--tech-cyan);
+    color: var(--tech-cyan);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.video-window-glw0pyx-nav button:hover {
+    background-color: var(--tech-cyan);
+    color: var(--dark-bg);
+}
+
+.video-window-glw0pyx-more-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.video-window-glw0pyx-more-btn:hover {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+}
+
+/* Showcase Sections (Friendly Links & Partners) - Refactored to reduce duplication */
+.link-showcase-section,
+.partner-showcase-section {
+    padding: 4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.link-showcase-section h2,
+.partner-showcase-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+
+.link-groups-container,
+.partner-groups-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.link-group,
+.partner-group {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.link-group:hover,
+.partner-group:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.link-group h3,
+.partner-group h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+.button-container,
+.partner-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.link-button,
+.partner-button {
+    display: inline-block;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    padding: 8px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.link-button:hover,
+.partner-button:hover {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: var(--dark-bg);
+    border-color: var(--tech-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+}
+
+/* Generic List/Table Page Styles (Publications, Honors, etc.) */
 .publication-page .page-container,
 .honor-page .page-container,
 .highlight-page .page-container,
@@ -597,10 +1163,6 @@ body {
 .search-container input:focus {
     border-color: var(--tech-cyan);
     box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
-}
-
-.table-container {
-    overflow-x: visible;
 }
 
 .publication-table,
@@ -701,351 +1263,284 @@ body {
     white-space: nowrap;
 }
 
-.action-buttons {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-start;
+/* Course Schedule Page */
+.schedule-section {
+    padding: 60px 0;
+    text-align: center;
 }
 
-.action-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: 5px;
+.schedule-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color, #e6edf3);
+}
+
+.schedule-section .text-muted {
+    color: #8b949e;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.schedule-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    margin: 0 -15px;
+    padding: 0 15px;
+}
+
+.course-schedule {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+}
+
+.course-schedule th {
+    background-color: #161b22;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 8px;
+    color: #c9d1d9;
+}
+
+.course-schedule td {
+    border: 1px solid #30363d;
+    padding: 8px;
+    vertical-align: top;
+    height: 80px;
+    color: #8b949e;
+}
+
+.course-schedule td:first-child {
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    color: #c9d1d9;
+    width: 120px;
+}
+
+.course-block {
+    background-color: #21262d;
+    padding: 12px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #c9d1d9;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.course-block strong {
+    font-weight: 600;
+    color: #fff;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.course-block .course-code {
+    font-family: 'Courier New', Courier, monospace;
     font-size: 0.8rem;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 6px;
 }
 
-.action-btn:hover {
-    transform: translateY(-2px);
-    background-color: var(--tech-cyan);
-    color: var(--dark-bg);
-    box-shadow: 0 4px 10px rgba(100, 210, 255, 0.2);
+.course-block .course-location {
+    font-size: 0.8rem;
+    opacity: 0.9;
 }
 
-.no-results {
+.course-block .course-location i {
+    margin-right: 5px;
+    color: #8b949e;
+}
+
+.course-color-1 { border-left-color: #58a6ff; }
+.course-color-2 { border-left-color: #3fb950; }
+.course-color-3 { border-left-color: #a371f7; }
+.course-color-4 { border-left-color: #f778ba; }
+.course-color-5 { border-left-color: #d29922; }
+
+.lunch-break {
+    background-color: rgba(48, 54, 61, 0.5);
     text-align: center;
-    padding: 3rem;
-    color: var(--text-color);
-    background-color: var(--light-bg);
+    vertical-align: middle;
+    font-style: italic;
+    color: #8b949e;
+}
+
+/* Course Materials Page */
+.materials-section {
+    padding: 60px 0;
+}
+
+.materials-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color, #e6edf3);
+}
+
+.materials-section .text-muted {
+    text-align: center;
+    color: #8b949e;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.course-materials-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.course-material-item {
+    background-color: #161b22;
+    border: 1px solid #30363d;
     border-radius: 8px;
-    margin-top: 2rem;
-}
-
-/* --- 7. Friendly Links Section --- */
-.link-showcase-section {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-
-.link-showcase-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-    margin-bottom: 3rem;
-}
-
-.link-groups-container {
-    max-width: 1100px;
-    /* Modified: Removed margin-top as spacing is now handled by the h2 title */
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.link-group {
-    background-color: var(--light-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.course-material-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.course-material-header {
     display: flex;
-    flex-direction: column;
-}
-
-.link-group:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.link-group h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 600;
-}
-
-.button-container {
-    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: auto;
 }
 
-.link-button {
-    display: inline-block;
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    padding: 8px 18px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+.course-material-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
 }
 
-.link-button:hover {
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: var(--dark-bg);
-    border-color: var(--tech-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+.course-meta {
+    text-align: right;
+    white-space: nowrap;
 }
 
-.link-showcase-section {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+.course-meta span {
+    display: block;
+    font-size: 0.85rem;
+    color: #8b949e;
 }
 
+.course-meta .course-code {
+    font-family: 'Courier New', Courier, monospace;
+}
 
-.link-showcase-section h2 {
+.course-description {
+    color: #c9d1d9;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 20px;
+}
+
+.material-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.material-links li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #282e36;
+}
+
+.material-links li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.material-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.material-info i {
+    font-size: 1.3rem;
+    color: #8b949e;
+    width: 25px;
     text-align: center;
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-    margin-bottom: 3rem;
 }
 
-.link-groups-container {
-    max-width: 1100px;
-    /* Modified: Removed margin-top as spacing is now handled by the h2 title */
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.link-group {
-    background-color: var(--light-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.link-group:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.link-group h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 600;
-}
-
-.button-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: auto;
-}
-
-.link-button {
-    display: inline-block;
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    padding: 8px 18px;
-    border-radius: 50px;
-    text-decoration: none;
+.material-info span {
+    color: #c9d1d9;
     font-weight: 500;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
 }
 
-.link-button:hover {
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: var(--dark-bg);
-    border-color: var(--tech-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+.material-download-btn {
+    background-color: #238636;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
 }
 
-
-/* --- 7. Friendly Links Section --- */
-.partner-showcase-section {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+.material-download-btn:hover {
+    background-color: #2ea043;
+    color: #fff;
 }
 
-
-.partner-showcase-section h2 {
+/* Motto Section */
+.motto {
+    position: relative;
+    width: 100%;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
     text-align: center;
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-    margin-bottom: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(201, 209, 217, 0.8);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
 }
 
-.partner-groups-container {
-    max-width: 1100px;
-    /* Modified: Removed margin-top as spacing is now handled by the h2 title */
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+.motto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 500px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
-.partner-group {
-    background-color: var(--light-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.partner-group:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.partner-group h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 600;
-}
-
-.partner-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: auto;
-}
-
-.partner-button {
-    display: inline-block;
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    padding: 8px 18px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.partner-button:hover {
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: var(--dark-bg);
-    border-color: var(--tech-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
-}
-
-.partner-showcase-section {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-
-.partner-showcase-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-    margin-bottom: 3rem;
-}
-
-.partner-groups-container {
-    max-width: 1100px;
-    /* Modified: Removed margin-top as spacing is now handled by the h2 title */
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.partner-group {
-    background-color: var(--light-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.partner-group:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.partner-group h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 600;
-}
-
-.partner-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: auto;
-}
-
-.partner-button {
-    display: inline-block;
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    padding: 8px 18px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.partner-button:hover {
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: var(--dark-bg);
-    border-color: var(--tech-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
-}
-
-
-/* --- 8. Contact Section --- */
+/* Contact Section */
 .contact-section {
     background-color: var(--light-bg);
     padding: 5rem 2rem;
@@ -1089,7 +1584,7 @@ body {
     color: #fff;
 }
 
-/* --- 9. Footer --- */
+/* --- 7. Footer --- */
 .site-footer {
     padding: 2.5rem 0;
     text-align: center;
@@ -1102,197 +1597,16 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* --- 10. Back to Top Button --- */
-.back-to-top-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 999;
-    width: 50px;
-    height: 50px;
-    background-color: var(--light-bg);
-    border: 2px solid var(--tech-cyan);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
-}
 
-.back-to-top-btn.is-visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.back-to-top-btn::after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid var(--tech-cyan);
-    border-left: 2px solid var(--tech-cyan);
-    transform: translateY(25%) rotate(45deg);
-    transition: border-color 0.3s ease;
-}
-
-.back-to-top-btn:hover {
-    background-color: var(--tech-cyan);
-}
-
-.back-to-top-btn:hover::after {
-    border-color: var(--dark-bg);
-}
-
-/* --- 11. Pagination --- */
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 2rem 0;
-    user-select: none;
-}
-
-.pagination-btn {
-    background-color: var(--light-bg);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-color);
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.pagination-btn:hover:not(:disabled) {
-    background-color: var(--tech-cyan);
-    color: var(--dark-bg);
-    border-color: var(--tech-cyan);
-}
-
-.pagination-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-
-.page-jump-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 0 10px;
-}
-
-#page-info,
-#page-info-honor,
-#page-info-highlight,
-#page-info-project,
-#page-info-work {
-    font-size: 0.9rem;
-    color: rgba(201, 209, 217, 0.8);
-}
-
-#page-input,
-#page-input-honor,
-#page-input-highlight,
-#page-input-project,
-#page-input-work {
-    width: 60px;
-    text-align: center;
-    background-color: var(--dark-bg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-color);
-    border-radius: 5px;
-    padding: 8px;
-    appearance: textfield;
-    -moz-appearance: textfield;
-}
-
-#page-input::-webkit-outer-spin-button,
-#page-input::-webkit-inner-spin-button,
-#page-input-honor::-webkit-outer-spin-button,
-#page-input-honor::-webkit-inner-spin-button,
-#page-input-highlight::-webkit-outer-spin-button,
-#page-input-highlight::-webkit-inner-spin-button,
-#page-input-project::-webkit-outer-spin-button,
-#page-input-project::-webkit-inner-spin-button,
-#page-input-work::-webkit-outer-spin-button,
-#page-input-work::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* --- 12. List Animations --- */
-
-@keyframes slide-in-from-right { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes slide-out-to-left { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
-@keyframes slide-in-from-left { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes slide-out-to-right { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(50px); } }
-@keyframes slide-in-from-down { from { opacity: 0; transform: translateY(0px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
 /*
-.item-enter-from-right,
-.item-enter-from-left,
-.item-enter-from-down {
-    opacity: 0;
-    animation-duration: 0.4s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-}
-.item-enter-from-right { animation-name: slide-in-from-right; }
-.item-enter-from-left { animation-name: slide-in-from-left; }
-.item-enter-from-down { animation-name: slide-in-from-down; }
-
-.item-exit-to-left,
-.item-exit-to-right,
-.item-exit-fade {
-    animation-duration: 0.3s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    right: 0;
-}
-.item-exit-to-left { animation-name: slide-out-to-left; }
-.item-exit-to-right { animation-name: slide-out-to-right; }
-.item-exit-fade { animation-name: fade-out; }
+======================================================================
+                     8. MASTER RESPONSIVE STYLES
+======================================================================
 */
-/* --- 13. Motto Section --- */
-.motto {
-    position: relative;
-    width: 100%;
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: rgba(201, 209, 217, 0.8);
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-}
 
-.motto::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    max-width: 500px;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.25);
-}
-
-/* --- 14. Responsive Design --- */
-
-/* Mobile Navigation */
+/* --- Small Desktops & Mobile Nav Trigger (max-width: 1200px) --- */
 @media (max-width: 1200px) {
+    /* Mobile Navigation */
     .nav-container {
         justify-content: flex-start;
     }
@@ -1396,8 +1710,9 @@ body {
     }
 }
 
-/* Tablet & Smaller Desktop */
+/* --- Tablets & Smaller Desktops (max-width: 992px) --- */
 @media (max-width: 992px) {
+    /* List Page Controls */
     .controls-container {
         flex-direction: column;
         align-items: stretch;
@@ -1418,6 +1733,7 @@ body {
         padding: 1.5rem;
     }
 
+    /* Education Timeline */
     .timeline-wrapper::before {
         left: 25px;
         transform: none;
@@ -1454,9 +1770,20 @@ body {
         font-size: 1.2rem;
         border-width: 2px;
     }
+
+    /* Skills Section */
+    .skills-col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Materials Page */
+    .course-materials-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* Mobile */
+/* --- Large Mobiles & Tablet Portrait (max-width: 768px) --- */
 @media (max-width: 768px) {
     .page-container {
         padding: 4rem 1rem;
@@ -1465,7 +1792,8 @@ body {
     .page-container h1 {
         font-size: 2rem;
     }
-
+    
+    /* Hero Slider */
     .slide-content {
         padding: 1.5rem;
         max-width: 90%;
@@ -1478,15 +1806,8 @@ body {
     .slide-content p {
         font-size: 1rem;
     }
-
-    .contact-section {
-        padding: 4rem 1.5rem;
-    }
-
-    .contact-section h2 {
-        font-size: 2rem;
-    }
     
+    /* Intro Section */
     .intro-section {
         flex-direction: column;
         text-align: center;
@@ -1508,6 +1829,22 @@ body {
         text-align: justify;
     }
 
+    /* Skills Section */
+    .skills-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    /* Video Window */
+    .video-window-glw0pyx-slot.slot-left,
+    .video-window-glw0pyx-slot.slot-right {
+        display: none;
+    }
+    .video-window-glw0pyx-slot.slot-center {
+        flex: 0 0 90%;
+    }
+
+    /* Pagination */
     .pagination-container {
         flex-wrap: wrap;
         justify-content: space-around;
@@ -1519,612 +1856,65 @@ body {
         order: -1;
         margin-bottom: 1rem;
     }
-}
-
-/* --- 15. Sliding Window Video Section --- */
-.video-window-glw0pyx-wrapper {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto, sans-serif;
-    text-align: center;
-    padding: 40px 0;
-    overflow: hidden;
-    background-color: var(--dark-bg);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-.video-window-glw0pyx-wrapper .text-muted {
-    color: #8b949e;
-    font-size: 1.1rem;
-    margin-top: 24px;
-    margin-bottom: 24px;
-}
-
-.video-window-glw0pyx-title {
-    /* 模仿 .education-section h2 的風格 */
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-}
-
-
-.video-window-glw0pyx-subtitle {
-    /* 隱藏附標題，讓主標題風格與 Education 標題一致 */
-    display: none;
-}
-
-.video-window-glw0pyx-display-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5%;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.video-window-glw0pyx-slot {
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: #000;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.video-window-glw0pyx-iframe-wrapper {
-    position: relative;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-}
-
-.video-window-glw0pyx-iframe-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.video-window-glw0pyx-slot.slot-left,
-.video-window-glw0pyx-slot.slot-right {
-    flex: 0 0 30%;
-    transform: scale(0.85);
-    opacity: 0.7;
-}
-
-.video-window-glw0pyx-slot.slot-center {
-    flex: 0 0 35%;
-    transform: scale(1);
-    z-index: 10;
-    border: 2px solid var(--tech-cyan);
-}
-
-.video-window-glw0pyx-nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 25px;
-}
-
-.video-window-glw0pyx-nav button {
-    background-color: var(--light-bg);
-    border: 1px solid var(--tech-cyan);
-    color: var(--tech-cyan);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.video-window-glw0pyx-nav button:hover {
-    background-color: var(--tech-cyan);
-    color: var(--dark-bg);
-}
-
-.video-window-glw0pyx-more-btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 10px 25px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-
-}
-
-.video-window-glw0pyx-more-btn:hover {
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: var(--dark-bg);
-    border-color: var(--tech-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
-}
-
-/* Responsive adjustments for the video window */
-@media (max-width: 768px) {
-    .video-window-glw0pyx-slot.slot-left,
-    .video-window-glw0pyx-slot.slot-right {
-        display: none;
+    
+    /* Contact Section */
+    .contact-section {
+        padding: 4rem 1.5rem;
     }
-    .video-window-glw0pyx-slot.slot-center {
-        flex: 0 0 90%;
+
+    .contact-section h2 {
+        font-size: 2rem;
     }
-}
 
-/* --- Skills Section Styles (Dark Theme Version - FINAL FIX) --- */
-.skills-section {
-    padding: 80px 0;
-    background-color: #0d1117; 
-}
-
-.skills-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.skills-text-center {
-    text-align: center;
-    margin-bottom: 3rem !important;
-}
-
-.skills-text-center .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-}
-
-.skills-text-center .text-muted {
-    font-size: 1.1rem;
-    color: #8b949e; 
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.skills-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.skills-col {
-    position: relative;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-bottom: 1.5rem;
-}
-
-@media (min-width: 768px) { .skills-col { flex: 0 0 50%; max-width: 50%; } }
-@media (min-width: 992px) { .skills-col { flex: 0 0 33.333333%; max-width: 33.333333%; } }
-
-.skill-card {
-    background-color: #161b22; 
-    border-radius: 10px;
-    padding: 2rem;
-    height: 100%;
-    border: 1px solid #30363d;
-    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
-}
-
-.skill-card:hover {
-    transform: translateY(-8px);
-    border-color: #58a6ff;
-}
-
-.skill-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.skill-icon {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-    border-radius: 50%;
-}
-
-.skill-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-    color: #f0f6fc; 
-}
-
-.skill-body .skill-item { margin-bottom: 1rem; }
-.skill-body .skill-item:last-child { margin-bottom: 0; }
-
-.d-flex { display: flex !important; }
-.justify-content-between { justify-content: space-between !important; }
-.fw-medium { font-weight: 500; color: #c9d1d9; }
-.skill-card .text-muted { color: #8b949e; }
-
-.progress {
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.1); 
-    border-radius: 999px; /* 使用一個大數值確保兩端是完美的半圓 */
-    overflow: hidden;
-}
-
-.progress-bar {
-    width: 0;
-    height: 100%; /* <<<<<<<<<<<<<<<<< THE FIX IS HERE */
-    transition: width 1.5s ease-out;
-    border-radius: inherit; /* <<<<<<<<<<<<<<<<< VISUAL IMPROVEMENT */
-}
-
-/* --- Helper classes for colors --- */
-
-/* Icon Background Glow Effect */
-.skill-icon.bg-primary   { background-color: rgba(88, 166, 255, 0.15) !important; }
-.skill-icon.bg-info      { background-color: rgba(56, 189, 248, 0.15) !important; }
-.skill-icon.bg-success   { background-color: rgba(34, 197, 94, 0.15) !important; }
-.skill-icon.bg-warning   { background-color: rgba(245, 158, 11, 0.15) !important; }
-.skill-icon.bg-danger    { background-color: rgba(244, 63, 94, 0.15) !important; }
-.skill-icon.bg-secondary { background-color: rgba(139, 92, 246, 0.15) !important; }
-
-/* Progress Bar Fill Color */
-.progress-bar.bg-primary   { background-color: #58a6ff !important; }
-.progress-bar.bg-info      { background-color: #38bdf8 !important; }
-.progress-bar.bg-success   { background-color: #20a352 !important; }
-.progress-bar.bg-warning   { background-color: #f59e0b !important; }
-.progress-bar.bg-danger    { background-color: #f43f5e !important; }
-.progress-bar.bg-secondary { background-color: #8b5cf6 !important; }
-
-/* Icon Color */
-.skill-icon.bg-primary i   { color: #58a6ff !important; }
-.skill-icon.bg-info i      { color: #38bdf8 !important; }
-.skill-icon.bg-success i   { color: #20a352 !important; }
-.skill-icon.bg-warning i   { color: #f59e0b !important; }
-.skill-icon.bg-danger i    { color: #f43f5e !important; }
-.skill-icon.bg-secondary i { color: #8b5cf6 !important; }
-
-
-/* ===================================================================
-   Schedule Page Styles
-====================================================================== */
-
-/* --- Static Page Header --- */
-/* A simpler header for content pages, replacing the Swiper slider */
-.page-header-static {
-    background-color: #0d1117; /* Same as your theme's dark background */
-    background-image: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.9)), url('images/slide.png'); /* Reuses your slide image with an overlay */
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    text-align: center;
-    padding: 100px 20px 60px; /* Ample padding for a header feel */
-    position: relative;
-}
-
-.page-header-content h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-.page-header-content p {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-
-/* --- Schedule Section --- */
-.schedule-section {
-    padding: 60px 0;
-    text-align: center; /* Center the section title and description */
-}
-
-.schedule-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-color, #e6edf3);
-}
-
-.schedule-section .text-muted {
-    color: #8b949e;
-    max-width: 700px;
-    margin: 0 auto 40px auto; /* Center the paragraph and add space below */
-}
-
-/* --- Responsive Table Wrapper --- */
-/* This allows the table to scroll horizontally on small screens */
-.schedule-table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    padding-bottom: 10px; /* Space for scrollbar */
-    margin: 0 -15px; /* Extend slightly to avoid inner container padding */
-    padding: 0 15px;
-}
-
-/* --- Course Schedule Table --- */
-.course-schedule {
-    width: 100%;
-    min-width: 800px; /* Ensures table layout is maintained even when scrolling */
-    border-collapse: collapse;
-    table-layout: fixed; /* Ensures columns are of equal width */
-    text-align: left;
-}
-
-.course-schedule th {
-    background-color: #161b22;
-    font-weight: 600;
-    text-align: center;      /* 水平置中 */
-    vertical-align: middle;  /* 垂直置中 (新增或確認) */
-    padding: 12px 8px;
-    color: #c9d1d9;
-}
-
-.course-schedule td {
-    border: 1px solid #30363d; /* Subtle border color from GitHub's dark theme */
-    padding: 8px;
-    vertical-align: top;
-    height: 80px; /* Consistent row height */
-}
-
-.course-schedule th {
-    background-color: #161b22;
-    font-weight: 600;
-    text-align: center;
-    padding: 12px 8px;
-    color: #c9d1d9;
-}
-
-.course-schedule td {
-    color: #8b949e;
-}
-
-.course-schedule td:first-child {
-    font-weight: 500;
-    text-align: center;
-    vertical-align: middle;
-    color: #c9d1d9;
-    width: 120px; /* Fixed width for the time column */
-}
-
-/* --- Course Block Styling --- */
-/* This is the colored block for each course entry */
-.course-block {
-    background-color: #21262d;
-    padding: 12px;
-    border-radius: 6px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: #c9d1d9;
-    font-size: 0.9rem;
-    border-left: 4px solid transparent; /* Colored accent border */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.course-block:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.course-block strong {
-    font-weight: 600;
-    color: #fff;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.course-block .course-code {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.8rem;
-    opacity: 0.8;
-    display: block;
-    margin-bottom: 6px;
-}
-
-.course-block .course-location {
-    font-size: 0.8rem;
-    opacity: 0.9;
-}
-
-.course-block .course-location i {
-    margin-right: 5px;
-    color: #8b949e;
-}
-
-/* --- Color Coding for Courses --- */
-/* Add more colors as needed */
-.course-color-1 { border-left-color: #58a6ff; } /* Blue */
-.course-color-2 { border-left-color: #3fb950; } /* Green */
-.course-color-3 { border-left-color: #a371f7; } /* Purple */
-.course-color-4 { border-left-color: #f778ba; } /* Pink */
-.course-color-5 { border-left-color: #d29922; } /* Yellow/Gold */
-
-.lunch-break {
-    background-color: rgba(48, 54, 61, 0.5);
-    text-align: center;
-    vertical-align: middle;
-    font-style: italic;
-    color: #8b949e;
-}
-
-/* --- Responsive Adjustments for Schedule --- */
-@media (max-width: 768px) {
+    /* Static Page Header */
     .page-header-static {
         padding: 80px 15px 50px;
     }
     .page-header-content h1 {
         font-size: 2.2rem;
     }
+
+    /* Course Schedule */
+    .course-schedule {
+        min-width: 100%;
+        table-layout: auto;
+    }
+
+    .course-schedule th,
+    .course-schedule td {
+        padding: 8px 4px;
+        height: auto;
+        min-height: 80px;
+    }
+
+    .course-schedule td:first-child {
+        width: 80px;
+        font-size: 13px;
+        word-break: break-all;
+        line-height: 1.5;
+    }
+
+    .course-schedule td[rowspan] {
+        vertical-align: middle;
+    }
+    
     .course-block {
-        font-size: 0.85rem;
         padding: 8px;
+        font-size: 13px;
+        line-height: 1.4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
-    .course-schedule th, .course-schedule td {
-        padding: 6px;
-    }
-}
 
-/* ===================================================================
-   Materials Page Styles
-====================================================================== */
-
-/* --- Materials Section --- */
-.materials-section {
-    padding: 60px 0;
-}
-
-.materials-section h2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-color, #e6edf3);
-}
-
-.materials-section .text-muted {
-    text-align: center;
-    color: #8b949e;
-    max-width: 700px;
-    margin: 0 auto 40px auto;
-}
-
-/* --- Course Materials List (Grid Container) --- */
-.course-materials-list {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 30px; /* Space between cards */
-}
-
-/* --- Course Material Item (Card) --- */
-.course-material-item {
-    background-color: #161b22; /* A slightly darker shade for the card */
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 25px 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-}
-
-.course-material-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-}
-
-.course-material-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-}
-
-.course-material-header h3 {
-    margin: 0;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.course-meta {
-    text-align: right;
-    white-space: nowrap;
-}
-
-.course-meta span {
-    display: block;
-    font-size: 0.85rem;
-    color: #8b949e;
-}
-
-.course-meta .course-code {
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.course-description {
-    color: #c9d1d9;
-    font-size: 0.95rem;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #30363d;
-    padding-bottom: 20px;
-}
-
-/* --- Material Links List --- */
-.material-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.material-links li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #282e36;
-}
-
-.material-links li:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.material-info {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Space between icon and text */
-}
-
-.material-info i {
-    font-size: 1.3rem;
-    color: #8b949e; /* Muted icon color */
-    width: 25px; /* Give icon a fixed width for alignment */
-    text-align: center;
-}
-
-.material-info span {
-    color: #c9d1d9;
-    font-weight: 500;
-}
-
-.material-download-btn {
-    background-color: #238636; /* GitHub green */
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-    white-space: nowrap;
-}
-
-.material-download-btn:hover {
-    background-color: #2ea043;
-    color: #fff;
-}
-
-/* --- Responsive Adjustments --- */
-@media (min-width: 992px) {
-    /* Two columns for larger screens */
-    .course-materials-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
+    .course-block strong { margin-bottom: 4px; }
+    .course-block .course-code { font-size: 11px; margin-bottom: 4px; }
+    .course-block .course-location { font-size: 11px; }
+    .course-block .course-location i { margin-right: 4px; }
+    
+    /* Materials Page */
     .course-material-item {
         padding: 20px;
     }
@@ -2139,88 +1929,19 @@ body {
     }
 }
 
-/* ===================================================================
-   NEW & IMPROVED: Responsive adjustments for Course Schedule
-====================================================================== */
-
-/* 當螢幕寬度小於或等於 768px 時 (適用於平板和手機) */
-@media (max-width: 768px) {
-
-    /* 1. 允許表格內容自然換行，並移除固定的最小寬度限制 */
-    .course-schedule {
-        min-width: 100%; /* 讓表格寬度自適應容器 */
-        table-layout: auto; /* 讓欄寬根據內容自動調整，而不是固定 */
-    }
-
-    /* 2. 調整儲存格樣式，提供更多空間 */
-    .course-schedule th,
-    .course-schedule td {
-        padding: 8px 4px; /* 垂直邊距不變，水平邊距縮小 */
-        height: auto;     /* 讓儲存格高度可以根據內容自動增長 */
-        min-height: 80px; /* 保持一個最小高度，避免空儲存格太扁 */
-    }
-
-    /* 3. 優化左側時間欄，允許文字換行 */
-    .course-schedule td:first-child {
-        width: 80px; /* 給予一個合理的寬度 */
-        font-size: 13px;
-        word-break: break-all; /* 如果時間文字太長，強制換行 */
-        line-height: 1.5;
-    }
-
-    /* 4. 這是避免「文字炸裂」的關鍵：優化課程區塊佈局 */
-    .course-block {
-        padding: 8px;
-        font-size: 13px; /* 保持可讀的字體大小 */
-        line-height: 1.4;
-        height: 100%; /* 確保區塊能填滿儲存格 */
-        display: flex;
-        flex-direction: column; /* 垂直堆疊內容 */
-        justify-content: center; /* 垂直置中 */
-        align-items: center;     /* 水平置中 */
-        text-align: center;
-    }
-
-    /* 5. 確保課程資訊之間有適當的間距 */
-    .course-block strong {
-        font-weight: 600;
-        margin-bottom: 4px; /* 與下方元素間的距離 */
-    }
-
-    .course-block .course-code {
-        font-size: 11px;
-        opacity: 0.8;
-        margin-bottom: 4px;
-    }
-    
-    .course-block .course-location {
-        font-size: 11px;
-    }
-
-    /* 6. 在課程地點文字和圖示之間增加一點空間 */
-    .course-block .course-location i {
-       margin-right: 4px;
-    }
-    
-    /* 7. 如果有 rowspan 跨越多行的儲存格，確保內容垂直置中 */
-    .course-schedule td[rowspan] {
-        vertical-align: middle;
-    }
-}
-
-/* 針對更小的螢幕 (例如 iPhone SE) 的微調 */
+/* --- Small Mobiles (max-width: 480px) --- */
 @media (max-width: 480px) {
     .course-schedule th {
-        font-size: 12px; /* 在極小螢幕上稍微縮小日期標題 */
+        font-size: 12px;
         padding: 6px 2px;
     }
 
     .course-schedule td:first-child {
-        width: 70px; /* 進一步縮小時間欄寬度 */
+        width: 70px;
         font-size: 12px;
     }
     
     .course-block {
-        font-size: 12px; /* 稍微縮小課程文字 */
+        font-size: 12px;
     }
 }
