@@ -569,3 +569,50 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
     
 });
+
+// --- Skills Section Progress Bar Animation (with text sync) ---
+document.addEventListener("DOMContentLoaded", function() {
+  
+  const skillsSection = document.querySelector('#skills');
+  if (!skillsSection) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.2 
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const progressBars = skillsSection.querySelectorAll('.progress-bar');
+        
+        progressBars.forEach(bar => {
+          // 1. 從 data-width 屬性讀取目標值
+          const targetWidth = bar.dataset.width;
+          
+          // 2. 將目標值設定給進度條的寬度，觸發動畫
+          bar.style.width = targetWidth;
+
+          // 3. (新增功能) 找到對應的文字標籤並填入數值
+          //    - .closest('.skill-item') 找到最近的父層 skill-item 容器
+          //    - .querySelector('.text-muted') 在該容器中找到要填寫的 span
+          const skillItem = bar.closest('.skill-item');
+          if (skillItem) {
+            const textSpan = skillItem.querySelector('.text-muted');
+            if (textSpan) {
+              // 將目標值寫入文字標籤
+              textSpan.textContent = targetWidth;
+            }
+          }
+        });
+        
+        // 動畫觸發後，停止觀察
+        observer.unobserve(skillsSection);
+      }
+    });
+  }, observerOptions);
+
+  // 開始觀察
+  observer.observe(skillsSection);
+});

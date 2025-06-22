@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Schedule - Yu-Cheng Chang</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <meta name="theme-color" content="#0d1117">
+
+    <!-- js-yaml for parsing YAML files -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    
+</head>
+<body>
+    <!-- Navbar (Copied from your index.html for consistency) -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-header">
+                <a href="index.html" class="mobile-brand">
+                    <img src="images/logo.svg" alt="Logo" class="mobile-logo">
+                    <h1 class="site-title">Yu-Cheng Chang</h1>
+                </a>
+                <button class="hamburger-btn" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="honors.html">Honors</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Experience<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="works.html">Works</a></li>
+                    </ul>
+                </li>
+                <li><a href="highlights.html">Highlights</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Medium<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://medium.com/@Yucheng0208/yolov8-tutorial-a95f8cce4b9f">YOLOv8 Tutorial</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">DevKit<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://github.com/Yucheng0208/Batch-Video-Converter">Batch Video Converter</a></li>
+                        <li><a href="https://github.com/Yucheng0208/Video-Frame-Extractor">Video Frame Extractor</a></li>
+                        <li><a href="https://chatgpt.com/g/g-6847fa761ce48191bec65762eed2f7f6-lexi">Lexi</a></li>         
+                    </ul>
+                </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="dropdown-toggle">Course<span class="dropdown-arrow"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="schedule.html">Schedule</a></li>
+                        <li><a href="materials.html">Materials</a></li>
+                    </ul>
+                </li>
+            </ul> 
+        </div>
+    </nav>
+        
+    <!-- Main Content -->
+    <main id="page-content">
+        <div class="page-container">
+            <!-- Course Schedule Section -->
+            <section class="schedule-section">
+                <h2>Fall 2024 Course Schedule</h2>
+                <p class="text-muted">Below is my tentative teaching and course schedule. All times are in GMT+8.</p>
+
+                <!-- Responsive Table Wrapper -->
+                <div class="schedule-table-wrapper">
+                    <table class="course-schedule">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 8:00 - 9:00 -->
+                            <tr>
+                                <td>08:00 - 09:00</td>
+                                <td></td>
+                                <td rowspan="2">
+                                    <div class="course-block course-color-1">
+                                        <strong>Advanced Computer Vision</strong>
+                                        <span class="course-code">CSIE-501</span>
+                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> Tech Bldg. 301</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- 9:00 - 10:00 -->
+                            <tr>
+                                <td>09:00 - 10:00</td>
+                                <td rowspan="2">
+                                    <div class="course-block course-color-2">
+                                        <strong>AIoT Systems Lab</strong>
+                                        <span class="course-code">CINE-405L</span>
+                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> IoT Lab 101</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td rowspan="3">
+                                    <div class="course-block course-color-3">
+                                        <strong>Research Seminar</strong>
+                                        <span class="course-code">GRAD-999</span>
+                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> Conference Hall</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <!-- 10:00 - 11:00 -->
+                            <tr>
+                                <td>10:00 - 11:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                             <!-- 11:00 - 12:00 -->
+                            <tr>
+                                <td>11:00 - 12:00</td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="2">
+                                     <div class="course-block course-color-4">
+                                        <strong>Embedded Systems Design</strong>
+                                        <span class="course-code">EE-412</span>
+                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> Eng. Bldg. 204</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <!-- 12:00 - 13:00 -->
+                            <tr>
+                                <td>12:00 - 13:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="lunch-break">LUNCH BREAK</td>
+                            </tr>
+                             <!-- 13:00 - 14:00 -->
+                             <tr>
+                                <td>13:00 - 14:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- 14:00 - 15:00 -->
+                            <tr>
+                                <td>14:00 - 15:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="2">
+                                     <div class="course-block course-color-1">
+                                        <strong>Advanced Computer Vision</strong>
+                                        <span class="course-code">CSIE-501 (Lab)</span>
+                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> Vision Lab 505</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                             <!-- 15:00 - 16:00 -->
+                             <tr>
+                                <td>15:00 - 16:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="2">
+                                    <div class="course-block course-color-5">
+                                        <strong>TA Office Hours</strong>
+                                        <span class="course-code">By Appointment</span>
+                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> Grad Office</span>
+                                    </div>
+                                </td>
+                            </tr>
+                             <!-- 16:00 - 17:00 -->
+                             <tr>
+                                <td>16:00 - 17:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div> <!-- End of .page-container -->
+    </main>
+
+    <!-- Footer (Copied from your index.html) -->
+    <footer class="site-footer">
+        <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
+    </footer>
+
+    <!-- Back to Top Button (Copied from your index.html) -->
+    <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
+
+    <!-- Application Scripts (Copied from your index.html) -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
