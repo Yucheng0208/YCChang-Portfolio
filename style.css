@@ -739,6 +739,29 @@ body {
     color: #f0f6fc;
 }
 
+.schedule-wrapper {
+    /* For smooth transition between schedules */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* [CORRECTED] 針對大學課表的時間欄位置中 */
+#university-schedule .course-schedule tbody td:nth-child(1), /* 選取 Period 欄 */
+#university-schedule .course-schedule tbody td:nth-child(2) { /* 選取 Time 欄 */
+    text-align: center;
+    vertical-align: middle;
+}
+/* [CORRECTED] 針對高中課表的時間欄位置中 */
+#high-school-schedule .course-schedule tbody td:nth-child(1), /* 選取 Period 欄 */
+#high-school-schedule .course-schedule tbody td:nth-child(2) { /* 選取 Time 欄 */
+    text-align: center;
+    vertical-align: middle;
+}
+
 .skill-body .skill-item { margin-bottom: 1rem; }
 .skill-body .skill-item:last-child { margin-bottom: 0; }
 
@@ -1374,14 +1397,16 @@ body {
 .course-color-5 { border-left-color: #d29922; }
 
 .lunch-break {
-    background-color: rgba(48, 54, 61, 0.5);
+    background-color: #21262d; /* 使用和 course-block 一樣的深色背景 */
     text-align: center;
     vertical-align: middle;
     font-style: italic;
     color: #8b949e;
+    border-left: 4px solid #8b949e; /* 加上一個灰色的左邊框，增加視覺區分 */
 }
 
-/* Course Materials Page */
+
+/* Course Materials Page - MODIFIED & ADDED */
 .materials-section {
     padding: 60px 0;
 }
@@ -1512,6 +1537,131 @@ body {
     background-color: #2ea043;
     color: #fff;
 }
+
+/* --- ADDED FOR materials.html --- */
+.materials-page .controls-container {
+    flex-direction: column;
+    gap: 1.5rem; /* Increased gap */
+    align-items: flex-start; /* Align to the left */
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-group select,
+.materials-page .search-container input {
+    padding: 10px 14px; /* Consistent padding */
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.materials-page .search-container input {
+    width: 100%; /* Make search input full width in its container */
+    max-width: 400px;
+}
+
+/* Language toggle button color */
+.lang-toggle-btn {
+    padding: 8px 16px;
+    background-color: #00a6ed; /* Your desired color */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.lang-toggle-btn:hover {
+    background-color: #0095d1; /* A darker shade for hover */
+}
+
+/* Language switching logic */
+.lang-zh { display: none; }
+body.show-zh .lang-zh { display: inline; }
+body.show-zh .lang-en { display: none; }
+
+/* Course card styles */
+.course-card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.course-card h3 {
+    margin-top: 0;
+    color: #58a6ff;
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+}
+
+.course-details p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.course-details strong {
+    color: #8b949e;
+    min-width: 120px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.course-links {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #30363d;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.course-links .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.course-links .btn:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+    transform: translateY(-2px);
+}
+
+.course-links .contact-btn {
+    background-color: #238636;
+    border-color: #238636;
+    color: white;
+}
+
+.course-links .contact-btn:hover {
+    background-color: #2ea043;
+}
+
 
 /* Motto Section */
 .motto {
@@ -1779,11 +1929,7 @@ body {
 
     /* Materials Page */
     .course-materials-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .controls-container .lang-toggle-btn{
-        background-color: #00a6ed;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Use auto-fit for better responsiveness */
     }
 }
 
@@ -1902,7 +2048,7 @@ body {
         vertical-align: middle;
     }
     
-    .course-block lang-toggle-btn{
+    .course-block {
         padding: 8px;
         font-size: 13px;
         line-height: 1.4;
@@ -1919,6 +2065,10 @@ body {
     .course-block .course-location i { margin-right: 4px; }
     
     /* Materials Page */
+    .course-materials-list {
+        grid-template-columns: 1fr; /* On smaller screens, one column is better */
+    }
+
     .course-material-item {
         padding: 20px;
     }
@@ -1935,6 +2085,23 @@ body {
 
 /* --- Small Mobiles (max-width: 480px) --- */
 @media (max-width: 480px) {
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group > * {
+        width: 100%;
+    }
+
+    .filter-bar {
+        justify-content: stretch;
+    }
+
+    .filter-bar button {
+        flex-grow: 1;
+    }
+
     .course-schedule th {
         font-size: 12px;
         padding: 6px 2px;

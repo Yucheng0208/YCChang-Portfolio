@@ -554,7 +554,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
 
-    // --- 6. 教材頁 (Materials Page) 專用邏輯 ---
+    // --- 6. 教材頁 (Materials Page) 專用邏輯 (MODIFIED & RESTRUCTURED) ---
     (function setupMaterialsPage() {
         const pageContainer = document.querySelector('.materials-page');
         if (!pageContainer) return; // 只在教材頁執行
@@ -568,10 +568,41 @@ document.addEventListener('DOMContentLoaded', function() {
         const langToggleButton = document.getElementById('lang-toggle');
 
         let allCourses = [];
+        // [MODIFIED] 用來儲存選項元素，方便後續更新文字
+        const yearOptionMap = {};
+        const semesterOptionMap = {};
 
-        langToggleButton.addEventListener('click', () => {
-            document.body.classList.toggle('show-zh');
-        });
+        // [NEW] 新增一個專門更新下拉選單語言的函式
+        function updateDropdownLanguage() {
+            const isZh = document.body.classList.contains('show-zh');
+
+            // 更新 "Year" 下拉選單
+            const allYearOption = yearFilter.querySelector('option[value="all"]');
+            if (allYearOption) {
+                allYearOption.textContent = isZh ? '所有學年度' : 'All Academic Years';
+            }
+            for (const year in yearOptionMap) {
+                yearOptionMap[year].textContent = isZh ? `${year} 學年度` : `Academic Year ${year}`;
+            }
+
+            // 更新 "Semester" 下拉選單
+            const allSemesterOption = semesterFilter.querySelector('option[value="all"]');
+            if (allSemesterOption) {
+                allSemesterOption.textContent = isZh ? '所有學期' : 'All Semesters';
+            }
+            for (const semester in semesterOptionMap) {
+                semesterOptionMap[semester].textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
+            }
+        }
+
+        // [MODIFIED] 修改語言切換按鈕的事件
+        if (langToggleButton) {
+            langToggleButton.addEventListener('click', () => {
+                document.body.classList.toggle('show-zh');
+                // 直接調用函式更新文字，比 MutationObserver 更簡單直接
+                updateDropdownLanguage();
+            });
+        }
 
         async function loadMaterials() {
             try {
@@ -579,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const yamlText = await response.text();
                 allCourses = jsyaml.load(yamlText) || [];
-                
+
                 allCourses.sort((a, b) => {
                     if (a.academicYear !== b.academicYear) return b.academicYear.localeCompare(a.academicYear);
                     return b.semester.localeCompare(a.semester);
@@ -589,50 +620,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 filterAndRender(); // 初始渲染
             } catch (error) {
                 console.error('Failed to load or parse materials.yml:', error);
-                listContainer.innerHTML = '<p style="color: red;">Error loading course data. Please check the console.</p>';
+                if (listContainer) {
+                    listContainer.innerHTML = '<p style="color: red; text-align: center;">Error loading course data. Please check the console.</p>';
+                }
             }
         }
 
+        // [MODIFIED] 修改 populateFilters 邏輯
         function populateFilters() {
             const years = [...new Set(allCourses.map(c => c.academicYear))];
             const semesters = [...new Set(allCourses.map(c => c.semester))];
 
+            // 清空現有選項 (除了 "all")
+            yearFilter.innerHTML = '<option value="all">All Academic Years</option>';
+            semesterFilter.innerHTML = '<option value="all">All Semesters</option>';
+
+            // 填充學年度選項
             years.sort().reverse().forEach(year => {
                 const option = document.createElement('option');
                 option.value = year;
-                option.textContent = `${year} 學年度 (AY)`;
+                option.textContent = `${year} (AY)`; // 先設定預設英文
                 yearFilter.appendChild(option);
+                yearOptionMap[year] = option; // 儲存起來
             });
-            
-            // 修正下拉選單中英切換問題
-            const semesterOptionMap = {};
+
+            // 填充學期選項
             semesters.sort().forEach(semester => {
                 const option = document.createElement('option');
                 option.value = semester;
+                option.textContent = `Semester ${semester}`; // 先設定預設英文
                 semesterFilter.appendChild(option);
-                semesterOptionMap[semester] = option;
+                semesterOptionMap[semester] = option; // 儲存起來
             });
-            
-            const updateSemesterOptionsText = () => {
-                const isZh = document.body.classList.contains('show-zh');
-                if (semesterFilter.value === 'all') {
-                    const allOption = semesterFilter.querySelector('option[value="all"]');
-                    allOption.textContent = isZh ? '所有學期' : 'All Semesters';
-                }
-                 semesters.forEach(semester => {
-                     const option = semesterOptionMap[semester];
-                     option.textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
-                 });
-            };
 
-            const langObserver = new MutationObserver(updateSemesterOptionsText);
-            langObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-            updateSemesterOptionsText(); // 初始設定
+            // 頁面載入後，立即根據當前語言設定一次文字
+            updateDropdownLanguage();
         }
 
+        // [MODIFIED] 修正課程卡片渲染邏輯
         function renderCourses(courses) {
             listContainer.innerHTML = '';
-            noResultsDiv.style.display = courses.length === 0 ? 'block' : 'none';
+            if (noResultsDiv) {
+                noResultsDiv.style.display = courses.length === 0 ? 'block' : 'none';
+            }
             if (courses.length === 0) return;
 
             courses.forEach(course => {
@@ -640,6 +670,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 courseCard.className = 'course-card';
                 const links = course.links || {};
 
+                // 使用模板字符串，結構更清晰，並修正了標籤
                 courseCard.innerHTML = `
                     <h3>
                         <span class="lang-en">${course.courseName.en}</span>
@@ -663,7 +694,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </p>
                         <p>
                             <strong><span class="lang-en">TA</span><span class="lang-zh">助教</span>:</strong>
-                            ${course.ta}
+                            <span>${course.ta || 'N/A'}</span>
                         </p>
                         <p>
                             <strong><span class="lang-en">Description</span><span class="lang-zh">課程簡介</span>:</strong>
@@ -677,14 +708,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn"><span class="lang-en">Materials</span><span class="lang-zh">課程教材</span></a>` : ''}
                         ${links.group ? `<a href="${links.group}" target="_blank" class="btn"><span class="lang-en">Group Chat</span><span class="lang-zh">課程群組</span></a>` : ''}
                         ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn"><span class="lang-en">Announcements</span><span class="lang-zh">課程公告</span></a>` : ''}
-                    </div>
-                `;
+                    </div>`;
                 listContainer.appendChild(courseCard);
             });
         }
 
         function filterAndRender() {
-            const activeSchool = schoolFilterContainer.querySelector('.active').dataset.filter;
+            if (!schoolFilterContainer) return;
+            const activeSchoolButton = schoolFilterContainer.querySelector('.active');
+            if (!activeSchoolButton) return;
+
+            const activeSchool = activeSchoolButton.dataset.filter;
             const selectedYear = yearFilter.value;
             const selectedSemester = semesterFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
@@ -704,21 +738,24 @@ document.addEventListener('DOMContentLoaded', function() {
             renderCourses(filteredCourses);
         }
 
-        schoolFilterContainer.addEventListener('click', (e) => {
-            if (e.target.tagName === 'BUTTON') {
-                schoolFilterContainer.querySelector('.active').classList.remove('active');
-                e.target.classList.add('active');
-                filterAndRender();
-            }
-        });
+        if (schoolFilterContainer) {
+            schoolFilterContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const currentActive = schoolFilterContainer.querySelector('.active');
+                    if(currentActive) currentActive.classList.remove('active');
+                    e.target.classList.add('active');
+                    filterAndRender();
+                }
+            });
+        }
 
-        yearFilter.addEventListener('change', filterAndRender);
-        semesterFilter.addEventListener('change', filterAndRender);
-        searchInput.addEventListener('input', filterAndRender);
+        if (yearFilter) yearFilter.addEventListener('change', filterAndRender);
+        if (semesterFilter) semesterFilter.addEventListener('change', filterAndRender);
+        if (searchInput) searchInput.addEventListener('input', filterAndRender);
 
         loadMaterials();
     })();
-    
+
     // --- 7. Skills Section Progress Bar Animation ---
     (function setupSkillsObserver() {
         const skillsSection = document.querySelector('#skills');
@@ -729,7 +766,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '0px',
             threshold: 0.2
         };
-
+    
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -750,6 +787,42 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, observerOptions);
         observer.observe(skillsSection);
+    })();
+
+    // --- 8. 課表頁 (Schedule Page) 專用邏輯 (NEW) ---
+    (function setupSchedulePage() {
+        const pageContainer = document.querySelector('.schedule-page');
+        if (!pageContainer) return; // 只在課表頁執行
+
+        const filterContainer = document.getElementById('schedule-filter');
+        const scheduleWrappers = document.querySelectorAll('.schedule-wrapper');
+
+        if (!filterContainer) return;
+
+        filterContainer.addEventListener('click', (e) => {
+            // 確保點擊到的是按鈕
+            if (e.target.tagName !== 'BUTTON') {
+                return;
+            }
+
+            const targetScheduleId = e.target.dataset.schedule;
+            if (!targetScheduleId) return;
+
+            // 1. 更新按鈕的 active 狀態
+            filterContainer.querySelector('.active').classList.remove('active');
+            e.target.classList.add('active');
+
+            // 2. 隱藏所有的課表
+            scheduleWrappers.forEach(wrapper => {
+                wrapper.style.display = 'none';
+            });
+
+            // 3. 顯示目標課表
+            const targetWrapper = document.getElementById(targetScheduleId + '-schedule');
+            if (targetWrapper) {
+                targetWrapper.style.display = 'block';
+            }
+        });
     })();
 
 });

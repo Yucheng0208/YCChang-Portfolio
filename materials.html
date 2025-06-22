@@ -11,101 +11,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
     <!-- 引入 js-yaml 來解析 YAML 檔案 -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-
-    <!-- 針對此頁面的額外樣式 -->
-    <style>
-        .page-container.materials-page .controls-container {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-        }
-        .filter-group select, .filter-group input {
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid #30363d;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-size: 14px;
-        }
-        .lang-toggle-btn {
-            padding: 8px 16px;
-            background-color: #238636;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-        .lang-toggle-btn:hover {
-            background-color: #2ea043;
-        }
-        .lang-zh { display: none; }
-        body.show-zh .lang-zh { display: inline; }
-        body.show-zh .lang-en { display: none; }
-
-        .course-card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .course-card h3 {
-            margin-top: 0;
-            color: #58a6ff;
-            font-size: 1.5em;
-        }
-        .course-details p {
-            margin: 0.5rem 0;
-            line-height: 1.6;
-        }
-        .course-details strong {
-            color: #8b949e; 
-            min-width: 120px;
-            display: inline-block;
-        }
-        .course-links {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-        .course-links .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .course-links .btn:hover {
-            background-color: #30363d;
-            border-color: #8b949e;
-        }
-        .course-links .contact-btn {
-            background-color: #238636;
-            border-color: #238636;
-            color: white;
-        }
-         .course-links .contact-btn:hover {
-            background-color: #2ea043;
-        }
-    </style>
 </head>
-<body>
+<body class="materials-page"> <!-- 建議在 body 加上頁面專屬 class -->
     
     <!-- Navbar (與其他頁面共用) -->
     <nav class="main-nav">
-        <!-- ... 您的導覽列 HTML ... (保持不變) ... -->
         <div class="nav-container">
             <div class="nav-header">
                 <a href="index.html" class="mobile-brand">
@@ -156,7 +66,7 @@
     </nav>
 
     <main id="page-content">
-        <div class="page-container materials-page">
+        <div class="page-container">
             <h1>
                 <span class="lang-en">Course Materials</span>
                 <span class="lang-zh">課程教材</span>
@@ -169,7 +79,7 @@
             <!-- 控制項：篩選和搜尋 -->
             <div class="controls-container">
                 <div class="filter-group">
-                    <button id="lang-toggle" class="lang-toggle-btn">中文 ↔️ EN</button>
+                    <button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>
                     <!-- 學校篩選 -->
                     <div id="school-filter" class="filter-bar">
                         <button class="active" data-filter="all">All</button>
@@ -179,16 +89,10 @@
                     </div>
                     <!-- 下拉選單篩選 -->
                     <select id="year-filter">
-                        <option value="all">
-                            <span class="lang-en">All Academic Years</span>
-                            <span class="lang-zh">所有學年度</span>
-                        </option>
+                        <option value="all">All Academic Years</option>
                     </select>
                     <select id="semester-filter">
-                        <option value="all">
-                            <span class="lang-en">All Semesters</span>
-                            <span class="lang-zh">所有學期</span>
-                        </option>
+                        <option value="all">All Semesters</option>
                     </select>
                 </div>
                 <div class="search-container">
@@ -221,8 +125,6 @@
 
     <!-- 核心 JS 檔案 -->
     <script src="script.js"></script>
-    <!-- 此頁面專用的 JS 檔案 -->
-    <script src="materials.js"></script>
 
 </body>
 </html>

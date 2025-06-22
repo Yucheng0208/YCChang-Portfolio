@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Schedule - Yu-Cheng Chang</title>
+    <title>Yu-Cheng Chang - Course Schedule</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style.css">
     
@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     
 </head>
-<body>
+<body class="schedule-page"> <!-- 建議加上頁面專屬 class -->
     <!-- Navbar (Copied from your index.html for consistency) -->
     <nav class="main-nav">
         <div class="nav-container">
@@ -76,195 +76,83 @@
             <!-- Course Schedule Section -->
             <section class="schedule-section">
                 <h2>Course Schedule</h2>
-                <p class="text-muted">Below is my tentative teaching and course schedule. All times are in GMT+8.</p>
+                <p class="text-muted">Below is my tentative teaching and course schedule. Select "University" or "High School" to view the corresponding schedule. All times are in GMT+8.</p>
 
-                <!-- Responsive Table Wrapper -->
-                <div class="schedule-table-wrapper">
-                    <table class="course-schedule">
-                        <thead>
-                            <tr>
-                                <th>Time</br></th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- 8:00 - 9:00 -->
-                            <tr>
-                                <td>08:00 - 09:00</td>
-                                <td></td>
-                                <td rowspan="2">
-                                    <div class="course-block course-color-1">
-                                        <strong>TBA</strong>
-                                        <span class="course-code">TBA</span>
-                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 9:00 - 10:00 -->
-                            <tr>
-                                <td>09:00 - 10:00</td>
-                                <td rowspan="2">
-                                    <div class="course-block course-color-2">
-                                        <strong>TBA</strong>
-                                        <span class="course-code">TBAL</span>
-                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td rowspan="3">
-                                    <div class="course-block course-color-3">
-                                        <strong>TBA</strong>
-                                        <span class="course-code">TBA</span>
-                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 10:00 - 11:00 -->
-                            <tr>
-                                <td>10:00 - 11:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                             <!-- 11:00 - 12:00 -->
-                            <tr>
-                                <td>11:00 - 12:00</td>
-                                <td></td>
-                                <td></td>
-                                <td rowspan="2">
-                                     <div class="course-block course-color-4">
-                                        <strong>TBA</strong>
-                                        <span class="course-code">TBA</span>
-                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 12:00 - 13:00 -->
-                            <tr>
-                                <td>12:00 - 13:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                             <!-- 13:00 - 14:00 -->
-                             <tr>
-                                <td>13:00 - 14:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 14:00 - 15:00 -->
-                            <tr>
-                                <td>14:00 - 15:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td rowspan="2">
-                                     <div class="course-block course-color-1">
-                                        <strong>TBA</strong>
-                                        <span class="course-code">TBA (Lab)</span>
-                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i>TBA</span>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                             <!-- 15:00 - 16:00 -->
-                             <tr>
-                                <td>15:00 - 16:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td rowspan="2">
-                                    <div class="course-block course-color-5">
-                                        <strong>TBA</strong>
-                                        <span class="course-code">By Appointment</span>
-                                        <span class="course-location"><i class="fas fa-map-marker-alt"></i> Grad Office</span>
-                                    </div>
-                                </td>
-                                <td></td>
-                                
-                            </tr>
-                             <!-- 16:00 - 17:00 -->
-                             <tr>
-                                <td>16:00 - 17:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 17:00 - 18:00 -->
-                             <tr>
-                                <td>17:00 - 18:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 18:00 - 19:00 -->
-                            <tr>
-                                <td>18:00 - 19:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 19:00 - 20:00 -->
-                            <tr>
-                                <td>19:00 - 20:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 20:00 - 21:00 -->
-                            <tr>
-                                <td>20:00 - 21:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!-- 21:00 - 22:00 -->
-                            <tr>
-                                <td>21:00 - 22:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- [NEW] Schedule Filter Buttons -->
+                <div id="schedule-filter" class="filter-bar" style="justify-content: center; margin-bottom: 2.5rem;">
+                    <button class="active" data-schedule="university">University</button>
+                    <button data-schedule="high-school">High School</button>
+                </div>
+
+                <!-- [MODIFIED] University Schedule Wrapper -->
+                <div id="university-schedule" class="schedule-wrapper">
+                    <div class="schedule-table-wrapper">
+                        <table class="course-schedule">
+                            <thead>
+                                <tr>
+                                    <th>Period</th>
+                                    <th>Time</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                    <th>Saturday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- University Schedule Rows Here -->
+                                <tr><td>1</td><td>08:10 - 09:00</td><td></td><td rowspan="2"><div class="course-block course-color-1"><strong>TBA</strong><span class="course-code">TBA</span><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>2</td><td>09:10 - 10:00</td><td rowspan="2"><div class="course-block course-color-2"><strong>TBA</strong><span class="course-code">TBAL</span><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td rowspan="3"><div class="course-block course-color-3"><strong>TBA</strong><span class="course-code">TBA</span><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td></td></tr>
+                                <tr><td>3</td><td>10:10 - 11:00</td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>4</td><td>11:10 - 12:00</td><td></td><td></td><td rowspan="1"><div class="course-block course-color-4"><strong>TBA</strong><span class="course-code">TBA</span><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td></td></tr>
+                                <tr><td>5</td><td>12:10 - 13:00</td><td colspan="6" class="lunch-break">Lunch break</td></tr>
+                                <tr><td>6</td><td>13:10 - 14:00</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>7</td><td>14:10 - 15:00</td><td></td><td></td><td></td><td rowspan="2"><div class="course-block course-color-1"><strong>TBA</strong><span class="course-code">TBA (Lab)</span><span class="course-location"><i class="fas fa-map-marker-alt"></i>TBA</span></div></td><td></td><td></td></tr>
+                                <tr><td>8</td><td>15:10 - 16:00</td><td></td><td></td><td></td><td rowspan="2"><div class="course-block course-color-5"><strong>TBA</strong><span class="course-code">By Appointment</span><span class="course-location"><i class="fas fa-map-marker-alt"></i> Grad Office</span></div></td><td></td></tr>
+                                <tr><td>9</td><td>16:10 - 17:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>A</td><td>17:10 - 18:00</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td colspan="8" class="lunch-break">Dinner Break (18:00 - 18:30)</td></tr>
+                                <tr><td>B</td><td>18:30 - 19:20</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>C</td><td>19:20 - 20:10</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>D</td><td>20:20 - 21:10</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>E</td><td>21:10 - 22:00</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- [NEW] High School Schedule Wrapper -->
+                <div id="high-school-schedule" class="schedule-wrapper" style="display: none;">
+                    <div class="schedule-table-wrapper">
+                        <table class="course-schedule">
+                            <thead>
+                                <tr>
+                                    <th>Period</th>
+                                    <th>Time</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- High School Schedule Rows Here -->
+                                <tr><td>1</td><td>08:10 - 09:00</td><td></td><td><div class="course-block course-color-1"><strong>TBA</strong><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td></td><td></td></tr>
+                                <tr><td>2</td><td>09:10 - 10:00</td><td><div class="course-block course-color-2"><strong>TBA</strong><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>3</td><td>10:10 - 11:00</td><td></td><td></td><td></td><td><div class="course-block course-color-3"><strong>TBA</strong><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td></tr>
+                                <tr><td>4</td><td>11:10 - 12:00</td><td></td><td></td><td><div class="course-block course-color-4"><strong>TBA</strong><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td><td></td><td></td></tr>
+                                <tr><td colspan="7" class="lunch-break">Lunch Break (12:00 - 13:00)</td></tr>
+                                <tr><td>5</td><td>13:00 - 13:50</td><td></td><td></td><td></td><td></td><td><div class="course-block course-color-5"><strong>TBA</strong><span class="course-location"><i class="fas fa-map-marker-alt"></i> TBA</span></div></td></tr>
+                                <tr><td>6</td><td>14:00 - 14:50</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>7</td><td>13:10 - 16:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>8</td><td>16:05 - 16:50</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>8</td><td>16:55 - 17:40</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>8</td><td>15:40 - 16:30</td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
         </div> <!-- End of .page-container -->
@@ -278,8 +166,7 @@
     <!-- Back to Top Button (Copied from your index.html) -->
     <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
 
-    <!-- Application Scripts (Copied from your index.html) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Application Scripts -->
     <script src="script.js"></script>
 
 </body>
