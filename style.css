@@ -335,7 +335,7 @@ body.menu-open {
 .nav-links li {
     position: relative;
     padding: 0;
-    height: 100%; /* 新增：讓 li 填滿高度 */
+    /*height: 100%;*/ /* 新增：讓 li 填滿高度 */
 }
 
 .nav-links a {
@@ -1838,6 +1838,7 @@ body.show-zh .lang-en { display: none; }
     .nav-links > li > a {
         padding: 15px 20px;
         border-radius: 0;
+        margin: 0; /* <--- 新增這一行來移除 li 的 margin */
     }
 
     .nav-links > li > a::before {
