@@ -1795,7 +1795,7 @@ body.show-zh .lang-en { display: none; }
         right: 0;
         width: 80dvw;
         max-width: 280px;
-        height: 100vh;
+        height: auto;
         background-color: var(--light-bg);
         flex-direction: column;
         justify-content: flex-start;
@@ -1811,7 +1811,7 @@ body.show-zh .lang-en { display: none; }
     .nav-links.is-active {
         transform: translateX(0);
     }
-
+    
     .nav-links li {
         width: 100%;
         text-align: center;
