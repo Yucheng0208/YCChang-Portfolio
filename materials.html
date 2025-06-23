@@ -37,18 +37,21 @@
                         <button data-filter="LHU">LHU</button>
                         <button data-filter="TTU">TTU</button>
                     </div>
-                    <!-- 下拉選單篩選 -->
-                    <select id="year-filter">
-                        <option value="all">All Academic Years</option>
-                    </select>
-                    <select id="semester-filter">
-                        <option value="all">All Semesters</option>
-                    </select>
+                        <!-- 下拉選單篩選 (用 wrapper 包起來) -->
+                    <div class="dropdown-filters-wrapper">
+                        <select id="year-filter">
+                            <option value="all">All Academic Years</option>
+                        </select>
+                        <select id="semester-filter">
+                            <option value="all">All Semesters</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="search-container">
                     <input type="text" id="materials-search" placeholder="Search in materials...">
                 </div>
             </div>
+            
 
             <!-- 課程列表容器 -->
             <div id="materials-list-container">
