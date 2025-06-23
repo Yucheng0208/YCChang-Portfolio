@@ -1,17 +1,27 @@
 - title: "Nxt-Gen 捷運 Go"
-  event: "2025 捷運盃黑客松 「設計創新 • AI 賦能  」App 競賽"
+  event: "2025 捷運盃黑客松「設計創新 • AI 賦能 」App 競賽"
   organizer: "臺北捷運, 國泰世華銀行"
-  category: "Competition" # 分類：Competition, Invention, Other
+  category: "Competition"
   award: ""
   bonus: ""
   members: "陳亮禎*, 張育丞, 龍禹丞, 林雨萱, 吳宗融"
   date: "August 25, 2025"
   links:
 
+- title: "智慧立體停車管理系統 - 高校空間利用與智能調度"
+  event: "2025年國際青年創業論壇"
+  organizer: "國際傑人會, 台北市國際傑人會, 亞洲物聯網聯盟"
+  category: "Pitch"
+  award: ""
+  bonus: ""
+  members: "張育丞*"
+  date: "July 30, 2025"
+  links:
+
 - title: "Face Recognition System"
   event: "XXVIII Московский международный Салон изобретений и инновационных технологий, Россия, Москва"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "ЗОЛОТОЙ МЕДАЛЬЮ"
   bonus: ""
   members: "Lu Ssu-Hsuan, Kang Tsai-Hua, Chien Wei, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng, Lin Yu-Xuan, Lung Yu-Cheng, Lin Wei-Hsin, Yang Fang-Yuan"
@@ -21,7 +31,7 @@
 - title: "Charging station with display"
   event: "XXVIII Московский международный Салон изобретений и инновационных технологий, Россия, Москва"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "ЗОЛОТОЙ МЕДАЛЬЮ"
   bonus: ""
   members: "Lu Ssu-Hsuan, Kang Tsai-Hua, Chien Wei, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng, Lung Yu-Cheng, Lin Yu-Xuan, Lin Wei-Hsin, Yang Fang-Yuan"
@@ -30,8 +40,8 @@
 
 - title: "基於骨架物件辨識的多使用者即時於英文拼字翻譯的手語系統"
   event: "2025 E化系統創意應用競賽"
-  organizer: "中華企業資源規劃學會, 國立中正大學 管理學院"
-  category: "Competition" # 分類：Competition, Invention, Other
+  organizer: "中華企業資源規劃學會, 國立中正大學管理學院"
+  category: "Competition"
   award: "第二名"
   bonus: " NTD $80,000"
   members: "龍禹丞*, 林雨萱, 張育丞, 吳宗融, 李家儀, 張字青, 楊姍羲"
@@ -42,8 +52,8 @@
 
 - title: "結合深度學習與即時電腦視覺於高級工場安全智慧化系統"
   event: "2025 E化系統創意應用競賽"
-  organizer: "中華企業資源規劃學會, 國立中正大學 管理學院"
-  category: "Competition" # 分類：Competition, Invention, Other
+  organizer: "中華企業資源規劃學會, 國立中正大學管理學院"
+  category: "Competition"
   award: "優選"
   bonus: ""
   members: "張育丞*, 吳宗融, 辜弘沅, 龍禹丞, 林雨萱, 李家儀"
@@ -54,7 +64,7 @@
 - title: "Charging Pile Frame To Prevent The Charging Cable From Falling Off"
   event: "2024 Kaohsiung International Invention & Design EXPO, Kaohsiung, Taiwan"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Kang Tsai-Hua, Chien Wei, Shen Sung-Shiou, Lu Rui-Chiao, Chang Yu-Cheng, Lee Jia-Yi, Lung Yu-Cheng, Lin Yu-Xuan"
@@ -64,7 +74,7 @@
 - title: "Charging Pile Frame To Prevent The Charging Cable From Falling Off"
   event: "2024 International Warsaw Invention Show, Warsaw"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Lee Kao-Hsien, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng, Yang Fang-Yuan"
@@ -74,17 +84,27 @@
 - title: "Artificial Intelligence Vehicle Guidance And Parking System"
   event: "2024 International Warsaw Invention Show, Warsaw"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Kang Tsai-Hua, Chien Wei, Shen Sung-Shiou, Lu Rui-Chiao, Chang Yu-Cheng, Lung Yu-Cheng, Lin Wei-Xuan, Yang Fang-Yuan, Lin Wei-Hsin, Lee Jia-Yi"
   date: "October 14-16, 2024"
   links:
 
+- title: "Smart Vision Guard - Real-time AI Safety for Advanced Factories"
+  event: "ISPARK International Pitching Competition 2024"
+  organizer: "TAR UMT, TAR UMT CBIEV, ISPARK "
+  category: "Pitch"
+  award: "Glod Medal"
+  bonus: ""
+  members: "Chang Yu-Cheng*, Wu Zong-Rong, Yang Fang-Yuan, Lin Wei-Hsin"
+  date: "September 20, 2024"
+  links:
+
 - title: "Smart Parking System"
   event: "2024 The 11th Indonesia Inventors Day, Bali, Indonesia"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Lee Kao-Hsien, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng, Yang Fang-Yuan"
@@ -94,7 +114,7 @@
 - title: "Anti-Falling Charging Pile Frame"
   event: "2024 The 11th Indonesia Inventors Day, Bali, Indonesia"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Lee Kao-Hsien, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng, Yang Fang-Yuan"
@@ -104,7 +124,7 @@
 - title: "Four Seasons heating and cooling bed machine"
   event: "2024 Japan Design, Idea & Invention Expo"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal, Speicial Award"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Lin He-Home, Liao Shu-Han, Loke Chui-Fung, Lim Tong-Ming, Chong Shyue Chuan, Chang Yu-Cheng, William Cheong Weng-Luen, Yang Fang-Yuan"
@@ -114,7 +134,7 @@
 - title: "Hypochlorous acid water disinfection device"
   event: "2024 Japan Design, Idea & Invention Expo"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Lin He-Home, Liao Shu-Han, Loke Chui-Fung, Lim Tong-Ming, Chong Shyue Chuan, Chang Yu-Cheng, William Cheong Weng-Luen, Lin Wei-Hsin"
@@ -124,7 +144,7 @@
 - title: "Device to prevent cables from falling off"
   event: "2024 European Exhibition of Creativity and Innovation, Iasi, Romania"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng"
@@ -134,7 +154,7 @@
 - title: "Charging device that can protect you from rain"
   event: "2024 European Exhibition of Creativity and Innovation, Iasi, Romania"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng"
@@ -144,7 +164,7 @@
 - title: "Power cable safety hook"
   event: "XXVII Московский международный Салон изобретений и инновационных технологий, Россия, Москва"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "ЗОЛОТОЙ МЕДАЛЬЮ"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Lin Je-Home, Chang Yu-Cheng, Lin Wei-Hsin, Yang Fang-Yuan"
@@ -154,7 +174,7 @@
 - title: "Rainproof electric vehicle charging pile"
   event: "XXVII Московский международный Салон изобретений и инновационных технологий, Россия, Москва"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "ЗОЛОТОЙ МЕДАЛЬЮ"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Lin Je-Home, Chang Yu-Cheng, Lin Wei-Hsin, Yang Fang-Yuan"
@@ -164,7 +184,7 @@
 - title: "Internet of Things Fire Alarm"
   event: "2023 Kaohsiung International Invention & Design EXPO, Kaohsiung, Taiwan"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chang Yu-Cheng, Pin-Hsuan Lin"
@@ -174,7 +194,7 @@
 - title: "Intelligent Electromotive Force Conversion Device"
   event: "2023 International Invention Show, Zagreb, R.Hrvatska/Croatia"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Liao Shu-Han, Lin Je-Hung, Chang Yu-Cheng"
@@ -184,7 +204,7 @@
 - title: "Rainproof Electric Vehicle Charging pile"
   event: "2023 International Invention Show, Zagreb, R.Hrvatska/Croatia"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Liao Shu-Han, Lin Je-Hung, Chang Yu-Cheng"
@@ -194,7 +214,7 @@
 - title: "Electric Engergy Conversion Device"
   event: "2023 The 10th Indonesia Inventors Day, Bali, Indonesia"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng"
@@ -204,7 +224,7 @@
 - title: "Rainproof charging system"
   event: "2023 The 10th Indonesia Inventors Day, Bali, Indonesia"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Chen Po-Hsiang, Chang Yu-Cheng"
@@ -214,7 +234,7 @@
 - title: "Automatic ordering and serving system"
   event: "Innovation & Invention Expo 2023, Georgia Gwinnett, GA, USA"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Liao Shu-Han, Chen Po-Hsiang, Lin Je-Hung, Chang Yu-Cheng, Chen Yung-Hsun"
@@ -224,7 +244,7 @@
 - title: "Smart pet feeder"
   event: "Innovation & Invention Expo 2023, Georgia Gwinnett, GA, USA"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Chien Wei, Kang Tsai-Hua, Chiu Chien-Ching, Liao Shu-Han, Chen Po-Hsiang, Lin Je-Hung, Chang Yu-Cheng, Chen Yung-Hsun"
@@ -233,14 +253,14 @@
 
 - title: "Python"
   event: "Information Technology Specialist (ITS)"
-  category: "Certification" # 分類：Competition, Invention, Certification, Other
+  category: "Certification"
   date: “Jane 7, 2023"
   links:
 
 - title: "應用於鐵路維安之智慧警示系統"
   event: "2023 E化系統創意應用競賽"
-  organizer: "中華企業資源規劃學會, 國立中央大學 管理學院"
-  category: "Competition" # 分類：Competition, Invention, Other
+  organizer: "中華企業資源規劃學會, 國立中央大學管理學院"
+  category: "Competition"
   award: "第一名"
   bonus: " NTD $20,000 "
   members: "張育丞*, 楊敦傑, 楊竣捷, 徐茂霖"
@@ -251,7 +271,7 @@
 - title: "應用於鐵路維安之智慧警示系統"
   event: "2023 E化系統創意應用競賽"
   organizer: "教育部, 教育部促進產業合作平台, 教育部產學連結辦公室, 國立臺灣科技大學, 國立勤益科技大學"
-  category: "Competition" # 分類：Competition, Invention, Other
+  category: "Competition"
   award: "季軍"
   bonus: " NTD $20,000 "
   members: "張育丞*, 吳宗融, 張育阡, 辜弘沅, 王柏偉"
@@ -263,7 +283,7 @@
 - title: "Foot-controlled elevator button device"
   event: "2022 Kaohsiung International Invention & Design EXPO, Kaohsiung, Taiwan"
   organizer: "World Invention Intellectual Property Associations (WIIPA)"
-  category: "Invention" # 分類：Competition, Invention, Other
+  category: "Invention"
   award: "Gold Medal"
   bonus: ""
   members: "Yu-Cheng Chang"
@@ -273,7 +293,7 @@
 - title: "植基於深度學習之影像辨識智慧車輛輔助系統"
   event: "2022 車用電子創新發明競賽"
   organizer: "台灣車用電子協會, 龍華科技大學"
-  category: "Competition" # 分類：Competition, Invention, Other
+  category: "Competition"
   award: "第二名"
   bonus: ""
   members: "張育丞"
@@ -284,7 +304,7 @@
 - title: "數位庶務系統開發之研究"
   event: "2021 全國技職盃創新創意專題實作競賽"
   organizer: "龍華科技大學"
-  category: "Competition" # 分類：Competition, Invention, Other
+  category: "Competition"
   award: "佳作"
   bonus: ""
   members: "張育丞*, 楊敦傑, 楊竣捷, 徐茂霖"
@@ -294,14 +314,14 @@
 
 - title: "網路管理與應用 </br> Networking Fundamentals"
   event: "MMicrosoft Technology Associate"
-  category: "Certification" # 分類：Competition, Invention, Certification, Other
+  category: "Certification"
   date: “June 12, 2021"
   links:
 
 - title: "基於OpenPose之機具操作於異常姿勢即時偵測"
   event: "AI in Taiwan 臺灣人工黑客松競賽"
   organizer: "經濟部工業局, 財團法人國家實驗研究院國家高速網路與計算中心"
-  category: "Competition" # 分類：Competition, Invention, Other
+  category: "Competition"
   award: "AI 新秀獎, 佳作"
   bonus: "NTD $3,000"
   members: "李宇桀, 李天順, 張柏彥, 高瑋澤, 陳柏霖, 吳宗融*, 張育丞*"
@@ -312,7 +332,7 @@
 
 - title: "工業配線 丙級 </br> Class C of Industrial Wiring"
   event: "Ministry of Labor, Taiwan (R.O.C)"
-  category: "Certification" # 分類：Competition, Invention, Certification, Other
+  category: "Certification"
   date: “September 17, 2018"
   links:
     
