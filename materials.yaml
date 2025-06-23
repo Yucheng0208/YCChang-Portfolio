@@ -3,16 +3,56 @@
 # academicYear: 學年度 (例如: 112)
 # semester: 學期 (例如: 1 或 2)
 # school: 學校縮寫 (SMSH, LHU, TTU)
+# class: 班級 (例如: 1, 2, 3)
+# classroom: 教室 (例如: 101, 102)
 
-- academicYear: "113"
+
+- academicYear: "114"
   semester: "1"
-  school: ""
+  school: "SMSH"
+  class: 
+    zh: "1"
+    en: "1"
+  classroom:
+    zh: "TBA"
+    en: "TBA"
   courseName:
+    zh: "資訊課"
+    en: "Information Course"
+  courseTime:
+    zh: "星期二  18:15 - 19:45"
+    en: "Tue 18:15 - 19:45"
+  officeHours:
+    zh: "採預約制"
+    en: "By Appointment"
+  description:
     zh: "即將公告..."
     en: "Coming Soon..."
-  lectureTime:
+  language:
     zh: "即將公告..."
     en: "Coming Soon..."
+  ta: "尚無 (N/A)"
+  contactEmailPlaceholder: "#"
+  links:
+    materials: "#"
+    group: "#"
+    announcements: "#"
+
+- academicYear: "114"
+  semester: "1"
+  school: "SMSH"
+  class: 
+    zh: "1"
+    en: "1"
+  classroom:
+    zh: "TBA"
+    en: "TBA"
+  courseName:
+    zh: "進階電腦社"
+    en: "Advanced Computer Club"
+  courseTime:
+    zh: "星期二  19:50 - 21:20"
+    en: "Tue 19:50 - 21:20"
   officeHours:
     zh: "採預約制"
     en: "By Appointment"
