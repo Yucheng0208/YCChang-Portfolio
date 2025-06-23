@@ -3,7 +3,14 @@
 # ==============================
 
 - category: 'academic'
-  date: 'September, 2024 ~ Now'
+  date: 'September, 2025 ~ Present'
+  organization: 'New Taipei City Municipal SanMin High School'
+  crn: '76892038'
+  position: 'Teacher'
+  links: {}
+
+- category: 'academic'
+  date: 'September, 2024 ~ Present'
   organization: 'National Taipei University of Technology'
   crn: '92021164'
   position: 'Researcher & Teaching Assistant'
@@ -66,7 +73,7 @@
   links: {}
 
 - category: 'academic'
-  date: 'September, 2017 ~ Now'
+  date: 'September, 2017 ~ Present'
   organization: 'New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, TSVS Special Topic Group & Team Cafe'
   crn: '' # 您的原始資料中此項無統編，故留空
   position: 'Chief Technology Officer & Researcher'
@@ -92,28 +99,28 @@
 # ==============================
 
 - category: 'industry'
-  date: 'January, 2024 ~ Now'
+  date: 'January, 2024 ~ Present'
   organization: 'Ningde Qianwei New Energy Group., Ltd'
-  crn: '' # 您的原始資料中此項無統編，故留空
+  crn: ''
   position: 'Consultant & Technical Engineer'
   links: {}
 
 - category: 'industry'
-  date: 'August, 2023 ~ Now'
+  date: 'August, 2023 ~ Present'
   organization: '網龍資訊工作室'
   crn: '91567601'
   position: 'Chief Operating Officer & Technical Manager'
   links: {}
 
 - category: 'industry'
-  date: 'January, 2020 ~ Now'
+  date: 'January, 2020 ~ Present'
   organization: 'Po sen Co.'
   crn: '891197565'
   position: 'Chief Technology Officer'
   links: {}
 
 - category: 'industry'
-  date: 'December, 2019 ~ Now'
+  date: 'December, 2019.12 ~ 2024.12'
   organization: 'Sin Hon Da Co.'
   crn: '87466428'
   position: 'Chief IT Officer'
