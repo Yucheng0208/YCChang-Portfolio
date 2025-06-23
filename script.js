@@ -680,14 +680,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         </span>
                     </h3>
                     <div class="course-details">
-                        <p><strong><span class="lang-en">Lecture Time</span><span class="lang-zh">授課時間</span>:</strong> <span class="lang-en">${course.lectureTime.en}</span><span class="lang-zh">${course.lectureTime.zh}</span></p>
+                        <p><strong><span class="lang-en">Course Time</span><span class="lang-zh">授課時間</span>:</strong> <span class="lang-en">${course.courseTime.en}</span><span class="lang-zh">${course.courseTime.zh}</span></p>
                         <p><strong><span class="lang-en">Office Hours</span><span class="lang-zh">輔導時間</span>:</strong> <span class="lang-en">${course.officeHours.en}</span><span class="lang-zh">${course.officeHours.zh}</span></p>
+                        <p><strong><span class="lang-en">Class</span><span class="lang-zh">授課班級</span>:</strong> <span class="lang-en">${course.class.en}</span><span class="lang-zh">${course.class.zh}</span></p>
+                        <p><strong><span class="lang-en">Classroom</span><span class="lang-zh">授課教室</span>:</strong> <span class="lang-en">${course.classroom.en}</span><span class="lang-zh">${course.classroom.zh}</span></p>
                         <p><strong><span class="lang-en">Language</span><span class="lang-zh">授課語言</span>:</strong> <span class="lang-en">${course.language.en}</span><span class="lang-zh">${course.language.zh}</span></p>
                         <p><strong><span class="lang-en">TA</span><span class="lang-zh">助教</span>:</strong> <span>${course.ta || 'N/A'}</span></p>
                         <p><strong><span class="lang-en">Description</span><span class="lang-zh">課程簡介</span>:</strong> <span class="lang-en">${course.description.en}</span><span class="lang-zh">${course.description.zh}</span></p>
                     </div>
                     <div class="course-links">
-                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn"><span class="lang-en">Contact Me</span><span class="lang-zh">聯繫我</span></a>
+                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn"><span class="lang-en">Contact Me</span><span class="lang-zh">聯繫老師</span></a>
                         ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn"><span class="lang-en">Materials</span><span class="lang-zh">課程教材</span></a>` : ''}
                         ${links.group ? `<a href="${links.group}" target="_blank" class="btn"><span class="lang-en">Group Chat</span><span class="lang-zh">課程群組</span></a>` : ''}
                         ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn"><span class="lang-en">Announcements</span><span class="lang-zh">課程公告</span></a>` : ''}
