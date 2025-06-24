@@ -1423,17 +1423,29 @@ body.menu-open {
 }
 
 /* School filter bar */
-.filter-bar {
+/*.filter-bar {
     display: flex;
     background-color: var(--light-bg);
     border-radius: 50px;
     padding: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
+}*/
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap; /* ADDED: Allows buttons to wrap onto multiple lines */
+    gap: 6px;        /* ADDED: Creates consistent spacing between buttons */
+    background-color: var(--light-bg);
+    border-radius: 12px; /* MODIFIED: Looks better than a pill shape when wrapped */
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
 }
 
-.filter-bar button {
-    flex: 1; /* Make buttons fill the space */
+
+/*.filter-bar button {
+    flex: 1;
     background: none;
     border: none;
     color: var(--text-color);
@@ -1442,6 +1454,18 @@ body.menu-open {
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s ease;
+} */
+.filter-bar button {
+    /* REMOVED: `flex: 1;` This prevents a single button on a new line from stretching to full width. */
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    flex: 1; /* ADDED: Allows buttons to stretch equally in a row */
 }
 
 .filter-bar button.active {
