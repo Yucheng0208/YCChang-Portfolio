@@ -2,19 +2,26 @@
 # 課程資料範本
 # academicYear: 學年度 (例如: 112)
 # semester: 學期 (例如: 1 或 2)
+# educational: 學校名稱 (例如: "High School", "University")
 # school: 學校縮寫 (SMSH, LHU, TTU)
 # class: 班級 (例如: 1, 2, 3)
 # classroom: 教室 (例如: 101, 102)
+# github, msteams, googlemeet, googleclassroom, zuvio
 
 
 - academicYear: "114"
   semester: "1"
-  school: "SMSH"
+  educational: 
+    zh: "高中職"
+    en: "High School"
+  school:
+    zh: "新北市立三民高級中學"
+    en: "SMSH"
   class: 
     zh: "1"
     en: "1"
   classroom:
-    zh: "TBA"
+    zh: "即將公告..."
     en: "TBA"
   courseName:
     zh: "資訊課"
@@ -29,23 +36,27 @@
     zh: "即將公告..."
     en: "Coming Soon..."
   language:
-    zh: "即將公告..."
-    en: "Coming Soon..."
+    zh: "繁體中文（臺灣）"
+    en: "Traditional Chinese (Taiwan)"
   ta: "尚無 (N/A)"
   contactEmailPlaceholder: "#"
   links:
     materials: "#"
-    group: "#"
-    announcements: "#"
+    linechat: "#"
 
 - academicYear: "114"
   semester: "1"
-  school: "SMSH"
+  educational: 
+    zh: "高中職"
+    en: "High School"
+  school:
+    zh: "新北市立三民高級中學"
+    en: "SMSH"
   class: 
-    zh: "1"
-    en: "1"
+    zh: "無班級"
+    en: "N/A"
   classroom:
-    zh: "TBA"
+    zh: "即將公告..."
     en: "TBA"
   courseName:
     zh: "進階電腦社"
@@ -60,11 +71,10 @@
     zh: "即將公告..."
     en: "Coming Soon..."
   language:
-    zh: "即將公告..."
-    en: "Coming Soon..."
+    zh: "繁體中文（臺灣）"
+    en: "Traditional Chinese (Taiwan)"
   ta: "尚無 (N/A)"
   contactEmailPlaceholder: "#"
   links:
     materials: "#"
-    group: "#"
-    announcements: "#"
+    linechat: "#"
