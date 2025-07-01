@@ -1725,6 +1725,7 @@ body.show-zh .lang-en { display: none; }
     border: 1px solid #30363d;
     border-radius: 8px;
     padding: 1.5rem;
+    margin-bottom: 0.5rem;
     text-align: left;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
