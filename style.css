@@ -393,6 +393,16 @@ body.menu-open {
     transform: scaleX(1);
 }
 
+/* CV 導航項目的外框樣式 */
+.nav-cv a {
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50px;
+}
+
+.nav-cv a:hover {
+    border-color: #ffffff;
+}
+
 .dropdown-arrow {
     border: solid currentColor;
     border-width: 0 2px 2px 0;
@@ -2108,7 +2118,7 @@ body.show-zh .lang-en { display: none; }
     .motto::before {
         width: 80%;
     }
-
+    
     /* Video Section - Mobile Optimization */
     .video-window-glw0pyx-wrapper {
         padding: 30px 15px;
