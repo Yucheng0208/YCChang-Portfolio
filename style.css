@@ -1140,11 +1140,11 @@ body.menu-open {
 
 .link-groups-container,
 .partner-groups-container {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
     gap: 2rem;
 }
 
@@ -1157,6 +1157,8 @@ body.menu-open {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .link-group:hover,
@@ -1885,6 +1887,50 @@ body.show-zh .lang-en { display: none; }
                      8. MASTER RESPONSIVE STYLES
 ======================================================================
 */
+
+/* --- Desktop Styles for Showcase Sections --- */
+@media (min-width: 1201px) {
+    .button-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: center;
+        gap: 16px;
+    }
+    
+    .link-button,
+    .partner-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+}
+
+/* --- Extra Large Screens (min-width: 1400px) --- */
+@media (min-width: 1400px) {
+    .link-button,
+    .partner-button {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    .button-container {
+        gap: 18px;
+    }
+}
+
+/* --- Medium Desktop Screens (min-width: 993px) --- */
+@media (min-width: 993px) and (max-width: 1200px) {
+    .link-button,
+    .partner-button {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .button-container {
+        gap: 14px;
+    }
+}
 
 /* --- Large Screens (min-width: 993px) --- */
 @media (min-width: 993px) {
