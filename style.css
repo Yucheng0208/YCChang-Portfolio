@@ -2154,6 +2154,58 @@ body.show-zh .lang-en { display: none; }
     vertical-align: middle;
 }
 
+.grade-note {
+    margin-top: 1rem;
+    color: var(--tech-cyan);
+    text-shadow: 
+        0 0 3px rgba(100, 210, 255, 0.4),
+        0 0 6px rgba(100, 210, 255, 0.2);
+    font-weight: 500;
+    animation: gentle-glow 4s ease-in-out infinite alternate;
+}
+
+.grade-note i {
+    margin-right: 0.5rem;
+    animation: bell-ring 2s ease-in-out infinite;
+}
+
+@keyframes gentle-glow {
+    0% {
+        text-shadow: 
+            0 0 3px rgba(100, 210, 255, 0.4),
+            0 0 6px rgba(100, 210, 255, 0.2);
+    }
+    100% {
+        text-shadow: 
+            0 0 5px rgba(100, 210, 255, 0.6),
+            0 0 10px rgba(100, 210, 255, 0.3);
+    }
+}
+
+@keyframes bell-ring {
+    0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(-10deg);
+    }
+    15% {
+        transform: rotate(10deg);
+    }
+    25% {
+        transform: rotate(-8deg);
+    }
+    35% {
+        transform: rotate(8deg);
+    }
+    45% {
+        transform: rotate(-5deg);
+    }
+    55% {
+        transform: rotate(5deg);
+    }
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
