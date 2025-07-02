@@ -1982,4 +1982,40 @@ document.addEventListener('DOMContentLoaded', function() {
             studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
         }
     })();
+
+    // --- Motto Section 向下滾動功能 ---
+    function scrollToNextSection() {
+        // 添加點擊動畫效果
+        const arrow = document.querySelector('.motto-scroll-arrow');
+        if (arrow) {
+            arrow.classList.add('clicked');
+            // 0.6秒後移除動畫class
+            setTimeout(() => {
+                arrow.classList.remove('clicked');
+            }, 600);
+        }
+
+        const educationSection = document.querySelector('.education-section');
+        const educationTitle = document.querySelector('.education-section h2');
+        
+        if (educationTitle) {
+            // 優先滾動到標題位置
+            const titleRect = educationTitle.getBoundingClientRect();
+            const titleOffsetTop = window.pageYOffset + titleRect.top;
+            
+            window.scrollTo({
+                top: titleOffsetTop - 10, // 減去10px確保標題在最頂部且有小間距
+                behavior: 'smooth'
+            });
+        } else if (educationSection) {
+            // 備用方案：滾動到section
+            const rect = educationSection.getBoundingClientRect();
+            const offsetTop = window.pageYOffset + rect.top;
+            
+            window.scrollTo({
+                top: offsetTop - 10,
+                behavior: 'smooth'
+            });
+        }
+    }
 });
