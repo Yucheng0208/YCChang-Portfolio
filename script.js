@@ -1097,7 +1097,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const isZh = isChinese();
             Array.from(schoolSelect.options).forEach(opt => {
                 if (opt.value === "") {
-                    opt.textContent = isZh ? "-- 請選擇學校 --" : "-- Please select a school --";
+                    opt.textContent = isZh ? "請選擇學校" : "Please select a school";
                 } else {
                     const course = availableCourses.find(c => c.school_id === opt.value);
                     if (course) opt.textContent = isZh ? course.school.zh : course.school.en;
@@ -1109,7 +1109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const isZh = isChinese();
             Array.from(courseSelect.options).forEach(opt => {
                 if (opt.value === "") {
-                    opt.textContent = isZh ? "-- 請選擇一門課程 --" : "-- Please select a course --";
+                    opt.textContent = isZh ? "請選擇一門課程" : "Please select a course";
                 } else {
                     const course = availableCourses.find(c => c.id === opt.value);
                     if (course) opt.textContent = isZh ? `${course.name.zh} (${course.code})` : `${course.name.en} (${course.code})`;
@@ -1299,6 +1299,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // 驗證學號格式（在要求輸入密碼之前）
+            if (!validateStudentId(studentId)) {
+                await showAlert(isChinese() 
+                    ? '學號格式錯誤！請輸入有效的學號格式。' 
+                    : 'Invalid Student ID format! Please enter a valid Student ID.', true);
+                return;
+            }
+
             // 使用自定義彈窗要求輸入六位代碼
             const accessCode = await showAccessCodeModal();
 
@@ -1351,6 +1359,28 @@ document.addEventListener('DOMContentLoaded', function() {
             // 檢查是否為六位字符且只包含大小寫英文字母和數字
             const codeRegex = /^[a-zA-Z0-9]{6}$/;
             return codeRegex.test(code);
+        }
+
+        function validateStudentId(studentId) {
+            // 根據實際資料調整學號格式驗證
+            // 從CSV資料看到的格式：S12345678 (字母S + 8位數字)
+            
+            // 格式1: S + 8位數字 (實際使用的格式)
+            const format1 = /^S[0-9]{8}$/;
+            
+            // 格式2: 其他常見學號格式 - 9位數字 (例: 123456789)
+            const format2 = /^[0-9]{9}$/;
+            
+            // 格式3: 字母+數字組合 (例: A12345678, B12345678)
+            const format3 = /^[A-Z][0-9]{8}$/;
+            
+            // 格式4: 年度+科系代碼+序號 (例: 11012345, 112AB001)
+            const format4 = /^[0-9]{3}[A-Z]{0,2}[0-9]{3,5}$/;
+            
+            return format1.test(studentId) || 
+                   format2.test(studentId) || 
+                   format3.test(studentId) || 
+                   format4.test(studentId);
         }
 
         function waitForPapaParse(timeout = 1000) {
@@ -1500,6 +1530,21 @@ document.addEventListener('DOMContentLoaded', function() {
         schoolSelect.addEventListener('change', (e) => {
             loadCoursesForSchool(e.target.value);
             hideAllResults();
+        });
+        
+        // 學號輸入即時驗證
+        studentIdInput.addEventListener('input', (e) => {
+            const studentId = e.target.value.trim().toUpperCase();
+            const isValid = !studentId || validateStudentId(studentId);
+            
+            // 添加視覺反饋
+            if (studentId && !isValid) {
+                studentIdInput.classList.add('invalid');
+                studentIdInput.title = isChinese() ? '學號格式不正確' : 'Invalid Student ID format';
+            } else {
+                studentIdInput.classList.remove('invalid');
+                studentIdInput.title = '';
+            }
         });
         
         searchBtn.addEventListener('click', performSearch);
