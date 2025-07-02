@@ -882,7 +882,7 @@ body.menu-open {
 
 /* Education Timeline */
 .education-section {
-    padding: 8rem 2rem 4rem 2rem;
+    padding: 9rem 2rem 4rem 2rem;
     background-color: var(--dark-bg);
     border-bottom: none;
 }
@@ -2226,6 +2226,8 @@ body.show-zh .lang-en { display: none; }
     width: 100%;
     margin: 2rem 0 3rem 0;
     text-align: center;
+    position: relative;
+    padding-bottom: 4rem;
 }
 
 .motto {
@@ -2252,6 +2254,33 @@ body.show-zh .lang-en { display: none; }
     max-width: 500px;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.25);
+}
+
+.motto-section::after {
+    content: '';
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid var(--tech-cyan);
+    opacity: 0.7;
+    animation: bounce-down 2s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-8px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-4px);
+    }
 }
 
 /* Contact Section */
