@@ -1167,7 +1167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
                 // 設定內容
-                titleEl.innerHTML = isChinese() ? '輸入查詢代碼' : 'Enter Access Code';
+                titleEl.innerHTML = isChinese() ? '🔐 輸入查詢代碼' : '🔐 Enter Access Code';
                 messageEl.textContent = isChinese() 
                     ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)：' 
                     : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers):';
@@ -1307,6 +1307,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // 檢查學號是否存在於CSV檔案中（在要求輸入密碼之前）
+            showLoading(true);
+            const studentExists = await checkStudentExists(courseId, studentId);
+            showLoading(false);
+            
+            if (!studentExists) {
+                await showAlert(isChinese() 
+                    ? '找不到該學號的資料。請確認學號是否正確。' 
+                    : 'No data found for this Student ID. Please verify the Student ID.', true);
+                return;
+            }
+
             // 使用自定義彈窗要求輸入六位代碼
             const accessCode = await showAccessCodeModal();
 
@@ -1381,6 +1393,45 @@ document.addEventListener('DOMContentLoaded', function() {
                    format2.test(studentId) || 
                    format3.test(studentId) || 
                    format4.test(studentId);
+        }
+
+        async function checkStudentExists(courseId, studentId) {
+            try {
+                await waitForPapaParse();
+                
+                const selectedCourse = availableCourses.find(c => c.id === courseId);
+                if (!selectedCourse) {
+                    throw new Error('Course not found');
+                }
+                
+                const csvPath = selectedCourse.csv_path;
+                const response = await fetch(csvPath);
+                if (!response.ok) {
+                    throw new Error(`Could not load grade file: ${csvPath} (Status: ${response.status})`);
+                }
+                
+                const csvText = await response.text();
+                
+                return new Promise((resolve) => {
+                    Papa.parse(csvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: (results) => {
+                            // 從第 5 行 (索引為 4) 開始是學生資料
+                            const studentRows = results.data.slice(4);
+                            const studentData = studentRows.find(row => row.ID && row.ID.toUpperCase() === studentId);
+                            resolve(!!studentData); // 轉換為布林值
+                        },
+                        error: () => {
+                            resolve(false); // 解析錯誤時返回 false
+                        }
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error checking student existence:', error);
+                return false; // 發生錯誤時返回 false
+            }
         }
 
         function waitForPapaParse(timeout = 1000) {
