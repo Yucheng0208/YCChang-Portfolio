@@ -207,6 +207,7 @@ body.menu-open {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    animation: gentle-float 3s ease-in-out infinite;
 }
 
 .back-to-top-btn::after {
@@ -225,6 +226,15 @@ body.menu-open {
 
 .back-to-top-btn:hover::after {
     border-color: var(--dark-bg);
+}
+
+@keyframes gentle-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 /* Pagination */
