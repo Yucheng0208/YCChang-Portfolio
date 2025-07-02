@@ -595,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- 4. 初始化所有列表頁 (表格) ---
     initializeListPage({
         pageSelector: '.publication-page',
-        yamlPath: './publications.yaml',
+        yamlPath: './data/yaml/publications.yaml',
         tableBodyId: 'publication-table-body',
         filterBarId: 'publication-filter',
         searchInputId: 'publication-search',
@@ -611,7 +611,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     initializeListPage({
         pageSelector: '.honor-page',
-        yamlPath: './honors.yaml',
+        yamlPath: './data/yaml/honors.yaml',
         tableBodyId: 'honor-table-body',
         filterBarId: 'honor-filter',
         searchInputId: 'honor-search',
@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     initializeListPage({
         pageSelector: '.highlight-page',
-        yamlPath: './highlights.yaml',
+        yamlPath: './data/yaml/highlights.yaml',
         tableBodyId: 'highlight-table-body',
         filterBarId: 'highlight-filter',
         searchInputId: 'highlight-search',
@@ -643,7 +643,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     initializeListPage({
         pageSelector: '.project-page',
-        yamlPath: './projects.yaml',
+        yamlPath: './data/yaml/projects.yaml',
         tableBodyId: 'project-table-body',
         filterBarId: 'project-filter',
         searchInputId: 'project-search',
@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     initializeListPage({
         pageSelector: '.work-page',
-        yamlPath: './works.yaml',
+        yamlPath: './data/yaml/works.yaml',
         tableBodyId: 'work-table-body',
         filterBarId: 'work-filter',
         searchInputId: null,
@@ -765,7 +765,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         async function loadMaterials() {
             try {
-                const response = await fetch('materials.yaml');
+                const response = await fetch('./data/yaml/materials.yaml');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const yamlText = await response.text();
                 allCourses = window.jsyaml.load(yamlText) || [];
@@ -997,8 +997,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'Daily': {en: 'Daily', zh: '日常'},
             'Participation': {en: 'Participation', zh: '參與分數'},
             'Attendance': { en: 'Attendance', zh: '點名分數' },
-            'Midterm': { en: 'Midterm Exam', zh: '期中考' },
-            'FinalExam': { en: 'Final Exam', zh: '期末考' },
+            'Midterm': { en: 'Midterm', zh: '期中' },
+            'Final': { en: 'Final', zh: '期末' },
         };
         
         // --- 核心功能函式 ---
@@ -1037,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 await waitForJsYaml();
                 
-                const response = await fetch('grades.yaml');
+                const response = await fetch('./data/yaml/grades.yaml');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const yamlText = await response.text();
                 availableCourses = window.jsyaml.load(yamlText) || [];

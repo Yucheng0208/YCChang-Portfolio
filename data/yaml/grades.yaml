@@ -1,0 +1,10 @@
+- id: TEST001
+  name:
+    en: TEST
+    zh: 測試課程
+  code: TEST001
+  school:
+    en: Test University
+    zh: 測試大學
+  school_id: TU
+  csv_path: data/grades/test.csv # 對應的成績檔路徑
