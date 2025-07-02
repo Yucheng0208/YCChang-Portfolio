@@ -1128,7 +1128,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="modal-body">
                         <p class="modal-message"></p>
-                        <input type="text" class="modal-input" maxlength="6" />
+                        <div class="modal-input-container">
+                            <input type="password" class="modal-input" maxlength="20" />
+                            <button type="button" class="modal-toggle-password" title="顯示/隱藏密碼">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                         <div class="modal-error"></div>
                     </div>
                     <div class="modal-footer">
@@ -1162,16 +1167,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 const titleEl = modal.querySelector('.modal-title');
                 const messageEl = modal.querySelector('.modal-message');
                 const inputEl = modal.querySelector('.modal-input');
+                const toggleBtn = modal.querySelector('.modal-toggle-password');
                 const errorEl = modal.querySelector('.modal-error');
                 const cancelBtn = modal.querySelector('[data-action="cancel"]');
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
                 // 設定內容
                 titleEl.innerHTML = isChinese() ? '🔐 輸入查詢代碼' : '🔐 Enter Access Code';
-                messageEl.textContent = isChinese() 
-                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)：' 
-                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers):';
+                messageEl.innerHTML = isChinese() 
+                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)<br><small style="color: #8b949e;">管理者 (yccadmin) 請輸入: ADMIN_課程代碼</small>' 
+                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)<br><small style="color: #8b949e;">Admin (yccadmin): Enter ADMIN_CourseCode</small>';
                 inputEl.placeholder = '＊＊＊＊＊＊';
+
+                // 密碼顯示/隱藏功能
+                let isPasswordVisible = false;
+                toggleBtn.addEventListener('click', () => {
+                    isPasswordVisible = !isPasswordVisible;
+                    const iconEl = toggleBtn.querySelector('i');
+                    if (isPasswordVisible) {
+                        inputEl.type = 'text';
+                        iconEl.className = 'fas fa-eye-slash';
+                        toggleBtn.title = isChinese() ? '隱藏密碼' : 'Hide password';
+                    } else {
+                        inputEl.type = 'password';
+                        iconEl.className = 'fas fa-eye';
+                        toggleBtn.title = isChinese() ? '顯示密碼' : 'Show password';
+                    }
+                });
 
                 // 顯示彈窗
                 setTimeout(() => modal.classList.add('show'), 10);
@@ -1180,10 +1202,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 即時驗證
                 inputEl.addEventListener('input', () => {
                     const value = inputEl.value;
-                    if (value.length > 0 && !validateAccessCode(value)) {
+                    const isValidStudentCode = validateAccessCode(value);
+                    const isValidAdminCode = value.startsWith('ADMIN_');
+                    
+                    if (value.length > 0 && !isValidStudentCode && !isValidAdminCode) {
                         errorEl.textContent = isChinese() 
-                            ? '格式錯誤！請輸入6位英文字母和數字' 
-                            : 'Invalid format! Please enter 6 letters and numbers';
+                            ? '格式錯誤！請輸入6位英文字母和數字，或管理者代碼' 
+                            : 'Invalid format! Please enter 6 letters and numbers, or admin code';
                         errorEl.style.display = 'block';
                         confirmBtn.disabled = true;
                         confirmBtn.style.opacity = '0.5';
@@ -1196,8 +1221,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Enter 鍵提交
                 inputEl.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' && validateAccessCode(inputEl.value)) {
-                        confirmBtn.click();
+                    if (e.key === 'Enter') {
+                        const value = inputEl.value;
+                        if (validateAccessCode(value) || value.startsWith('ADMIN_')) {
+                            confirmBtn.click();
+                        }
                     }
                 });
 
@@ -1213,7 +1241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 confirmBtn.addEventListener('click', () => {
                     const code = inputEl.value.trim();
-                    if (validateAccessCode(code)) {
+                    if (validateAccessCode(code) || code.startsWith('ADMIN_')) {
                         modal.classList.remove('show');
                         setTimeout(() => {
                             modal.cleanup();
@@ -1327,7 +1355,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // 驗證代碼格式
+            // 檢查是否為管理者查詢（yccadmin學號）
+            if (studentId === 'YCCADMIN') {
+                const isAdminMode = await checkAdminCode(courseId, accessCode);
+                if (isAdminMode) {
+                    // 管理者模式：顯示全班成績
+                    await showAllGrades(courseId);
+                    return;
+                } else {
+                    await showAlert(isChinese() 
+                        ? '管理者代碼錯誤！請確認您輸入的代碼是否正確。' 
+                        : 'Admin code is incorrect! Please verify the code you entered.', true);
+                    return;
+                }
+            }
+
+            // 驗證代碼格式（一般學生查詢）
             if (!validateAccessCode(accessCode)) {
                 await showAlert(isChinese() 
                     ? '代碼格式錯誤！請輸入六位由大小寫英文字母和數字組成的代碼。' 
@@ -1376,6 +1419,11 @@ document.addEventListener('DOMContentLoaded', function() {
         function validateStudentId(studentId) {
             // 根據實際資料調整學號格式驗證
             // 從CSV資料看到的格式：S12345678 (字母S + 8位數字)
+            
+            // 管理者學號
+            if (studentId === 'YCCADMIN') {
+                return true;
+            }
             
             // 格式1: S + 8位數字 (實際使用的格式)
             const format1 = /^S[0-9]{8}$/;
@@ -1432,6 +1480,301 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error checking student existence:', error);
                 return false; // 發生錯誤時返回 false
             }
+        }
+
+        async function checkAdminCode(courseId, accessCode) {
+            try {
+                await waitForPapaParse();
+                
+                const selectedCourse = availableCourses.find(c => c.id === courseId);
+                if (!selectedCourse) {
+                    return false;
+                }
+                
+                const csvPath = selectedCourse.csv_path;
+                const response = await fetch(csvPath);
+                if (!response.ok) {
+                    return false;
+                }
+                
+                const csvText = await response.text();
+                
+                return new Promise((resolve) => {
+                    Papa.parse(csvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: (results) => {
+                            // 從第 5 行 (索引為 4) 開始是學生資料，查找 yccadmin
+                            const studentRows = results.data.slice(4);
+                            const adminRow = studentRows.find(row => row.ID && row.ID.toUpperCase() === 'YCCADMIN');
+                            
+                            if (adminRow) {
+                                const adminCode = adminRow.Code || adminRow.code;
+                                resolve(adminCode === accessCode);
+                            } else {
+                                resolve(false);
+                            }
+                        },
+                        error: () => {
+                            resolve(false);
+                        }
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error checking admin code:', error);
+                return false;
+            }
+        }
+
+        async function showAllGrades(courseId) {
+            hideAllResults();
+            showLoading(true);
+    
+            try {
+                await waitForPapaParse();
+                
+                const selectedCourse = availableCourses.find(c => c.id === courseId);
+                if (!selectedCourse) throw new Error('Course not found');
+                
+                const csvPath = selectedCourse.csv_path;
+                const response = await fetch(csvPath);
+                if (!response.ok) throw new Error(`Could not load grade file: ${csvPath} (Status: ${response.status})`);
+                
+                const csvText = await response.text();
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: async (results) => {
+                        await renderAllGrades(results.data, selectedCourse);
+                    },
+                    error: (error) => { throw new Error('Failed to parse CSV file.'); }
+                });
+    
+            } catch (error) {
+                console.error('Show all grades failed:', error);
+                await showAlert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`, true);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function renderAllGrades(data, courseInfo) {
+            const config = {};
+            const configRows = data.slice(0, 4);
+            const headers = Object.keys(data[0] || {});
+
+            headers.forEach(h => { config[h] = {}; });
+            configRows.forEach(row => {
+                const keyName = row.ID;
+                if (keyName) {
+                    headers.forEach(h => {
+                        if (h !== 'ID') {
+                            config[h][keyName] = row[h];
+                        }
+                    });
+                }
+            });
+
+            // 過濾學生資料，排除管理者帳號
+            const studentRows = data.slice(4).filter(row => 
+                row.ID && row.ID.toUpperCase() !== 'YCCADMIN'
+            );
+
+            // 設定課程資訊
+            resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
+            resultCourseCode.textContent = courseInfo.code;
+            resultStudentId.innerHTML = `<span class="lang-en">👥 All Students (Admin View)</span><span class="lang-zh">👥 全班成績 (管理者檢視)</span>`;
+
+            // 計算各類別的總權重並顯示特定成績卡片
+            const categoryWeights = {};
+            headers.forEach(h => {
+                if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
+                    const category = config[h].category;
+                    const weight = parseFloat(config[h].weight) || 0;
+                    if (!categoryWeights[category]) {
+                        categoryWeights[category] = 0;
+                    }
+                    categoryWeights[category] += weight;
+                }
+            });
+
+            // 顯示成績卡片（管理者模式下顯示佔比）
+            const cardsContainer = document.querySelector('.grade-summary-cards');
+            cardsContainer.style.display = 'grid';
+            
+            // 隱藏所有卡片，然後只顯示需要的
+            const allCards = cardsContainer.querySelectorAll('.card');
+            allCards.forEach(card => card.style.display = 'none');
+            
+            // 計算加分項目的平均值
+            let bonusTotal = 0;
+            let studentCount = 0;
+            studentRows.forEach(student => {
+                if (!student.ID) return;
+                let studentBonusTotal = 0;
+                headers.forEach(h => {
+                    if (h !== 'ID' && config[h] && config[h].category === 'bonus') {
+                        const score = parseFloat(student[h]) || 0;
+                        studentBonusTotal += score;
+                    }
+                });
+                bonusTotal += studentBonusTotal;
+                studentCount++;
+            });
+            const bonusAverage = studentCount > 0 ? (bonusTotal / studentCount) : 0;
+
+            // 顯示特定卡片並填入佔比資訊
+            const cardMappings = {
+                'assignments': 'card-assignments',
+                'dailyPerformance': 'card-daily-performance', 
+                'attendance': 'card-attendance',
+                'midterm': 'card-midterm',
+                'final': 'card-final'
+            };
+            
+            Object.keys(cardMappings).forEach(category => {
+                const cardId = cardMappings[category];
+                const card = document.getElementById(cardId);
+                if (card && categoryWeights[category]) {
+                    card.style.display = 'block';
+                    const scoreElement = card.querySelector('.score .value');
+                    if (scoreElement) {
+                        const percentage = (categoryWeights[category] * 100).toFixed(0);
+                        scoreElement.textContent = `${percentage}%`;
+                    }
+                    // 更新顯示格式
+                    const scoreContainer = card.querySelector('.score');
+                    if (scoreContainer) {
+                        scoreContainer.innerHTML = `<span class="value">${(categoryWeights[category] * 100).toFixed(0)}%</span>`;
+                    }
+                }
+            });
+
+            // 顯示加分項目卡片並填入平均值
+            const bonusCard = document.getElementById('card-bonus');
+            if (bonusCard) {
+                bonusCard.style.display = 'block';
+                const scoreContainer = bonusCard.querySelector('.score');
+                if (scoreContainer) {
+                    const avgLabel = isChinese() ? '平均' : 'AVG';
+                    scoreContainer.innerHTML = `+<span class="value">${bonusAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
+                }
+            }
+            
+            // 隱藏成績明細標題（因為我們要自定義表格）
+            const gradeDetailsSection = document.querySelector('.grade-details');
+            const gradeDetailsTitle = gradeDetailsSection.querySelector('h3');
+            if (gradeDetailsTitle) {
+                gradeDetailsTitle.style.display = 'none';
+            }
+
+            // 隱藏原本的thead（包含Item, Score, Weight, Weighted Score等標題）
+            const thead = gradeDetailsSection.querySelector('thead');
+            if (thead) {
+                thead.style.display = 'none';
+            }
+
+            // 建立全班成績表格，完全重新設計
+            gradeDetailsBody.innerHTML = '';
+            
+            // 隱藏原本的tfoot（包含Final Score (Before Bonus)等）
+            const tfoot = gradeDetailsSection.querySelector('tfoot');
+            if (tfoot) {
+                tfoot.style.display = 'none';
+            }
+
+            // 表格標題行 - 只顯示對應卡片的類別
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th><span class="lang-en">Rank</span><span class="lang-zh">排名</span></th>
+                <th><span class="lang-en">Student ID</span><span class="lang-zh">學號</span></th>
+                <th><span class="lang-en">Assignments</span><span class="lang-zh">平時成績</span></th>
+                <th><span class="lang-en">Daily Performance</span><span class="lang-zh">日常表現</span></th>
+                <th><span class="lang-en">Attendance</span><span class="lang-zh">點名</span></th>
+                <th><span class="lang-en">Midterm</span><span class="lang-zh">期中</span></th>
+                <th><span class="lang-en">Final</span><span class="lang-zh">期末</span></th>
+                <th><span class="lang-en">Bonus</span><span class="lang-zh">加分</span></th>
+                <th><span class="lang-en">Final Score</span><span class="lang-zh">總分</span></th>
+            `;
+            gradeDetailsBody.appendChild(headerRow);
+
+            // 計算每個學生的各類別成績和總分
+            const studentData = studentRows.map(student => {
+                if (!student.ID) return null;
+
+                const categoryScores = {
+                    assignments: 0,
+                    dailyPerformance: 0,
+                    attendance: 0,
+                    midterm: 0,
+                    final: 0,
+                    bonus: 0
+                };
+
+                const categoryWeightedScores = {
+                    assignments: 0,
+                    dailyPerformance: 0,
+                    attendance: 0,
+                    midterm: 0,
+                    final: 0
+                };
+
+                headers.forEach(h => {
+                    if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
+                        const score = parseFloat(student[h]) || 0;
+                        const weight = parseFloat(config[h].weight) || 0;
+                        const category = config[h].category;
+                        
+                        if (category === 'bonus') {
+                            categoryScores.bonus += score;
+                        } else if (categoryScores.hasOwnProperty(category)) {
+                            // 計算該類別的平均分數
+                            const weightedScore = score * weight;
+                            categoryWeightedScores[category] += weightedScore;
+                        }
+                    }
+                });
+
+                // 計算各類別的顯示分數（加權後再除以該類別總權重得到平均分）
+                Object.keys(categoryWeightedScores).forEach(category => {
+                    if (categoryWeights[category] > 0) {
+                        categoryScores[category] = categoryWeightedScores[category] / categoryWeights[category];
+                    }
+                });
+
+                const subtotal = Object.values(categoryWeightedScores).reduce((sum, score) => sum + score, 0);
+                const finalScore = Math.min(100, subtotal + categoryScores.bonus);
+
+                return {
+                    id: student.ID,
+                    ...categoryScores,
+                    finalScore: finalScore
+                };
+            }).filter(student => student !== null);
+
+            // 根據總分排序（由高到低）
+            studentData.sort((a, b) => b.finalScore - a.finalScore);
+
+            // 生成學生成績行
+            studentData.forEach((student, index) => {
+                const rank = index + 1;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>#${rank}</strong></td>
+                    <td><strong>${student.id}</strong></td>
+                    <td>${student.assignments.toFixed(1)}</td>
+                    <td>${student.dailyPerformance.toFixed(1)}</td>
+                    <td>${student.attendance.toFixed(1)}</td>
+                    <td>${student.midterm.toFixed(1)}</td>
+                    <td>${student.final.toFixed(1)}</td>
+                    <td>+${student.bonus.toFixed(1)}</td>
+                    <td><strong style="color: var(--tech-cyan);">${student.finalScore.toFixed(2)}</strong></td>
+                `;
+                gradeDetailsBody.appendChild(row);
+            });
+
+            resultsContainer.style.display = 'block';
         }
 
         function waitForPapaParse(timeout = 1000) {
@@ -1500,6 +1843,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // =========================================================================
     
         function renderResults(student, config, courseInfo) {
+            // 恢復個人成績卡片顯示（管理者模式會隱藏它）
+            document.querySelector('.grade-summary-cards').style.display = 'grid';
+            
+            // 恢復成績明細標題
+            const gradeDetailsSection = document.querySelector('.grade-details');
+            const gradeDetailsTitle = gradeDetailsSection.querySelector('h3');
+            if (gradeDetailsTitle) {
+                gradeDetailsTitle.style.display = 'block';
+            }
+            
+            // 恢復thead顯示
+            const thead = gradeDetailsSection.querySelector('thead');
+            if (thead) {
+                thead.style.display = 'table-header-group';
+            }
+            
+            // 恢復tfoot顯示
+            const tfoot = gradeDetailsSection.querySelector('tfoot');
+            if (tfoot) {
+                tfoot.style.display = 'table-footer-group';
+            }
+            
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
             resultCourseCode.textContent = courseInfo.code;
             resultStudentId.textContent = student.ID;

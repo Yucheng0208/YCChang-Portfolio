@@ -2098,6 +2098,32 @@ body.show-zh .lang-en { display: none; }
     background-color: rgba(10, 132, 255, 0.2);
 }
 
+/* 管理者檢視全班成績的特殊樣式 */
+.grade-inquiry-page .grade-details tbody tr:first-child th {
+    background-color: var(--tech-blue);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 8px;
+    border-bottom: 2px solid var(--tech-cyan);
+}
+
+.grade-inquiry-page .grade-details tbody tr:not(:first-child) td:first-child {
+    font-weight: 600;
+    color: var(--tech-cyan);
+    background-color: rgba(100, 210, 255, 0.1);
+}
+
+.grade-inquiry-page .grade-details tbody tr:not(:first-child) td:last-child {
+    font-weight: 700;
+    color: var(--tech-cyan);
+    font-size: 1.1rem;
+}
+
+.grade-inquiry-page .grade-details tbody tr:not(:first-child):hover {
+    background-color: rgba(100, 210, 255, 0.15);
+}
+
 .grade-inquiry-page .grade-details .total-score.final {
     color: var(--tech-cyan);
 }
@@ -2781,9 +2807,16 @@ body.show-zh .lang-en { display: none; }
     margin-bottom: 1rem;
 }
 
+.modal-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .modal-input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 3rem 0.75rem 1rem;
     border: 2px solid rgba(100, 210, 255, 0.3);
     border-radius: 8px;
     background-color: var(--dark-bg);
@@ -2805,6 +2838,43 @@ body.show-zh .lang-en { display: none; }
 .modal-input::placeholder {
     color: rgba(201, 209, 217, 0.5);
     letter-spacing: 1px;
+}
+
+.modal-toggle-password {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    min-height: 2rem;
+}
+
+.modal-toggle-password:hover {
+    opacity: 1;
+    background-color: rgba(100, 210, 255, 0.1);
+}
+
+.modal-toggle-password i {
+    pointer-events: none;
+}
+
+.modal-error {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: none;
 }
 
 .modal-footer {
