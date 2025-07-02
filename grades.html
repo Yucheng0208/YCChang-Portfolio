@@ -33,20 +33,41 @@
             <!-- 查詢控制區塊 -->
             <div class="inquiry-controls">
                 <button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>
-                <!-- 課程選擇下拉選單 -->
-                <div class="course-selector-wrapper">
-                    <label for="course-select">
-                        <span class="lang-en">Course:</span>
-                        <span class="lang-zh">課程：</span>
-                    </label>
-                    <select id="course-select">
-                        <!-- 選項會由 JS 動態載入，這裡先放一個預設選項 -->
-                        <option value="">
-                            <span class="lang-en">-- Please select a course --</span>
-                            <span class="lang-zh">-- 請選擇一門課程 --</span>
-                        </option>
-                    </select>
+                
+                <!-- ▼▼▼ 已修改部分：新增一個 div 將兩個下拉選單包起來 ▼▼▼ -->
+                <div class="dropdown-group">
+                    <!-- 學校選擇下拉選單 -->
+                    <div class="school-selector-wrapper">
+                        <label for="school-select">
+                            <span class="lang-en">School:</span>
+                            <span class="lang-zh">學校：</span>
+                        </label>
+                        <select id="school-select">
+                            <option value="">
+                                <span class="lang-en">-- Please select a school --</span>
+                                <span class="lang-zh">-- 請選擇學校 --</span>
+                            </option>
+                            <!-- 學校選項會由 JS 動態載入 -->
+                        </select>
+                    </div>
+                    
+                    <!-- 課程選擇下拉選單 -->
+                    <div class="course-selector-wrapper">
+                        <label for="course-select">
+                            <span class="lang-en">Course:</span>
+                            <span class="lang-zh">課程：</span>
+                        </label>
+                        <select id="course-select" disabled>
+                            <!-- 選項會由 JS 動態載入，這裡先放一個預設選項 -->
+                            <option value="">
+                                <span class="lang-en">-- Please select a course --</span>
+                                <span class="lang-zh">-- 請選擇一門課程 --</span>
+                            </option>
+                        </select>
+                    </div>
                 </div>
+                <!-- ▲▲▲ 已修改部分：結束群組容器 ▲▲▲ -->
+                
                 <!-- 學號搜尋框 (這就是您提到的圓角搜索框) -->
                 <div class="search-box-wrapper">
                     <input type="text" id="student-id-input" 

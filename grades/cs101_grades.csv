@@ -1,8 +1,6 @@
-ID,HW1,HW2,Attendance,Midterm,FinalExam,ExtraCredit
-type,score,score,score,score,score,score
-display_name_en,Homework 1,Homework 2,Attendance,Midterm Exam,Final Exam,Bonus Project
-display_name_zh,作業一,作業二,點名分數,期中考,期末考,加分項目
-weight,0.15,0.15,0.1,0.3,0.3,0
-category,assignments,assignments,attendance,midterm,final,bonus
-S12345678,90,85,100,88,92,5
-S87654321,75,80,90,70,78,0
+ID,HW1,HW2,Attendance,Midterm,FinalExam,Bonus1,Bonus2
+type,score,score,score,score,score,score,score
+weight,0.15,0.15,0.1,0.3,0.3,0,0
+category,assignments,assignments,attendance,midterm,final,bonus,bonus
+S12345678,90,85,100,88,92,5,10
+S87654321,75,80,90,70,78,0,5
