@@ -1,0 +1,13 @@
+- id: CS101_F23
+  name:
+    en: Introduction to Programming
+    zh: 程式設計入門
+  code: CS101
+  csv_path: ./grades/cs101_grades.csv # 對應的成績檔路徑
+
+- id: MA202_F23
+  name:
+    en: Advanced Calculus
+    zh: 高等微積分
+  code: MA202
+  csv_path: ./grades/ma202_grades.csv
