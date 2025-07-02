@@ -23,7 +23,7 @@ TABLE OF CONTENTS:
     - List/Table Pages (Publications, Honors, etc.)
     - Course Schedule Page
     - Course Materials Page
-    - Grade Inquiry Page (*** REVISED ***)
+    - Grade Inquiry Page (*** REVISED & COLORED ***)
     - Motto Section
     - Contact Section
 7.  FOOTER
@@ -65,17 +65,11 @@ body {
     overflow-x: hidden;
 }
 
-/* === MODIFIED: Added to prevent scroll jump when mobile menu is open === */
 body.menu-open {
-    overflow: hidden; /* 當選單打開時，禁止背景滾動 */
+    overflow: hidden; 
 }
 
 
-/* === ADDED === Scroll Behavior Fix for Sticky Navbar */
-/*
-* This rule prevents content from being hidden under the sticky navbar
-* when jumping to an anchor link (e.g., from the hero's scroll-down arrow).
-*/
 #page-content {
     scroll-margin-top: var(--navbar-height);
 }
@@ -329,7 +323,7 @@ body.menu-open {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
-    height: var(--navbar-height); /* === MODIFIED === Using CSS variable */
+    height: var(--navbar-height);
     display: flex;
     justify-content: center;
     position: relative;
@@ -342,15 +336,14 @@ body.menu-open {
 .nav-links {
     list-style: none;
     display: flex;
-    align-items: center; /* 這個可以保留，或者用 align-items: stretch; */
+    align-items: center;
     gap: 10px;
-    height: 100%; /* 新增：讓 ul 填滿高度 */
+    height: 100%;
 }
 
 .nav-links li {
     position: relative;
     padding: 0;
-    /*height: 100%;*/ /* 新增：讓 li 填滿高度 */
 }
 
 .nav-links a {
@@ -366,7 +359,7 @@ body.menu-open {
     transition: color 0.3s ease;
     border-radius: 50px;
     overflow: hidden;
-    align-items: center; /* 這個本身就有，確保文字在 a 內部垂直置中 */
+    align-items: center;
 }
 
 .nav-links li:hover > a,
@@ -798,7 +791,6 @@ body.menu-open {
 }
 
 .schedule-wrapper {
-    /* For smooth transition between schedules */
     animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -807,21 +799,19 @@ body.menu-open {
     to { opacity: 1; }
 }
 
-/* [CORRECTED] 針對大學課表的時間欄位置中 */
-#university-schedule .course-schedule tbody td:nth-child(1), /* 選取 Period 欄 */
-#university-schedule .course-schedule tbody td:nth-child(2) { /* 選取 Time 欄 */
+#university-schedule .course-schedule tbody td:nth-child(1),
+#university-schedule .course-schedule tbody td:nth-child(2) {
     text-align: center;
     vertical-align: middle;
-    white-space: nowrap; /* 防止換行 */
-    font-size: clamp(0.7rem, 2.5vw, 0.75rem); /* 響應式字體大小 - 調整為與高中課表相同 */
+    white-space: nowrap;
+    font-size: clamp(0.7rem, 2.5vw, 0.75rem);
 }
-/* [CORRECTED] 針對高中課表的時間欄位置中 */
-#high-school-schedule .course-schedule tbody td:nth-child(1), /* 選取 Period 欄 */
-#high-school-schedule .course-schedule tbody td:nth-child(2) { /* 選取 Time 欄 */
+#high-school-schedule .course-schedule tbody td:nth-child(1),
+#high-school-schedule .course-schedule tbody td:nth-child(2) {
     text-align: center;
     vertical-align: middle;
-    white-space: nowrap; /* 防止換行 */
-    font-size: clamp(0.7rem, 2.5vw, 0.75rem); /* 響應式字體大小 - 電腦版從 1rem 調整為 0.75rem */
+    white-space: nowrap;
+    font-size: clamp(0.7rem, 2.5vw, 0.75rem);
 }
 
 .skill-body .skill-item { 
@@ -1356,7 +1346,6 @@ body.menu-open {
     position: relative;
 }
 
-/* Add scroll indicator for mobile */
 @media (max-width: 768px) {
     .schedule-table-wrapper::after {
         content: '← Swipe to see more →';
@@ -1382,7 +1371,6 @@ body.menu-open {
     50% { opacity: 0.9; }
 }
 
-/* Desktop: Remove horizontal scroll for tables */
 @media (min-width: 769px) {
     .schedule-table-wrapper {
         overflow-x: visible;
@@ -1398,7 +1386,6 @@ body.menu-open {
         margin: 0 auto;
     }
     
-    /* Desktop: Fix time column sizing */
     .course-schedule td:nth-child(2) {
         width: 150px;
         min-width: 150px;
@@ -1416,14 +1403,12 @@ body.menu-open {
     text-align: center;
 }
 
-/* Desktop: Set minimum width for better layout */
 @media (min-width: 769px) {
     .course-schedule {
         min-width: 800px;
     }
 }
 
-/* Mobile: Enable horizontal scroll with optimized table sizing */
 @media (max-width: 768px) {
     .schedule-table-wrapper {
         overflow-x: auto;
@@ -1434,12 +1419,11 @@ body.menu-open {
     }
     
     .course-schedule {
-        min-width: 650px; /* Optimal minimum width for mobile readability */
+        min-width: 650px;
         table-layout: fixed;
         font-size: 0.85rem;
     }
     
-    /* Optimized column widths for mobile scroll */
     .course-schedule th:first-child,
     .course-schedule td:first-child {
         width: 80px;
@@ -1454,7 +1438,6 @@ body.menu-open {
         font-size: 0.75rem;
     }
     
-    /* Day columns - equal width */
     .course-schedule th:nth-child(n+3),
     .course-schedule td:nth-child(n+3) {
         width: 100px;
@@ -1547,12 +1530,12 @@ body.menu-open {
 .course-color-5 { border-left-color: #d29922; }
 
 .dinner-break .lunch-break {
-    background-color: #21262d; /* 使用和 course-block 一樣的深色背景 */
+    background-color: #21262d;
     text-align: center;
     vertical-align: middle;
     font-style: italic;
     color: #8b949e;
-    border-left: 4px solid #8b949e; /* 加上一個灰色的左邊框，增加視覺區分 */
+    border-left: 4px solid #8b949e;
 }
 
 
@@ -1562,7 +1545,6 @@ body.menu-open {
     padding: 60px 0;
 }
 
-/* Main controls container - stack everything vertically by default */
 .controls-container {
     display: flex;
     flex-direction: column;
@@ -1570,15 +1552,13 @@ body.menu-open {
     margin: 2rem 0;
 }
 
-/* Group for language, school, dropdowns */
 .filter-group {
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* Make children full-width */
+    align-items: stretch;
     gap: 1rem;
 }
 
-/* Language toggle button - NEW UNIFIED STYLE */
 .lang-toggle-btn {
     padding: 12px 16px;
     background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
@@ -1598,13 +1578,12 @@ body.menu-open {
     box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
 }
 
-/* School filter bar */
 .filter-bar {
     display: flex;
-    flex-wrap: wrap; /* ADDED: Allows buttons to wrap onto multiple lines */
-    gap: 6px;        /* ADDED: Creates consistent spacing between buttons */
+    flex-wrap: wrap;
+    gap: 6px;
     background-color: var(--light-bg);
-    border-radius: 12px; /* MODIFIED: Looks better than a pill shape when wrapped */
+    border-radius: 12px;
     padding: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
@@ -1620,7 +1599,7 @@ body.menu-open {
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s ease;
-    flex: 1; /* ADDED: Allows buttons to stretch equally in a row */
+    flex: 1;
 }
 
 .filter-bar button.active {
@@ -1633,7 +1612,6 @@ body.menu-open {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Dropdown filters wrapper */
 .dropdown-filters-wrapper {
     display: flex;
     width: 100%;
@@ -1666,7 +1644,6 @@ body.menu-open {
     border-right: 1px solid #30363d;
 }
 
-/* Search container and input */
 .search-container {
     width: 100%;
 }
@@ -1677,7 +1654,7 @@ body.menu-open {
     border-radius: 50px;
     padding: 12px 20px;
     color: var(--text-color);
-    width: 100%; /* Full width by default */
+    width: 100%;
     font-size: 0.9rem;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -1689,19 +1666,16 @@ body.menu-open {
 }
 
 
-/* Language switching logic */
 .lang-zh { display: none; }
 body.show-zh .lang-zh { display: inline; }
 body.show-zh .lang-en { display: none; }
 
-/* Course card list */
 .course-materials-list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
 }
 
-/* Individual course card */
 .course-card {
     background-color: #161b22;
     border: 1px solid #30363d;
@@ -1776,13 +1750,11 @@ body.show-zh .lang-en { display: none; }
 
 /*
 ============================================================
-           GRADE INQUIRY PAGE STYLES - REVISED
+           GRADE INQUIRY PAGE STYLES - REVISED & COLORED
 ============================================================
 */
 
 /* --- 1. Control Bar & Inputs --- */
-
-/* Main container for all controls */
 .grade-inquiry-page .inquiry-controls {
     display: flex;
     flex-wrap: wrap; 
@@ -1805,7 +1777,7 @@ body.show-zh .lang-en { display: none; }
     font-weight: 600;
     font-size: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    flex-shrink: 0; /* 防止按鈕在 flex 佈局中被壓縮 */
+    flex-shrink: 0;
 }
 
 .grade-inquiry-page .lang-toggle-btn:hover {
@@ -1813,15 +1785,14 @@ body.show-zh .lang-en { display: none; }
     box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
 }
 
-/* === MODIFIED: The new capsule-style dropdown group === */
 .grade-inquiry-page .dropdown-group {
     display: flex;
-    flex-grow: 3; /* 讓此膠囊容器在空間分配上佔較大比例 */
-    min-width: 300px; /* 確保在換行時不會被過度壓縮 */
+    flex-grow: 3;
+    min-width: 300px;
     background-color: var(--dark-bg);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50px; /* 關鍵：膠囊形狀 */
-    overflow: hidden; /* 關鍵：隱藏內部元件超出的部分，確保圓角效果 */
+    border-radius: 50px;
+    overflow: hidden;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1834,27 +1805,23 @@ body.show-zh .lang-en { display: none; }
     box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
 }
 
-/* === MODIFIED: Hide the labels for the capsule UI === */
 .grade-inquiry-page .school-selector-wrapper label,
 .grade-inquiry-page .course-selector-wrapper label {
     display: none;
 }
 
-/* === MODIFIED: Style the wrappers to be flexible items === */
 .grade-inquiry-page .school-selector-wrapper,
 .grade-inquiry-page .course-selector-wrapper {
-    flex: 1; /* 讓兩個 wrapper 在膠囊內平分寬度 */
-    display: flex; /* 確保 select 填滿 wrapper */
+    flex: 1;
+    display: flex;
 }
 
-/* === MODIFIED: Unify the styling for both select elements & ADDED WRAP SUPPORT === */
 .grade-inquiry-page #school-select,
 .grade-inquiry-page #course-select {
     width: 100%;
-    background-color: transparent; /* 無背景色 */
-    border: none; /* 無邊框 */
-    border-radius: 0; /* 無圓角，由父容器控制 */
-    /* MODIFIED: 稍微調整 padding 以更好地適應多行文字 */
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
     padding: 10px 40px 10px 20px;
     color: var(--text-color);
     font-size: 1rem;
@@ -1865,43 +1832,39 @@ body.show-zh .lang-en { display: none; }
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23c9d1d9" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
     background-repeat: no-repeat;
     background-position: right 1rem center;
-    outline: none; /* 移除點擊時的 outline */
-
-    /* === NEW: Properties to allow text wrapping === */
-    height: auto;           /* 允許元素根據內容自動調整高度 */
-    white-space: normal;    /* 關鍵：允許文字換行 */
-    line-height: 1.4;       /* 當文字換行時，設定合理的行高，避免文字擠在一起 */
+    outline: none;
+    height: auto;
+    white-space: normal;
+    line-height: 1.4;
 }
 
-/* === NEW: Add the dividing line === */
 .grade-inquiry-page #school-select {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* === MODIFIED: Search box wrapper styles === */
 .grade-inquiry-page .search-box-wrapper {
     display: flex;
-    flex-grow: 2; /* 佔用剩餘空間 */
+    flex-grow: 2;
     min-width: 250px;
 }
 
 .grade-inquiry-page #student-id-input {
     background-color: var(--dark-bg);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50px 0 0 50px; /* 左側圓角 */
+    border-radius: 50px 0 0 50px;
     padding: 12px 20px;
     color: var(--text-color);
     flex-grow: 1;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
-    border-right: none; /* 移除與按鈕相接的邊框 */
+    border-right: none;
 }
 
 .grade-inquiry-page #student-id-input:focus {
     border-color: var(--tech-cyan);
     box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
-    z-index: 1; /* 讓陰影顯示在按鈕之上 */
+    z-index: 1;
     position: relative;
 }
 
@@ -1910,12 +1873,12 @@ body.show-zh .lang-en { display: none; }
     background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
     color: #fff;
     border: none;
-    border-radius: 0 50px 50px 0; /* 右側圓角 */
+    border-radius: 0 50px 50px 0;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-left: -1px; /* 讓按鈕稍微疊加在輸入框上，無縫連接 */
+    margin-left: -1px;
 }
 
 .grade-inquiry-page #search-btn:hover {
@@ -1925,7 +1888,6 @@ body.show-zh .lang-en { display: none; }
 
 /* --- 2. Grade Results Display --- */
 
-/* Main container for all results */
 .grade-inquiry-page .results-container {
     margin-top: 2.5rem;
     padding: 2rem;
@@ -1961,11 +1923,10 @@ body.show-zh .lang-en { display: none; }
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* The "design-y" summary cards */
 .grade-inquiry-page .grade-summary-cards {
     display: grid;
-    /* Responsive grid: auto-fit columns with a min-width */
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    /* === CORRECTED: Set to 3-column layout as requested === */
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-bottom: 3rem;
 }
@@ -1976,7 +1937,7 @@ body.show-zh .lang-en { display: none; }
     padding: 1.5rem;
     text-align: center;
     border: 1px solid #30363d;
-    border-bottom: 3px solid var(--tech-blue);
+    border-bottom: 3px solid transparent; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -2000,21 +1961,56 @@ body.show-zh .lang-en { display: none; }
 }
 
 .grade-inquiry-page .grade-summary-cards .card .score .value {
-    color: var(--tech-cyan);
+    color: #fff; /* Default color, overridden by individual cards */
 }
 
-/* Special styling for the bonus card */
-.grade-inquiry-page .grade-summary-cards .card.bonus {
-    border-bottom-color: #3fb950; /* Green for bonus */
+/* === Individual Card Colors === */
+.grade-inquiry-page #card-assignments {
+    border-bottom-color: #58a6ff;
 }
-.grade-inquiry-page .grade-summary-cards .card.bonus .score .value {
+.grade-inquiry-page #card-assignments .score .value {
+    color: #58a6ff;
+}
+
+.grade-inquiry-page #card-daily-performance {
+    border-bottom-color: #f7b731;
+}
+.grade-inquiry-page #card-daily-performance .score .value {
+    color: #f7b731;
+}
+
+.grade-inquiry-page #card-attendance {
+    border-bottom-color: #a371f7;
+}
+.grade-inquiry-page #card-attendance .score .value {
+    color: #a371f7;
+}
+
+.grade-inquiry-page #card-midterm {
+    border-bottom-color: #f778ba;
+}
+.grade-inquiry-page #card-midterm .score .value {
+    color: #f778ba;
+}
+
+.grade-inquiry-page #card-final {
+    border-bottom-color: #e85656;
+}
+.grade-inquiry-page #card-final .score .value {
+    color: #e85656;
+}
+
+.grade-inquiry-page #card-bonus {
+    border-bottom-color: #3fb950;
+}
+.grade-inquiry-page #card-bonus .score .value {
     color: #3fb950;
 }
+/* ========================================= */
 
 
-/* Detailed grade breakdown table */
 .grade-inquiry-page .grade-details {
-    overflow-x: auto; /* Makes table scrollable on small screens */
+    overflow-x: auto;
 }
 
 .grade-inquiry-page .grade-details h3 {
@@ -2027,7 +2023,7 @@ body.show-zh .lang-en { display: none; }
 .grade-inquiry-page .grade-details table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Prevents table from squishing too much */
+    min-width: 600px;
 }
 
 .grade-inquiry-page .grade-details th,
@@ -2079,7 +2075,7 @@ body.show-zh .lang-en { display: none; }
 }
 
 .grade-inquiry-page #bonus-score {
-    color: #3fb950; /* Green for bonus score */
+    color: #3fb950;
 }
 
 /* --- 3. Utility & Loading Styles --- */
@@ -2091,7 +2087,6 @@ body.show-zh .lang-en { display: none; }
     color: var(--text-color);
 }
 
-/* Simple spinner animation */
 .grade-inquiry-page .loading-indicator p::before {
     content: '';
     display: inline-block;
@@ -2298,7 +2293,7 @@ body.show-zh .lang-en { display: none; }
         right: 0;
         width: 80dvw;
         max-width: 280px;
-        height: 100dvh; /* === MODIFIED: Make mobile menu full height === */
+        height: 100dvh;
         background-color: var(--light-bg);
         flex-direction: column;
         justify-content: flex-start;
@@ -2319,14 +2314,14 @@ body.show-zh .lang-en { display: none; }
         width: 100%;
         text-align: center;
         padding: 0;
-        margin: 0; /* <--- 新增這一行來移除 li 的 margin */
+        margin: 0;
         
     }
 
     .nav-links > li > a {
         padding: 15px 20px;
         border-radius: 0;
-        margin: 0; /* <--- 新增這一行來移除 li 的 margin */
+        margin: 0;
     }
 
     .nav-links > li > a::before {
@@ -2420,17 +2415,22 @@ body.show-zh .lang-en { display: none; }
 
     /* Materials Page Card List */
     .course-materials-list {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Use auto-fit for better responsiveness */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
 
     /* Grade Inquiry Page Controls Responsive */
     .grade-inquiry-page .inquiry-controls {
         flex-direction: column;
-        align-items: stretch; /* 在垂直堆疊時，讓項目填滿寬度 */
+        align-items: stretch;
     }
 
     .grade-inquiry-page .lang-toggle-btn {
-        width: 100%; /* 在小螢幕上，讓語言切換按鈕自成一行 */
+        width: 100%;
+    }
+    
+    /* === ADDED: Responsive layout for grade summary cards on tablets === */
+    .grade-inquiry-page .grade-summary-cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -2516,7 +2516,6 @@ body.show-zh .lang-en { display: none; }
         padding: 0 10px;
     }
     
-    /* Hide side videos on mobile, only show center video */
     .video-window-glw0pyx-slot.slot-left,
     .video-window-glw0pyx-slot.slot-right {
         display: none;
@@ -2531,7 +2530,6 @@ body.show-zh .lang-en { display: none; }
         margin-bottom: 1.5rem;
     }
     
-    /* Make navigation buttons larger and more touch-friendly */
     .video-window-glw0pyx-nav {
         gap: 30px;
         margin-top: 20px;
@@ -2554,7 +2552,7 @@ body.show-zh .lang-en { display: none; }
 /* --- Small Mobiles (max-width: 480px) --- */
 @media (max-width: 480px) {
     .course-schedule {
-        min-width: 600px; /* Slightly smaller for very small screens */
+        min-width: 600px;
         font-size: 0.8rem;
     }
     
@@ -2596,7 +2594,6 @@ body.show-zh .lang-en { display: none; }
         font-size: 0.65rem;
     }
     
-    /* Video Section - Small Mobile Optimization */
     .video-window-glw0pyx-wrapper {
         padding: 20px 10px;
     }
@@ -2640,7 +2637,8 @@ body.show-zh .lang-en { display: none; }
     }
 
     .grade-inquiry-page .grade-summary-cards {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        /* === MODIFIED: Changed to a single-column layout on small screens === */
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
 

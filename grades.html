@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yu-Cheng Chang - Grade Inquiry</title>
-    <!-- 這裡可以連結到您之後會提供的 CSS -->
+    <!-- 連結到您的 CSS 檔案 -->
     <link rel="stylesheet" href="style.css"> 
     <!-- Favicon (沿用原本的設定) -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
 </head>
-    <!-- 第一步：引入 js-yaml 工具，用來解析 courses_for_grades.yaml -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-
-    <!-- 第二步：引入 PapaParse 工具，用來解析 .csv 成績單 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
 <body class="grade-inquiry-page">
     <!-- 導覽列容器，與其他頁面共用 -->
     <header id="navbar-container"></header>
@@ -34,7 +29,6 @@
             <div class="inquiry-controls">
                 <button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>
                 
-                <!-- ▼▼▼ 已修改部分：新增一個 div 將兩個下拉選單包起來 ▼▼▼ -->
                 <div class="dropdown-group">
                     <!-- 學校選擇下拉選單 -->
                     <div class="school-selector-wrapper">
@@ -43,10 +37,7 @@
                             <span class="lang-zh">學校：</span>
                         </label>
                         <select id="school-select">
-                            <option value="">
-                                <span class="lang-en">-- Please select a school --</span>
-                                <!--<span class="lang-zh">-- 請選擇學校 --</span>-->
-                            </option>
+                            <option value="">-- 請選擇學校 --</option>
                             <!-- 學校選項會由 JS 動態載入 -->
                         </select>
                     </div>
@@ -58,17 +49,13 @@
                             <span class="lang-zh">課程：</span>
                         </label>
                         <select id="course-select" disabled>
-                            <!-- 選項會由 JS 動態載入，這裡先放一個預設選項 -->
-                            <option value="">
-                                <span class="lang-en">-- Please select a course --</span>
-                                <!--<span class="lang-zh">-- 請選擇一門課程 --</span>-->
-                            </option>
+                            <option value="">-- 請選擇一門課程 --</option>
+                            <!-- 選項會由 JS 動態載入 -->
                         </select>
                     </div>
                 </div>
-                <!-- ▲▲▲ 已修改部分：結束群組容器 ▲▲▲ -->
                 
-                <!-- 學號搜尋框 (這就是您提到的圓角搜索框) -->
+                <!-- 學號搜尋框 -->
                 <div class="search-box-wrapper">
                     <input type="text" id="student-id-input" 
                            placeholder="Enter Student ID..." 
@@ -108,6 +95,15 @@
                         <h3><span class="lang-en">Assignments</span><span class="lang-zh">平時成績</span></h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
+
+                    <!-- ======================= 新增的卡片 START ======================= -->
+                    <!-- 日常表現卡 (Daily Performance) -->
+                    <div class="card" id="card-daily-performance">
+                        <h3><span class="lang-en">Daily Performance</span><span class="lang-zh">日常表現</span></h3>
+                        <p class="score"><span class="value">--</span> / 100</p>
+                    </div>
+                    <!-- ======================= 新增的卡片 END ========================= -->
+
                     <!-- 點名成績卡 -->
                     <div class="card" id="card-attendance">
                         <h3><span class="lang-en">Attendance</span><span class="lang-zh">點名</span></h3>
@@ -115,17 +111,17 @@
                     </div>
                     <!-- 期中考成績卡 -->
                     <div class="card" id="card-midterm">
-                        <h3><span class="lang-en">Midterm</span><span class="lang-zh">期中考</span></h3>
+                        <h3><span class="lang-en">Midterm</span><span class="lang-zh">期中</span></h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
                     <!-- 期末考成績卡 -->
                     <div class="card" id="card-final">
-                        <h3><span class="lang-en">Final Exam</span><span class="lang-zh">期末考</span></h3>
+                        <h3><span class="lang-en">Final</span><span class="lang-zh">期末</span></h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
                     <!-- 加分項目卡 -->
                      <div class="card bonus" id="card-bonus">
-                        <h3><span class="lang-en">Bonus</span><span class="lang-zh">加分</span></h3>
+                        <h3><span class="lang-en">Bonus</span><span class="lang-zh">額外加分</span></h3>
                         <p class="score">+<span class="value">--</span></p>
                     </div>
                 </div>
@@ -147,14 +143,6 @@
                         </thead>
                         <tbody id="grade-details-body">
                             <!-- 成績細項將由 JS 動態生成於此 -->
-                            <!-- 範例:
-                            <tr>
-                                <td>作業一 (Homework 1)</td>
-                                <td>90</td>
-                                <td>10%</td>
-                                <td>9.0</td>
-                            </tr>
-                            -->
                         </tbody>
                         <tfoot>
                             <tr>
@@ -203,8 +191,13 @@
                     <span class="lang-zh">載入中...</span>
                 </p>
             </div>
+            <p style="margin-top: 1rem;">
+                <span class="lang-en">Note: Grades will be retained for one academic year.</span>
+                <span class="lang-zh">備註：成績將保留一個學年度。</span>
+            </p>
 
         </div>
+
     </main>
 
     <!-- 頁腳 -->
@@ -215,7 +208,7 @@
     <!-- 回到頂部按鈕 -->
     <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
 
-    <!-- 核心 JS 檔案 -->
+    <!-- 核心 JS 檔案 (請確認路徑正確) -->
     <script src="script.js"></script>
 </body>
 </html>

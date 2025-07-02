@@ -1,4 +1,148 @@
 // =======================================================
+//  本地函式庫 - YAML 和 CSV 解析器
+// =======================================================
+
+// 本地 YAML 解析器 - 專門處理我們的格式
+window.jsyaml = window.jsyaml || {
+    load: function(yamlText) {
+        try {
+            const lines = yamlText.split('\n').filter(line => {
+                const trimmed = line.trim();
+                return trimmed && !trimmed.startsWith('#');
+            });
+            
+            const result = [];
+            let currentItem = null;
+            let currentObject = null; // 追蹤當前嵌套物件 (name 或 school)
+            
+            for (let line of lines) {
+                const trimmed = line.trim();
+                const leadingSpaces = line.length - line.trimStart().length;
+                
+                if (trimmed.startsWith('- ')) {
+                    // 新項目開始
+                    if (currentItem) {
+                        result.push(currentItem);
+                    }
+                    currentItem = {};
+                    currentObject = null;
+                    
+                    // 處理 "- id: value" 格式
+                    const content = trimmed.substring(2);
+                    if (content.includes(':')) {
+                        const colonIndex = content.indexOf(':');
+                        const key = content.substring(0, colonIndex).trim();
+                        let value = content.substring(colonIndex + 1).trim();
+                        
+                        // 移除行內註解
+                        const commentIndex = value.indexOf('#');
+                        if (commentIndex >= 0) {
+                            value = value.substring(0, commentIndex).trim();
+                        }
+                        
+                        currentItem[key] = value;
+                    }
+                } else if (trimmed.includes(':')) {
+                    const colonIndex = trimmed.indexOf(':');
+                    const key = trimmed.substring(0, colonIndex).trim();
+                    let value = trimmed.substring(colonIndex + 1).trim();
+                    
+                    // 移除行內註解
+                    const commentIndex = value.indexOf('#');
+                    if (commentIndex >= 0) {
+                        value = value.substring(0, commentIndex).trim();
+                    }
+                    
+                    if (leadingSpaces === 2) {
+                        // 第一層屬性
+                        if (value) {
+                            // 有值的屬性
+                            currentItem[key] = value;
+                        } else {
+                            // 無值，表示嵌套物件
+                            currentItem[key] = {};
+                            currentObject = key;
+                        }
+                    } else if (leadingSpaces === 4 && currentObject) {
+                        // 第二層屬性 (en, zh)
+                        currentItem[currentObject][key] = value;
+                    }
+                }
+            }
+            
+            if (currentItem) {
+                result.push(currentItem);
+            }
+            
+            console.log('YAML parsing completed:', result);
+            return result;
+        } catch (error) {
+            console.error('YAML parsing error:', error);
+            return [];
+        }
+    }
+};
+
+// 本地 CSV 解析器
+window.Papa = window.Papa || {
+    parse: function(csvText, options = {}) {
+        try {
+            const lines = csvText.trim().split('\n');
+            const result = [];
+            
+            if (lines.length === 0) {
+                if (options.complete) {
+                    options.complete({ data: [] });
+                }
+                return { data: [] };
+            }
+            
+            const headers = lines[0].split(',').map(h => h.trim());
+            
+            if (options.header) {
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    
+                    const values = line.split(',').map(v => v.trim());
+                    const row = {};
+                    
+                    headers.forEach((header, index) => {
+                        row[header] = values[index] || '';
+                    });
+                    
+                    result.push(row);
+                }
+            } else {
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    
+                    const values = line.split(',').map(v => v.trim());
+                    result.push(values);
+                }
+            }
+            
+            const parseResult = { data: result };
+            
+            if (options.complete) {
+                setTimeout(() => options.complete(parseResult), 0);
+            }
+            
+            return parseResult;
+        } catch (error) {
+            console.error('CSV parsing error:', error);
+            if (options.error) {
+                options.error(error);
+            }
+            return { data: [] };
+        }
+    }
+};
+
+console.log('Local libraries loaded successfully!');
+
+// =======================================================
 //  👋 HEY, CODE EXPLORER! THANKS FOR VISITING!
 // =======================================================
 (function() {
@@ -624,7 +768,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = await fetch('materials.yaml');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const yamlText = await response.text();
-                allCourses = jsyaml.load(yamlText) || [];
+                allCourses = window.jsyaml.load(yamlText) || [];
                 allCourses.sort((a, b) => {
                     if (a.academicYear !== b.academicYear) return b.academicYear.localeCompare(a.academicYear);
                     return b.semester.localeCompare(a.semester);
@@ -811,7 +955,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
 
     // =======================================================
-    //  9. 成績查詢頁 (Grade Inquiry Page) 專用邏輯  [NEW & IMPROVED]
+    //  9. 成績查詢頁 (Grade Inquiry Page) 專用邏輯  [MODIFIED]
     // =======================================================
     (function setupGradeInquiryPage() {
         const pageContainer = document.querySelector('.grade-inquiry-page');
@@ -830,8 +974,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultCourseCode = document.getElementById('result-course-code');
         const resultStudentId = document.getElementById('result-student-id');
         const gradeDetailsBody = document.getElementById('grade-details-body');
+        
         const summaryCards = {
             assignments: document.querySelector('#card-assignments .score .value'),
+            dailyPerformance: document.querySelector('#card-daily-performance .score .value'),
             attendance: document.querySelector('#card-attendance .score .value'),
             midterm: document.querySelector('#card-midterm .score .value'),
             final: document.querySelector('#card-final .score .value'),
@@ -843,13 +989,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let availableCourses = [];
 
-        // --- [新功能] 標頭翻譯字典 ---
+        // --- 標頭翻譯字典 ---
         const headerTranslations = {
-            // 基礎名稱 (會被智能匹配)
             'HW': { en: 'Homework', zh: '作業' },
             'Quiz': { en: 'Quiz', zh: '小考' },
             'Bonus': { en: 'Bonus', zh: '加分' },
-            // 固定名稱 (完全匹配)
+            'Daily': {en: 'Daily', zh: '日常'},
+            'Participation': {en: 'Participation', zh: '參與分數'},
             'Attendance': { en: 'Attendance', zh: '點名分數' },
             'Midterm': { en: 'Midterm Exam', zh: '期中考' },
             'FinalExam': { en: 'Final Exam', zh: '期末考' },
@@ -861,26 +1007,19 @@ document.addEventListener('DOMContentLoaded', function() {
             return document.body.classList.contains('show-zh');
         }
 
-        // [新功能] 智能翻譯函式
         function getDisplayName(header) {
             const lang = isChinese() ? 'zh' : 'en';
-            
-            // 1. 嘗試完全匹配
             if (headerTranslations[header]) {
                 return headerTranslations[header][lang];
             }
-
-            // 2. 嘗試智能匹配 (例如 HW1, HW2)
-            const match = header.match(/^([a-zA-Z]+)(\d+)$/); // e.g., "HW" and "1" from "HW1"
+            const match = header.match(/^([a-zA-Z]+)(\d+)$/);
             if (match) {
-                const base = match[1]; // "HW"
-                const number = match[2]; // "1"
+                const base = match[1];
+                const number = match[2];
                 if (headerTranslations[base]) {
                     return `${headerTranslations[base][lang]} ${number}`;
                 }
             }
-            
-            // 3. 如果都找不到，返回原始 Header
             return header;
         }
 
@@ -896,23 +1035,42 @@ document.addEventListener('DOMContentLoaded', function() {
     
         async function loadCourses() {
             try {
-                const response = await fetch('courses_for_grades.yaml');
+                await waitForJsYaml();
+                
+                const response = await fetch('grades.yaml');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                availableCourses = jsyaml.load(await response.text()) || [];
+                const yamlText = await response.text();
+                availableCourses = window.jsyaml.load(yamlText) || [];
                 loadSchools();
             } catch (error) {
-                console.error('Failed to load courses.yaml:', error);
+                console.error('Failed to load grades.yaml:', error);
                 schoolSelect.disabled = true;
                 courseSelect.disabled = true;
                 schoolSelect.innerHTML = '<option>Error loading courses</option>';
             }
         }
+
+        function waitForJsYaml(timeout = 1000) {
+            return new Promise((resolve, reject) => {
+                if (typeof window.jsyaml !== 'undefined' && typeof window.jsyaml.load === 'function') {
+                    resolve();
+                    return;
+                }
+                setTimeout(() => {
+                    if (typeof window.jsyaml !== 'undefined' && typeof window.jsyaml.load === 'function') {
+                        resolve();
+                    } else {
+                        reject(new Error('js-yaml library is not available.'));
+                    }
+                }, 100);
+            });
+        }
         
         function loadSchools() {
-            schoolSelect.options.length = 1; // 保留預設選項
+            schoolSelect.options.length = 1;
             const schoolMap = new Map();
             availableCourses.forEach(c => {
-                if (c.school && c.school_id && !schoolMap.has(c.school_id)) {
+                if (c.school && c.school_id && c.school_id !== 'NA' && c.school_id.trim() !== '' && c.school.en && c.school.zh && !schoolMap.has(c.school_id)) {
                     schoolMap.set(c.school_id, c.school);
                 }
             });
@@ -924,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         function loadCoursesForSchool(schoolId) {
-            courseSelect.options.length = 1; // 保留預設選項
+            courseSelect.options.length = 1;
             courseSelect.disabled = !schoolId;
             if (!schoolId) return;
             availableCourses.filter(c => c.school_id === schoolId).forEach(c => {
@@ -972,44 +1130,75 @@ document.addEventListener('DOMContentLoaded', function() {
             showLoading(true);
     
             try {
-                const selectedCourse = availableCourses.find(c => c.id === courseId);
-                const response = await fetch(selectedCourse.csv_path);
-                if (!response.ok) throw new Error(`Could not load grade file: ${selectedCourse.csv_path}`);
+                await waitForPapaParse();
                 
-                Papa.parse(await response.text(), {
+                const selectedCourse = availableCourses.find(c => c.id === courseId);
+                if (!selectedCourse) throw new Error('Course not found');
+                
+                const csvPath = selectedCourse.csv_path;
+                const response = await fetch(csvPath);
+                if (!response.ok) throw new Error(`Could not load grade file: ${csvPath} (Status: ${response.status})`);
+                
+                const csvText = await response.text();
+                Papa.parse(csvText, {
                     header: true,
                     skipEmptyLines: true,
-                    complete: (results) => processGradeData(results.data, studentId, selectedCourse),
+                    complete: (results) => {
+                        processGradeData(results.data, studentId, selectedCourse);
+                    },
                     error: (error) => { throw new Error('Failed to parse CSV file.'); }
                 });
     
             } catch (error) {
                 console.error('Search failed:', error);
                 noResultsMessage.style.display = 'block';
+                alert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`);
             } finally {
                 showLoading(false);
             }
         }
 
-        // [修改] 處理簡化後的 CSV
+        function waitForPapaParse(timeout = 1000) {
+            return new Promise((resolve, reject) => {
+                if (typeof Papa !== 'undefined' && typeof Papa.parse === 'function') {
+                    resolve();
+                    return;
+                }
+                setTimeout(() => {
+                    if (typeof Papa !== 'undefined' && typeof Papa.parse === 'function') {
+                        resolve();
+                    } else {
+                        reject(new Error('Papa Parse library is not available.'));
+                    }
+                }, 100);
+            });
+        }
+
+        // =========================================================================
+        //  ↓↓↓ 這裡是修改的核心 ↓↓↓
+        // =========================================================================
         function processGradeData(data, studentId, courseInfo) {
             const config = {};
-            // [修改] CSV 設定檔現在只有 3 行 (type, weight, category)
-            const configRows = data.slice(0, 3);
+            // [修改] 讀取前 4 行作為設定 (ID, type, weight, category)
+            const configRows = data.slice(0, 4); 
             const headers = Object.keys(data[0] || {});
 
             headers.forEach(h => { config[h] = {}; });
             configRows.forEach(row => {
-                const type = row.ID;
-                if (type) {
+                // 使用第一欄的值 ('ID', 'type', 'weight', 'category') 作為設定的鍵
+                const keyName = row.ID; 
+                if (keyName) {
                     headers.forEach(h => {
-                        if (h !== 'ID') config[h][type] = row[h];
+                        // 排除第一欄本身，只處理成績項目欄
+                        if (h !== 'ID') {
+                            config[h][keyName] = row[h];
+                        }
                     });
                 }
             });
 
-            // [修改] 學生資料從第 4 行 (索引 3) 開始
-            const studentRows = data.slice(3);
+            // [修改] 從第 5 行 (索引為 4) 開始是學生資料
+            const studentRows = data.slice(4); 
             const studentData = studentRows.find(row => row.ID && row.ID.toUpperCase() === studentId);
 
             if (!studentData) {
@@ -1020,23 +1209,24 @@ document.addEventListener('DOMContentLoaded', function() {
             renderResults(studentData, config, courseInfo);
             resultsContainer.style.display = 'block';
         }
+        // =========================================================================
+        //  ↑↑↑ 這裡是修改的核心 ↑↑↑
+        // =========================================================================
     
-        // [修改] 使用新的 getDisplayName 函式
         function renderResults(student, config, courseInfo) {
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
             resultCourseCode.textContent = courseInfo.code;
             resultStudentId.textContent = student.ID;
             gradeDetailsBody.innerHTML = '';
     
-            let subtotal = 0;
+            const categoryTotals = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0 };
+            const categoryWeights = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0 };
             let totalBonus = 0;
-            const categoryTotals = { assignments: 0, attendance: 0, midterm: 0, final: 0, bonus: 0 };
-            const categoryWeights = { assignments: 0, attendance: 0, midterm: 0, final: 0, bonus: 0 };
+            let subtotal = 0;
     
             Object.keys(student).forEach(key => {
-                if (key === 'ID' || !config[key]) return;
+                if (key === 'ID' || !config[key] || !config[key].category) return;
     
-                // [修改] 調用 getDisplayName 獲取名稱
                 const displayName = getDisplayName(key);
                 if (!displayName) return;
                 
@@ -1047,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (category !== 'bonus') {
                     subtotal += weightedScore;
-                    if(category) {
+                    if (category in categoryTotals) {
                         categoryTotals[category] += weightedScore;
                         categoryWeights[category] += weight;
                     }
@@ -1092,7 +1282,7 @@ document.addEventListener('DOMContentLoaded', function() {
                  studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
             }
             if(resultsContainer.style.display === 'block' && studentIdInput.value) {
-                performSearch(); // 重新渲染結果以更新語言
+                performSearch();
             }
         }
 
