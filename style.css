@@ -449,9 +449,10 @@ body.menu-open {
 
 .dropdown-menu li a {
     font-weight: 400;
-    padding: 12px 20px;
+    padding: 12px 10px;
     color: #ffffff;
-    justify-content: flex-start;
+    justify-content: center;
+    text-align: center;
     border-radius: 0;
 }
 
