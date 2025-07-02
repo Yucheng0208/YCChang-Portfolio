@@ -1080,7 +1080,7 @@ body.menu-open {
 
 .video-window-glw0pyx-nav button:hover {
     background-color: var(--tech-cyan);
-    color: var(--dark-bg);
+    color: var,--dark-bg;
 }
 
 .video-window-glw0pyx-more-btn {
@@ -2038,6 +2038,24 @@ body.show-zh .lang-en { display: none; }
     color: #fff;
     font-weight: 600;
     white-space: nowrap;
+    text-align: center; /* 標題置中對齊 */
+}
+
+/* 數值欄位右對齊（第2、3、4欄） */
+.grade-inquiry-page .grade-details th:nth-child(2),
+.grade-inquiry-page .grade-details th:nth-child(3),
+.grade-inquiry-page .grade-details th:nth-child(4),
+.grade-inquiry-page .grade-details td:nth-child(2),
+.grade-inquiry-page .grade-details td:nth-child(3),
+.grade-inquiry-page .grade-details td:nth-child(4) {
+    text-align: right;
+}
+
+/* 標題仍然置中 */
+.grade-inquiry-page .grade-details thead th:nth-child(2),
+.grade-inquiry-page .grade-details thead th:nth-child(3),
+.grade-inquiry-page .grade-details thead th:nth-child(4) {
+    text-align: center;
 }
 
 .grade-inquiry-page .grade-details tbody tr:hover {
@@ -2056,7 +2074,7 @@ body.show-zh .lang-en { display: none; }
 .grade-inquiry-page .grade-details .total-score {
     font-size: 1.2rem;
     color: var(--tech-cyan);
-    text-align: center;
+    text-align: right;
 }
 
 .grade-inquiry-page .grade-details tfoot tr:last-child {
@@ -2653,5 +2671,300 @@ body.show-zh .lang-en { display: none; }
     .grade-inquiry-page .grade-details th,
     .grade-inquiry-page .grade-details td {
         padding: 10px 8px;
+    }
+
+    /* 在手機版本上保持對齊規則 */
+    .grade-inquiry-page .grade-details thead th {
+        text-align: center;
+    }
+
+    .grade-inquiry-page .grade-details th:nth-child(2),
+    .grade-inquiry-page .grade-details th:nth-child(3),
+    .grade-inquiry-page .grade-details th:nth-child(4),
+    .grade-inquiry-page .grade-details td:nth-child(2),
+    .grade-inquiry-page .grade-details td:nth-child(3),
+    .grade-inquiry-page .grade-details td:nth-child(4) {
+        text-align: right;
+    }
+
+    .grade-inquiry-page .grade-details thead th:nth-child(2),
+    .grade-inquiry-page .grade-details thead th:nth-child(3),
+    .grade-inquiry-page .grade-details thead th:nth-child(4) {
+        text-align: center;
+    }
+}
+
+/* === CUSTOM MODAL STYLES === */
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    /* 確保在所有情況下都能居中 */
+    overflow: hidden;
+}
+
+.custom-modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--light-bg) 0%, var(--dark-bg) 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    min-width: 400px;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(100, 210, 255, 0.2);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    position: relative;
+    /* 確保內容在縮放時保持居中 */
+    margin: auto;
+    /* 防止內容超出螢幕 */
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.custom-modal.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-title {
+    color: var(--tech-cyan);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.modal-title::before {
+    content: "🔐";
+    font-size: 1.2rem;
+}
+
+.modal-body {
+    margin-bottom: 2rem;
+}
+
+.modal-message {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(100, 210, 255, 0.3);
+    border-radius: 8px;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    text-align: center;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.modal-input:focus {
+    border-color: var(--tech-cyan);
+    box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.modal-input::placeholder {
+    color: rgba(201, 209, 217, 0.5);
+    letter-spacing: 1px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-btn-primary {
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    color: white;
+}
+
+.modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4);
+}
+
+.modal-btn-secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(201, 209, 217, 0.3);
+}
+
+.modal-btn-secondary:hover {
+    background-color: rgba(201, 209, 217, 0.1);
+    border-color: rgba(201, 209, 217, 0.5);
+}
+
+.modal-error {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: none;
+    text-align: center;
+}
+
+/* 響應式設計 - 使用縮放來適應不同螢幕尺寸 */
+
+/* 平板大小 */
+@media (max-width: 992px) {
+    .custom-modal.show .modal-content {
+        transform: scale(0.9);
+    }
+}
+
+/* 平板小尺寸和大手機 */
+@media (max-width: 768px) {
+    .custom-modal.show .modal-content {
+        transform: scale(0.8);
+    }
+}
+
+/* 一般手機 */
+@media (max-width: 480px) {
+    .custom-modal.show .modal-content {
+        transform: scale(0.75);
+        /* 移除 margin，保持完美居中 */
+    }
+    
+    .modal-content {
+        min-width: auto;
+        padding: 1.5rem;
+        /* 確保在小螢幕上有適當邊距，但不影響居中 */
+        margin: 1rem;
+        width: calc(100vw - 2rem);
+        max-width: 500px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-btn {
+        width: 100%;
+    }
+}
+
+/* 小螢幕手機 */
+@media (max-width: 360px) {
+    .custom-modal.show .modal-content {
+        transform: scale(0.7);
+        /* 移除 margin，保持完美居中 */
+    }
+    
+    .modal-content {
+        padding: 1.2rem;
+        /* 確保在極小螢幕上有適當邊距 */
+        margin: 0.5rem;
+        width: calc(100vw - 1rem);
+        max-width: 500px;
+    }
+    
+    .modal-title {
+        font-size: 1rem;
+    }
+    
+    .modal-message {
+        font-size: 0.8rem;
+    }
+    
+    .modal-input {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
+    }
+    
+    .modal-btn {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.8rem;
+    }
+}
+
+/* 額外的居中保障 - 針對特殊情況 */
+.custom-modal {
+    /* 使用 inset 確保完整覆蓋 */
+    inset: 0;
+    /* 強制居中對齊 */
+    place-items: center;
+    /* 禁用用戶選擇以避免拖拽 */
+    user-select: none;
+}
+
+/* 確保模態內容在任何縮放下都居中 */
+.custom-modal .modal-content {
+    /* 使用 flex 的 margin auto 確保居中 */
+    margin: auto;
+    /* 防止內容被壓縮 */
+    flex-shrink: 0;
+}
+
+/* 在極小螢幕上的特殊處理 */
+@media (max-width: 320px) {
+    .custom-modal.show .modal-content {
+        transform: scale(0.65);
+    }
+    
+    .modal-content {
+        width: calc(100vw - 0.5rem);
+        margin: 0.25rem;
+        padding: 1rem;
+    }
+    
+    .modal-title {
+        font-size: 1rem;
+    }
+    
+    .modal-message {
+        font-size: 0.8rem;
+    }
+    
+    .modal-input {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
+    }
+    
+    .modal-btn {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.8rem;
     }
 }

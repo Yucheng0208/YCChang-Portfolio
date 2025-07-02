@@ -1117,12 +1117,201 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     
+        // --- 自定義彈窗功能 ---
+        function createModal() {
+            const modal = document.createElement('div');
+            modal.className = 'custom-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal-message"></p>
+                        <input type="text" class="modal-input" maxlength="6" />
+                        <div class="modal-error"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn modal-btn-secondary" data-action="cancel">
+                            <span class="lang-en">Cancel</span>
+                            <span class="lang-zh">取消</span>
+                        </button>
+                        <button class="modal-btn modal-btn-primary" data-action="confirm">
+                            <span class="lang-en">Confirm</span>
+                            <span class="lang-zh">確認</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // 防止頁面滾動干擾彈窗居中位置
+            document.body.style.overflow = 'hidden';
+            document.body.appendChild(modal);
+            
+            // 添加清理函數到模態框對象
+            modal.cleanup = function() {
+                document.body.style.overflow = '';
+            };
+            
+            return modal;
+        }
+
+        function showAccessCodeModal() {
+            return new Promise((resolve) => {
+                const modal = createModal();
+                const titleEl = modal.querySelector('.modal-title');
+                const messageEl = modal.querySelector('.modal-message');
+                const inputEl = modal.querySelector('.modal-input');
+                const errorEl = modal.querySelector('.modal-error');
+                const cancelBtn = modal.querySelector('[data-action="cancel"]');
+                const confirmBtn = modal.querySelector('[data-action="confirm"]');
+
+                // 設定內容
+                titleEl.innerHTML = isChinese() ? '輸入查詢代碼' : 'Enter Access Code';
+                messageEl.textContent = isChinese() 
+                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)：' 
+                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers):';
+                inputEl.placeholder = '＊＊＊＊＊＊';
+
+                // 顯示彈窗
+                setTimeout(() => modal.classList.add('show'), 10);
+                inputEl.focus();
+
+                // 即時驗證
+                inputEl.addEventListener('input', () => {
+                    const value = inputEl.value;
+                    if (value.length > 0 && !validateAccessCode(value)) {
+                        errorEl.textContent = isChinese() 
+                            ? '格式錯誤！請輸入6位英文字母和數字' 
+                            : 'Invalid format! Please enter 6 letters and numbers';
+                        errorEl.style.display = 'block';
+                        confirmBtn.disabled = true;
+                        confirmBtn.style.opacity = '0.5';
+                    } else {
+                        errorEl.style.display = 'none';
+                        confirmBtn.disabled = false;
+                        confirmBtn.style.opacity = '1';
+                    }
+                });
+
+                // Enter 鍵提交
+                inputEl.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && validateAccessCode(inputEl.value)) {
+                        confirmBtn.click();
+                    }
+                });
+
+                // 按鈕事件
+                cancelBtn.addEventListener('click', () => {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        modal.cleanup();
+                        modal.remove();
+                    }, 300);
+                    resolve(null);
+                });
+
+                confirmBtn.addEventListener('click', () => {
+                    const code = inputEl.value.trim();
+                    if (validateAccessCode(code)) {
+                        modal.classList.remove('show');
+                        setTimeout(() => {
+                            modal.cleanup();
+                            modal.remove();
+                        }, 300);
+                        resolve(code);
+                    }
+                });
+
+                // 點擊背景關閉
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        cancelBtn.click();
+                    }
+                });
+            });
+        }
+
+        function showAlert(message, isError = false) {
+            return new Promise((resolve) => {
+                const modal = createModal();
+                const titleEl = modal.querySelector('.modal-title');
+                const messageEl = modal.querySelector('.modal-message');
+                const inputEl = modal.querySelector('.modal-input');
+                const errorEl = modal.querySelector('.modal-error');
+                const cancelBtn = modal.querySelector('[data-action="cancel"]');
+                const confirmBtn = modal.querySelector('[data-action="confirm"]');
+
+                // 隱藏輸入框和取消按鈕
+                inputEl.style.display = 'none';
+                errorEl.style.display = 'none';
+                cancelBtn.style.display = 'none';
+
+                // 設定內容
+                titleEl.innerHTML = isError 
+                    ? (isChinese() ? '❌ 錯誤' : '❌ Error')
+                    : (isChinese() ? '✅ 提示' : '✅ Notice');
+                messageEl.textContent = message;
+                messageEl.style.textAlign = 'center';
+
+                if (isError) {
+                    messageEl.style.color = '#ff6b6b';
+                }
+
+                // 顯示彈窗
+                setTimeout(() => modal.classList.add('show'), 10);
+                confirmBtn.focus();
+
+                // 確認按鈕
+                confirmBtn.innerHTML = isChinese() ? '確定' : 'OK';
+                confirmBtn.addEventListener('click', () => {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        modal.cleanup();
+                        modal.remove();
+                    }, 300);
+                    resolve();
+                });
+
+                // Enter 鍵確認
+                document.addEventListener('keydown', function enterHandler(e) {
+                    if (e.key === 'Enter') {
+                        document.removeEventListener('keydown', enterHandler);
+                        confirmBtn.click();
+                    }
+                });
+
+                // 點擊背景關閉
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        confirmBtn.click();
+                    }
+                });
+            });
+        }
+
         async function performSearch() {
             const courseId = courseSelect.value;
             const studentId = studentIdInput.value.trim().toUpperCase();
 
             if (!courseId || !studentId) {
-                alert(isChinese() ? '請選擇課程並輸入學號。' : 'Please select a course and enter your Student ID.');
+                await showAlert(isChinese() ? '請選擇課程並輸入學號。' : 'Please select a course and enter your Student ID.', true);
+                return;
+            }
+
+            // 使用自定義彈窗要求輸入六位代碼
+            const accessCode = await showAccessCodeModal();
+
+            // 檢查使用者是否取消輸入
+            if (accessCode === null) {
+                return;
+            }
+
+            // 驗證代碼格式
+            if (!validateAccessCode(accessCode)) {
+                await showAlert(isChinese() 
+                    ? '代碼格式錯誤！請輸入六位由大小寫英文字母和數字組成的代碼。' 
+                    : 'Invalid code format! Please enter a 6-character code consisting of uppercase/lowercase letters and numbers.', true);
                 return;
             }
     
@@ -1143,8 +1332,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 Papa.parse(csvText, {
                     header: true,
                     skipEmptyLines: true,
-                    complete: (results) => {
-                        processGradeData(results.data, studentId, selectedCourse);
+                    complete: async (results) => {
+                        await processGradeData(results.data, studentId, selectedCourse, accessCode);
                     },
                     error: (error) => { throw new Error('Failed to parse CSV file.'); }
                 });
@@ -1152,10 +1341,16 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Search failed:', error);
                 noResultsMessage.style.display = 'block';
-                alert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`);
+                await showAlert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`, true);
             } finally {
                 showLoading(false);
             }
+        }
+
+        function validateAccessCode(code) {
+            // 檢查是否為六位字符且只包含大小寫英文字母和數字
+            const codeRegex = /^[a-zA-Z0-9]{6}$/;
+            return codeRegex.test(code);
         }
 
         function waitForPapaParse(timeout = 1000) {
@@ -1177,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // =========================================================================
         //  ↓↓↓ 這裡是修改的核心 ↓↓↓
         // =========================================================================
-        function processGradeData(data, studentId, courseInfo) {
+        async function processGradeData(data, studentId, courseInfo, accessCode) {
             const config = {};
             // [修改] 讀取前 4 行作為設定 (ID, type, weight, category)
             const configRows = data.slice(0, 4); 
@@ -1203,6 +1398,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!studentData) {
                 noResultsMessage.style.display = 'block';
+                await showAlert(isChinese() ? '找不到該學號的資料。' : 'No data found for this Student ID.', true);
+                return;
+            }
+
+            // 驗證查詢代碼
+            const studentAccessCode = studentData.Code || studentData.code; // 支援大小寫不同的欄位名
+            if (!studentAccessCode || studentAccessCode !== accessCode) {
+                await showAlert(isChinese() 
+                    ? '查詢代碼錯誤！請確認您輸入的代碼是否正確。' 
+                    : 'Access code is incorrect! Please verify the code you entered.', true);
                 return;
             }
 
@@ -1225,7 +1430,8 @@ document.addEventListener('DOMContentLoaded', function() {
             let subtotal = 0;
     
             Object.keys(student).forEach(key => {
-                if (key === 'ID' || !config[key] || !config[key].category) return;
+                // 排除 ID 欄位、沒有設定的欄位、代碼欄位
+                if (key === 'ID' || key === 'Code' || key === 'code' || !config[key] || !config[key].category) return;
     
                 const displayName = getDisplayName(key);
                 if (!displayName) return;
@@ -1233,6 +1439,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const score = parseFloat(student[key]) || 0;
                 const weight = parseFloat(config[key].weight) || 0;
                 const category = config[key].category;
+                
+                // 排除 code 類別的項目
+                if (category === 'code') return;
+                
                 const weightedScore = score * weight;
                 
                 if (category !== 'bonus') {
@@ -1248,9 +1458,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${displayName}</td>
-                    <td style="text-align: center;">${score.toFixed(1)}</td>
-                    <td style="text-align: center;">${(weight * 100).toFixed(0)}%</td>
-                    <td style="text-align: center;">${weightedScore.toFixed(2)}</td>
+                    <td>${score.toFixed(1)}</td>
+                    <td>${(weight * 100).toFixed(0)}%</td>
+                    <td>${weightedScore.toFixed(2)}</td>
                 `;
                 gradeDetailsBody.appendChild(row);
             });
