@@ -6,6 +6,7 @@
   # Co-Author(s), First Author, Corresponding Author
   date: 'August 25-26 2025'
   links:
+    DOI: '#'
 
 - category: 'conference'
   title: 'Modular Model Stacking Based on YOLO: A Novel Approach for Model Extension Without Retraining'
@@ -15,6 +16,7 @@
   # Co-Author(s), First Author, Corresponding Author
   date: 'June 27-28 2025'
   links:
+    DOI: '#'
 
 - category: 'conference'
   title: 'Pixel-Level Cryptographic Hashing for Image Authentication and Recovery'
@@ -24,6 +26,7 @@
   # Co-Author(s), First Author, Corresponding Author
   date: '2025-06-27'
   links:
+    DOI: '#'
 
 - category: 'conference'
   title: 'Vision-based Real-time Sign Spelling System for Cross-lingual Translation using Neural Models'
@@ -33,6 +36,7 @@
   # Co-Author(s), First Author, Corresponding Author
   date: 'June 27-28 2025'
   links:
+    DOI: '#'
 
 - category: 'conference'
   title: 'Research on the Development of New Energy Technologies and Strategic Layout in Asia from a Global Perspective'
@@ -42,6 +46,7 @@
   # Co-Author(s), First Author, Corresponding Author
   date: 'June 27-28 2025'
   links:
+    DOI: '#'
 
 - category: 'conference'
   title: 'Comparative Analysis of Real-time Multi-person Pose Detection in Electrical Industrial Safety Scenarios using YOLOv8-Pose and OpenPose'
@@ -51,6 +56,7 @@
   # Co-Author(s), First Author, Corresponding Author
   date: 'April 19-21 2024'
   links:
+    DOI: 'https://doi.org/10.1109/ICEIB61477.2024.10602595'
 
 - category: 'conference'
   title: 'Using Real-time Integrated Computer Vision and Deep Learning for Advanced Factory Safety'
@@ -60,15 +66,17 @@
   # Co-Author(s), First Author, Corresponding Author
   date: 'April 19-21 2024'
   links:
+    DOI: 'https://doi.org/10.1109/ICEIB61477.2024.10602722'
 
 - category: 'conference'
-  title: 'Leveraging Advanced Computer Vision for Hazardous Behavior Monitoring in Campus Safety Maintenance'
+  title: 'Leveraging Advanced Computer Vision for Hazardous Behavior Monitoring on Campus Safety Maintenance'
   authors: 'Shang-Te Tsai, Zong-Rong Wu, Yu-Cheng Chang*, Wei-Hsin Lin, Wei Chien*'
   venue: 'IEEE ICEIB 2024'
   authorrole: 'Corresponding Author'
   # Co-Author(s), First Author, Corresponding Author
   date: 'April 19-21 2024'
   links:
+    DOI: 'https://doi.org/10.1109/ICEIB61477.2024.10602700'
 
 - category: 'conference'
   title: '應用電腦視覺的手語注音符號辨識與影像分析研究'
@@ -105,18 +113,14 @@
   # Co-Author(s), First Author, Corresponding Author
   date: '16-17 April 2023'
   links:
+    DOI: 'https://doi.org/10.1109/ICEIB57887.2023.10169919'
 
 - category: 'conference'
   title: 'AI-DAS: An AI-based Driving Assistance System for Scooters for Traffic Accident Avoidance'
   authors: 'Yen-Da Chen, Yu-Cheng Chang*'
   venue: 'IEEE ECBIOS 2023'
   links:
-    scholar: ''
-    researchgate: ''
-    ieee: ''
-    pdf: ''
-    isbn: ''
-    url: ''
+    DOI: 'https://doi.org/10.3390/engproc2023055058'
   authorrole: 'Corresponding Author'
   # Co-Author(s), First Author, Corresponding Author
   date: '2-4 June, 2023'
