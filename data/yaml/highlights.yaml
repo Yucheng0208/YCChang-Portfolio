@@ -1,3 +1,12 @@
+- title: "「2025 IEEE ICCBE國際研討會」於馬來西亞拉曼理工大學檳城分校盛大舉行 亞洲物聯網聯盟共創智慧未來"
+  category: "Media"
+  position: "Researcher"
+  location: "TAR UMT, Penang, Malaysia"
+  organizer: "TAR UMT x IIKII x IEEE ICCBE x AIOTA"
+  date: "June 27, 2025"
+  links: 
+    公民新聞: "https://www.peopo.org/news/813158"
+
 - title: "旺宏科學獎及大專校院資訊應用服務創新競賽"
   category: "Instruction"
   position: "協同指導教師"
@@ -8,11 +17,11 @@
 - title: "教育部接見2023年及2024年著名國際發明展"
   category: "Media"
   position: "金牌得獎學生代表"
-  location: ""
-  organizer: "教育部 技術及職業教育司"
+  location: "NCC國家通訊傳播委員會"
+  organizer: "教育部技術及職業教育司"
   date: "October 25, 2024"
   links: 
-    News: "https://depart.moe.edu.tw/ed2300/News_Content.aspx?n=5D06F8190A65710E&s=8C542700CE396E6D" 
+    即時新聞: "https://depart.moe.edu.tw/ed2300/News_Content.aspx?n=5D06F8190A65710E&s=8C542700CE396E6D" 
 
 - title: "參加2024俄羅斯阿基米德發明展榮獲2面金牌及日本、伊朗國際大獎殊榮"
   category: "Media"
@@ -21,7 +30,7 @@
   organizer: "台灣發明商品促進協會"
   date: "April 3, 2024"
   links: 
-    News: "https://news.taiwannet.com.tw/c7/125599/%E9%8C%A2%E5%A8%81%E6%95%99%E6%8E%88%E5%89%B5%E6%96%B0%E6%88%90%E6%9E%9C%E5%8F%97%E7%9F%9A%E7%9B%AE-%E5%8F%83%E5%8A%A02024%E4%BF%84%E7%BE%85%E6%96%AF%E9%98%BF%E5%9F%BA%E7%B1%B3%E5%BE%B7%E7%99%BC%E6%98%8E%E5%B1%95%E6%A6%AE%E7%8D%B22%E9%9D%A2%E9%87%91%E7%89%8C%E5%8F%8A%E6%97%A5%E6%9C%AC-%E4%BC%8A%E6%9C%97%E5%9C%8B%E9%9A%9B%E5%A4%A7%E7%8D%8E%E6%AE%8A%E6%A6%AE.html" 
+    台灣產經新聞網: "https://news.taiwannet.com.tw/c7/125599/%E9%8C%A2%E5%A8%81%E6%95%99%E6%8E%88%E5%89%B5%E6%96%B0%E6%88%90%E6%9E%9C%E5%8F%97%E7%9F%9A%E7%9B%AE-%E5%8F%83%E5%8A%A02024%E4%BF%84%E7%BE%85%E6%96%AF%E9%98%BF%E5%9F%BA%E7%B1%B3%E5%BE%B7%E7%99%BC%E6%98%8E%E5%B1%95%E6%A6%AE%E7%8D%B22%E9%9D%A2%E9%87%91%E7%89%8C%E5%8F%8A%E6%97%A5%E6%9C%AC-%E4%BC%8A%E6%9C%97%E5%9C%8B%E9%9A%9B%E5%A4%A7%E7%8D%8E%E6%AE%8A%E6%A6%AE.html" 
 
 - title: "新北發明成果帶你看創新不間斷"
   category: "Media"
@@ -30,7 +39,7 @@
   organizer: "新北市政府經濟發展局"
   date: "January 10, 2024"
   links: 
-    News: "https://www.ntpc.gov.tw/ch/home.jsp?id=28&dataserno=202401100035"
+    市政新聞: "https://www.ntpc.gov.tw/ch/home.jsp?id=28&dataserno=202401100035"
 
 - title: "連續3年指導科學展覽及各項賽事前進全國屢獲佳績"
   category: "Instruction"
@@ -88,7 +97,7 @@
   organizer: "財團法人人工智慧科技基金會"
   date: "October 25, 2020"
   links: 
-    News: “https://edge.aif.tw/ai-in-taiwan-hackathon-report/”
+    知勢新聞: “https://edge.aif.tw/ai-in-taiwan-hackathon-report”
 
 - title: "不為獲獎從科展中體現108課綱「帶著走的能力」"
   category: "Media"
@@ -97,7 +106,7 @@
   organizer: "國立教育廣播電臺"
   date: "July 30, 2020"
   links: 
-    Broadcast: “http://ner.gov.tw/news/5f228112f4c96b0006ef24bc”
+    國立教育廣播電台: “https://www.ner.gov.tw/news/5f228112f4c96b0006ef24bc”
 
 - title: "新北市108學年度科學展覽會成果專輯"
   category: "Media"
@@ -131,4 +140,4 @@
   organizer: "新北市教育局, 遠見雜誌"
   date: "March, 2017"
   links: 
-    eBook: “https://code.ntpc.edu.tw/books/%E3%80%8A%E5%BD%88%E6%8C%87%E7%8E%A9%E8%BD%89%E4%B8%96%E7%95%8C%E3%80%8B.pdf”
+    PDF: “https://code.ntpc.edu.tw/books/%E3%80%8A%E5%BD%88%E6%8C%87%E7%8E%A9%E8%BD%89%E4%B8%96%E7%95%8C%E3%80%8B.pdf”
