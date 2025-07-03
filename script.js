@@ -292,6 +292,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
+
+        // Timeline Date Present Detection
+        const timelineDates = document.querySelectorAll('.timeline-date');
+        if (timelineDates.length > 0) {
+            timelineDates.forEach(dateElement => {
+                if (dateElement.textContent.includes('Present')) {
+                    dateElement.setAttribute('data-contains-present', 'true');
+                }
+            });
+        }
     }
     
     // --- 函式：載入導覽列並初始化 ---
