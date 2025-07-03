@@ -2,23 +2,42 @@
 
 ## Folder Tree
 ```
-│
-├── index.html           # Home
-├── honors.html          # Honors
-├── publications.html    # Publications
-├── projects.html        # Projects
-├── works.html           # Works
-├── highlights.html      # Highlights
-├── honors.yaml          # Honors Data
-├── publications.yaml    # Publications Data
-├── project.yaml         # Projects Data
-├── works.yaml           # Works Data
-├── highlights.yaml      # Highlight Data
-├── style.css            # Website Style
-├── script.js            # Website Script
-│
-└── images/
-    ├── logo.svg
-    ├── slide.png
-    └── slide1.png
+├── CNAME
+├── data
+│   ├── cv.pdf
+│   ├── grades
+│   │   └── test.csv
+│   └── yaml
+│       ├── grades.yaml
+│       ├── highlights.yaml
+│       ├── honors.yaml
+│       ├── materials.yaml
+│       ├── projects.yaml
+│       ├── publications.yaml
+│       └── works.yaml
+├── grades.html
+├── highlights.html
+├── honors.html
+├── images
+│   ├── logo.svg
+│   └── myphoto.jpg
+├── index.html
+├── lib-fallback.js
+├── LICENSE
+├── materials.html
+├── navbar.html
+├── projects.html
+├── publications.html
+├── README.md
+├── schedule.html
+├── script.js
+├── slides
+│   ├── slide1.png
+│   ├── slide2.png
+│   ├── slide3.png
+│   ├── slide4.png
+│   ├── slide5.png
+│   └── slide6.png
+├── style.css
+└── works.html
 ```
