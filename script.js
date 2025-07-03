@@ -74,7 +74,7 @@ window.jsyaml = window.jsyaml || {
                 result.push(currentItem);
             }
             
-            console.log('YAML parsing completed:', result);
+            // console.log('YAML parsing completed:', result); // 可以註解掉以保持控制台乾淨
             return result;
         } catch (error) {
             console.error('YAML parsing error:', error);
@@ -99,28 +99,21 @@ window.Papa = window.Papa || {
             
             const headers = lines[0].split(',').map(h => h.trim());
             
-            if (options.header) {
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (!line) continue;
-                    
-                    const values = line.split(',').map(v => v.trim());
-                    const row = {};
-                    
-                    headers.forEach((header, index) => {
-                        row[header] = values[index] || '';
-                    });
-                    
-                    result.push(row);
-                }
-            } else {
-                for (let i = 1; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (!line) continue;
-                    
-                    const values = line.split(',').map(v => v.trim());
-                    result.push(values);
-                }
+            // Papa.js 的 header:true 會將第一行視為標頭，並從第二行開始解析
+            // 我們的邏輯也是如此，但 Papa.js 的原始實現可能會將標頭行也作為一個數據對象返回
+            // 這裡我們直接實現我們需要的邏輯
+            for (let i = 1; i < lines.length; i++) { // 從 i = 1 開始，跳過標頭行
+                const line = lines[i].trim();
+                if (!line) continue;
+                
+                const values = line.split(',').map(v => v.trim());
+                const row = {};
+                
+                headers.forEach((header, index) => {
+                    row[header] = values[index] || '';
+                });
+                
+                result.push(row);
             }
             
             const parseResult = { data: result };
@@ -140,7 +133,7 @@ window.Papa = window.Papa || {
     }
 };
 
-console.log('Local libraries loaded successfully!');
+// console.log('Local libraries loaded successfully!'); // 可以註解掉以保持控制台乾淨
 
 // =======================================================
 //  👋 HEY, CODE EXPLORER! THANKS FOR VISITING!
@@ -208,9 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const navLinks = document.querySelector('.nav-links');
         if (hamburgerBtn && navLinks) {
             hamburgerBtn.addEventListener('click', () => {
-                // === MODIFIED: Add/remove class on body to control scrolling ===
                 document.body.classList.toggle('menu-open');
-
                 hamburgerBtn.classList.toggle('is-active');
                 navLinks.classList.toggle('is-active');
             });
@@ -267,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         dropdownToggles.forEach(toggle => {
             toggle.addEventListener('click', (event) => {
-                // 檢查是否在手機模式下 (漢堡按鈕是可見的)
                 if (hamburgerBtn && window.getComputedStyle(hamburgerBtn).display !== 'none') {
                     event.preventDefault();
                     const parentLi = toggle.closest('.nav-item-dropdown');
@@ -308,7 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadNavbarAndInit() {
         const navbarContainer = document.getElementById('navbar-container');
         if (!navbarContainer) {
-            // 如果頁面沒有導覽列容器，仍然執行通用功能初始化 (例如頁尾年份)
             console.warn('Navbar container (#navbar-container) not found. Initializing other common features.');
             initializeCommonFeatures(); 
             return;
@@ -321,17 +310,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const navbarHTML = await response.text();
             navbarContainer.innerHTML = navbarHTML;
-
-            // **關鍵步驟**：在導覽列的 HTML 被插入到頁面後，才執行初始化
             initializeCommonFeatures();
-
         } catch (error) {
             console.error('Error loading navbar:', error);
             navbarContainer.innerHTML = '<p style="color: red; text-align: center; padding: 1rem;">Error: Navigation bar could not be loaded.</p>';
         }
     }
 
-    // --- 執行載入與初始化 ---
     loadNavbarAndInit();
 
 
@@ -539,24 +524,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // 高光顯示作者名字
         function highlightAuthorName(text) {
             if (!text) return text;
-            const namePatterns = [
-                'Yu-Cheng Chang\\*?',
-                'Chang Yu-Cheng\\*?',
-                'Chang, Yu-Cheng\\*?',
-                'Yu-Cheng Chang',
-                'Chang Yu-Cheng',
-                '張育丞'
-            ];
-            
+            const namePatterns = [ 'Yu-Cheng Chang\\*?', 'Chang Yu-Cheng\\*?', 'Chang, Yu-Cheng\\*?', 'Yu-Cheng Chang', 'Chang Yu-Cheng', '張育丞' ];
             let highlightedText = text;
             namePatterns.forEach(pattern => {
                 const regex = new RegExp(`(${pattern})`, 'gi');
                 highlightedText = highlightedText.replace(regex, '<mark class="author-highlight">$1</mark>');
             });
-            
             return highlightedText;
         }
         
@@ -576,40 +551,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // 高光顯示作者名字
         function highlightAuthorName(text) {
             if (!text) return text;
-            const namePatterns = [
-                'Yu-Cheng Chang\\*',
-                'Yu-Cheng Chang',
-                'Chang Yu-Cheng\\*',
-                'Chang Yu-Cheng',
-                'Chang, Yu-Cheng\\*',
-                'Chang, Yu-Cheng',
-                'Ryan Chang\\*',
-                'Ryan Chang',
-                'Chang Ryan\\*',
-                'Chang Ryan',
-                'Yu-Cheng (Ryan) Chang\\*',
-                'Yu-Cheng (Ryan) Chang',
-                'Ryan Yu-Cheng Chang\\*',
-                'Ryan Yu-Cheng Chang',
-                '張育丞\\*',
-                '張育丞',
-                '育丞 張\\*',
-                '育丞 張',
-            ];
-            
+            const namePatterns = [ 'Yu-Cheng Chang\\*', 'Yu-Cheng Chang', 'Chang Yu-Cheng\\*', 'Chang Yu-Cheng', 'Chang, Yu-Cheng\\*', 'Chang, Yu-Cheng', 'Ryan Chang\\*', 'Ryan Chang', 'Chang Ryan\\*', 'Chang Ryan', 'Yu-Cheng (Ryan) Chang\\*', 'Yu-Cheng (Ryan) Chang', 'Ryan Yu-Cheng Chang\\*', 'Ryan Yu-Cheng Chang', '張育丞\\*', '張育丞', '育丞 張\\*', '育丞 張', ];
             let highlightedText = text;
             namePatterns.forEach(pattern => {
                 const regex = new RegExp(`(${pattern})`, 'gi');
                 highlightedText = highlightedText.replace(regex, '<mark class="author-highlight">$1</mark>');
             });
-            
             return highlightedText;
         }
-        
-        // 對可能包含名字的欄位進行高光處理
+
         const highlightedMembers = highlightAuthorName(honor.members || '');
         const highlightedSupervisor = highlightAuthorName(honor.supervisor || '');
         const highlightedTitle = highlightAuthorName(honor.title || '');
@@ -666,86 +618,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- 4. 初始化所有列表頁 (表格) ---
-    initializeListPage({
-        pageSelector: '.publication-page',
-        yamlPath: './data/yaml/publications.yaml',
-        tableBodyId: 'publication-table-body',
-        filterBarId: 'publication-filter',
-        searchInputId: 'publication-search',
-        noResultsId: 'no-results',
-        paginationContainerId: 'pagination-container',
-        pageInfoId: 'page-info',
-        pageInputId: 'page-input',
-        firstPageBtnId: 'first-page',
-        prevPageBtnId: 'prev-page',
-        nextPageBtnId: 'next-page',
-        lastPageBtnId: 'last-page',
-        renderRowFunction: renderPublicationRow
-    });
-    initializeListPage({
-        pageSelector: '.honor-page',
-        yamlPath: './data/yaml/honors.yaml',
-        tableBodyId: 'honor-table-body',
-        filterBarId: 'honor-filter',
-        searchInputId: 'honor-search',
-        noResultsId: 'no-results-honor',
-        paginationContainerId: 'pagination-container-honor',
-        pageInfoId: 'page-info-honor',
-        pageInputId: 'page-input-honor',
-        firstPageBtnId: 'first-page-honor',
-        prevPageBtnId: 'prev-page-honor',
-        nextPageBtnId: 'next-page-honor',
-        lastPageBtnId: 'last-page-honor',
-        renderRowFunction: renderHonorRow
-    });
-    initializeListPage({
-        pageSelector: '.highlight-page',
-        yamlPath: './data/yaml/highlights.yaml',
-        tableBodyId: 'highlight-table-body',
-        filterBarId: 'highlight-filter',
-        searchInputId: 'highlight-search',
-        noResultsId: 'no-results-highlight',
-        paginationContainerId: 'pagination-container-highlight',
-        pageInfoId: 'page-info-highlight',
-        pageInputId: 'page-input-highlight',
-        firstPageBtnId: 'first-page-highlight',
-        prevPageBtnId: 'prev-page-highlight',
-        nextPageBtnId: 'next-page-highlight',
-        lastPageBtnId: 'last-page-highlight',
-        renderRowFunction: renderHighlightRow
-    });
-    initializeListPage({
-        pageSelector: '.project-page',
-        yamlPath: './data/yaml/projects.yaml',
-        tableBodyId: 'project-table-body',
-        filterBarId: 'project-filter',
-        searchInputId: 'project-search',
-        noResultsId: 'no-results-project',
-        paginationContainerId: 'pagination-container-project',
-        pageInfoId: 'page-info-project',
-        pageInputId: 'page-input-project',
-        firstPageBtnId: 'first-page-project',
-        prevPageBtnId: 'prev-page-project',
-        nextPageBtnId: 'next-page-project',
-        lastPageBtnId: 'last-page-project',
-        renderRowFunction: renderProjectRow
-    });
-    initializeListPage({
-        pageSelector: '.work-page',
-        yamlPath: './data/yaml/works.yaml',
-        tableBodyId: 'work-table-body',
-        filterBarId: 'work-filter',
-        searchInputId: null,
-        noResultsId: 'no-results-work',
-        paginationContainerId: 'pagination-container-work',
-        pageInfoId: 'page-info-work',
-        pageInputId: 'page-input-work',
-        firstPageBtnId: 'first-page-work',
-        prevPageBtnId: 'prev-page-work',
-        nextPageBtnId: 'next-page-work',
-        lastPageBtnId: 'last-page-work',
-        renderRowFunction: renderWorkRow
-    });
+    initializeListPage({ pageSelector: '.publication-page', yamlPath: './data/yaml/publications.yaml', tableBodyId: 'publication-table-body', filterBarId: 'publication-filter', searchInputId: 'publication-search', noResultsId: 'no-results', paginationContainerId: 'pagination-container', pageInfoId: 'page-info', pageInputId: 'page-input', firstPageBtnId: 'first-page', prevPageBtnId: 'prev-page', nextPageBtnId: 'next-page', lastPageBtnId: 'last-page', renderRowFunction: renderPublicationRow });
+    initializeListPage({ pageSelector: '.honor-page', yamlPath: './data/yaml/honors.yaml', tableBodyId: 'honor-table-body', filterBarId: 'honor-filter', searchInputId: 'honor-search', noResultsId: 'no-results-honor', paginationContainerId: 'pagination-container-honor', pageInfoId: 'page-info-honor', pageInputId: 'page-input-honor', firstPageBtnId: 'first-page-honor', prevPageBtnId: 'prev-page-honor', nextPageBtnId: 'next-page-honor', lastPageBtnId: 'last-page-honor', renderRowFunction: renderHonorRow });
+    initializeListPage({ pageSelector: '.highlight-page', yamlPath: './data/yaml/highlights.yaml', tableBodyId: 'highlight-table-body', filterBarId: 'highlight-filter', searchInputId: 'highlight-search', noResultsId: 'no-results-highlight', paginationContainerId: 'pagination-container-highlight', pageInfoId: 'page-info-highlight', pageInputId: 'page-input-highlight', firstPageBtnId: 'first-page-highlight', prevPageBtnId: 'prev-page-highlight', nextPageBtnId: 'next-page-highlight', lastPageBtnId: 'last-page-highlight', renderRowFunction: renderHighlightRow });
+    initializeListPage({ pageSelector: '.project-page', yamlPath: './data/yaml/projects.yaml', tableBodyId: 'project-table-body', filterBarId: 'project-filter', searchInputId: 'project-search', noResultsId: 'no-results-project', paginationContainerId: 'pagination-container-project', pageInfoId: 'page-info-project', pageInputId: 'page-input-project', firstPageBtnId: 'first-page-project', prevPageBtnId: 'prev-page-project', nextPageBtnId: 'next-page-project', lastPageBtnId: 'last-page-project', renderRowFunction: renderProjectRow });
+    initializeListPage({ pageSelector: '.work-page', yamlPath: './data/yaml/works.yaml', tableBodyId: 'work-table-body', filterBarId: 'work-filter', searchInputId: null, noResultsId: 'no-results-work', paginationContainerId: 'pagination-container-work', pageInfoId: 'page-info-work', pageInputId: 'page-input-work', firstPageBtnId: 'first-page-work', prevPageBtnId: 'prev-page-work', nextPageBtnId: 'next-page-work', lastPageBtnId: 'last-page-work', renderRowFunction: renderWorkRow });
 
     // --- 5. 首頁影音滑動視窗 ---
     (function setupVideoWindow() {
@@ -930,7 +807,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const selectedSemester = semesterFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
             const filteredCourses = allCourses.filter(course => {
-                // 使用 educational 做分類，將按鈕值映射到對應的 educational 值
                 let educationalMatch = false;
                 if (activeFilter === 'all') {
                     educationalMatch = true;
@@ -1028,7 +904,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
 
     // =======================================================
-    //  9. 成績查詢頁 (Grade Inquiry Page) 專用邏輯  [MODIFIED]
+    //  9. 成績查詢頁 (Grade Inquiry Page) 專用邏輯  [INTEGRATED]
     // =======================================================
     (function setupGradeInquiryPage() {
         const pageContainer = document.querySelector('.grade-inquiry-page');
@@ -1060,8 +936,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const bonusScoreEl = document.getElementById('bonus-score');
         const finalTotalScoreEl = document.getElementById('final-total-score');
         
-        let availableCourses = [];
+        // --- 新增：圖表相關元素獲取 ---
+        const adminControlsContainer = document.getElementById('admin-controls-container');
+        const chartOptionsBtn = document.getElementById('chart-options-btn');
+        const chartOptionsDropdown = document.getElementById('chart-options-dropdown');
+        const chartContainer = document.getElementById('grade-chart-container');
+        const chartCheckboxes = chartOptionsDropdown.querySelectorAll('input[type="checkbox"]');
 
+        let availableCourses = [];
+        
+        // --- 新增：圖表相關變數 ---
+        let gradeChart = null; // 用來存放 Chart.js 實例
+        let currentStudentDataForChart = []; // 儲存當前班級資料以供圖表使用
+        
         // --- 標頭翻譯字典 ---
         const headerTranslations = {
             'HW': { en: 'Homework', zh: '作業' },
@@ -1185,7 +1072,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     opt.textContent = isZh ? "請選擇一門課程" : "Please select a course";
                 } else {
                     const course = availableCourses.find(c => c.id === opt.value);
-                    if (course) opt.textContent = isZh ? `${course.name.zh} (${course.code})` : `${course.name.en} (${course.code})`;
+                    if (course) opt.textContent = isZh ? `${course.name.zh} (${c.code})` : `${course.name.en} (${c.code})`;
                 }
             });
         }
@@ -1222,11 +1109,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             
-            // 防止頁面滾動干擾彈窗居中位置
             document.body.style.overflow = 'hidden';
             document.body.appendChild(modal);
             
-            // 添加清理函數到模態框對象
             modal.cleanup = function() {
                 document.body.style.overflow = '';
             };
@@ -1245,14 +1130,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cancelBtn = modal.querySelector('[data-action="cancel"]');
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
-                // 設定內容
                 titleEl.innerHTML = isChinese() ? '🔐 輸入查詢代碼' : '🔐 Enter Access Code';
                 messageEl.innerHTML = isChinese() 
                     ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)' 
                     : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)';
                 inputEl.placeholder = '＊＊＊＊＊＊';
 
-                // 密碼顯示/隱藏功能
                 let isPasswordVisible = false;
                 toggleBtn.addEventListener('click', () => {
                     isPasswordVisible = !isPasswordVisible;
@@ -1268,11 +1151,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // 顯示彈窗
                 setTimeout(() => modal.classList.add('show'), 10);
                 inputEl.focus();
 
-                // 即時驗證
                 inputEl.addEventListener('input', () => {
                     const value = inputEl.value;
                     const isValidStudentCode = validateAccessCode(value);
@@ -1292,7 +1173,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Enter 鍵提交
                 inputEl.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
                         const value = inputEl.value;
@@ -1302,7 +1182,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // 按鈕事件
                 cancelBtn.addEventListener('click', () => {
                     modal.classList.remove('show');
                     setTimeout(() => {
@@ -1324,7 +1203,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // 點擊背景關閉
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) {
                         cancelBtn.click();
@@ -1344,13 +1222,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cancelBtn = modal.querySelector('[data-action="cancel"]');
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
-                // 隱藏輸入框、密碼切換按鈕和取消按鈕
                 inputEl.style.display = 'none';
                 toggleBtn.style.display = 'none';
                 errorEl.style.display = 'none';
                 cancelBtn.style.display = 'none';
 
-                // 設定內容
                 titleEl.innerHTML = isError 
                     ? (isChinese() ? '❌ 錯誤' : '❌ Error')
                     : (isChinese() ? '✅ 提示' : '✅ Notice');
@@ -1361,11 +1237,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     messageEl.style.color = '#ff6b6b';
                 }
 
-                // 顯示彈窗
                 setTimeout(() => modal.classList.add('show'), 10);
                 confirmBtn.focus();
 
-                // 確認按鈕
                 confirmBtn.innerHTML = isChinese() ? '確定' : 'OK';
                 confirmBtn.addEventListener('click', () => {
                     modal.classList.remove('show');
@@ -1376,7 +1250,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     resolve();
                 });
 
-                // Enter 鍵確認
                 document.addEventListener('keydown', function enterHandler(e) {
                     if (e.key === 'Enter') {
                         document.removeEventListener('keydown', enterHandler);
@@ -1384,7 +1257,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // 點擊背景關閉
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) {
                         confirmBtn.click();
@@ -1394,6 +1266,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         async function performSearch() {
+            // --- 修改：每次新查詢時，先隱藏管理者介面 ---
+            adminControlsContainer.style.display = 'none';
+            chartContainer.style.display = 'none';
+            if (gradeChart) {
+                gradeChart.destroy();
+                gradeChart = null;
+            }
+            // --- 修改結束 ---
+
             const courseId = courseSelect.value;
             const studentId = studentIdInput.value.trim().toUpperCase();
 
@@ -1402,15 +1283,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // 驗證學號格式（在要求輸入密碼之前）
             if (!validateStudentId(studentId)) {
                 await showAlert(isChinese() 
                     ? '學號格式錯誤！請輸入有效的學號格式。' 
                     : 'Invalid Student ID format! Please enter a valid Student ID.', true);
                 return;
             }
-
-            // 檢查學號是否存在於CSV檔案中（在要求輸入密碼之前）
+            
             showLoading(true);
             const studentExists = await checkStudentExists(courseId, studentId);
             showLoading(false);
@@ -1422,19 +1301,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // 使用自定義彈窗要求輸入六位代碼
             const accessCode = await showAccessCodeModal();
+            if (accessCode === null) return;
 
-            // 檢查使用者是否取消輸入
-            if (accessCode === null) {
-                return;
-            }
-
-            // 檢查是否為管理者查詢（yccadmin學號）
             if (studentId === 'YCCADMIN') {
                 const isAdminMode = await checkAdminCode(courseId, accessCode);
                 if (isAdminMode) {
-                    // 管理者模式：顯示全班成績
                     await showAllGrades(courseId);
                     return;
                 } else {
@@ -1444,8 +1316,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
             }
-
-            // 驗證代碼格式（一般學生查詢）
+            
             if (!validateAccessCode(accessCode)) {
                 await showAlert(isChinese() 
                     ? '代碼格式錯誤！請輸入六位由大小寫英文字母和數字組成的代碼。' 
@@ -1486,36 +1357,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function validateAccessCode(code) {
-            // 檢查是否為六位字符且只包含大小寫英文字母和數字
             const codeRegex = /^[a-zA-Z0-9]{6}$/;
             return codeRegex.test(code);
         }
 
         function validateStudentId(studentId) {
-            // 根據實際資料調整學號格式驗證
-            // 從CSV資料看到的格式：S12345678 (字母S + 8位數字)
-            
-            // 管理者學號
-            if (studentId === 'YCCADMIN') {
-                return true;
-            }
-            
-            // 格式1: S + 8位數字 (實際使用的格式)
+            if (studentId === 'YCCADMIN') return true;
             const format1 = /^S[0-9]{8}$/;
-            
-            // 格式2: 其他常見學號格式 - 9位數字 (例: 123456789)
             const format2 = /^[0-9]{9}$/;
-            
-            // 格式3: 字母+數字組合 (例: A12345678, B12345678)
             const format3 = /^[A-Z][0-9]{8}$/;
-            
-            // 格式4: 年度+科系代碼+序號 (例: 11012345, 112AB001)
             const format4 = /^[0-9]{3}[A-Z]{0,2}[0-9]{3,5}$/;
-            
-            return format1.test(studentId) || 
-                   format2.test(studentId) || 
-                   format3.test(studentId) || 
-                   format4.test(studentId);
+            return format1.test(studentId) || format2.test(studentId) || format3.test(studentId) || format4.test(studentId);
         }
 
         async function checkStudentExists(courseId, studentId) {
@@ -1523,15 +1375,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 await waitForPapaParse();
                 
                 const selectedCourse = availableCourses.find(c => c.id === courseId);
-                if (!selectedCourse) {
-                    throw new Error('Course not found');
-                }
+                if (!selectedCourse) throw new Error('Course not found');
                 
                 const csvPath = selectedCourse.csv_path;
                 const response = await fetch(csvPath);
-                if (!response.ok) {
-                    throw new Error(`Could not load grade file: ${csvPath} (Status: ${response.status})`);
-                }
+                if (!response.ok) throw new Error(`Could not load grade file: ${csvPath}`);
                 
                 const csvText = await response.text();
                 
@@ -1540,20 +1388,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         header: true,
                         skipEmptyLines: true,
                         complete: (results) => {
-                            // 從第 5 行 (索引為 4) 開始是學生資料
-                            const studentRows = results.data.slice(4);
+                            const studentRows = results.data.slice(3);
                             const studentData = studentRows.find(row => row.ID && row.ID.toUpperCase() === studentId);
-                            resolve(!!studentData); // 轉換為布林值
+                            resolve(!!studentData);
                         },
-                        error: () => {
-                            resolve(false); // 解析錯誤時返回 false
-                        }
+                        error: () => { resolve(false); }
                     });
                 });
                 
             } catch (error) {
                 console.error('Error checking student existence:', error);
-                return false; // 發生錯誤時返回 false
+                return false;
             }
         }
 
@@ -1562,15 +1407,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 await waitForPapaParse();
                 
                 const selectedCourse = availableCourses.find(c => c.id === courseId);
-                if (!selectedCourse) {
-                    return false;
-                }
+                if (!selectedCourse) return false;
                 
                 const csvPath = selectedCourse.csv_path;
                 const response = await fetch(csvPath);
-                if (!response.ok) {
-                    return false;
-                }
+                if (!response.ok) return false;
                 
                 const csvText = await response.text();
                 
@@ -1579,8 +1420,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         header: true,
                         skipEmptyLines: true,
                         complete: (results) => {
-                            // 從第 5 行 (索引為 4) 開始是學生資料，查找 yccadmin
-                            const studentRows = results.data.slice(4);
+                            const studentRows = results.data.slice(3);
                             const adminRow = studentRows.find(row => row.ID && row.ID.toUpperCase() === 'YCCADMIN');
                             
                             if (adminRow) {
@@ -1590,9 +1430,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 resolve(false);
                             }
                         },
-                        error: () => {
-                            resolve(false);
-                        }
+                        error: () => { resolve(false); }
                     });
                 });
                 
@@ -1608,13 +1446,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
             try {
                 await waitForPapaParse();
-                
                 const selectedCourse = availableCourses.find(c => c.id === courseId);
                 if (!selectedCourse) throw new Error('Course not found');
                 
                 const csvPath = selectedCourse.csv_path;
                 const response = await fetch(csvPath);
-                if (!response.ok) throw new Error(`Could not load grade file: ${csvPath} (Status: ${response.status})`);
+                if (!response.ok) throw new Error(`Could not load grade file: ${csvPath}`);
                 
                 const csvText = await response.text();
                 Papa.parse(csvText, {
@@ -1651,17 +1488,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // 過濾學生資料，排除管理者帳號
             const studentRows = data.slice(4).filter(row => 
                 row.ID && row.ID.toUpperCase() !== 'YCCADMIN'
             );
 
-            // 設定課程資訊
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
             resultCourseCode.textContent = courseInfo.code;
             resultStudentId.innerHTML = `<span class="lang-en">All Students (Admin View)</span><span class="lang-zh">全班成績 (管理者檢視)</span>`;
 
-            // 計算各類別的總權重並顯示特定成績卡片
             const categoryWeights = {};
             headers.forEach(h => {
                 if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
@@ -1674,15 +1508,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // 顯示成績卡片（管理者模式下顯示佔比）
             const cardsContainer = document.querySelector('.grade-summary-cards');
             cardsContainer.style.display = 'grid';
             
-            // 隱藏所有卡片，然後只顯示需要的
             const allCards = cardsContainer.querySelectorAll('.card');
             allCards.forEach(card => card.style.display = 'none');
             
-            // 計算加分項目的平均值和期末成績平均值
             let bonusTotal = 0;
             let finalScoreTotal = 0;
             let studentCount = 0;
@@ -1709,17 +1540,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 bonusTotal += studentBonusTotal;
-                // 計算該學生的期末成績平均分（加權後再除以權重）
                 if (finalScoreWeight > 0) {
                     finalScoreTotal += (studentFinalScoreTotal / finalScoreWeight);
                 }
                 studentCount++;
             });
             
-            const bonusAverage = studentCount > 0 ? (bonusTotal / studentCount) : 0;
             const finalScoreAverage = studentCount > 0 ? (finalScoreTotal / studentCount) : 0;
 
-            // 顯示特定卡片並填入佔比資訊
             const cardMappings = {
                 'assignments': 'card-assignments',
                 'dailyPerformance': 'card-daily-performance', 
@@ -1731,14 +1559,13 @@ document.addEventListener('DOMContentLoaded', function() {
             Object.keys(cardMappings).forEach(category => {
                 const cardId = cardMappings[category];
                 const card = document.getElementById(cardId);
-                if (card && categoryWeights[category]) {
+                if (card && categoryWeights[category] > 0) {
                     card.style.display = 'block';
                     const scoreElement = card.querySelector('.score .value');
                     if (scoreElement) {
                         const percentage = (categoryWeights[category] * 100).toFixed(0);
                         scoreElement.textContent = `${percentage}%`;
                     }
-                    // 更新顯示格式
                     const scoreContainer = card.querySelector('.score');
                     if (scoreContainer) {
                         scoreContainer.innerHTML = `<span class="value">${(categoryWeights[category] * 100).toFixed(0)}%</span>`;
@@ -1746,52 +1573,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // 顯示加分項目卡片 - 對管理者顯示期末成績平均值
             const bonusCard = document.getElementById('card-bonus');
             if (bonusCard) {
                 bonusCard.style.display = 'block';
-                
-                // 修改卡片標題為期末成績平均值
                 const cardTitle = bonusCard.querySelector('h3');
                 if (cardTitle) {
                     cardTitle.innerHTML = '<span class="lang-en">Final Avg</span><span class="lang-zh">期末平均</span>';
                 }
-                
-                // 顯示期末成績平均值而不是加分平均值
                 const scoreContainer = bonusCard.querySelector('.score');
                 if (scoreContainer) {
                     const avgLabel = isChinese() ? '平均' : 'AVG';
                     scoreContainer.innerHTML = `<span class="value">${finalScoreAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
                 }
-                
-                // 移除 bonus 類別（用於視覺區分）
                 bonusCard.classList.remove('bonus');
                 bonusCard.classList.add('final-avg');
             }
             
-            // 隱藏成績明細標題（因為我們要自定義表格）
             const gradeDetailsSection = document.querySelector('.grade-details');
             const gradeDetailsTitle = gradeDetailsSection.querySelector('h3');
-            if (gradeDetailsTitle) {
-                gradeDetailsTitle.style.display = 'none';
-            }
-
-            // 隱藏原本的thead（包含Item, Score, Weight, Weighted Score等標題）
+            if (gradeDetailsTitle) gradeDetailsTitle.style.display = 'none';
+            
             const thead = gradeDetailsSection.querySelector('thead');
-            if (thead) {
-                thead.style.display = 'none';
-            }
+            if (thead) thead.style.display = 'none';
+            
+            const tfoot = gradeDetailsSection.querySelector('tfoot');
+            if (tfoot) tfoot.style.display = 'none';
 
-            // 建立全班成績表格，完全重新設計
             gradeDetailsBody.innerHTML = '';
             
-            // 隱藏原本的tfoot（包含Final Score (Before Bonus)等）
-            const tfoot = gradeDetailsSection.querySelector('tfoot');
-            if (tfoot) {
-                tfoot.style.display = 'none';
-            }
-
-            // 表格標題行 - 只顯示對應卡片的類別
             const headerRow = document.createElement('tr');
             headerRow.innerHTML = `
                 <th><span class="lang-en">Rank</span><span class="lang-zh">排名</span></th>
@@ -1806,26 +1615,11 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             gradeDetailsBody.appendChild(headerRow);
 
-            // 計算每個學生的各類別成績和總分
-            const studentData = studentRows.map(student => {
+            const studentDataForProcessing = studentRows.map(student => {
                 if (!student.ID) return null;
 
-                const categoryScores = {
-                    assignments: 0,
-                    dailyPerformance: 0,
-                    attendance: 0,
-                    midterm: 0,
-                    final: 0,
-                    bonus: 0
-                };
-
-                const categoryWeightedScores = {
-                    assignments: 0,
-                    dailyPerformance: 0,
-                    attendance: 0,
-                    midterm: 0,
-                    final: 0
-                };
+                const categoryScores = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0, bonus: 0 };
+                const categoryWeightedScores = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0 };
 
                 headers.forEach(h => {
                     if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
@@ -1836,14 +1630,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (category === 'bonus') {
                             categoryScores.bonus += score;
                         } else if (categoryScores.hasOwnProperty(category)) {
-                            // 計算該類別的平均分數
-                            const weightedScore = score * weight;
-                            categoryWeightedScores[category] += weightedScore;
+                            categoryWeightedScores[category] += score * weight;
                         }
                     }
                 });
 
-                // 計算各類別的顯示分數（加權後再除以該類別總權重得到平均分）
                 Object.keys(categoryWeightedScores).forEach(category => {
                     if (categoryWeights[category] > 0) {
                         categoryScores[category] = categoryWeightedScores[category] / categoryWeights[category];
@@ -1853,18 +1644,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const subtotal = Object.values(categoryWeightedScores).reduce((sum, score) => sum + score, 0);
                 const finalScore = Math.min(100, subtotal + categoryScores.bonus);
 
-                return {
-                    id: student.ID,
-                    ...categoryScores,
-                    finalScore: finalScore
-                };
+                return { id: student.ID, ...categoryScores, finalScore: finalScore };
             }).filter(student => student !== null);
 
-            // 根據總分排序（由高到低）
-            studentData.sort((a, b) => b.finalScore - a.finalScore);
-
-            // 生成學生成績行
-            studentData.forEach((student, index) => {
+            studentDataForProcessing.sort((a, b) => b.finalScore - a.finalScore);
+            
+            studentDataForProcessing.forEach((student, index) => {
                 const rank = index + 1;
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -1881,41 +1666,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 gradeDetailsBody.appendChild(row);
             });
 
-            // 計算各項目的班級平均分數
-            const categoryAverages = {
-                assignments: 0,
-                dailyPerformance: 0,
-                attendance: 0,
-                midterm: 0,
-                final: 0,
-                bonus: 0,
-                finalScore: 0
-            };
-
-            // 計算每個類別的總分
-            studentData.forEach(student => {
+            const categoryAverages = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0, bonus: 0, finalScore: 0 };
+            studentDataForProcessing.forEach(student => {
                 Object.keys(categoryAverages).forEach(category => {
                     categoryAverages[category] += student[category] || 0;
                 });
             });
-
-            // 計算平均值
-            if (studentData.length > 0) {
+            if (studentDataForProcessing.length > 0) {
                 Object.keys(categoryAverages).forEach(category => {
-                    categoryAverages[category] = categoryAverages[category] / studentData.length;
+                    categoryAverages[category] = categoryAverages[category] / studentDataForProcessing.length;
                 });
             }
 
-            // 新增班級平均行
             const classAverageRow = document.createElement('tr');
             classAverageRow.classList.add('class-average-row');
             classAverageRow.innerHTML = `
-                <td colspan="2" style="text-align: center;">
-                    <strong>
-                        <span class="lang-en">Class Average</span>
-                        <span class="lang-zh">班級平均</span>
-                    </strong>
-                </td>
+                <td colspan="2" style="text-align: center;"><strong><span class="lang-en">Class Average</span><span class="lang-zh">班級平均</span></strong></td>
                 <td><strong>${categoryAverages.assignments.toFixed(1)}</strong></td>
                 <td><strong>${categoryAverages.dailyPerformance.toFixed(1)}</strong></td>
                 <td><strong>${categoryAverages.attendance.toFixed(1)}</strong></td>
@@ -1925,6 +1691,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td><strong style="color: var(--tech-cyan);">${categoryAverages.finalScore.toFixed(2)}</strong></td>
             `;
             gradeDetailsBody.appendChild(classAverageRow);
+
+            // --- 修改：儲存資料並設置圖表UI ---
+            currentStudentDataForChart = studentDataForProcessing;
+            setupAdminUI();
+            // --- 修改結束 ---
 
             resultsContainer.style.display = 'block';
         }
@@ -1944,23 +1715,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 100);
             });
         }
-
-        // =========================================================================
-        //  ↓↓↓ 這裡是修改的核心 ↓↓↓
-        // =========================================================================
+        
         async function processGradeData(data, studentId, courseInfo, accessCode) {
             const config = {};
-            // [修改] 讀取前 4 行作為設定 (ID, type, weight, category)
             const configRows = data.slice(0, 4); 
             const headers = Object.keys(data[0] || {});
 
             headers.forEach(h => { config[h] = {}; });
             configRows.forEach(row => {
-                // 使用第一欄的值 ('ID', 'type', 'weight', 'category') 作為設定的鍵
                 const keyName = row.ID; 
                 if (keyName) {
                     headers.forEach(h => {
-                        // 排除第一欄本身，只處理成績項目欄
                         if (h !== 'ID') {
                             config[h][keyName] = row[h];
                         }
@@ -1968,7 +1733,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // [修改] 從第 5 行 (索引為 4) 開始是學生資料
             const studentRows = data.slice(4); 
             const studentData = studentRows.find(row => row.ID && row.ID.toUpperCase() === studentId);
 
@@ -1978,8 +1742,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // 驗證查詢代碼
-            const studentAccessCode = studentData.Code || studentData.code; // 支援大小寫不同的欄位名
+            const studentAccessCode = studentData.Code || studentData.code;
             if (!studentAccessCode || studentAccessCode !== accessCode) {
                 await showAlert(isChinese() 
                     ? '查詢代碼錯誤！請確認您輸入的代碼是否正確。' 
@@ -1990,43 +1753,26 @@ document.addEventListener('DOMContentLoaded', function() {
             renderResults(studentData, config, courseInfo);
             resultsContainer.style.display = 'block';
         }
-        // =========================================================================
-        //  ↑↑↑ 這裡是修改的核心 ↑↑↑
-        // =========================================================================
     
         function renderResults(student, config, courseInfo) {
-            // 恢復個人成績卡片顯示（管理者模式會隱藏它）
             document.querySelector('.grade-summary-cards').style.display = 'grid';
             
-            // 恢復成績明細標題
             const gradeDetailsSection = document.querySelector('.grade-details');
             const gradeDetailsTitle = gradeDetailsSection.querySelector('h3');
-            if (gradeDetailsTitle) {
-                gradeDetailsTitle.style.display = 'block';
-            }
+            if (gradeDetailsTitle) gradeDetailsTitle.style.display = 'block';
             
-            // 恢復thead顯示
             const thead = gradeDetailsSection.querySelector('thead');
-            if (thead) {
-                thead.style.display = 'table-header-group';
-            }
+            if (thead) thead.style.display = 'table-header-group';
             
-            // 恢復tfoot顯示
             const tfoot = gradeDetailsSection.querySelector('tfoot');
-            if (tfoot) {
-                tfoot.style.display = 'table-footer-group';
-            }
+            if (tfoot) tfoot.style.display = 'table-footer-group';
             
-            // 恢復 bonus 卡片的原始狀態（學生端）
             const bonusCard = document.getElementById('card-bonus');
             if (bonusCard) {
-                // 恢復原始標題
                 const cardTitle = bonusCard.querySelector('h3');
                 if (cardTitle) {
                     cardTitle.innerHTML = '<span class="lang-en">Bonus</span><span class="lang-zh">額外加分</span>';
                 }
-                
-                // 恢復原始樣式類別
                 bonusCard.classList.remove('final-avg');
                 bonusCard.classList.add('bonus');
             }
@@ -2042,7 +1788,6 @@ document.addEventListener('DOMContentLoaded', function() {
             let subtotal = 0;
     
             Object.keys(student).forEach(key => {
-                // 排除 ID 欄位、沒有設定的欄位、代碼欄位
                 if (key === 'ID' || key === 'Code' || key === 'code' || !config[key] || !config[key].category) return;
     
                 const displayName = getDisplayName(key);
@@ -2052,7 +1797,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const weight = parseFloat(config[key].weight) || 0;
                 const category = config[key].category;
                 
-                // 排除 code 類別的項目
                 if (category === 'code') return;
                 
                 const weightedScore = score * weight;
@@ -2103,9 +1847,129 @@ document.addEventListener('DOMContentLoaded', function() {
             if (studentIdInput) {
                  studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
             }
-            // 移除自動重新搜尋的邏輯，避免切換語言時要求重新輸入密碼
-            // 語言切換只更新介面文字，不重新載入資料
         }
+        
+        // ======================= 新增：繪製圖表的核心函式 =======================
+    
+        function setupAdminUI() {
+            adminControlsContainer.style.display = 'flex';
+            chartCheckboxes.forEach(cb => cb.checked = false);
+            
+            chartOptionsBtn.onclick = function(event) {
+                event.stopPropagation();
+                chartOptionsDropdown.classList.toggle('show');
+            };
+
+            chartCheckboxes.forEach(checkbox => {
+                checkbox.onchange = () => updateChart();
+            });
+
+            window.onclick = function(event) {
+                if (!event.target.matches('.admin-btn, .admin-btn *')) {
+                    if (chartOptionsDropdown.classList.contains('show')) {
+                        chartOptionsDropdown.classList.remove('show');
+                    }
+                }
+            };
+        }
+
+        function updateChart() {
+            const checkedOptions = Array.from(chartCheckboxes)
+                                        .filter(cb => cb.checked)
+                                        .map(cb => ({ 
+                                            value: cb.value, 
+                                            label: isChinese() ? cb.parentElement.querySelector('.lang-zh').textContent.trim() : cb.parentElement.querySelector('.lang-en').textContent.trim()
+                                        }));
+            
+            if (checkedOptions.length === 0) {
+                chartContainer.style.display = 'none';
+                if (gradeChart) {
+                    gradeChart.destroy();
+                    gradeChart = null;
+                }
+                return;
+            }
+
+            chartContainer.style.display = 'block';
+
+            const labels = ['0~9', '10~19', '20~29', '30~39', '40~49', '50~59', '60-~69', '70~79', '80~89', '90~99+'];
+            const datasets = [];
+            const colors = ['#3fb950', '#58a6ff', '#f7b731', '#a371f7', '#f778ba', '#e8565'];
+
+            checkedOptions.forEach((option, index) => {
+                const distribution = Array(10).fill(0);
+                
+                currentStudentDataForChart.forEach(student => {
+                    const score = student[option.value];
+                    if (score >= 100) {
+                        distribution[0]++;
+                    } else if (score >= 0) {
+                        const bucketIndex = 9 - Math.floor(score / 10);
+                        distribution[bucketIndex]++;
+                    }
+                });
+
+                datasets.push({
+                    label: option.label,
+                    data: distribution.reverse(),
+                    backgroundColor: colors[index % colors.length],
+                    borderColor: colors[index % colors.length].replace('0.7', '1'),
+                    borderWidth: 1
+                });
+            });
+
+            if (gradeChart) {
+                gradeChart.destroy();
+            }
+
+            const ctx = document.getElementById('grade-distribution-chart').getContext('2d');
+            gradeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: isChinese() ? '成績分佈長條圖' : 'Grade Distribution Chart',
+                            color: '#c9d1d9',
+                            font: { size: 18 }
+                        },
+                        legend: {
+                            labels: { color: '#c9d1d9' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: isChinese() ? '成績級距' : 'Score Range',
+                                color: '#c9d1d9'
+                            },
+                            ticks: { color: '#c9d1d9' }
+                        },
+                        y: {
+                            title: { 
+                                display: true, 
+                                text: isChinese() ? '人數' : 'Number of Students',
+                                color: '#c9d1d9'
+                            },
+                            ticks: { 
+                                color: '#c9d1d9',
+                                stepSize: 1,
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ======================= 新增結束 =======================
 
         // --- 事件監聽器 ---
         schoolSelect.addEventListener('change', (e) => {
@@ -2113,12 +1977,10 @@ document.addEventListener('DOMContentLoaded', function() {
             hideAllResults();
         });
         
-        // 學號輸入即時驗證
         studentIdInput.addEventListener('input', (e) => {
             const studentId = e.target.value.trim().toUpperCase();
             const isValid = !studentId || validateStudentId(studentId);
             
-            // 添加視覺反饋
             if (studentId && !isValid) {
                 studentIdInput.classList.add('invalid');
                 studentIdInput.title = isChinese() ? '學號格式不正確' : 'Invalid Student ID format';
@@ -2147,15 +2009,14 @@ document.addEventListener('DOMContentLoaded', function() {
             studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
         }
     })();
+    
 });
 
 // --- Motto Section 向下滾動功能 (全局函數) ---
 function scrollToNextSection() {
-    // 添加點擊動畫效果
     const arrow = document.querySelector('.motto-scroll-arrow');
     if (arrow) {
         arrow.classList.add('clicked');
-        // 0.6秒後移除動畫class
         setTimeout(() => {
             arrow.classList.remove('clicked');
         }, 600);
@@ -2165,16 +2026,14 @@ function scrollToNextSection() {
     const educationTitle = document.querySelector('.education-section h2');
     
     if (educationTitle) {
-        // 優先滾動到標題位置
         const titleRect = educationTitle.getBoundingClientRect();
         const titleOffsetTop = window.pageYOffset + titleRect.top;
         
         window.scrollTo({
-            top: titleOffsetTop - 10, // 減去10px確保標題在最頂部且有小間距
+            top: titleOffsetTop - 10,
             behavior: 'smooth'
         });
     } else if (educationSection) {
-        // 備用方案：滾動到section
         const rect = educationSection.getBoundingClientRect();
         const offsetTop = window.pageYOffset + rect.top;
         
