@@ -2262,13 +2262,13 @@ body.show-zh .lang-en { display: none; }
     border-bottom: 2px solid var(--tech-cyan);
 }
 
-.grade-inquiry-page .grade-details tbody tr:not(:first-child) td:first-child {
+.grade-inquiry-page .grade-details td:first-child {
     font-weight: 600;
     color: var(--tech-cyan);
     background-color: rgba(100, 210, 255, 0.1);
 }
 
-.grade-inquiry-page .grade-details tbody tr:not(:first-child) td:last-child {
+.grade-inquiry-page .grade-details td:last-child {
     font-weight: 700;
     color: var(--tech-cyan);
     font-size: 1.1rem;

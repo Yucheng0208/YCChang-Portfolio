@@ -1596,7 +1596,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 設定課程資訊
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
             resultCourseCode.textContent = courseInfo.code;
-            resultStudentId.innerHTML = `<span class="lang-en">👥 All Students (Admin View)</span><span class="lang-zh">👥 全班成績 (管理者檢視)</span>`;
+            resultStudentId.innerHTML = `<span class="lang-en">All Students (Admin View)</span><span class="lang-zh">全班成績 (管理者檢視)</span>`;
 
             // 計算各類別的總權重並顯示特定成績卡片
             const categoryWeights = {};
