@@ -3356,3 +3356,35 @@ body.show-zh .lang-en { display: none; }
     border-radius: 12px;
     border: 1px solid #30363d;
 }
+
+/* 圖表選項按鈕樣式 */
+.chart-option-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid #30363d;
+    margin-bottom: 8px;
+}
+
+.chart-option-btn {
+    background-color: var(--tech-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chart-option-btn:hover {
+    background-color: var(--tech-purple);
+}
+
+#clear-all-options {
+    background-color: #6e7681;
+}
+
+#clear-all-options:hover {
+    background-color: #ff6b6b;
+}

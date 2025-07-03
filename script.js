@@ -1855,6 +1855,24 @@ document.addEventListener('DOMContentLoaded', function() {
             adminControlsContainer.style.display = 'flex';
             chartCheckboxes.forEach(cb => cb.checked = false);
             
+            // 獲取全選和清除選擇按鈕
+            const selectAllBtn = document.getElementById('select-all-options');
+            const clearAllBtn = document.getElementById('clear-all-options');
+            
+            // 設置全選按鈕的點擊事件
+            selectAllBtn.onclick = function(event) {
+                event.stopPropagation();
+                chartCheckboxes.forEach(cb => cb.checked = true);
+                updateChart();
+            };
+            
+            // 設置清除選擇按鈕的點擊事件
+            clearAllBtn.onclick = function(event) {
+                event.stopPropagation();
+                chartCheckboxes.forEach(cb => cb.checked = false);
+                updateChart();
+            };
+            
             chartOptionsBtn.onclick = function(event) {
                 event.stopPropagation();
                 chartOptionsDropdown.classList.toggle('show');
