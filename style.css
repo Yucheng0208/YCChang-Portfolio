@@ -2282,6 +2282,24 @@ body.show-zh .lang-en { display: none; }
     color: var(--tech-cyan);
 }
 
+/* 班級平均行的特殊樣式 */
+.grade-inquiry-page .grade-details tbody tr.class-average-row {
+    border-top: 2px solid var(--tech-cyan);
+    border-bottom: 2px solid var(--tech-cyan);
+    background-color: rgba(100, 210, 255, 0.1);
+}
+
+.grade-inquiry-page .grade-details tbody tr.class-average-row td {
+    font-weight: 600;
+    color: var(--tech-cyan);
+    background-color: transparent;
+    border-bottom: none;
+}
+
+.grade-inquiry-page .grade-details tbody tr.class-average-row:hover {
+    background-color: rgba(100, 210, 255, 0.15);
+}
+
 .grade-inquiry-page #bonus-score {
     color: #3fb950;
 }
@@ -3282,7 +3300,7 @@ body.show-zh .lang-en { display: none; }
 .custom-modal .modal-content {
     /* 使用 flex 的 margin auto 確保居中 */
     margin: auto;
-    /* 防止內容被壓縮 */
+    /* 防止內容被壓缩 */
     flex-shrink: 0;
 }
 

@@ -1185,8 +1185,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 設定內容
                 titleEl.innerHTML = isChinese() ? '🔐 輸入查詢代碼' : '🔐 Enter Access Code';
                 messageEl.innerHTML = isChinese() 
-                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)<br><small style="color: #8b949e;">管理者 (yccadmin) 請輸入: ADMIN_課程代碼</small>' 
-                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)<br><small style="color: #8b949e;">Admin (yccadmin): Enter ADMIN_CourseCode</small>';
+                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)' 
+                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)';
                 inputEl.placeholder = '＊＊＊＊＊＊';
 
                 // 密碼顯示/隱藏功能
@@ -1355,7 +1355,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!studentExists) {
                 await showAlert(isChinese() 
                     ? '找不到該學號的資料。請確認學號是否正確。' 
-                    : 'No data found for this Student ID. Please verify the Student ID.', true);
+                    : 'No data found for this Student ID.Please verify the Student ID.', true);
                 return;
             }
 
@@ -1818,6 +1818,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 gradeDetailsBody.appendChild(row);
             });
 
+            // 計算各項目的班級平均分數
+            const categoryAverages = {
+                assignments: 0,
+                dailyPerformance: 0,
+                attendance: 0,
+                midterm: 0,
+                final: 0,
+                bonus: 0,
+                finalScore: 0
+            };
+
+            // 計算每個類別的總分
+            studentData.forEach(student => {
+                Object.keys(categoryAverages).forEach(category => {
+                    categoryAverages[category] += student[category] || 0;
+                });
+            });
+
+            // 計算平均值
+            if (studentData.length > 0) {
+                Object.keys(categoryAverages).forEach(category => {
+                    categoryAverages[category] = categoryAverages[category] / studentData.length;
+                });
+            }
+
+            // 新增班級平均行
+            const classAverageRow = document.createElement('tr');
+            classAverageRow.classList.add('class-average-row');
+            classAverageRow.innerHTML = `
+                <td colspan="2" style="text-align: center;">
+                    <strong>
+                        <span class="lang-en">Class Average</span>
+                        <span class="lang-zh">班級平均</span>
+                    </strong>
+                </td>
+                <td><strong>${categoryAverages.assignments.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.dailyPerformance.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.attendance.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.midterm.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.final.toFixed(1)}</strong></td>
+                <td><strong>+${categoryAverages.bonus.toFixed(1)}</strong></td>
+                <td><strong style="color: var(--tech-cyan);">${categoryAverages.finalScore.toFixed(2)}</strong></td>
+            `;
+            gradeDetailsBody.appendChild(classAverageRow);
+
             resultsContainer.style.display = 'block';
         }
 
@@ -1995,9 +2040,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (studentIdInput) {
                  studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
             }
-            if(resultsContainer.style.display === 'block' && studentIdInput.value) {
-                performSearch();
-            }
+            // 移除自動重新搜尋的邏輯，避免切換語言時要求重新輸入密碼
+            // 語言切換只更新介面文字，不重新載入資料
         }
 
         // --- 事件監聽器 ---
