@@ -3295,18 +3295,21 @@ body.show-zh .lang-en { display: none; }
     text-shadow: 
         0 0 3px rgba(100, 210, 255, 0.6),
         0 0 6px rgba(100, 210, 255, 0.3);
-    animation: subtle-glow 3s ease-in-out infinite alternate;
+    animation: breathing-glow 2.5s ease-in-out infinite;
 }
 
-@keyframes subtle-glow {
-    from {
+@keyframes breathing-glow {
+    0%, 100% {
+        opacity: 0.8;
         text-shadow: 
             0 0 3px rgba(100, 210, 255, 0.6),
             0 0 6px rgba(100, 210, 255, 0.3);
     }
-    to {
+    50% {
+        opacity: 1;
         text-shadow: 
-            0 0 4px rgba(100, 210, 255, 0.8),
-            0 0 8px rgba(100, 210, 255, 0.4);
+            0 0 5px rgba(100, 210, 255, 0.9),
+            0 0 10px rgba(100, 210, 255, 0.5),
+            0 0 15px rgba(100, 210, 255, 0.2);
     }
 }
