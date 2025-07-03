@@ -1912,7 +1912,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const labels = ['0~9', '10~19', '20~29', '30~39', '40~49', '50~59', '60-~69', '70~79', '80~89', '90~99+'];
             const datasets = [];
-            const colors = ['#3fb950', '#58a6ff', '#f7b731', '#a371f7', '#f778ba', '#e8565'];
+            const colors = ['#3fb950', '#58a6ff', '#f7b731', '#a371f7', '#f778ba', '#e85656'];
 
             checkedOptions.forEach((option, index) => {
                 const distribution = Array(10).fill(0);
