@@ -1276,12 +1276,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const titleEl = modal.querySelector('.modal-title');
                 const messageEl = modal.querySelector('.modal-message');
                 const inputEl = modal.querySelector('.modal-input');
+                const toggleBtn = modal.querySelector('.modal-toggle-password');
                 const errorEl = modal.querySelector('.modal-error');
                 const cancelBtn = modal.querySelector('[data-action="cancel"]');
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
-                // 隱藏輸入框和取消按鈕
+                // 隱藏輸入框、密碼切換按鈕和取消按鈕
                 inputEl.style.display = 'none';
+                toggleBtn.style.display = 'none';
                 errorEl.style.display = 'none';
                 cancelBtn.style.display = 'none';
 
@@ -1617,22 +1619,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const allCards = cardsContainer.querySelectorAll('.card');
             allCards.forEach(card => card.style.display = 'none');
             
-            // 計算加分項目的平均值
+            // 計算加分項目的平均值和期末成績平均值
             let bonusTotal = 0;
+            let finalScoreTotal = 0;
             let studentCount = 0;
+            
             studentRows.forEach(student => {
                 if (!student.ID) return;
                 let studentBonusTotal = 0;
+                let studentFinalScoreTotal = 0;
+                let finalScoreWeight = 0;
+                
                 headers.forEach(h => {
-                    if (h !== 'ID' && config[h] && config[h].category === 'bonus') {
+                    if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
                         const score = parseFloat(student[h]) || 0;
-                        studentBonusTotal += score;
+                        const weight = parseFloat(config[h].weight) || 0;
+                        const category = config[h].category;
+                        
+                        if (category === 'bonus') {
+                            studentBonusTotal += score;
+                        } else if (category === 'final') {
+                            studentFinalScoreTotal += score * weight;
+                            finalScoreWeight += weight;
+                        }
                     }
                 });
+                
                 bonusTotal += studentBonusTotal;
+                // 計算該學生的期末成績平均分（加權後再除以權重）
+                if (finalScoreWeight > 0) {
+                    finalScoreTotal += (studentFinalScoreTotal / finalScoreWeight);
+                }
                 studentCount++;
             });
+            
             const bonusAverage = studentCount > 0 ? (bonusTotal / studentCount) : 0;
+            const finalScoreAverage = studentCount > 0 ? (finalScoreTotal / studentCount) : 0;
 
             // 顯示特定卡片並填入佔比資訊
             const cardMappings = {
@@ -1661,15 +1683,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // 顯示加分項目卡片並填入平均值
+            // 顯示加分項目卡片 - 對管理者顯示期末成績平均值
             const bonusCard = document.getElementById('card-bonus');
             if (bonusCard) {
                 bonusCard.style.display = 'block';
+                
+                // 修改卡片標題為期末成績平均值
+                const cardTitle = bonusCard.querySelector('h3');
+                if (cardTitle) {
+                    cardTitle.innerHTML = '<span class="lang-en">Final Avg</span><span class="lang-zh">期末平均</span>';
+                }
+                
+                // 顯示期末成績平均值而不是加分平均值
                 const scoreContainer = bonusCard.querySelector('.score');
                 if (scoreContainer) {
                     const avgLabel = isChinese() ? '平均' : 'AVG';
-                    scoreContainer.innerHTML = `+<span class="value">${bonusAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
+                    scoreContainer.innerHTML = `<span class="value">${finalScoreAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
                 }
+                
+                // 移除 bonus 類別（用於視覺區分）
+                bonusCard.classList.remove('bonus');
+                bonusCard.classList.add('final-avg');
             }
             
             // 隱藏成績明細標題（因為我們要自定義表格）
@@ -1873,6 +1907,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const tfoot = gradeDetailsSection.querySelector('tfoot');
             if (tfoot) {
                 tfoot.style.display = 'table-footer-group';
+            }
+            
+            // 恢復 bonus 卡片的原始狀態（學生端）
+            const bonusCard = document.getElementById('card-bonus');
+            if (bonusCard) {
+                // 恢復原始標題
+                const cardTitle = bonusCard.querySelector('h3');
+                if (cardTitle) {
+                    cardTitle.innerHTML = '<span class="lang-en">Bonus</span><span class="lang-zh">額外加分</span>';
+                }
+                
+                // 恢復原始樣式類別
+                bonusCard.classList.remove('final-avg');
+                bonusCard.classList.add('bonus');
             }
             
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
