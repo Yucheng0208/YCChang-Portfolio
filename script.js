@@ -538,8 +538,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
             }
         }
+        
+        // 高光顯示作者名字
+        function highlightAuthorName(text) {
+            if (!text) return text;
+            const namePatterns = [
+                'Yu-Cheng Chang\\*?',
+                'Chang Yu-Cheng\\*?',
+                'Chang, Yu-Cheng\\*?',
+                'Yu-Cheng Chang',
+                'Chang Yu-Cheng',
+                '張育丞'
+            ];
+            
+            let highlightedText = text;
+            namePatterns.forEach(pattern => {
+                const regex = new RegExp(`(${pattern})`, 'gi');
+                highlightedText = highlightedText.replace(regex, '<mark class="author-highlight">$1</mark>');
+            });
+            
+            return highlightedText;
+        }
+        
+        const highlightedAuthors = highlightAuthorName(pub.authors || '');
+        
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${pub.authors || ''}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${highlightedAuthors}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
@@ -551,8 +575,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
             }
         }
+        
+        // 高光顯示作者名字
+        function highlightAuthorName(text) {
+            if (!text) return text;
+            const namePatterns = [
+                'Yu-Cheng Chang\\*',
+                'Yu-Cheng Chang',
+                'Chang Yu-Cheng\\*',
+                'Chang Yu-Cheng',
+                'Chang, Yu-Cheng\\*',
+                'Chang, Yu-Cheng',
+                'Ryan Chang\\*',
+                'Ryan Chang',
+                'Chang Ryan\\*',
+                'Chang Ryan',
+                'Yu-Cheng (Ryan) Chang\\*',
+                'Yu-Cheng (Ryan) Chang',
+                'Ryan Yu-Cheng Chang\\*',
+                'Ryan Yu-Cheng Chang',
+                '張育丞\\*',
+                '張育丞',
+                '育丞 張\\*',
+                '育丞 張',
+            ];
+            
+            let highlightedText = text;
+            namePatterns.forEach(pattern => {
+                const regex = new RegExp(`(${pattern})`, 'gi');
+                highlightedText = highlightedText.replace(regex, '<mark class="author-highlight">$1</mark>');
+            });
+            
+            return highlightedText;
+        }
+        
+        // 對可能包含名字的欄位進行高光處理
+        const highlightedMembers = highlightAuthorName(honor.members || '');
+        const highlightedSupervisor = highlightAuthorName(honor.supervisor || '');
+        const highlightedTitle = highlightAuthorName(honor.title || '');
+        
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${honor.title || ''}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${honor.supervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${highlightedMembers}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${highlightedSupervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
@@ -1185,8 +1248,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 設定內容
                 titleEl.innerHTML = isChinese() ? '🔐 輸入查詢代碼' : '🔐 Enter Access Code';
                 messageEl.innerHTML = isChinese() 
-                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)<br><small style="color: #8b949e;">管理者 (yccadmin) 請輸入: ADMIN_課程代碼</small>' 
-                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)<br><small style="color: #8b949e;">Admin (yccadmin): Enter ADMIN_CourseCode</small>';
+                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)' 
+                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)';
                 inputEl.placeholder = '＊＊＊＊＊＊';
 
                 // 密碼顯示/隱藏功能
@@ -1276,12 +1339,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const titleEl = modal.querySelector('.modal-title');
                 const messageEl = modal.querySelector('.modal-message');
                 const inputEl = modal.querySelector('.modal-input');
+                const toggleBtn = modal.querySelector('.modal-toggle-password');
                 const errorEl = modal.querySelector('.modal-error');
                 const cancelBtn = modal.querySelector('[data-action="cancel"]');
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
-                // 隱藏輸入框和取消按鈕
+                // 隱藏輸入框、密碼切換按鈕和取消按鈕
                 inputEl.style.display = 'none';
+                toggleBtn.style.display = 'none';
                 errorEl.style.display = 'none';
                 cancelBtn.style.display = 'none';
 
@@ -1353,7 +1418,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!studentExists) {
                 await showAlert(isChinese() 
                     ? '找不到該學號的資料。請確認學號是否正確。' 
-                    : 'No data found for this Student ID. Please verify the Student ID.', true);
+                    : 'No data found for this Student ID.Please verify the Student ID.', true);
                 return;
             }
 
@@ -1594,7 +1659,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 設定課程資訊
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
             resultCourseCode.textContent = courseInfo.code;
-            resultStudentId.innerHTML = `<span class="lang-en">👥 All Students (Admin View)</span><span class="lang-zh">👥 全班成績 (管理者檢視)</span>`;
+            resultStudentId.innerHTML = `<span class="lang-en">All Students (Admin View)</span><span class="lang-zh">全班成績 (管理者檢視)</span>`;
 
             // 計算各類別的總權重並顯示特定成績卡片
             const categoryWeights = {};
@@ -1617,22 +1682,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const allCards = cardsContainer.querySelectorAll('.card');
             allCards.forEach(card => card.style.display = 'none');
             
-            // 計算加分項目的平均值
+            // 計算加分項目的平均值和期末成績平均值
             let bonusTotal = 0;
+            let finalScoreTotal = 0;
             let studentCount = 0;
+            
             studentRows.forEach(student => {
                 if (!student.ID) return;
                 let studentBonusTotal = 0;
+                let studentFinalScoreTotal = 0;
+                let finalScoreWeight = 0;
+                
                 headers.forEach(h => {
-                    if (h !== 'ID' && config[h] && config[h].category === 'bonus') {
+                    if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
                         const score = parseFloat(student[h]) || 0;
-                        studentBonusTotal += score;
+                        const weight = parseFloat(config[h].weight) || 0;
+                        const category = config[h].category;
+                        
+                        if (category === 'bonus') {
+                            studentBonusTotal += score;
+                        } else if (category === 'final') {
+                            studentFinalScoreTotal += score * weight;
+                            finalScoreWeight += weight;
+                        }
                     }
                 });
+                
                 bonusTotal += studentBonusTotal;
+                // 計算該學生的期末成績平均分（加權後再除以權重）
+                if (finalScoreWeight > 0) {
+                    finalScoreTotal += (studentFinalScoreTotal / finalScoreWeight);
+                }
                 studentCount++;
             });
+            
             const bonusAverage = studentCount > 0 ? (bonusTotal / studentCount) : 0;
+            const finalScoreAverage = studentCount > 0 ? (finalScoreTotal / studentCount) : 0;
 
             // 顯示特定卡片並填入佔比資訊
             const cardMappings = {
@@ -1661,15 +1746,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // 顯示加分項目卡片並填入平均值
+            // 顯示加分項目卡片 - 對管理者顯示期末成績平均值
             const bonusCard = document.getElementById('card-bonus');
             if (bonusCard) {
                 bonusCard.style.display = 'block';
+                
+                // 修改卡片標題為期末成績平均值
+                const cardTitle = bonusCard.querySelector('h3');
+                if (cardTitle) {
+                    cardTitle.innerHTML = '<span class="lang-en">Final Avg</span><span class="lang-zh">期末平均</span>';
+                }
+                
+                // 顯示期末成績平均值而不是加分平均值
                 const scoreContainer = bonusCard.querySelector('.score');
                 if (scoreContainer) {
                     const avgLabel = isChinese() ? '平均' : 'AVG';
-                    scoreContainer.innerHTML = `+<span class="value">${bonusAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
+                    scoreContainer.innerHTML = `<span class="value">${finalScoreAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
                 }
+                
+                // 移除 bonus 類別（用於視覺區分）
+                bonusCard.classList.remove('bonus');
+                bonusCard.classList.add('final-avg');
             }
             
             // 隱藏成績明細標題（因為我們要自定義表格）
@@ -1784,6 +1881,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 gradeDetailsBody.appendChild(row);
             });
 
+            // 計算各項目的班級平均分數
+            const categoryAverages = {
+                assignments: 0,
+                dailyPerformance: 0,
+                attendance: 0,
+                midterm: 0,
+                final: 0,
+                bonus: 0,
+                finalScore: 0
+            };
+
+            // 計算每個類別的總分
+            studentData.forEach(student => {
+                Object.keys(categoryAverages).forEach(category => {
+                    categoryAverages[category] += student[category] || 0;
+                });
+            });
+
+            // 計算平均值
+            if (studentData.length > 0) {
+                Object.keys(categoryAverages).forEach(category => {
+                    categoryAverages[category] = categoryAverages[category] / studentData.length;
+                });
+            }
+
+            // 新增班級平均行
+            const classAverageRow = document.createElement('tr');
+            classAverageRow.classList.add('class-average-row');
+            classAverageRow.innerHTML = `
+                <td colspan="2" style="text-align: center;">
+                    <strong>
+                        <span class="lang-en">Class Average</span>
+                        <span class="lang-zh">班級平均</span>
+                    </strong>
+                </td>
+                <td><strong>${categoryAverages.assignments.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.dailyPerformance.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.attendance.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.midterm.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.final.toFixed(1)}</strong></td>
+                <td><strong>+${categoryAverages.bonus.toFixed(1)}</strong></td>
+                <td><strong style="color: var(--tech-cyan);">${categoryAverages.finalScore.toFixed(2)}</strong></td>
+            `;
+            gradeDetailsBody.appendChild(classAverageRow);
+
             resultsContainer.style.display = 'block';
         }
 
@@ -1875,6 +2017,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 tfoot.style.display = 'table-footer-group';
             }
             
+            // 恢復 bonus 卡片的原始狀態（學生端）
+            const bonusCard = document.getElementById('card-bonus');
+            if (bonusCard) {
+                // 恢復原始標題
+                const cardTitle = bonusCard.querySelector('h3');
+                if (cardTitle) {
+                    cardTitle.innerHTML = '<span class="lang-en">Bonus</span><span class="lang-zh">額外加分</span>';
+                }
+                
+                // 恢復原始樣式類別
+                bonusCard.classList.remove('final-avg');
+                bonusCard.classList.add('bonus');
+            }
+            
             resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
             resultCourseCode.textContent = courseInfo.code;
             resultStudentId.textContent = student.ID;
@@ -1947,9 +2103,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (studentIdInput) {
                  studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
             }
-            if(resultsContainer.style.display === 'block' && studentIdInput.value) {
-                performSearch();
-            }
+            // 移除自動重新搜尋的邏輯，避免切換語言時要求重新輸入密碼
+            // 語言切換只更新介面文字，不重新載入資料
         }
 
         // --- 事件監聽器 ---
