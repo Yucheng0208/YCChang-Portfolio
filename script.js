@@ -538,8 +538,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
             }
         }
+        
+        // 高光顯示作者名字
+        function highlightAuthorName(text) {
+            if (!text) return text;
+            const namePatterns = [
+                'Yu-Cheng Chang\\*?',
+                'Chang Yu-Cheng\\*?',
+                'Chang, Yu-Cheng\\*?',
+                'Yu-Cheng Chang',
+                'Chang Yu-Cheng',
+                '張育丞'
+            ];
+            
+            let highlightedText = text;
+            namePatterns.forEach(pattern => {
+                const regex = new RegExp(`(${pattern})`, 'gi');
+                highlightedText = highlightedText.replace(regex, '<mark class="author-highlight">$1</mark>');
+            });
+            
+            return highlightedText;
+        }
+        
+        const highlightedAuthors = highlightAuthorName(pub.authors || '');
+        
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${pub.authors || ''}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${highlightedAuthors}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
@@ -551,8 +575,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
             }
         }
+        
+        // 高光顯示作者名字
+        function highlightAuthorName(text) {
+            if (!text) return text;
+            const namePatterns = [
+                'Yu-Cheng Chang\\*',
+                'Yu-Cheng Chang',
+                'Chang Yu-Cheng\\*',
+                'Chang Yu-Cheng',
+                'Chang, Yu-Cheng\\*',
+                'Chang, Yu-Cheng',
+                'Ryan Chang\\*',
+                'Ryan Chang',
+                'Chang Ryan\\*',
+                'Chang Ryan',
+                'Yu-Cheng (Ryan) Chang\\*',
+                'Yu-Cheng (Ryan) Chang',
+                'Ryan Yu-Cheng Chang\\*',
+                'Ryan Yu-Cheng Chang',
+                '張育丞\\*',
+                '張育丞',
+                '育丞 張\\*',
+                '育丞 張',
+            ];
+            
+            let highlightedText = text;
+            namePatterns.forEach(pattern => {
+                const regex = new RegExp(`(${pattern})`, 'gi');
+                highlightedText = highlightedText.replace(regex, '<mark class="author-highlight">$1</mark>');
+            });
+            
+            return highlightedText;
+        }
+        
+        // 對可能包含名字的欄位進行高光處理
+        const highlightedMembers = highlightAuthorName(honor.members || '');
+        const highlightedSupervisor = highlightAuthorName(honor.supervisor || '');
+        const highlightedTitle = highlightAuthorName(honor.title || '');
+        
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${honor.title || ''}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${honor.members}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${honor.supervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${highlightedMembers}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${highlightedSupervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
