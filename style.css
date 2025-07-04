@@ -464,13 +464,24 @@ body.menu-open {
     display: none;
 }
 
-.dropdown-menu li:hover {
+/* 只針對主選單項目的懸停效果 */
+.dropdown-menu > li:hover {
     background-color: rgba(100, 210, 255, 0.1);
 }
 
-.dropdown-menu li:hover a {
+.dropdown-menu > li:hover > a {
     color: var(--tech-cyan);
 }
+
+/* 子選單項目的懸停效果 - 如需啟用請取消註釋
+.dropdown-submenu li:hover {
+    background-color: rgba(100, 210, 255, 0.1);
+}
+
+.dropdown-submenu li:hover a {
+    color: var(--tech-cyan);
+}
+*/
 
 /* 巢狀下拉選單樣式 - 點擊才展開 */
 .dropdown-menu .nav-item-dropdown {
