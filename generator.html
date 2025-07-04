@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Code Generator</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css"> 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon (reusing your settings) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.svg"><link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg"><link rel="icon" type="image/png" sizes="16x16" href="images/logo.svg"><link rel="shortcut icon" href="images/logo.svg"><meta name="theme-color" content="#0d1117">
+</head>
+<body class="code-generator-page"> <!-- Added a specific class for this page -->
+    <!-- Re-using the same navbar container -->
+    <header id="navbar-container"></header>
+
+    <main id="page-content">
+        <div class="page-container">
+            <!-- Page Title -->
+            <h1>
+                <span class="lang-en">Student Code Generator</span>
+                <span class="lang-zh">學生密碼產生器</span>
+            </h1>
+            <p>
+                <span class="lang-en">Enter the number of students to generate unique 6-character login codes.</span>
+                <span class="lang-zh">請輸入學生人數以產生專屬的 6 位數登入密碼。</span>
+            </p>
+
+            <!-- Generator Controls -->
+            <div class="generator-controls">
+                <button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>
+                
+                <div class="input-group">
+                    <label for="num-codes-input">
+                        <span class="lang-en">Number of Students:</span>
+                        <span class="lang-zh">學生人數：</span>
+                    </label>
+                    <input type="number" id="num-codes-input" min="1" placeholder="e.g., 50" aria-label="Number of codes to generate">
+                    <button id="generate-btn" class="search-btn">
+                        <span class="lang-en">Generate</span>
+                        <span class="lang-zh">產生</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error Message Display -->
+            <div id="error-message" class="no-results" style="display: none;"></div>
+
+            <!-- Results Display Area -->
+            <div id="results-container" class="results-container" style="display: none;">
+                <div class="result-header">
+                    <h2>
+                        <span class="lang-en">Generated Codes</span>
+                        <span class="lang-zh">產生的密碼</span>
+                    </h2>
+                     <div class="results-controls">
+                        <button id="copy-all-btn" class="admin-btn">
+                            <i class="fas fa-copy"></i>
+                            <span class="lang-en">Copy All</span><span class="lang-zh">全部複製</span>
+                        </button>
+                        <button id="download-csv-btn" class="admin-btn">
+                            <i class="fas fa-file-csv"></i>
+                            <span class="lang-en">Download CSV</span><span class="lang-zh">下載 CSV</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- List of generated codes -->
+                <ol id="code-list"></ol>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
+    </footer>
+    
+    <!-- Back to top button -->
+    <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top"></a>
+
+    <!-- Core JS file -->
+    <script src="script.js"></script>
+</body>
+</html>

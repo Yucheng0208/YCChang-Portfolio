@@ -3388,3 +3388,184 @@ body.show-zh .lang-en { display: none; }
 #clear-all-options:hover {
     background-color: #ff6b6b;
 }
+
+/* =================================== */
+/* Styles for Code Generator Page      */
+/* =================================== */
+
+.code-generator-page .generator-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center; /* 改為居中對齊 */
+    justify-content: center; /* 水平居中 */
+    background-color: #161b22; /* Dark background similar to other controls */
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    margin-bottom: 2rem;
+}
+
+.code-generator-page .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; /* 新增水平居中對齊 */
+    gap: 1rem;
+}
+
+.code-generator-page .input-group label {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #c9d1d9; /* Light text color */
+}
+
+.code-generator-page #num-codes-input {
+    padding: 0.75rem;
+    border: 1px solid #30363d;
+    background-color: #0d1117; /* Very dark input background */
+    color: #c9d1d9;
+    border-radius: 6px;
+    width: 120px; /* A fixed width is fine here */
+    font-size: 1rem;
+}
+
+.code-generator-page #num-codes-input:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+}
+
+.code-generator-page .results-container .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.code-generator-page .results-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.code-generator-page #code-list {
+    list-style-type: decimal;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 2rem 2rem 2rem 4rem; /* More padding on the left for numbers */
+    margin: 0;
+    
+    /* Multi-column layout for better readability */
+    column-count: 3;
+    column-gap: 2.5rem;
+}
+
+.code-generator-page #code-list li {
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+    background-color: #161b22;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #89e0ff; /* A distinct color for the codes */
+    text-align: center;
+    border: 1px solid #30363d;
+}
+
+/* Responsive adjustments for code list columns */
+@media (max-width: 900px) {
+    .code-generator-page #code-list {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .code-generator-page #code-list {
+        column-count: 1;
+        padding-left: 3rem;
+    }
+    .code-generator-page .generator-controls {
+        flex-direction: column;
+        align-items: center; /* 改為居中對齊 */
+    }
+    .code-generator-page .input-group {
+        flex-direction: column;
+        align-items: center; /* 改為居中對齊 */
+    }
+    .code-generator-page #num-codes-input {
+        width: 80%; /* 改為百分比寬度，但不佔滿整行 */
+        max-width: 200px; /* 設置最大寬度 */
+        margin: 0 auto; /* 水平置中 */
+    }
+}
+
+.search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #2f81f7; /* 主要的藍色 */
+    border: 1px solid #2f81f7;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    -webkit-appearance: none; /* 修正 iOS 上的樣式問題 */
+    appearance: none; /* 標準屬性 */
+}
+
+.search-btn:hover {
+    background-color: #58a6ff; /* 滑鼠懸停時變亮 */
+    border-color: #58a6ff;
+}
+
+.search-btn:focus, .search-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.4); /* 點擊或 Tab 鍵選中時的藍色光暈 */
+}
+
+.search-btn:disabled {
+    background-color: #21262d;
+    color: #8b949e;
+    border-color: #30363d;
+    cursor: not-allowed;
+}
+
+/* 次要/管理員按鈕 (例如「全部複製」、「下載 CSV」) */
+/* This style is for secondary actions like "Copy" or "Download" */
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem; /* 圖示和文字之間的間距 */
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #c9d1d9; /* 淺灰色文字 */
+    background-color: #21262d; /* 深灰色背景 */
+    border: 1px solid #30363d; /* 邊框 */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.admin-btn:hover {
+    background-color: #30363d; /* 滑鼠懸停時背景變亮 */
+    border-color: #8b949e; /* 邊框變亮 */
+}
+
+.admin-btn:focus, .admin-btn:focus-visible {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+}
+
+.admin-btn i {
+    font-size: 0.8em; /* 讓圖示比文字稍小一點 */
+}
