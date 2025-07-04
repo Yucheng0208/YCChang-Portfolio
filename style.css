@@ -509,7 +509,7 @@ body.menu-open {
     visibility: visible;
 }
 
-/* 巢狀下拉選單的下拉箭頭指向右側 */
+/* 巢狀下拉選單的下拉箭頭指向右側（桌面版） */
 .dropdown-menu .nav-item-dropdown > a .dropdown-arrow {
     transform: rotate(-45deg); /* 指向右側 */
     margin-left: 8px;
@@ -517,6 +517,17 @@ body.menu-open {
 
 .dropdown-menu .nav-item-dropdown.is-open > a .dropdown-arrow {
     transform: rotate(45deg); /* 點擊後指向右下 */
+}
+
+/* 手機版下，子選單的箭頭指向下方 */
+@media (max-width: 1200px) {
+    .dropdown-menu .nav-item-dropdown > a .dropdown-arrow {
+        transform: rotate(45deg); /* 指向下方 */
+    }
+    
+    .dropdown-menu .nav-item-dropdown.is-open > a .dropdown-arrow {
+        transform: rotate(225deg); /* 點擊後指向上方 */
+    }
 }
 
 /* Hamburger Menu Icon */
@@ -1185,7 +1196,7 @@ body.menu-open {
     overflow: hidden;
     background-color: #000;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition: transform 0.4s ease, opacity 0.
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -2739,7 +2750,28 @@ body.show-zh .lang-en { display: none; }
         transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
     }
 
-    .nav-item-dropdown.is-open .dropdown-menu {
+    .nav-item-dropdown.is-open > .dropdown-menu {
+        max-height: 500px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    /* 手機版下的子選單樣式 */
+    .dropdown-menu .dropdown-submenu {
+        position: static;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 3px 8px rgba(0,0,0,0.4);
+        border-radius: 0;
+        max-height: 0;
+        padding: 0;
+        transform: none !important;
+        top: auto !important;
+        left: auto !important;
+    }
+    
+    /* 確保子選單在手機版中能正確顯示和隱藏 */
+    .dropdown-menu .nav-item-dropdown.is-open > .dropdown-submenu {
         max-height: 500px;
         padding-top: 10px;
         padding-bottom: 10px;
