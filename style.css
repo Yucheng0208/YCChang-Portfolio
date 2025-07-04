@@ -472,6 +472,42 @@ body.menu-open {
     color: var(--tech-cyan);
 }
 
+/* 巢狀下拉選單樣式 - 點擊才展開 */
+.dropdown-menu .nav-item-dropdown {
+    position: relative;
+}
+
+.dropdown-menu .dropdown-submenu {
+    position: absolute;
+    left: 100%; /* 從父元素的右側邊緣開始 */
+    top: -10px !important; /* 強制上移子選單 */
+    transform: translateX(0); /* 不需要額外偏移 */
+    background-color: var(--light-bg);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 11; /* 確保子選單在其他元素之上 */
+}
+
+/* 點擊後才顯示子選單，不使用hover */
+.dropdown-menu .nav-item-dropdown.is-open > .dropdown-submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 巢狀下拉選單的下拉箭頭指向右側 */
+.dropdown-menu .nav-item-dropdown > a .dropdown-arrow {
+    transform: rotate(-45deg); /* 指向右側 */
+    margin-left: 8px;
+}
+
+.dropdown-menu .nav-item-dropdown.is-open > a .dropdown-arrow {
+    transform: rotate(45deg); /* 點擊後指向右下 */
+}
+
 /* Hamburger Menu Icon */
 .hamburger-btn {
     background: none;
@@ -3457,7 +3493,7 @@ body.show-zh .lang-en { display: none; }
     border-radius: 8px;
     padding: 2rem 1.5rem; /* 調整內邊距 */
     margin: 0 auto; /* 居中顯示 */
-    width: 90%; /* 控制整體寬度 */
+    width: 100%; /* 控制整體寬度 */
     
     /* Multi-column layout for better readability */
     column-count: 3;
@@ -3553,6 +3589,9 @@ body.show-zh .lang-en { display: none; }
     display: flex;
     width: 100%;
     align-items: center;
+    padding: 0.2rem;
+    background-color: #161b22;
+    border-radius: 4px;
     color: #89e0ff;
     font-family: 'Courier New', Courier, monospace;
     overflow: hidden; /* 確保內容不會溢出 */

@@ -254,18 +254,49 @@ document.addEventListener('DOMContentLoaded', function() {
             yearSpan.textContent = new Date().getFullYear();
         }
 
-        // Mobile Dropdown Accordion
+        // Dropdown Accordion - 桌面版和移動版
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         dropdownToggles.forEach(toggle => {
             toggle.addEventListener('click', (event) => {
+                const parentLi = toggle.closest('.nav-item-dropdown');
+                
+                // 檢查是否是子選單的切換按鈕
+                const isSubmenuToggle = parentLi && parentLi.closest('.dropdown-menu') !== null;
+                
+                // 移動版 - 所有下拉選單都以點擊方式展開
                 if (hamburgerBtn && window.getComputedStyle(hamburgerBtn).display !== 'none') {
                     event.preventDefault();
-                    const parentLi = toggle.closest('.nav-item-dropdown');
                     if (parentLi) {
                         parentLi.classList.toggle('is-open');
+                        
+                        if (isSubmenuToggle) {
+                            event.stopPropagation(); // 防止事件冒泡到父級下拉選單
+                        }
                     }
+                } 
+                // 桌面版 - 僅巢狀下拉選單需點擊展開
+                else if (isSubmenuToggle) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    // 關閉同層級其他已打開的子選單
+                    const siblingItems = parentLi.parentElement.querySelectorAll('.nav-item-dropdown.is-open');
+                    siblingItems.forEach(sibling => {
+                        if (sibling !== parentLi) sibling.classList.remove('is-open');
+                    });
+                    
+                    parentLi.classList.toggle('is-open');
                 }
             });
+        });
+        
+        // 點擊頁面其他區域時關閉所有子選單
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.dropdown-menu')) {
+                document.querySelectorAll('.dropdown-menu .nav-item-dropdown.is-open').forEach(item => {
+                    item.classList.remove('is-open');
+                });
+            }
         });
 
         // Back to Top Button
