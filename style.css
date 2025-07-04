@@ -1847,7 +1847,7 @@ body.show-zh .lang-en { display: none; }
 .course-links {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #30363d;
+    border-top: 1px solid #303d3d;
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
@@ -3451,121 +3451,120 @@ body.show-zh .lang-en { display: none; }
 }
 
 .code-generator-page #code-list {
-    list-style-type: decimal;
+    list-style-type: none; /* 更改為無樣式，因為我們使用自訂編號 */
     background-color: #0d1117;
     border: 1px solid #30363d;
     border-radius: 8px;
-    padding: 2rem 2rem 2rem 4rem; /* More padding on the left for numbers */
-    margin: 0;
+    padding: 2rem 1.5rem; /* 調整內邊距 */
+    margin: 0 auto; /* 居中顯示 */
+    width: 90%; /* 控制整體寬度 */
     
     /* Multi-column layout for better readability */
     column-count: 3;
-    column-gap: 2.5rem;
+    column-gap: 2rem; /* 稍微減少列之間的間隙 */
 }
 
 .code-generator-page #code-list li {
-    padding: 0.5rem;
-    margin-bottom: 0.75rem;
+    padding: 0.9rem 0.5rem; /* 增加上下內邊距，減少左右內邊距 */
+    margin-bottom: 0.9rem; /* 增加下方間距 */
     background-color: #161b22;
     border-radius: 4px;
+    position: relative; /* 新增相對定位以幫助調整布局 */
+    margin-left: 0; /* 移除左邊距，因為我們使用自訂編號 */
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.1rem;
     font-weight: bold;
     color: #89e0ff; /* A distinct color for the codes */
-    text-align: center;
     border: 1px solid #30363d;
+    display: block; /* 改為塊級顯示，確保整個框架正常 */
+    max-width: 95%; /* 控制最大寬度 */
+    margin-right: auto;
+    margin-left: auto;
+    /* 確保內容不會溢出 */
+    overflow: hidden;
+    break-inside: avoid; /* 避免在多列布局中分隔項目 */
 }
 
-/* Responsive adjustments for code list columns */
-@media (max-width: 900px) {
-    .code-generator-page #code-list {
-        column-count: 2;
-    }
+/* 編號的樣式 */
+.code-generator-page #code-list li .code-index {
+    min-width: 35px; /* 稍微減少固定最小寬度 */
+    color: #c9d1d9; /* 使用較淺的顏色區分於密碼 */
+    text-align: right; /* 文字右對齊 */
+    padding-right: 10px; /* 增加右側內邊距，讓編號和密碼有更明顯的區分 */
+    font-weight: normal; /* 不要太粗 */
+    font-size: 0.95rem; /* 略微縮小字體 */
+    flex-shrink: 0; /* 防止編號區域被壓縮 */
 }
 
+/* 密碼值的樣式 */
+.code-generator-page #code-list li .code-value {
+    flex-grow: 1; /* 允許元素填充可用空間 */
+    text-align: left; /* 文字左對齊 */
+    padding: 0 0.15rem; /* 減少水平內邊距 */
+    letter-spacing: 0.8px; /* 稍微調整字母間距 */
+    max-width: 90%; /* 控制最大寬度 */
+    overflow-wrap: break-word; /* 確保長密碼能夠換行 */
+}
+
+/* 資訊圖標樣式 */
+.code-generator-page #code-list li .code-info-icon {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    color: #58a6ff;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.code-generator-page #code-list li .code-info-icon:hover {
+    color: #89e0ff;
+}
+
+/* 密碼詳細資訊容器 */
+.code-generator-page #code-list li .code-details {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: #0d1117;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    border-left: 2px solid #58a6ff;
+    width: 100%;
+}
+
+.code-generator-page #code-list li .code-translation {
+    padding: 0.2rem 0;
+    color: #c9d1d9;
+}
+
+/* 確保密碼可點擊區域足夠大 */
+.code-generator-page #code-list li .code-value {
+    transition: color 0.2s ease;
+}
+
+/* 在手機上的特別樣式 */
 @media (max-width: 600px) {
-    .code-generator-page #code-list {
-        column-count: 1;
-        padding-left: 3rem;
-    }
-    .code-generator-page .generator-controls {
-        flex-direction: column;
-        align-items: center; /* 改為居中對齊 */
-    }
-    .code-generator-page .input-group {
-        flex-direction: column;
-        align-items: center; /* 改為居中對齊 */
-    }
-    .code-generator-page #num-codes-input {
-        width: 80%; /* 改為百分比寬度，但不佔滿整行 */
-        max-width: 200px; /* 設置最大寬度 */
-        margin: 0 auto; /* 水平置中 */
+    .code-generator-page #code-list li .code-details {
+        font-size: 0.85rem;
+        padding: 0.4rem;
     }
 }
 
-.search-btn {
-    display: inline-flex;
+/* 密碼容器樣式 - 保證編號和密碼在同一個框內 */
+.code-generator-page #code-list li .code-container {
+    display: flex;
+    width: 100%;
     align-items: center;
-    justify-content: center;
-    padding: 0.7rem 1.5rem;
+    color: #89e0ff;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden; /* 確保內容不會溢出 */
+}
+.code-generator-page  #generate-btn {
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
-    color: #ffffff;
-    background-color: #2f81f7; /* 主要的藍色 */
-    border: 1px solid #2f81f7;
-    border-radius: 6px;
+    border: none;
     cursor: pointer;
-    text-align: center;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    -webkit-appearance: none; /* 修正 iOS 上的樣式問題 */
-    appearance: none; /* 標準屬性 */
-}
-
-.search-btn:hover {
-    background-color: #58a6ff; /* 滑鼠懸停時變亮 */
-    border-color: #58a6ff;
-}
-
-.search-btn:focus, .search-btn:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.4); /* 點擊或 Tab 鍵選中時的藍色光暈 */
-}
-
-.search-btn:disabled {
-    background-color: #21262d;
-    color: #8b949e;
-    border-color: #30363d;
-    cursor: not-allowed;
-}
-
-/* 次要/管理員按鈕 (例如「全部複製」、「下載 CSV」) */
-/* This style is for secondary actions like "Copy" or "Download" */
-.admin-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem; /* 圖示和文字之間的間距 */
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #c9d1d9; /* 淺灰色文字 */
-    background-color: #21262d; /* 深灰色背景 */
-    border: 1px solid #30363d; /* 邊框 */
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-}
-
-.admin-btn:hover {
-    background-color: #30363d; /* 滑鼠懸停時背景變亮 */
-    border-color: #8b949e; /* 邊框變亮 */
-}
-
-.admin-btn:focus, .admin-btn:focus-visible {
-    outline: none;
-    border-color: #58a6ff;
-    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
-}
-
-.admin-btn i {
-    font-size: 0.8em; /* 讓圖示比文字稍小一點 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

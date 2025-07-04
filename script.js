@@ -2169,7 +2169,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const code = generateRandomCode(6);
                 generatedCodes.push(code);
                 const listItem = document.createElement('li');
-                listItem.textContent = code;
+                // 將編號和密碼放在同一個容器內，避免跑到隔壁格子
+                listItem.innerHTML = `<div class="code-container"><span class="code-index">${i+1}.</span> <span class="code-value">${code}</span></div>`;
                 codeList.appendChild(listItem);
             }
             
@@ -2178,7 +2179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // --- "Copy All" Button Logic ---
         copyAllBtn.addEventListener('click', () => {
-            const codes = Array.from(codeList.querySelectorAll('li')).map(li => li.textContent);
+            const codes = Array.from(codeList.querySelectorAll('li .code-value')).map(span => span.textContent);
             const textToCopy = codes.join('\n');
 
             navigator.clipboard.writeText(textToCopy).then(() => {
@@ -2201,7 +2202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // --- "Download CSV" Button Logic ---
         downloadCsvBtn.addEventListener('click', () => {
-            const codes = Array.from(codeList.querySelectorAll('li')).map(li => li.textContent);
+            const codes = Array.from(codeList.querySelectorAll('li .code-value')).map(span => span.textContent);
             let csvContent = 'data:text/csv;charset=utf-8,';
             csvContent += 'Index,Code\n'; // CSV Header
 
