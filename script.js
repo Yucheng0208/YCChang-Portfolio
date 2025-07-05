@@ -909,6 +909,149 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(skillsSection);
     })();
 
+
+        // ===== 7.5 Recent Events Carousel Logic (v3 - YAML Loaded) =====
+    (async function setupRecentEventsCarousel() {
+        const carouselSection = document.getElementById('recent-events');
+        if (!carouselSection) return;
+
+        let eventsData = [];
+        try {
+            // 1. 從 YAML 檔案異步獲取數據
+            const response = await fetch('./data/yaml/events.yaml');
+            if (!response.ok) {
+                throw new Error(`Failed to load events.yaml: ${response.status} ${response.statusText}`);
+            }
+            const yamlText = await response.text();
+            // 2. 使用您自訂的解析器來解析 YAML
+            eventsData = window.jsyaml.load(yamlText) || [];
+
+        } catch (error) {
+            console.error("Could not load recent events data:", error);
+            carouselSection.style.display = 'none'; // 如果載入失敗，直接隱藏此區塊
+            return; // 終止函式執行
+        }
+
+        // 3. 檢查是否有有效的數據
+        if (eventsData.length === 0) {
+            console.warn("No event data found in events.yaml. Hiding events section.");
+            carouselSection.style.display = 'none';
+            return;
+        }
+
+        // --- 以下為輪播邏輯，與之前相同，現在使用從 YAML 載入的 eventsData ---
+        
+        const grid = document.getElementById('events-grid');
+        const prevBtn = document.getElementById('prev-event');
+        const nextBtn = document.getElementById('next-event');
+        const playBtn = document.getElementById('play-event-autoplay');
+        const pauseBtn = document.getElementById('pause-event-autoplay');
+
+        if (!grid || !prevBtn || !nextBtn || !playBtn || !pauseBtn) return;
+        
+        let currentIndex = 0;
+        let autoplayInterval = null;
+        const AUTOPLAY_SPEED = 5000;
+
+        function getVisibleCards() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 4;
+        }
+
+        function renderEvents() {
+            const visibleCards = getVisibleCards();
+            
+            const showNav = eventsData.length > visibleCards;
+            prevBtn.style.display = showNav ? 'flex' : 'none';
+            nextBtn.style.display = showNav ? 'flex' : 'none';
+
+            grid.innerHTML = '';
+            grid.style.opacity = '0';
+
+            setTimeout(() => {
+                for (let i = 0; i < Math.min(eventsData.length, visibleCards); i++) {
+                    const dataIndex = (currentIndex + i) % eventsData.length;
+                    const event = eventsData[dataIndex];
+    
+                    const card = document.createElement('div');
+                    card.className = 'event-card';
+                    card.innerHTML = `
+                        <img src="${event.image}" alt="${event.title}">
+                        <div class="event-info">
+                            <h3>${event.title}</h3>
+                            <p>${event.description}</p>
+                        </div>
+                    `;
+                    card.addEventListener('mouseenter', pauseAutoplay);
+                    card.addEventListener('mouseleave', startAutoplay);
+                    grid.appendChild(card);
+                }
+                 grid.style.opacity = '1';
+            }, 150);
+        }
+
+        function showNext() {
+            const visibleCards = getVisibleCards();
+            if (eventsData.length > visibleCards) {
+                currentIndex = (currentIndex + 1) % eventsData.length;
+                renderEvents();
+            }
+        }
+
+        function showPrev() {
+             const visibleCards = getVisibleCards();
+             if (eventsData.length > visibleCards) {
+                currentIndex = (currentIndex - 1 + eventsData.length) % eventsData.length;
+                renderEvents();
+            }
+        }
+        
+        function startAutoplay() {
+            const visibleCards = getVisibleCards();
+            if (eventsData.length <= visibleCards) return;
+
+            if (autoplayInterval) return;
+            
+            pauseBtn.classList.remove('hidden');
+            playBtn.classList.add('hidden');
+            autoplayInterval = setInterval(showNext, AUTOPLAY_SPEED);
+        }
+
+        function pauseAutoplay() {
+            clearInterval(autoplayInterval);
+            autoplayInterval = null;
+            pauseBtn.classList.add('hidden');
+            playBtn.classList.remove('hidden');
+        }
+        
+        function resetAutoplay() {
+            pauseAutoplay();
+            startAutoplay();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            showNext();
+            resetAutoplay();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            showPrev();
+            resetAutoplay();
+        });
+
+        pauseBtn.addEventListener('click', pauseAutoplay);
+        playBtn.addEventListener('click', startAutoplay);
+
+        window.addEventListener('resize', () => {
+            renderEvents();
+            resetAutoplay();
+        });
+
+        renderEvents();
+        startAutoplay();
+    })();
+
     // --- 8. 課表頁 (Schedule Page) 專用邏輯 ---
     (function setupSchedulePage() {
         const pageContainer = document.querySelector('.schedule-page');

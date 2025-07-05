@@ -1,0 +1,57 @@
+# ===============================================
+#   Recent Events & Activities Data
+# ===============================================
+# 說明:
+# - image: 圖片路徑 (相對於網站根目錄)
+# - title: 事件標題
+# - description: 事件的簡短描述
+
+- image: images/events/event1.jpg
+  title: IEEE ICCBE 2025
+  description: Presented multiple cutting-edge research findings from our team's latest studies.
+
+- image: images/events/event2.jpg
+  title: Computex 2025
+  description: Gained comprehensive insights into the tech industry landscape through mentoring a winning team that developed an accessibility-focused application.
+
+- image: images/events/event3.jpg
+  title: Cybersec 2025
+  description: Explored the cybersecurity industry landscape and emerging security trends through hands-on IoT security workshops.
+
+- image: images/events/event4.jpg
+  title: 2025 E化系統創意應用競賽
+  description: Demonstrated the integration of natural sciences and technology by showcasing AI-powered solutions for industry assistance and emotional analysis applications.
+
+- image: images/events/event5.jpg
+  title: International Scholar Invitation to Malaysia
+  description: Conducted in-depth research collaboration and industry exchange at TAR UMT, including comprehensive local field studies and academic partnerships.
+
+- image: images/events/event6.jpg
+  title: IEEE ICEIB 2024
+  description: Published an innovative research paper exploring the intersection of emerging technologies and current societal trends in smart surveillance applications.
+
+- image: images/events/event7.png
+  title: Cross-border Issues Conference by Taiwan Institute for Business Development
+  description: Hosted Malaysian Vice Chancellor and administrative executives for Taiwan exchange conference, collaborating with multiple research institutes to explore cross-border mutual prosperity and bilateral innovation.
+
+- image: images/events/event8.png
+  title: Industry Academia Exchange Conference by Yilan County Government, Taiwan
+  description: Facilitated Yilan's expansion into international markets, promoting bilateral academic and business exchange networks between Taiwan and global partners.
+
+- image: images/events/event9.png
+  title: 教育部 國際發明展金牌得獎學生代表接見活動
+  description: Honored for bringing glory to Taiwan at international invention exhibitions, receiving prestigious awards for outstanding achievements in innovation.
+
+- image: images/events/event10.png
+  title: 國立臺灣師範大學附屬高級中學創客暨IEYI世界青少年發明展經驗分享
+  description: Shared hands-on implementation and competition experiences with numerous students, inspiring them to ignite their passion for practical innovation and maker spirit.
+
+- image: images/events/event11.png
+  title: 新北市立淡水高級商工職業學校 生涯規劃與備審資料分享會
+  description: Illuminated the path for confused students through inspiring stories and structured guidance, helping them navigate their academic and career journey with clarity and purpose.
+
+- image: images/events/event12.png
+  title: 2023 新北市發明人表揚大會
+  description: Received awards and recognition from New Taipei City Mayor for winning multiple gold medals at international invention exhibitions.
+
+# 您可以在此處繼續添加更多事件...

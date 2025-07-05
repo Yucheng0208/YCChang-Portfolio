@@ -1275,6 +1275,176 @@ body.menu-open {
     box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
 }
 
+/* ===== Recent Events Showcase Section (NEW) ===== */
+.recent-events-section {
+    padding: 80px 0;
+    background-color: #0d1117; /* Matches your dark theme */
+    color: #c9d1d9;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Consistent with other sections */
+}
+
+.events-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.events-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.events-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--tech-cyan); /* Use theme color */
+    font-weight: 700;
+}
+
+.events-header .text-muted {
+    font-size: 1.1rem;
+    color: #8b949e;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Autoplay Controls */
+.events-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.event-autoplay-btn {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.event-autoplay-btn:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+}
+
+.hidden {
+    display: none;
+}
+
+.events-carousel-container {
+    position: relative;
+    padding: 0 50px; /* Space for nav buttons */
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    transition: opacity 0.5s ease-in-out; /* Changed from transform to opacity for smoother rendering */
+}
+
+.event-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px; /* Rounded corners */
+    aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #30363d; /* Match skill-card border */
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(100, 210, 255, 0.2); /* Tech-cyan shadow */
+    border-color: var(--tech-cyan); /* Highlight border on hover */
+}
+
+.event-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the card without distortion */
+    transition: transform 0.4s ease;
+}
+
+.event-card:hover img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.event-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%);
+    color: #ffffff;
+    padding: 40px 20px 20px 20px;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    text-align: left;
+}
+
+.event-card:hover .event-info {
+    opacity: 1; /* Show on hover */
+    transform: translateY(0);
+}
+
+.event-info h3 {
+    font-size: 1.2rem;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+    color: #fff; /* Ensure it's white */
+}
+
+.event-info p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--text-color); /* Use theme text color */
+    line-height: 1.4;
+}
+
+.event-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(13, 17, 23, 0.7);
+    color: #ffffff;
+    border: 1px solid #30363d;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.event-nav-btn:hover {
+    background-color: rgba(35, 41, 49, 0.9);
+    border-color: #8b949e;
+}
+
+#prev-event {
+    left: 0;
+}
+
+#next-event {
+    right: 0;
+}
+
 /* Showcase Sections (Friendly Links & Partners) - Refactored to reduce duplication */
 .link-showcase-section,
 .partner-showcase-section {
