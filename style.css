@@ -1536,7 +1536,7 @@ body.menu-open {
 }
 
 @media (max-width: 600px) {
-    .events-header h2 { font-size: 2rem; }
+    .events-header h2 { font-size: 2.5rem; }
     #prev-event { left: -5px; }
     #next-event { right: -5px; }
     
@@ -3187,12 +3187,12 @@ body.show-zh .lang-en { display: none; }
     }
     
     .video-carousel-title {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
         margin-bottom: 1rem;
     }
     
     .video-carousel-section .text-muted {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin: 1rem 0;
         padding: 0 10px;
     }
@@ -3284,12 +3284,12 @@ body.show-zh .lang-en { display: none; }
     }
     
     .video-carousel-title {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
         line-height: 1.3;
     }
     
     .video-carousel-section .text-muted {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         padding: 0 5px;
     }
     
