@@ -963,14 +963,23 @@ body.menu-open {
 
 /* Education Timeline */
 .education-section {
-    padding: 9rem 2rem 4rem 2rem;
+    padding: 9rem 0 4rem 0;
     background-color: var(--dark-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: none;
+    /* 使用 viewport 寬度來確保分隔線橫跨整個螢幕 */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
 }
 
 .education-container {
     max-width: 900px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
 
