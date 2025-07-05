@@ -257,12 +257,23 @@
   date: “Jane 7, 2023"
   links:
 
+- title: "Based-on Computer Vision Applications for Bus Stop Passenger Detection Systems"
+  event: "3rd IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2023 (IEEE ICEIB 2023)"
+  organizer: "Asia University, Taichung, Taiwan"
+  category: "Other"
+  award: "Best Paper Award"
+  bonus: ""
+  members: "Yu-Cheng Chang; Hua-Wen Tsai*; Chao-Yi Huang; Zong-Rong Wu*"
+  supervisor: ""
+  date: "April 16-17, 2023"
+  links:
+
 - title: "應用於鐵路維安之智慧警示系統"
   event: "2023 E化系統創意應用競賽"
   organizer: "中華企業資源規劃學會, 國立中央大學管理學院"
   category: "Competition"
   award: "第一名"
-  bonus: " NTD $20,000 "
+  bonus: "NTD $20,000"
   members: "張育丞*, 楊敦傑, 楊竣捷, 徐茂霖"
   supervisor:  "蔡華文 教授"
   date: "March 18, 2023"
@@ -273,7 +284,7 @@
   organizer: "教育部, 教育部促進產業合作平台, 教育部產學連結辦公室, 國立臺灣科技大學, 國立勤益科技大學"
   category: "Competition"
   award: "季軍"
-  bonus: " NTD $20,000 "
+  bonus: "NTD $20,000"
   members: "張育丞*, 吳宗融, 張育阡, 辜弘沅, 王柏偉"
   supervisor:  "蔡華文 教授, 陳金雄 博士"
   date: "December 3, 2022"
@@ -418,7 +429,7 @@
   organizer: "Japan Institute of Invention and Innovation"
   category: "Competition"
   award: "Education and Recreation (above 14 years old), Indonesian Special Award"
-  bonus: 
+  bonus: "" 
   members: "黃煜展, 張育丞, 吳嘉恆"
   supervisor:  "劉亦恭 老師"
   date: “July 27-39, 2017"
@@ -431,7 +442,7 @@
   organizer: "臺北市政府教育局"
   category: "Competition"
   award: "國中組 運動育樂類 金牌獎 代表台灣赴日本參加決賽"
-  bonus: 
+  bonus: ""
   members: "黃煜展, 張育丞, 吳嘉恆"
   supervisor:  "劉亦恭 老師"
   date: “January 21-22, 2017"
@@ -442,7 +453,7 @@
   organizer: "新北市政府教育局"
   category: "Competition"
   award: "創意秀組 特優"
-  bonus: 
+  bonus: ""
   members: "黃煜展, 張育丞, 吳嘉恆"
   supervisor:  "劉亦恭 老師"
   date: May 27-28, 2016"
