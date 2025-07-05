@@ -747,18 +747,26 @@ body.menu-open {
     text-align: center;
     overflow: hidden;
     border-radius: 16px;
+    /* 確保容器是正方形 */
+    width: 300px;
+    height: 300px;
+    /* 添加過渡效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* 添加背景色以確保圓角效果 */
+    background-color: var(--light-bg);
 }
 
 .intro-image img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     border-radius: 16px;
-    object-fit: contain;
+    object-fit: cover; /* 使用 cover 填滿容器，但通過容器的 overflow: hidden 確保圓角 */
     animation: slideUpImage 0.8s ease-out;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: inherit; /* 繼承父元素的過渡效果 */
+    display: block; /* 確保圖片是塊級元素 */
 }
 
-.intro-image img:hover {
+.intro-image:hover {
     transform: scale(1.05);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
@@ -1539,6 +1547,16 @@ body.menu-open {
     
     .video-carousel-prev { left: -5px; }
     .video-carousel-next { right: -5px; }
+    
+    /* Intro Section - Small Mobile */
+    .intro-image {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: var(--light-bg);
+    }
     
     /* Unified section title responsive styles */
     .section-title,
@@ -3059,6 +3077,16 @@ body.show-zh .lang-en { display: none; }
         padding: 1.5rem;
     }
 
+    /* Intro Section - Tablet */
+    .intro-image {
+        width: 280px;
+        height: 280px;
+        flex-basis: 280px; /* 覆蓋基本設定的 flex-basis: 300px */
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: var(--light-bg);
+    }
+
     /* Education Timeline */
     .timeline-wrapper::before {
         left: 25px;
@@ -3157,7 +3185,12 @@ body.show-zh .lang-en { display: none; }
     .intro-image {
         width: 250px;
         height: 250px;
+        flex-basis: 250px; /* 覆蓋基本設定的 flex-basis: 300px */
         order: -1;
+        margin: 0 auto; /* 居中對齊 */
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: var(--light-bg);
     }
 
     .intro-text h1 {
@@ -3305,6 +3338,17 @@ body.show-zh .lang-en { display: none; }
     
     .video-carousel-section {
         padding: 20px 10px;
+    }
+    
+    /* Intro Section - Mobile */
+    .intro-image {
+        width: 200px;
+        height: 200px;
+        flex-basis: 200px; /* 覆蓋基本設定的 flex-basis: 300px */
+        margin: 0 auto;
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: var(--light-bg);
     }
     
     /* Unified section title mobile styles */
