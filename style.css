@@ -977,7 +977,7 @@ body.menu-open {
 }
 
 .education-container {
-    max-width: 900px;
+    max-width: 1200px; /* 從 900px 增加到 1200px，適應更寬的電腦螢幕 */
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -2209,7 +2209,7 @@ body.show-zh .lang-en { display: none; }
     padding: 8px 16px;
     background-color: #21262d;
     color: #c9d1d9;
-    border: 1px solid #30363d;
+    border: 1px solid #303d3d;
     border-radius: 6px;
     text-decoration: none;
     font-size: 14px;
@@ -3431,18 +3431,6 @@ body.show-zh .lang-en { display: none; }
     .video-carousel-next { 
         right: 5px;
     }
-    
-    .video-window-glw0pyx-nav button {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-    }
-    
-    .video-carousel-more {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-        margin-top: 20px;
-    }
 }
 
 /* === 手機影片輪播優化 (針對 390x844 等小螢幕) === */
@@ -3534,37 +3522,6 @@ body.show-zh .lang-en { display: none; }
     
     .video-carousel-next { 
         right: 10px;
-    }
-    
-    /* 確保 iframe 不會溢出 */
-    .video-iframe-wrapper {
-        border-radius: 8px;
-    }
-    
-    .video-iframe-wrapper iframe {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-    
-    /* 調整標題和說明文字 */
-    .video-carousel-title {
-        font-size: 1.6rem;
-        margin-bottom: 1rem;
-        padding: 0 10px;
-    }
-    
-    .video-carousel-section .text-muted {
-        font-size: 0.9rem;
-        padding: 0 15px;
-        margin-bottom: 2rem;
-    }
-    
-    .video-carousel-more {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-        margin-top: 20px;
     }
 }
 
@@ -4165,4 +4122,53 @@ body.show-zh .lang-en { display: none; }
     border: none;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Education Timeline 響應式寬度調整 */
+/* 超大螢幕 (1600px+) */
+@media (min-width: 1600px) {
+    .education-container {
+        max-width: 1400px;
+    }
+}
+
+/* 大螢幕 (1400px+) */
+@media (min-width: 1400px) {
+    .education-container {
+        max-width: 1300px;
+    }
+}
+
+/* 標準大螢幕 (1200px+) */
+@media (min-width: 1200px) {
+    .education-container {
+        max-width: 1200px;
+    }
+}
+
+/* 中等螢幕調整 */
+@media (max-width: 1199px) {
+    .education-container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 992px) {
+    .education-container {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .education-container {
+        max-width: 700px;
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .education-container {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
 }
