@@ -348,7 +348,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- 函式：載入頁腳 ---
+    async function loadFooter() {
+        // 檢查是否已經有頁腳容器 ID，如果沒有就在 body 結尾前插入
+        let footerContainer = document.getElementById('footer-container');
+        if (!footerContainer) {
+            // 創建一個頁腳容器並插入到 body 結尾前
+            footerContainer = document.createElement('div');
+            footerContainer.id = 'footer-container';
+            document.body.appendChild(footerContainer);
+        }
+
+        try {
+            const response = await fetch('footer.html');
+            if (!response.ok) {
+                throw new Error(`Failed to load footer.html: ${response.status} ${response.statusText}`);
+            }
+            const footerHTML = await response.text();
+            footerContainer.innerHTML = footerHTML;
+        } catch (error) {
+            console.error('Error loading footer:', error);
+            footerContainer.innerHTML = '<p style="color: red; text-align: center; padding: 1rem;">Error: Footer could not be loaded.</p>';
+        }
+    }
+
     loadNavbarAndInit();
+    loadFooter();
 
 
     // --- 2. 列表頁初始化 (通用表格) ---

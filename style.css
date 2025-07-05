@@ -210,22 +210,18 @@ body.menu-open {
     animation: gentle-float 3s ease-in-out infinite;
 }
 
-.back-to-top-btn::after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid var(--tech-cyan);
-    border-left: 2px solid var(--tech-cyan);
-    transform: translateY(25%) rotate(45deg);
-    transition: border-color 0.3s ease;
+.back-to-top-btn i {
+    color: var(--tech-cyan);
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
 
 .back-to-top-btn:hover {
     background-color: var(--tech-cyan);
 }
 
-.back-to-top-btn:hover::after {
-    border-color: var(--dark-bg);
+.back-to-top-btn:hover i {
+    color: var(--dark-bg);
 }
 
 @keyframes gentle-float {
@@ -679,24 +675,21 @@ body.menu-open {
     cursor: pointer;
     transition: background-color 0.3s ease;
     animation: bounce 2.5s infinite ease-in-out;
+    text-decoration: none;
 }
 
-.scroll-down-arrow::after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-bottom: 2px solid var(--tech-cyan);
-    border-right: 2px solid var(--tech-cyan);
-    transform: translateY(-25%) rotate(45deg);
-    transition: border-color 0.3s ease;
+.scroll-down-arrow i {
+    color: var(--tech-cyan);
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
 
 .scroll-down-arrow:hover {
     background-color: rgba(100, 210, 255, 0.2);
 }
 
-.scroll-down-arrow:hover::after {
-    border-color: #fff;
+.scroll-down-arrow:hover i {
+    color: #fff;
 }
 
 
