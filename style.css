@@ -3303,8 +3303,10 @@ body.show-zh .lang-en { display: none; }
     }
     
     .video-carousel-slide {
-        flex: 0 0 250px;
-        height: 140px;
+        flex: 0 0 auto;
+        width: calc(100vw - 80px);
+        max-width: 300px;
+        aspect-ratio: 4 / 3;
         border-width: 1px;
         border-radius: 8px;
     }
