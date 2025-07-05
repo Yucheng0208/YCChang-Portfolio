@@ -2,95 +2,95 @@
 #      ACADEMIC EXPERIENCE
 # ==============================
 
-- category: 'academic'
-  date: 'September, 2025 ~ Present'
-  organization: 'New Taipei City Municipal SanMin High School'
-  crn: '76892038'
-  position: 'Teacher'
+- category: "academic"
+  date: "September 2025 ~ Present"
+  organization: "New Taipei City Municipal SanMin High School"
+  crn: "76892038"
+  position: "Teacher"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2024 ~ Present'
-  organization: 'National Taipei University of Technology'
-  crn: '92021164'
-  position: 'Researcher & Teaching Assistant'
+- category: "academic"
+  date: "September 2024 ~ Present"
+  organization: "National Taipei University of Technology"
+  crn: "92021164"
+  position: "Researcher"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2022 ~ March, 2023'
-  organization: 'New Taipei City Municipal SanMin High School'
-  crn: '76892038'
-  position: 'Guest Lecturer'
+- category: "academic"
+  date: "September 2022 ~ March 2023"
+  organization: "New Taipei City Municipal SanMin High School"
+  crn: "76892038"
+  position: "Guest Lecturer"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2022 ~ April, 2023'
-  organization: 'New Taipei City Career Exploration And Experience Education Center'
-  crn: '76892038'
-  position: 'Guest Lecturer'
+- category: "academic"
+  date: "September 2022 ~ April 2023"
+  organization: "New Taipei City Career Exploration And Experience Education Center"
+  crn: "76892038"
+  position: "Guest Lecturer"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2022 ~ February, 2023'
-  organization: 'New Taipei City Lu Jiang Elementary School'
-  crn: '36099998'
-  position: 'Guest Lecturer & Competition Consultant'
+- category: "academic"
+  date: "September 2022 ~ February 2023"
+  organization: "New Taipei City Lu Jiang Elementary School"
+  crn: "36099998"
+  position: "Guest Lecturer & Competition Consultant"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2022 ~ January, 2023'
-  organization: 'Lunghwa University of Science and Technology, dept. of Computer Information and Network Engineering'
-  crn: '45002545'
-  position: 'Teaching Assistant'
+- category: "academic"
+  date: "September 2022 ~ January 2023"
+  organization: "Lunghwa University of Science and Technology, dept. of Computer Information and Network Engineering"
+  crn: "45002545"
+  position: "Teaching Assistant"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2022 ~ July, 2024'
-  organization: 'Lunghwa University of Science and Technology, dept. of College of Engineering'
-  crn: '45002545'
-  position: 'Information Assistant & Technical Adviser'
+- category: "academic"
+  date: "September 2022 ~ July 2024"
+  organization: "Lunghwa University of Science and Technology, dept. of College of Engineering"
+  crn: "45002545"
+  position: "Information Assistant & Technical Adviser"
   links: {}
 
-- category: 'academic'
-  date: 'June, 2020 ~ August, 2024'
-  organization: 'New Taipei City Municipal Tamsui Vocational High School, dept. Of Electrical Engineering'
-  crn: '02215822'
-  position: 'Lecturer & Guidance Teacher for the Contest'
+- category: "academic"
+  date: "June 2020 ~ August 2024"
+  organization: "New Taipei City Municipal Tamsui Vocational High School, dept. Of Electrical Engineering"
+  crn: "02215822"
+  position: "Lecturer & Guidance Teacher for the Contest"
   links: {}
 
-- category: 'academic'
-  date: 'October, 2020 ~ November, 2023'
-  organization: 'Lunghwa University of Science and Technology, dept. Of Computer Information and Network Engineering, Computer Vision & Wireless Sensor Network Lab'
-  crn: '45002545'
-  position: 'Research Assistant & Team Leader'
+- category: "academic"
+  date: "October 2020 ~ November 2023"
+  organization: "Lunghwa University of Science and Technology, dept. Of Computer Information and Network Engineering, Computer Vision & Wireless Sensor Network Lab"
+  crn: "45002545"
+  position: "Research Assistant & Team Leader"
   links: {}
 
-- category: 'academic'
-  date: 'October, 2020 ~ June, 2024'
-  organization: 'Lunghwa University of Science and Technology, dept. of Computer Information and Network Engineering'
-  crn: '45002545'
-  position: 'Research Assistant & Technical Adviser'
+- category: "academic"
+  date: "October 2020 ~ June 2024"
+  organization: "Lunghwa University of Science and Technology, dept. of Computer Information and Network Engineering"
+  crn: "45002545"
+  position: "Research Assistant & Technical Adviser"
   links: {}
 
-- category: 'academic'
-  date: 'September, 2017 ~ Present'
-  organization: 'New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, TSVS Special Topic Group & Team Cafe'
-  crn: '' # 您的原始資料中此項無統編，故留空
-  position: 'Chief Technology Officer & Researcher'
+- category: "academic"
+  date: "September 2017 ~ Present"
+  organization: "New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, TSVS Special Topic Group & Team Cafe"
+  crn: "02215822"
+  position: "Chief Technology Officer & Researcher"
   links: {}
 
-- category: 'academic'
-  date: 'August, 2019 ~ July, 2020'
-  organization: 'New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, Electrical Project Lab & Team Science Fair'
-  crn: '02215822'
-  position: 'Team Leader & Researcher'
+- category: "academic"
+  date: "August 2019 ~ July 2020"
+  organization: "New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, Electrical Project Lab & Team Science Fair"
+  crn: "02215822"
+  position: "Team Leader & Researcher"
   links: {}
 
-- category: 'academic'
-  date: 'August, 2017 ~ July, 2019'
-  organization: 'New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, Electrical Project Lab & Team Science Fair'
-  crn: '02215822'
-  position: 'Researcher'
+- category: "academic"
+  date: "August 2017 ~ July 2019"
+  organization: "New Taipei City Municipal Tamsui Vocational High School, dept. of Electrical Engineering, Electrical Project Lab & Team Science Fair"
+  crn: "02215822"
+  position: "Researcher"
   links: {}
 
 
@@ -98,37 +98,44 @@
 #      INDUSTRY EXPERIENCE
 # ==============================
 
-- category: 'industry'
-  date: 'January, 2024 ~ Present'
-  organization: 'Ningde Qianwei New Energy Group., Ltd'
-  crn: ''
-  position: 'Consultant & Technical Engineer'
+- category: "industry"
+  date: "June 2025 ~ Present"
+  organization: "Ningde Qianwei New Energy Group., Ltd, China"
+  crn: ""
+  position: "Assistant to VP of Technology and Marketing & Technical Consultant"
   links: {}
 
-- category: 'industry'
-  date: 'August, 2023 ~ Present'
-  organization: '網龍資訊工作室'
-  crn: '91567601'
-  position: 'Chief Operating Officer & Technical Manager'
+- category: "industry"
+  date: "January 2024 ~ June 2025"
+  organization: "Ningde Qianwei New Energy Group., Ltd, China"
+  crn: ""
+  position: "Consultant & Technical Engineer"
   links: {}
 
-- category: 'industry'
-  date: 'January, 2020 ~ Present'
-  organization: 'Po sen Co.'
-  crn: '891197565'
-  position: 'Chief Technology Officer'
+- category: "industry"
+  date: "August 2023 ~ Augus, 2024"
+  organization: "臺灣網龍資訊工作室"
+  crn: "91567601"
+  position: "Chief Operating Officer & Technical Manager"
   links: {}
 
-- category: 'industry'
-  date: 'December, 2019.12 ~ 2024.12'
-  organization: 'Sin Hon Da Co.'
-  crn: '87466428'
-  position: 'Chief IT Officer'
+- category: "industry"
+  date: "January 2020 ~ Present"
+  organization: "臺灣泊森商行"
+  crn: "891197565"
+  position: "Chief Technology Officer"
   links: {}
 
-- category: 'industry'
-  date: 'June, 2017 ~ Spetember, 2018'
-  organization: 'SWEET SPA HEALTH CENTER'
-  crn: '28930759'
-  position: 'Swimming Pool Lifeguard'
+- category: "industry"
+  date: "December 2019 ~ December 2024"
+  organization: "臺灣鑫鴻達汽車商行"
+  crn: "87466428"
+  position: "Chief IT Officer"
+  links: {}
+
+- category: "industry"
+  date: "June 2017 ~ Spetember 2018"
+  organization: "臺灣水悅活水養身會館（新弘興業股份有限公司）"
+  crn: "28930759"
+  position: "Swimming Pool Lifeguard"
   links: {}
