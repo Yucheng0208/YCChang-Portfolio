@@ -1176,7 +1176,7 @@ body.menu-open {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto, sans-serif;
     text-align: center;
     padding: 40px 0;
-    overflow: hidden;
+    overflow: visible; /* 改為 visible 以防止影片被裁切 */
     background-color: var(--dark-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255,255,255,0.15);
@@ -1192,7 +1192,7 @@ body.menu-open {
 
 .video-carousel-display {
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* 改為 visible 以防止影片被裁切 */
     width: 100%;
     height: 400px;
     display: flex;
@@ -1288,6 +1288,7 @@ body.menu-open {
     height: 100%;
     border: none;
     object-fit: contain;
+    border-radius: inherit; /* 繼承父容器的圓角 */
 }
 
 .video-carousel-prev,
@@ -1525,16 +1526,6 @@ body.menu-open {
     .event-nav-btn { width: 40px; height: 40px; font-size: 1.2rem; }
     #prev-event { left: -10px; }
     #next-event { right: -10px; }
-    
-    .video-carousel-display { padding: 0 15px; }
-    .video-carousel-prev,
-    .video-carousel-next { 
-        width: 40px; 
-        height: 40px; 
-        font-size: 1.2rem; 
-    }
-    .video-carousel-prev { left: -10px; }
-    .video-carousel-next { right: -10px; }
 }
 
 @media (max-width: 600px) {
@@ -3266,6 +3257,7 @@ body.show-zh .lang-en { display: none; }
     .video-carousel-slide {
         flex: 0 0 280px;
         height: 157px;
+        overflow: hidden; /* 確保圓角效果 */
     }
     
     .video-carousel-slide.active {
@@ -3387,8 +3379,17 @@ body.show-zh .lang-en { display: none; }
     }
     
     .video-carousel-display {
-        height: 200px;
-        padding: 0 5px;
+        height: 220px;
+        padding: 0 10px;
+        overflow: visible;
+        max-width: 100vw;
+    }
+    
+    .video-carousel-container {
+        width: 100%;
+        max-width: 320px;
+        height: 180px;
+        margin: 0 auto;
     }
     
     .video-carousel-track {
@@ -3397,11 +3398,29 @@ body.show-zh .lang-en { display: none; }
     
     .video-carousel-slide {
         flex: 0 0 auto;
-        width: calc(100vw - 80px);
-        max-width: 300px;
+        width: 200px;
+        height: 130px;
+        max-width: calc(100vw - 100px);
         aspect-ratio: 4 / 3;
         border-width: 1px;
         border-radius: 8px;
+        overflow: hidden; /* 確保圓角效果 */
+    }
+    
+    /* 調整手機上影片輪播的按鈕 */
+    .video-carousel-prev,
+    .video-carousel-next {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+    
+    .video-carousel-prev { 
+        left: 5px;
+    }
+    
+    .video-carousel-next { 
+        right: 5px;
     }
     
     .video-window-glw0pyx-nav button {
@@ -3412,53 +3431,173 @@ body.show-zh .lang-en { display: none; }
     
     .video-carousel-more {
         font-size: 0.8rem;
-        padding: 8px 20px;
+        padding: 8px 16px;
+        margin-top: 20px;
+    }
+}
+
+/* === 手機影片輪播優化 (針對 390x844 等小螢幕) === */
+@media (max-width: 414px) {
+    .video-carousel-section {
+        padding: 30px 15px;
+        overflow-x: hidden;
     }
     
-    .grade-inquiry-page .results-container {
-        padding: 1.5rem 1rem;
+    .video-carousel-display {
+        height: 280px;
+        padding: 0 10px;
+        width: 100%;
+        max-width: 100vw;
+        overflow: visible;
+    }
+    
+    .video-carousel-container {
+        width: 100%;
+        max-width: 350px;
+        height: 220px;
+        margin: 0 auto;
+    }
+    
+    .video-carousel-slide {
+        width: 240px;
+        height: 160px;
+        border-radius: 8px;
+    }
+    
+    /* 重新調整影片位置以適應小螢幕 */
+    .video-carousel-slide[data-position="0"] {
+        /* 中心位置 - 主要影片 */
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateZ(80px) scale(1.1);
+        z-index: 5;
+        border: 2px solid var(--tech-cyan);
+        box-shadow: 0 10px 25px rgba(100, 210, 255, 0.3);
     }
 
-    .grade-inquiry-page .result-header h2 {
-        font-size: 1.5rem;
+    .video-carousel-slide[data-position="1"] {
+        /* 右側 */
+        left: 75%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateZ(40px) scale(0.85);
+        z-index: 4;
+        opacity: 0.7;
     }
 
-    .grade-inquiry-page .grade-summary-cards {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    .video-carousel-slide[data-position="2"] {
+        /* 最右側 - 幾乎隱藏 */
+        left: 95%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateZ(0px) scale(0.6);
+        z-index: 2;
+        opacity: 0.4;
     }
 
-    .grade-inquiry-page .grade-summary-cards .card .score {
-        font-size: 2rem;
+    .video-carousel-slide[data-position="3"] {
+        /* 最左側 - 幾乎隱藏 */
+        left: 5%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateZ(0px) scale(0.6);
+        z-index: 2;
+        opacity: 0.4;
     }
 
-    .grade-inquiry-page .grade-details table {
+    .video-carousel-slide[data-position="4"] {
+        /* 左側 */
+        left: 25%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateZ(40px) scale(0.85);
+        z-index: 4;
+        opacity: 0.7;
+    }
+    
+    /* 調整導航按鈕位置和大小 */
+    .video-carousel-prev,
+    .video-carousel-next {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    
+    .video-carousel-prev { 
+        left: 10px;
+    }
+    
+    .video-carousel-next { 
+        right: 10px;
+    }
+    
+    /* 確保 iframe 不會溢出 */
+    .video-iframe-wrapper {
+        border-radius: 8px;
+    }
+    
+    .video-iframe-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    
+    /* 調整標題和說明文字 */
+    .video-carousel-title {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        padding: 0 10px;
+    }
+    
+    .video-carousel-section .text-muted {
         font-size: 0.9rem;
+        padding: 0 15px;
+        margin-bottom: 2rem;
     }
-
-    .grade-inquiry-page .grade-details th,
-    .grade-inquiry-page .grade-details td {
-        padding: 10px 8px;
+    
+    .video-carousel-more {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+        margin-top: 20px;
     }
+}
 
-    /* 在手機版本上保持對齊規則 */
-    .grade-inquiry-page .grade-details thead th {
-        text-align: center;
+/* === 更小的手機螢幕優化 (360px 以下) === */
+@media (max-width: 360px) {
+    .video-carousel-display {
+        height: 250px;
+        padding: 0 5px;
     }
-
-    .grade-inquiry-page .grade-details th:nth-child(2),
-    .grade-inquiry-page .grade-details th:nth-child(3),
-    .grade-inquiry-page .grade-details th:nth-child(4),
-    .grade-inquiry-page .grade-details td:nth-child(2),
-    .grade-inquiry-page .grade-details td:nth-child(3),
-    .grade-inquiry-page .grade-details td:nth-child(4) {
-        text-align: right;
+    
+    .video-carousel-container {
+        max-width: 320px;
+        height: 200px;
     }
-
-    .grade-inquiry-page .grade-details thead th:nth-child(2),
-    .grade-inquiry-page .grade-details thead th:nth-child(3),
-    .grade-inquiry-page .grade-details thead th:nth-child(4) {
-        text-align: center;
+    
+    .video-carousel-slide {
+        width: 220px;
+        height: 140px;
+    }
+    
+    .video-carousel-slide[data-position="0"] {
+        transform: translate(-50%, -50%) translateZ(60px) scale(1.05);
+    }
+    
+    .video-carousel-slide[data-position="1"],
+    .video-carousel-slide[data-position="4"] {
+        transform: translate(-50%, -50%) translateZ(30px) scale(0.8);
+    }
+    
+    .video-carousel-prev,
+    .video-carousel-next {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    .video-carousel-prev { 
+        left: 5px;
+    }
+    
+    .video-carousel-next { 
+        right: 5px;
     }
 }
 
@@ -3561,7 +3700,6 @@ body.show-zh .lang-en { display: none; }
 .modal-input:focus {
     border-color: var(--tech-cyan);
     box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.1);
-    transform: translateY(-1px);
 }
 
 .modal-input::placeholder {
