@@ -1536,7 +1536,10 @@ body.menu-open {
 }
 
 @media (max-width: 600px) {
-    .events-header h2 { font-size: 2.5rem; }
+    .video-carousel-title {font-size: 2.5rem; }
+    .events-header h2 { 
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;}
     #prev-event { left: -5px; }
     #next-event { right: -5px; }
     
@@ -3189,6 +3192,7 @@ body.show-zh .lang-en { display: none; }
     .video-carousel-title {
         font-size: 2.5rem;
         margin-bottom: 1rem;
+        margin-top: 3rem;
     }
     
     .video-carousel-section .text-muted {
