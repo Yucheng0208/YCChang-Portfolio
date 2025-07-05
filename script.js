@@ -682,25 +682,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- 5. 首頁3D旋轉木馬影音視窗 ---
     (function setupVideoWindow() {
-        const videoIds = ["4RvHph2q0Hc", "dQw4w9WgXcQ", "jNQXAC9IVRw", "MtN1YnoL46Q", "kJQP7kiw5Fk"];
+        const videoIds = ["4RvHph2q0Hc", "4RvHph2q0Hc", "4RvHph2q0Hc", "4RvHph2q0Hc", "4RvHph2q0Hc"];
         let currentIndex = 0;
         
-        const container = document.querySelector('.video-window-glw0pyx-wrapper');
+        const container = document.querySelector('.video-carousel-section');
         if (!container || videoIds.length === 0) return;
         
         const carouselContainer = container.querySelector('.video-carousel-container');
-        const prevBtn = container.querySelector('.video-window-glw0pyx-prev-btn');
-        const nextBtn = container.querySelector('.video-window-glw0pyx-next-btn');
+        const prevBtn = container.querySelector('.video-carousel-prev');
+        const nextBtn = container.querySelector('.video-carousel-next');
         
         if (!carouselContainer || !prevBtn || !nextBtn) return;
         
-        // 獲取所有 slot 元素
-        const slots = carouselContainer.querySelectorAll('.video-window-glw0pyx-slot');
+        // 獲取所有 slide 元素
+        const slides = carouselContainer.querySelectorAll('.video-carousel-slide');
         
         // 初始化視頻內容
-        function initializeVideoSlots() {
-            slots.forEach((slot, index) => {
-                const iframe = slot.querySelector('iframe');
+        function initializeVideoSlides() {
+            slides.forEach((slide, index) => {
+                const iframe = slide.querySelector('iframe');
                 if (iframe) {
                     // 根據當前索引計算對應的視頻ID索引
                     const videoIndex = (currentIndex + index) % videoIds.length;
@@ -711,13 +711,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 更新旋轉木馬位置
         function updateCarouselPositions() {
-            slots.forEach((slot, slotIndex) => {
+            slides.forEach((slide, slideIndex) => {
                 // 計算相對於中心位置的偏移
-                const relativePosition = (slotIndex - 2 + slots.length) % slots.length;
-                slot.setAttribute('data-position', relativePosition);
+                const relativePosition = (slideIndex - 2 + slides.length) % slides.length;
+                slide.setAttribute('data-position', relativePosition);
                 
                 // 更新視頻內容
-                const iframe = slot.querySelector('iframe');
+                const iframe = slide.querySelector('iframe');
                 if (iframe) {
                     const videoIndex = (currentIndex + relativePosition) % videoIds.length;
                     iframe.src = `https://www.youtube.com/embed/${videoIds[videoIndex]}`;
@@ -738,9 +738,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentIndex = (currentIndex - 1 + videoIds.length) % videoIds.length;
             }
             
-            // 重新計算所有slot的位置
-            slots.forEach((slot, slotIndex) => {
-                const currentPosition = parseInt(slot.getAttribute('data-position'));
+            // 重新計算所有slide的位置
+            slides.forEach((slide, slideIndex) => {
+                const currentPosition = parseInt(slide.getAttribute('data-position'));
                 let newPosition;
                 
                 if (direction === 'next') {
@@ -751,10 +751,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     newPosition = (currentPosition + 1) % 5;
                 }
                 
-                slot.setAttribute('data-position', newPosition);
+                slide.setAttribute('data-position', newPosition);
                 
                 // 同時更新對應的視頻內容
-                const iframe = slot.querySelector('iframe');
+                const iframe = slide.querySelector('iframe');
                 if (iframe) {
                     const videoIndex = (currentIndex + newPosition) % videoIds.length;
                     iframe.src = `https://www.youtube.com/embed/${videoIds[videoIndex]}`;
@@ -778,7 +778,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // 初始化
-        initializeVideoSlots();
+        initializeVideoSlides();
         
         // 添加鍵盤支援（可選）
         document.addEventListener('keydown', (e) => {
