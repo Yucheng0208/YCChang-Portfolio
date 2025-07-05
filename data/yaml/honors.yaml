@@ -330,9 +330,121 @@
   links:
     News: "https://edge.aif.tw/ai-in-taiwan-hackathon-report/"
 
+- title: "基於OpenPose之機具操作於異常姿勢即時偵測"
+  event: "第60屆中小學科學展覽會"
+  organizer: "教育部, 國立臺灣科學教育館"
+  category: "Competition"
+  award: "佳作, 微軟少年英雄獎, 臺灣康寧創新獎優等獎 提名"
+  bonus: "NTD $20,000"
+  members: "張育丞, 吳宗融, 李宇桀"
+  supervisor:  "陳金雄 博士"
+  date: “July 27-31, 2020"
+  links:
+
+- title: "基於OpenPose之機具操作於異常姿勢即時偵測"
+  event: "新北市108學年度中小學科學展覽會"
+  organizer: "新北市政府教育局"
+  category: "Competition"
+  award: "特優, 探究精神獎"
+  bonus: "NTD $10,000"
+  members: "張育丞, 吳宗融, 李宇桀"
+  supervisor:  "陳金雄 博士"
+  date: “April 25-26, 2020"
+  links:
+
+- title: "智慧型電網之區塊鏈研究"
+  event: "第一屆技職校院大手攜小手物聯網創新應用競賽"
+  organizer: "教育部, 教育部促進產學合作育才平臺 產學連結執行辦公室-國立臺灣科技大學, 國立臺灣科學教育館"
+  category: "Competition"
+  award: "第二名, 微軟少年英雄獎"
+  bonus: "NTD $5,000"
+  members: "林栩永、洪琮馥、張育丞、吳宗融、​蘇銓佑"
+  supervisor:  "謝鴻琳 教授, 陳金雄 博士"
+  date: "December 7, 2019"
+  links:
+
+- title: "具有區塊鏈之IOT用電系統"
+  event: "第59屆中小學科學展覽會"
+  organizer: "教育部, 國立臺灣科學教育館"
+  category: "Competition"
+  award: "第二名, 微軟少年英雄獎"
+  bonus: "NTD $40,000"
+  members: "吳晨知, 張育丞, 張閎翔"
+  supervisor:  "陳金雄 博士"
+  date: “July 22-26, 2019"
+  links:
+
+- title: "電能帳單與交易知區塊鏈系統"
+  event: "2019 第四屆裕隆盃全國大專及高中職工程創意專題競賽"
+  organizer: "聖約翰科技大學"
+  category: "Competition"
+  award: "電機與控制組 第三名"
+  bonus: "NTD $10,000"
+  members: "吳晨知, 張育丞, 張閎翔, 吳宗融, 高靖崴, 葉澤鐿"
+  supervisor:  "陳金雄 博士"
+  date: “April 19, 2019"
+  links:
+
+- title: "具有區塊鏈之IOT用電系統"
+  event: "新北市107學年度中小學科學展覽會"
+  organizer: "新北市政府教育局"
+  category: "Competition"
+  award: "特優, 探究精神獎"
+  bonus: "NTD $10,000"
+  members: "張育丞, 吳宗融, 張閎翔"
+  supervisor:  "陳金雄 博士"
+  date: “April 17-18, 2019"
+  links:
+
 - title: "工業配線 丙級 </br> Class C of Industrial Wiring"
   event: "Ministry of Labor, Taiwan (R.O.C)"
   category: "Certification"
   date: “September 17, 2018"
   links:
-    
+
+- title: "電器辨識系統"
+  event: "2018 第三屆裕隆盃全國高中職工程創意專題競賽"
+  organizer: "聖約翰科技大學"
+  category: "Competition"
+  award: "資通與電子組 特優"
+  bonus: "NTD $5,000"
+  members: "張育丞, 林晉誠"
+  supervisor:  "陳金雄 博士"
+  date: “April 11, 2018"
+  links:
+
+- title: "Fish Pokemon : Remote Automatic Fish Babysitter"
+  event: "International Exhibition for Young Inventors 2017 (IEYI 2017)"
+  organizer: "Japan Institute of Invention and Innovation"
+  category: "Competition"
+  award: "Education and Recreation (above 14 years old), Indonesian Special Award"
+  bonus: 
+  members: "黃煜展, 張育丞, 吳嘉恆"
+  supervisor:  "劉亦恭 老師"
+  date: “July 27-39, 2017"
+  links:
+    Official: "https://koueki.jiii.or.jp/ieyi2017/en/"
+    Information: "https://koueki.jiii.or.jp/ieyi2017/works/nationality/Taiwan_04.html"
+
+- title: "魚兒保可夢-出國魚缸照護器"
+  event: "2016 IEYI 世界青少年創克發明展暨臺灣選拔賽"
+  organizer: "臺北市政府教育局"
+  category: "Competition"
+  award: "國中組 運動育樂類 金牌獎 代表台灣赴日本參加決賽"
+  bonus: 
+  members: "黃煜展, 張育丞, 吳嘉恆"
+  supervisor:  "劉亦恭 老師"
+  date: “January 21-22, 2017"
+  links:
+
+- title: "我可以安心出國了！魚兒物聯網手機餵食器"
+  event: "新北市2016國中小Scratch程式設計競賽"
+  organizer: "新北市政府教育局"
+  category: "Competition"
+  award: "創意秀組 特優"
+  bonus: 
+  members: "黃煜展, 張育丞, 吳嘉恆"
+  supervisor:  "劉亦恭 老師"
+  date: May 27-28, 2016"
+  links:
+
