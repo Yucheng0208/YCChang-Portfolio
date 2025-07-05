@@ -909,38 +909,29 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(skillsSection);
     })();
 
-
-        // ===== 7.5 Recent Events Carousel Logic (v3 - YAML Loaded) =====
+    // ===== 7.5 Recent Events Carousel Logic (v8 - Contained Zoom Effect) =====
     (async function setupRecentEventsCarousel() {
         const carouselSection = document.getElementById('recent-events');
         if (!carouselSection) return;
 
         let eventsData = [];
         try {
-            // 1. 從 YAML 檔案異步獲取數據
             const response = await fetch('./data/yaml/events.yaml');
-            if (!response.ok) {
-                throw new Error(`Failed to load events.yaml: ${response.status} ${response.statusText}`);
-            }
+            if (!response.ok) throw new Error(`Failed to load events.yaml: ${response.status} ${response.statusText}`);
             const yamlText = await response.text();
-            // 2. 使用您自訂的解析器來解析 YAML
             eventsData = window.jsyaml.load(yamlText) || [];
-
         } catch (error) {
             console.error("Could not load recent events data:", error);
-            carouselSection.style.display = 'none'; // 如果載入失敗，直接隱藏此區塊
-            return; // 終止函式執行
+            carouselSection.style.display = 'none';
+            return;
         }
 
-        // 3. 檢查是否有有效的數據
         if (eventsData.length === 0) {
             console.warn("No event data found in events.yaml. Hiding events section.");
             carouselSection.style.display = 'none';
             return;
         }
 
-        // --- 以下為輪播邏輯，與之前相同，現在使用從 YAML 載入的 eventsData ---
-        
         const grid = document.getElementById('events-grid');
         const prevBtn = document.getElementById('prev-event');
         const nextBtn = document.getElementById('next-event');
@@ -951,68 +942,112 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let currentIndex = 0;
         let autoplayInterval = null;
-        const AUTOPLAY_SPEED = 5000;
+        const AUTOPLAY_SPEED = 2000;
 
+        let resizeTimer;
+        
         function getVisibleCards() {
             if (window.innerWidth <= 600) return 1;
             if (window.innerWidth <= 1024) return 2;
-            return 4;
+            return 3;
         }
 
-        function renderEvents() {
+        function adjustDescriptionFontSize() {
+            const descriptions = document.querySelectorAll('.event-card .event-info p');
+            descriptions.forEach(p => {
+                p.classList.remove('text-fit');
+                if (p.scrollHeight > p.clientHeight) {
+                    p.classList.add('text-fit');
+                }
+            });
+        }
+
+        function renderAllCards() {
+            grid.innerHTML = '';
             const visibleCards = getVisibleCards();
             
-            const showNav = eventsData.length > visibleCards;
-            prevBtn.style.display = showNav ? 'flex' : 'none';
-            nextBtn.style.display = showNav ? 'flex' : 'none';
-
-            grid.innerHTML = '';
-            grid.style.opacity = '0';
-
-            setTimeout(() => {
-                for (let i = 0; i < Math.min(eventsData.length, visibleCards); i++) {
-                    const dataIndex = (currentIndex + i) % eventsData.length;
-                    const event = eventsData[dataIndex];
-    
-                    const card = document.createElement('div');
-                    card.className = 'event-card';
-                    card.innerHTML = `
-                        <img src="${event.image}" alt="${event.title}">
-                        <div class="event-info">
-                            <h3>${event.title}</h3>
-                            <p>${event.description}</p>
-                        </div>
-                    `;
-                    card.addEventListener('mouseenter', pauseAutoplay);
-                    card.addEventListener('mouseleave', startAutoplay);
-                    grid.appendChild(card);
-                }
-                 grid.style.opacity = '1';
-            }, 150);
+            if (eventsData.length <= visibleCards) {
+                eventsData.forEach(event => grid.appendChild(createCard(event)));
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'none';
+            } else {
+                 prevBtn.style.display = 'flex';
+                 nextBtn.style.display = 'flex';
+                 for (let i = 0; i < visibleCards; i++) {
+                     grid.appendChild(createCard(eventsData[eventsData.length - 1 - i]));
+                 }
+                 eventsData.forEach(event => grid.appendChild(createCard(event)));
+                 for (let i = 0; i < visibleCards; i++) {
+                     grid.appendChild(createCard(eventsData[i]));
+                 }
+            }
+            
+            setTimeout(adjustDescriptionFontSize, 50);
+            updateCarouselPosition(false);
         }
 
-        function showNext() {
+        function createCard(event) {
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = 'event-card-wrapper';
+            
             const visibleCards = getVisibleCards();
-            if (eventsData.length > visibleCards) {
-                currentIndex = (currentIndex + 1) % eventsData.length;
-                renderEvents();
+            cardWrapper.style.width = `${100 / visibleCards}%`;
+
+            const card = document.createElement('div');
+            card.className = 'event-card';
+            // ✨✨✨ 關鍵修改：在圖片外層包一個 .event-image-container ✨✨✨
+            card.innerHTML = `
+                <div class="event-image-container">
+                    <img src="${event.image}" alt="${event.title}">
+                </div>
+                <div class="event-info">
+                    <h3>${event.title}</h3>
+                    <p>${event.description}</p>
+                </div>
+            `;
+            card.addEventListener('mouseenter', pauseAutoplay);
+            card.addEventListener('mouseleave', startAutoplay);
+            
+            cardWrapper.appendChild(card);
+            return cardWrapper;
+        }
+        
+        function updateCarouselPosition(animate = true) {
+            const visibleCards = getVisibleCards();
+            const offset = currentIndex + visibleCards;
+            const cardWidthPercentage = 100 / visibleCards;
+            
+            grid.style.transition = animate ? 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none';
+            grid.style.transform = `translateX(-${offset * cardWidthPercentage}%)`;
+        }
+        
+        function handleSlide(direction) {
+            const visibleCards = getVisibleCards();
+            if (eventsData.length <= visibleCards) return;
+            currentIndex += direction;
+            updateCarouselPosition();
+            if (currentIndex >= eventsData.length) {
+                setTimeout(() => {
+                    currentIndex = 0;
+                    updateCarouselPosition(false);
+                }, 600);
+            } else if (currentIndex < 0) {
+                setTimeout(() => {
+                    currentIndex = eventsData.length - 1;
+                    updateCarouselPosition(false);
+                }, 600);
             }
         }
 
-        function showPrev() {
-             const visibleCards = getVisibleCards();
-             if (eventsData.length > visibleCards) {
-                currentIndex = (currentIndex - 1 + eventsData.length) % eventsData.length;
-                renderEvents();
-            }
-        }
+        function showNext() { handleSlide(1); }
+        function showPrev() { handleSlide(-1); }
         
         function startAutoplay() {
             const visibleCards = getVisibleCards();
             if (eventsData.length <= visibleCards) return;
-
             if (autoplayInterval) return;
-            
             pauseBtn.classList.remove('hidden');
             playBtn.classList.add('hidden');
             autoplayInterval = setInterval(showNext, AUTOPLAY_SPEED);
@@ -1030,25 +1065,20 @@ document.addEventListener('DOMContentLoaded', function() {
             startAutoplay();
         }
 
-        nextBtn.addEventListener('click', () => {
-            showNext();
-            resetAutoplay();
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            showPrev();
-            resetAutoplay();
-        });
-
+        nextBtn.addEventListener('click', () => { showNext(); resetAutoplay(); });
+        prevBtn.addEventListener('click', () => { showPrev(); resetAutoplay(); });
         pauseBtn.addEventListener('click', pauseAutoplay);
         playBtn.addEventListener('click', startAutoplay);
 
         window.addEventListener('resize', () => {
-            renderEvents();
-            resetAutoplay();
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                renderAllCards();
+                resetAutoplay();
+            }, 250);
         });
 
-        renderEvents();
+        renderAllCards();
         startAutoplay();
     })();
 
