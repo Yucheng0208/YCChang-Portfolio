@@ -680,55 +680,118 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeListPage({ pageSelector: '.project-page', yamlPath: './data/yaml/projects.yaml', tableBodyId: 'project-table-body', filterBarId: 'project-filter', searchInputId: 'project-search', noResultsId: 'no-results-project', paginationContainerId: 'pagination-container-project', pageInfoId: 'page-info-project', pageInputId: 'page-input-project', firstPageBtnId: 'first-page-project', prevPageBtnId: 'prev-page-project', nextPageBtnId: 'next-page-project', lastPageBtnId: 'last-page-project', renderRowFunction: renderProjectRow });
     initializeListPage({ pageSelector: '.work-page', yamlPath: './data/yaml/works.yaml', tableBodyId: 'work-table-body', filterBarId: 'work-filter', searchInputId: null, noResultsId: 'no-results-work', paginationContainerId: 'pagination-container-work', pageInfoId: 'page-info-work', pageInputId: 'page-input-work', firstPageBtnId: 'first-page-work', prevPageBtnId: 'prev-page-work', nextPageBtnId: 'next-page-work', lastPageBtnId: 'last-page-work', renderRowFunction: renderWorkRow });
 
-    // --- 5. 首頁影音滑動視窗 ---
+    // --- 5. 首頁3D旋轉木馬影音視窗 ---
     (function setupVideoWindow() {
-        const videoIds = ["4RvHph2q0Hc", "4RvHph2q0Hc", "4RvHph2q0Hc"];
+        const videoIds = ["4RvHph2q0Hc", "dQw4w9WgXcQ", "jNQXAC9IVRw", "MtN1YnoL46Q", "kJQP7kiw5Fk"];
         let currentIndex = 0;
+        
         const container = document.querySelector('.video-window-glw0pyx-wrapper');
         if (!container || videoIds.length === 0) return;
-        const displayArea = container.querySelector('.video-window-glw0pyx-display-area');
+        
+        const carouselContainer = container.querySelector('.video-carousel-container');
         const prevBtn = container.querySelector('.video-window-glw0pyx-prev-btn');
         const nextBtn = container.querySelector('.video-window-glw0pyx-next-btn');
-        const slots = {
-            left: container.querySelector('.slot-left iframe'),
-            center: container.querySelector('.slot-center iframe'),
-            right: container.querySelector('.slot-right iframe')
-        };
-        const isMobile = window.innerWidth <= 768;
-        const n = videoIds.length;
-
-        function render(index) {
-            displayArea.style.opacity = 0;
-            setTimeout(() => {
-                if (isMobile) {
-                    slots.center.src = `https://www.youtube.com/embed/${videoIds[index]}`;
-                } else {
-                    if (n < 3) {
-                        slots.center.src = `https://www.youtube.com/embed/${videoIds[index]}`;
-                        container.querySelector('.slot-left').style.display = 'none';
-                        container.querySelector('.slot-right').style.display = 'none';
-                        prevBtn.style.display = 'none';
-                        nextBtn.style.display = 'none';
-                    } else {
-                        slots.left.src = `https://www.youtube.com/embed/${videoIds[index]}`;
-                        slots.center.src = `https://www.youtube.com/embed/${videoIds[(index + 1) % n]}`;
-                        slots.right.src = `https://www.youtube.com/embed/${videoIds[(index + 2) % n]}`;
-                    }
+        
+        if (!carouselContainer || !prevBtn || !nextBtn) return;
+        
+        // 獲取所有 slot 元素
+        const slots = carouselContainer.querySelectorAll('.video-window-glw0pyx-slot');
+        
+        // 初始化視頻內容
+        function initializeVideoSlots() {
+            slots.forEach((slot, index) => {
+                const iframe = slot.querySelector('iframe');
+                if (iframe) {
+                    // 根據當前索引計算對應的視頻ID索引
+                    const videoIndex = (currentIndex + index) % videoIds.length;
+                    iframe.src = `https://www.youtube.com/embed/${videoIds[videoIndex]}`;
                 }
-                displayArea.style.opacity = 1;
-            }, 300);
-        }
-        if (n > 0) {
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + n) % n;
-                render(currentIndex);
             });
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % n;
-                render(currentIndex);
-            });
-            render(currentIndex);
         }
+        
+        // 更新旋轉木馬位置
+        function updateCarouselPositions() {
+            slots.forEach((slot, slotIndex) => {
+                // 計算相對於中心位置的偏移
+                const relativePosition = (slotIndex - 2 + slots.length) % slots.length;
+                slot.setAttribute('data-position', relativePosition);
+                
+                // 更新視頻內容
+                const iframe = slot.querySelector('iframe');
+                if (iframe) {
+                    const videoIndex = (currentIndex + relativePosition) % videoIds.length;
+                    iframe.src = `https://www.youtube.com/embed/${videoIds[videoIndex]}`;
+                }
+            });
+        }
+        
+        // 旋轉木馬動畫
+        function rotateCarousel(direction) {
+            // 禁用按鈕防止快速點擊
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            
+            // 更新當前索引
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % videoIds.length;
+            } else {
+                currentIndex = (currentIndex - 1 + videoIds.length) % videoIds.length;
+            }
+            
+            // 重新計算所有slot的位置
+            slots.forEach((slot, slotIndex) => {
+                const currentPosition = parseInt(slot.getAttribute('data-position'));
+                let newPosition;
+                
+                if (direction === 'next') {
+                    // 順時針旋轉：position值減1（循環）
+                    newPosition = (currentPosition - 1 + 5) % 5;
+                } else {
+                    // 逆時針旋轉：position值加1（循環）
+                    newPosition = (currentPosition + 1) % 5;
+                }
+                
+                slot.setAttribute('data-position', newPosition);
+                
+                // 同時更新對應的視頻內容
+                const iframe = slot.querySelector('iframe');
+                if (iframe) {
+                    const videoIndex = (currentIndex + newPosition) % videoIds.length;
+                    iframe.src = `https://www.youtube.com/embed/${videoIds[videoIndex]}`;
+                }
+            });
+            
+            // 重新啟用按鈕
+            setTimeout(() => {
+                prevBtn.disabled = false;
+                nextBtn.disabled = false;
+            }, 800); // 與CSS transition時間一致
+        }
+        
+        // 事件監聽器
+        prevBtn.addEventListener('click', () => {
+            rotateCarousel('prev');
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            rotateCarousel('next');
+        });
+        
+        // 初始化
+        initializeVideoSlots();
+        
+        // 添加鍵盤支援（可選）
+        document.addEventListener('keydown', (e) => {
+            if (container.querySelector(':hover')) { // 只有當鼠標在容器上時才響應
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    rotateCarousel('prev');
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    rotateCarousel('next');
+                }
+            }
+        });
     })();
 
     // --- 6. 教材頁 (Materials Page) 專用邏輯 ---
