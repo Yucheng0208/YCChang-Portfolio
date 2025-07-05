@@ -745,6 +745,8 @@ body.menu-open {
     flex-basis: 300px;
     flex-shrink: 0;
     text-align: center;
+    overflow: hidden;
+    border-radius: 16px;
 }
 
 .intro-image img {
@@ -757,7 +759,7 @@ body.menu-open {
 }
 
 .intro-image img:hover {
-    transform: translateY(-10px);
+    transform: scale(1.05);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
@@ -1363,7 +1365,6 @@ body.menu-open {
 }
 
 .event-card:hover {
-    transform: translateY(-10px);
     box-shadow: 0 8px 25px rgba(100, 210, 255, 0.2);
     border-color: var(--tech-cyan);
 }
@@ -1376,9 +1377,12 @@ body.menu-open {
     /* ✨✨✨ 這就是解決方案！✨✨✨ */
     /* 讓圖片繼承父層的圓角，修復縮放時邊角變尖銳的問題 */
     border-radius: inherit; 
+    /* 確保圖片變換不會超出容器邊界 */
+    transform-origin: center center;
 }
 
 .event-card:hover img {
+    /* 輕微的縮放效果，確保不會超出邊界 */
     transform: scale(1.05);
 }
 
