@@ -279,6 +279,7 @@ body.menu-open {
 #page-info-work {
     font-size: 0.9rem;
     color: rgba(201, 209, 217, 0.8);
+    line-height: 36px; /* 與輸入框對齊 */
 }
 
 #page-input,
@@ -293,6 +294,8 @@ body.menu-open {
     color: var(--text-color);
     border-radius: 5px;
     padding: 8px;
+    height: 36px;      /* 統一高度與分页按鈕 */
+    line-height: 36px; /* 垂直置中輸入數字 */
     appearance: textfield;
     -moz-appearance: textfield;
 }
@@ -1333,8 +1336,8 @@ body.menu-open {
     pointer-events: none;
 }
 
-.video-carousel-prev { left: 180px; }
-.video-carousel-next { right: 180px; }
+.video-carousel-prev { left: calc(50% - 400px - 22.5px); }
+.video-carousel-next { right: calc(50% - 400px - 22.5px); }
 
 .video-carousel-more {
     display: inline-block;
@@ -1527,14 +1530,16 @@ body.menu-open {
     border-color: #8b949e;
 }
 
-#prev-event { left: 0; }
-#next-event { right: 0; }
+#prev-event { left: 50px; }
+#next-event { right: 50px; }
 
 @media (max-width: 1024px) {
     .events-carousel-container { padding: 0 15px; }
     .event-nav-btn { width: 40px; height: 40px; font-size: 1.2rem; }
     #prev-event { left: -10px; }
     #next-event { right: -10px; }
+    .video-carousel-prev { left: -10px; }
+    .video-carousel-next { right: -10px; }
 }
 
 @media (max-width: 600px) {
@@ -3284,7 +3289,7 @@ body.show-zh .lang-en { display: none; }
         font-size: 28px;
         border-width: 2px;
     }
-
+    
     /* Skills Section */
     .skills-col {
         flex: 0 0 100%;

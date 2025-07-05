@@ -8,50 +8,50 @@
 
 - image: images/events/event1.jpg
   title: IEEE ICCBE 2025
-  description: Presented multiple cutting-edge research findings from our team's latest studies.
+  description: Presented cutting-edge research findings.
 
 - image: images/events/event2.jpg
   title: Computex 2025
-  description: Gained comprehensive insights into the tech industry landscape through mentoring a winning team that developed an accessibility-focused application.
+  description: Mentored a team to build an accessibility app.
 
 - image: images/events/event3.jpg
   title: Cybersec 2025
-  description: Explored the cybersecurity industry landscape and emerging security trends through hands-on IoT security workshops.
+  description: Explored IoT security trends.
 
 - image: images/events/event4.jpg
   title: 2025 E-System Creative Application Competition
-  description: Demonstrated the integration of natural sciences and technology by showcasing AI-powered solutions for industry assistance and emotional analysis applications.
+  description: Showcased AI solutions for industry and emotional analysis.
 
 - image: images/events/event5.jpg
   title: International Scholar Invitation to Malaysia
-  description: Conducted in-depth research collaboration and industry exchange at TAR UMT, including comprehensive local field studies and academic partnerships.
+  description: Led research collaboration and industry exchange at TAR UMT.
 
 - image: images/events/event6.jpg
   title: IEEE ICEIB 2024
-  description: Published an innovative research paper exploring the intersection of emerging technologies and current societal trends in smart surveillance applications.
+  description: Published research on smart surveillance and societal trends.
 
 - image: images/events/event7.jpg
   title: Cross-border Issues Conference by Taiwan Institute for Business Development
-  description: Hosted Malaysian Vice Chancellor and administrative executives for Taiwan exchange conference, collaborating with multiple research institutes to explore cross-border mutual prosperity and bilateral innovation.
+  description: Hosted Malaysian leaders for Taiwan exchange and collaboration.
 
 - image: images/events/event8.jpg
   title: Industry Academia Exchange Conference by Yilan County Government, Taiwan
-  description: Facilitated Yilan's expansion into international markets, promoting bilateral academic and business exchange networks between Taiwan and global partners.
+  description: Facilitated Yilan's global market expansion and partnerships.
 
 - image: images/events/event9.jpg
   title: Ministry of Education's reception for gold medal-winning students from international invention competitions
-  description: Honored for bringing glory to Taiwan at international invention exhibitions, receiving prestigious awards for outstanding achievements in innovation.
+  description: Earned awards for Taiwan at international invention exhibitions.
 
 - image: images/events/event10.jpg
   title: Guest Lecture at National Taiwan Normal University Affiliated Senior High School
-  description: Shared experiences and insights from international invention exhibitions, science fairs, and IEYI World Young Inventors Exhibition, inspiring students to pursue innovation and practical problem-solving.
+  description: Shared invention insights to inspire students.
 
 - image: images/events/event11.jpg
   title: Guest Lecture at New Taipei Municipal Tamsui Commercial and Industrial Vocational Senior High School
-  description: Illuminated the path for confused students through inspiring stories and structured guidance, helping them navigate their academic and career journey with clarity and purpose.
+  description: Guided students with inspiring stories and career advice.
 
 - image: images/events/event12.jpg
   title: 2023 New Taipei City Inventors Recognition Ceremony
-  description: Received awards and recognition from New Taipei City Mayor for winning multiple gold medals at international invention exhibitions.
+  description: Received gold medal recognition.
 
 # 您可以在此處繼續添加更多事件...
