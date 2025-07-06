@@ -32,22 +32,23 @@
                     <button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>
                     <!-- 學校篩選 -->
                     <div id="school-filter" class="filter-bar">
-                        <button class="active" data-filter="all">All</button>
-                        <button data-filter="high-school">High School</button>
-                        <button data-filter="university">University</button>
+                        <button class="active" data-filter="all"><span class="lang-en">All</span><span class="lang-zh">全部</span></button>
+                        <button data-filter="high-school"><span class="lang-en">High School</span><span class="lang-zh">高中</span></button>
+                        <button data-filter="university"><span class="lang-en">University</span><span class="lang-zh">大學</span></button>
                     </div>
                         <!-- 下拉選單篩選 (用 wrapper 包起來) -->
                     <div class="dropdown-filters-wrapper">
                         <select id="year-filter">
-                            <option value="all">All Academic Years</option>
+                            <option value="all"><span class="lang-en">All Academic Years</span><span class="lang-zh">所有學年</span></option>
                         </select>
                         <select id="semester-filter">
-                            <option value="all">All Semesters</option>
+                            <option value="all"><span class="lang-en">All Semesters</span><span class="lang-zh">所有學期</span></option>
                         </select>
                     </div>
                 </div>
                 <div class="search-container">
-                    <input type="text" id="materials-search" placeholder="Search in materials...">
+                    <input type="text" id="materials-search" data-placeholder-en="Search in materials..." data-placeholder-zh="搜尋課程教材...">
+                    <i class="fa fa-search" aria-hidden="true"></i>
                 </div>
             </div>
             

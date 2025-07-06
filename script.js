@@ -1035,6 +1035,9 @@ document.addEventListener('DOMContentLoaded', function() {
             for (const semester in semesterOptionMap) {
                 semesterOptionMap[semester].textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
             }
+            for (const semester in semesterOptionMap) {
+                semesterOptionMap[semester].textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
+            }
         }
         if (langToggleButton) {
             langToggleButton.addEventListener('click', () => {
