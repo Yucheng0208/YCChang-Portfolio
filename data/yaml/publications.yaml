@@ -5,7 +5,16 @@
   authors: "Yu-Cheng Lung, Yu-Xuan Lin, Yu-Cheng Chang*, Hua-Wen Tsai*, Yen-Da Chen"
   venue: "20th Workshop on Wireless, Ad-Hoc and Sensor Networks (WASN 2025)"
   authorrole: "Corresponding Author"
-  date: "August 25-26 2025"
+  date: "August 25-26, 2025"
+  links:
+    DOI: "#"
+
+- category: "book"
+  title: "生程式AI素養全解：從模型原理到教育應用的實戰教學書"
+  authors: "TBA"
+  venue: "TBA"
+  authorrole: "Co-Author(s)"
+  date: "July 30, 2025"
   links:
     DOI: "#"
 
@@ -14,7 +23,7 @@
   authors: "Yu-Cheng Chang*, Hong-Yuan Gu, Zong-Rong Wu, Zi-Qing Chang, Liang-Zhen Chen, Weng-Luen Willam Cheong, Xiang-Yann Lim, Wei Chien*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
   authorrole: "First Author, Corresponding Author"
-  date: "June 27-28 2025"
+  date: "June 27-28, 2025"
   links:
     DOI: "#"
 
@@ -23,7 +32,7 @@
   authors: "Yu-Cheng Chang*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
   authorrole: "First Author, Corresponding Author"
-  date: "2025-06-27"
+  date: "June 27-28, 2025"
   links:
     DOI: "#"
 
@@ -32,7 +41,7 @@
   authors: "Yu-Cheng Chang*, Yu-Xuan Lin, Yu-Cheng Lung, Shan-Xi Yang, Wei Chien*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)5"
   authorrole: "First Author, Corresponding Author"
-  date: "June 27-28 2025"
+  date: "June 27-28, 2025"
   links:
     DOI: "#"
 
@@ -41,7 +50,7 @@
   authors: "Wei-Ming Xie, Ssu-Xuan Lu, Chung-Chih Yang, Zheng-Yu Wei, Yu-Xuan Lin, Yu-Cheng Lung, Yu-Cheng Chang*, Wei Chien*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
   authorrole: "Corresponding Author"
-  date: "June 27-28 2025"
+  date: "June 27-28, 2025"
   links:
     DOI: "#"
 
@@ -50,7 +59,7 @@
   authors: "Shang-Te Tsai, Zong-Rong Wu, Pin-Hsuan Lin, Chin-Hsiung Chen, Wei Chien, Yu-Cheng Chang*"
   venue: "4th IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2024 (IEEE ICEIB 2024)"
   authorrole: "Corresponding Author"
-  date: "April 19-21 2024"
+  date: "April 19-21, 2024"
   links:
     DOI: "https://doi.org/10.1109/ICEIB61477.2024.10602595"
 
@@ -59,7 +68,7 @@
   authors: "Shang-Te Tsai, Yu-Cheng Chang*,  Chao-Yi Huang, Fang-Yuan Yang, Wei Chien, Zong-Rong Wu*"
   venue: "4th IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2024 (IEEE ICEIB 2024)"
   authorrole: "Corresponding Author"
-  date: "April 19-21 2024"
+  date: "April 19-21, 2024"
   links:
     DOI: "https://doi.org/10.1109/ICEIB61477.2024.10602722"
 
@@ -68,7 +77,7 @@
   authors: "Shang-Te Tsai, Zong-Rong Wu, Yu-Cheng Chang*, Wei-Hsin Lin, Wei Chien*"
   venue: "4th IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2024 (IEEE ICEIB 2024)"
   authorrole: "Corresponding Author"
-  date: "April 19-21 2024"
+  date: "April 19-21, 2024"
   links:
     DOI: "https://doi.org/10.1109/ICEIB61477.2024.10602700"
 
@@ -77,7 +86,7 @@
   authors: "Yen-Da Chen, Yu-Cheng Chang*, Hua-Wen Tsai*"
   venue: "18th Workshop on Wireless, Ad-Hoc and Sensor Networks 2023 (WASN 2023)"
   authorrole: "Corresponding Author"
-  date: "August 28-29 2023"
+  date: "August 28-29, 2023"
   links:
 
 - category: "conference"
@@ -85,7 +94,7 @@
   authors: "蔡華文*, 張育丞*, 楊敦傑, 楊竣捷, 徐茂霖"
   venue: "2023 Symposium on Digital Life Technologies (2023 DLT)"
   authorrole: "Corresponding Author"
-  date: "May 12-13 2023"
+  date: "May 12-13, 2023"
   links:
 
 - category: "conference"
@@ -93,7 +102,7 @@
   authors: "Ming-Hsuan Ho*, Shao-Yuan Huang, Yu-Cheng Chang, Chi-Wei Ruo"
   venue: "9th IEEE International Conference on Applied System Innovation 2023 (IEEE ICASI 2023)"
   authorrole: "Co-Author(s)"
-  date: "21-25 April 2023"
+  date: "April 21-25, 2023"
   links:
 
 - category: "conference"
@@ -101,7 +110,7 @@
   authors: "Yu-Cheng Chang; Hua-Wen Tsai*; Chao-Yi Huang; Zong-Rong Wu*"
   venue: "3rd IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2023 (IEEE ICEIB 2023)"
   authorrole: "Corresponding Author"
-  date: "16-17 April 2023"
+  date: "April 16-17, 2023"
   links:
     DOI: "https://doi.org/10.1109/ICEIB57887.2023.10169919"
 
@@ -112,14 +121,14 @@
   links:
     DOI: "https://doi.org/10.3390/engproc2023055058"
   authorrole: "Corresponding Author"
-  date: "2-4 June, 2023"
+  date: "June, 2-4 2023"
 
 - category: "conference"
   title: "An Outdoor Rescue System Using LoRa Communication Network"
   authors: "張哲唯*, 林千瓏, 林郁芮, 江采淳, 陳紫菱, 張育丞"
   venue: "Taiwan Academic Network Conference 2022 (TANET 2022)"
   authorrole: "Co-Author(s)"
-  date: "15-17 December, 2022"
+  date: "December 15-17, 2022"
   links:
 
 - category: "conference"
@@ -127,5 +136,5 @@
   authors: "Yen-Da Chen*, Hua-Wen Tsai*, Yu-Zhu Liao, Yu-Cheng Chang"
   venue: "26th Mobile Computing Workshop 2022 (MC 2022)"
   authorrole: "Co-Author(s)"
-  date: "26-27 August, 2022"
+  date: "August 26-27, 2022"
   links:
