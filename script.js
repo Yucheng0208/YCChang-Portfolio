@@ -397,12 +397,170 @@ document.addEventListener('DOMContentLoaded', function() {
         const nextPageBtn = document.getElementById(config.nextPageBtnId);
         const lastPageBtn = document.getElementById(config.lastPageBtnId);
 
+        // 輔助函數：解析日期字符串
+        function parseWorkDate(dateString) {
+            if (!dateString) return { startDate: new Date(0), isPresent: false };
+            
+            const str = dateString.toLowerCase().trim();
+            const isPresent = str.includes('present');
+            
+            // 提取開始日期
+            let startDateStr = str;
+            if (str.includes('~')) {
+                startDateStr = str.split('~')[0].trim();
+            }
+            
+            // 嘗試解析日期格式 (月份, 年份)
+            const monthYearMatch = startDateStr.match(/(\w+),?\s*(\d{4})/);
+            if (monthYearMatch) {
+                const [, month, year] = monthYearMatch;
+                const monthMap = {
+                    'january': 0, 'february': 1, 'march': 2, 'april': 3,
+                    'may': 4, 'june': 5, 'july': 6, 'august': 7,
+                    'september': 8, 'october': 9, 'november': 10, 'december': 11
+                };
+                const monthIndex = monthMap[month.toLowerCase()] ?? 0;
+                return { 
+                    startDate: new Date(parseInt(year), monthIndex), 
+                    isPresent: isPresent 
+                };
+            }
+            
+            // 如果無法解析，返回預設值
+            return { startDate: new Date(0), isPresent: isPresent };
+        }
+
+        // 輔助函數：解析 Publications 日期字符串
+        function parsePublicationDate(dateString) {
+            if (!dateString) return new Date(0);
+            
+            const str = dateString.trim();
+            
+            // 格式1: "2025-06-27" (ISO format)
+            const isoMatch = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+            if (isoMatch) {
+                const [, year, month, day] = isoMatch;
+                return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+            }
+            
+            // 格式2: "June 27-28 2025" 或 "21-25 April 2023"
+            const monthYearMatch = str.match(/(\w+)\s+(\d{1,2})(?:-\d{1,2})?,?\s*(\d{4})|(\d{1,2})(?:-\d{1,2})?\s+(\w+),?\s*(\d{4})/);
+            if (monthYearMatch) {
+                let month, year, day;
+                if (monthYearMatch[1]) {
+                    // "June 27-28 2025" format
+                    month = monthYearMatch[1];
+                    day = monthYearMatch[2];
+                    year = monthYearMatch[3];
+                } else {
+                    // "21-25 April 2023" format
+                    day = monthYearMatch[4];
+                    month = monthYearMatch[5];
+                    year = monthYearMatch[6];
+                }
+                
+                const monthMap = {
+                    'january': 0, 'february': 1, 'march': 2, 'april': 3,
+                    'may': 4, 'june': 5, 'july': 6, 'august': 7,
+                    'september': 8, 'october': 9, 'november': 10, 'december': 11
+                };
+                const monthIndex = monthMap[month.toLowerCase()] ?? 0;
+                return new Date(parseInt(year), monthIndex, parseInt(day) || 1);
+            }
+            
+            // 格式3: "2-4 June, 2023"
+            const dayMonthYearMatch = str.match(/(\d{1,2})(?:-\d{1,2})?\s+(\w+),?\s*(\d{4})/);
+            if (dayMonthYearMatch) {
+                const [, day, month, year] = dayMonthYearMatch;
+                const monthMap = {
+                    'january': 0, 'february': 1, 'march': 2, 'april': 3,
+                    'may': 4, 'june': 5, 'july': 6, 'august': 7,
+                    'september': 8, 'october': 9, 'november': 10, 'december': 11
+                };
+                const monthIndex = monthMap[month.toLowerCase()] ?? 0;
+                return new Date(parseInt(year), monthIndex, parseInt(day) || 1);
+            }
+            
+            // 如果無法解析，嘗試使用 Date.parse
+            const fallbackDate = new Date(str);
+            return isNaN(fallbackDate.getTime()) ? new Date(0) : fallbackDate;
+        }
+
+        // 輔助函數：解析 Projects 日期字符串 (處理日期範圍)
+        function parseProjectDate(dateString) {
+            if (!dateString) return new Date(0);
+            
+            const str = dateString.trim();
+            
+            // 格式: "July 1, 2023 ~ February 28, 2024" - 取結束日期
+            const rangeMatch = str.match(/.*?~\s*(.+)$/);
+            if (rangeMatch) {
+                const endDateStr = rangeMatch[1].trim();
+                return parsePublicationDate(endDateStr);
+            }
+            
+            // 如果沒有範圍，直接解析日期
+            return parsePublicationDate(str);
+        }
+
         async function loadData() {
             try {
                 const response = await fetch(config.yamlPath);
                 if (!response.ok) throw new Error(`YAML file not found: ${config.yamlPath}`);
                 const yamlContent = await response.text();
                 allItems = window.jsyaml.load(yamlContent) || [];
+                
+                // 如果是 works 頁面，進行特殊排序
+                if (config.yamlPath.includes('works.yaml')) {
+                    allItems.sort((a, b) => {
+                        const dateA = parseWorkDate(a.date);
+                        const dateB = parseWorkDate(b.date);
+                        
+                        // Present 的工作優先
+                        if (dateA.isPresent && !dateB.isPresent) return -1;
+                        if (!dateA.isPresent && dateB.isPresent) return 1;
+                        
+                        // 都有 Present 或都沒有，按開始日期降序排列 (最新的在前)
+                        return dateB.startDate.getTime() - dateA.startDate.getTime();
+                    });
+                }
+                
+                // 如果是 publications 頁面，按日期降序排列 (最新的在前)
+                if (config.yamlPath.includes('publications.yaml')) {
+                    allItems.sort((a, b) => {
+                        const dateA = parsePublicationDate(a.date);
+                        const dateB = parsePublicationDate(b.date);
+                        return dateB.getTime() - dateA.getTime();
+                    });
+                }
+                
+                // 如果是 projects 頁面，按日期降序排列 (最新的在前)
+                if (config.yamlPath.includes('projects.yaml')) {
+                    allItems.sort((a, b) => {
+                        const dateA = parseProjectDate(a.date);
+                        const dateB = parseProjectDate(b.date);
+                        return dateB.getTime() - dateA.getTime();
+                    });
+                }
+                
+                // 如果是 honors 頁面，按日期降序排列 (最新的在前)
+                if (config.yamlPath.includes('honors.yaml')) {
+                    allItems.sort((a, b) => {
+                        const dateA = parsePublicationDate(a.date);
+                        const dateB = parsePublicationDate(b.date);
+                        return dateB.getTime() - dateA.getTime();
+                    });
+                }
+                
+                // 如果是 highlights 頁面，按日期降序排列 (最新的在前)
+                if (config.yamlPath.includes('highlights.yaml')) {
+                    allItems.sort((a, b) => {
+                        const dateA = parsePublicationDate(a.date);
+                        const dateB = parsePublicationDate(b.date);
+                        return dateB.getTime() - dateA.getTime();
+                    });
+                }
+                
                 updateDisplay({
                     type: 'refresh'
                 });
@@ -494,6 +652,58 @@ document.addEventListener('DOMContentLoaded', function() {
             if (searchTerm) {
                 tempFiltered = tempFiltered.filter(item => Object.values(item).some(value => String(value).toLowerCase().includes(searchTerm)));
             }
+            
+            // 如果是 works 頁面，對篩選後的結果進行排序
+            if (config.yamlPath.includes('works.yaml')) {
+                tempFiltered.sort((a, b) => {
+                    const dateA = parseWorkDate(a.date);
+                    const dateB = parseWorkDate(b.date);
+                    
+                    // Present 的工作優先
+                    if (dateA.isPresent && !dateB.isPresent) return -1;
+                    if (!dateA.isPresent && dateB.isPresent) return 1;
+                    
+                    // 都有 Present 或都沒有，按開始日期降序排列 (最新的在前)
+                    return dateB.startDate.getTime() - dateA.startDate.getTime();
+                });
+            }
+            
+            // 如果是 publications 頁面，對篩選後的結果按日期排序
+            if (config.yamlPath.includes('publications.yaml')) {
+                tempFiltered.sort((a, b) => {
+                    const dateA = parsePublicationDate(a.date);
+                    const dateB = parsePublicationDate(b.date);
+                    return dateB.getTime() - dateA.getTime();
+                });
+            }
+            
+            // 如果是 projects 頁面，對篩選後的結果按日期排序
+            if (config.yamlPath.includes('projects.yaml')) {
+                tempFiltered.sort((a, b) => {
+                    const dateA = parseProjectDate(a.date);
+                    const dateB = parseProjectDate(b.date);
+                    return dateB.getTime() - dateA.getTime();
+                });
+            }
+            
+            // 如果是 honors 頁面，對篩選後的結果按日期排序
+            if (config.yamlPath.includes('honors.yaml')) {
+                tempFiltered.sort((a, b) => {
+                    const dateA = parsePublicationDate(a.date);
+                    const dateB = parsePublicationDate(b.date);
+                    return dateB.getTime() - dateA.getTime();
+                });
+            }
+            
+            // 如果是 highlights 頁面，對篩選後的結果按日期排序
+            if (config.yamlPath.includes('highlights.yaml')) {
+                tempFiltered.sort((a, b) => {
+                    const dateA = parsePublicationDate(a.date);
+                    const dateB = parsePublicationDate(b.date);
+                    return dateB.getTime() - dateA.getTime();
+                });
+            }
+            
             filteredItems = tempFiltered;
             if (noResultsDiv) noResultsDiv.style.display = filteredItems.length === 0 ? 'block' : 'none';
             if (filteredItems.length === 0) {
@@ -650,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="Title">${project.title || ''}</td><td data-label="Class">${project.class || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="position">${project.position || ''}</td>${project.Members ? `<td data-label="Members">${project.members}</td>` : ''}${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${project.title || ''}</td><td data-label="Class">${project.class || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="Position">${project.position || ''}</td>${project.members ? `<td data-label="Members">${project.members}</td>` : ''}${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
@@ -678,7 +888,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeListPage({ pageSelector: '.honor-page', yamlPath: './data/yaml/honors.yaml', tableBodyId: 'honor-table-body', filterBarId: 'honor-filter', searchInputId: 'honor-search', noResultsId: 'no-results-honor', paginationContainerId: 'pagination-container-honor', pageInfoId: 'page-info-honor', pageInputId: 'page-input-honor', firstPageBtnId: 'first-page-honor', prevPageBtnId: 'prev-page-honor', nextPageBtnId: 'next-page-honor', lastPageBtnId: 'last-page-honor', renderRowFunction: renderHonorRow });
     initializeListPage({ pageSelector: '.highlight-page', yamlPath: './data/yaml/highlights.yaml', tableBodyId: 'highlight-table-body', filterBarId: 'highlight-filter', searchInputId: 'highlight-search', noResultsId: 'no-results-highlight', paginationContainerId: 'pagination-container-highlight', pageInfoId: 'page-info-highlight', pageInputId: 'page-input-highlight', firstPageBtnId: 'first-page-highlight', prevPageBtnId: 'prev-page-highlight', nextPageBtnId: 'next-page-highlight', lastPageBtnId: 'last-page-highlight', renderRowFunction: renderHighlightRow });
     initializeListPage({ pageSelector: '.project-page', yamlPath: './data/yaml/projects.yaml', tableBodyId: 'project-table-body', filterBarId: 'project-filter', searchInputId: 'project-search', noResultsId: 'no-results-project', paginationContainerId: 'pagination-container-project', pageInfoId: 'page-info-project', pageInputId: 'page-input-project', firstPageBtnId: 'first-page-project', prevPageBtnId: 'prev-page-project', nextPageBtnId: 'next-page-project', lastPageBtnId: 'last-page-project', renderRowFunction: renderProjectRow });
-    initializeListPage({ pageSelector: '.work-page', yamlPath: './data/yaml/works.yaml', tableBodyId: 'work-table-body', filterBarId: 'work-filter', searchInputId: null, noResultsId: 'no-results-work', paginationContainerId: 'pagination-container-work', pageInfoId: 'page-info-work', pageInputId: 'page-input-work', firstPageBtnId: 'first-page-work', prevPageBtnId: 'prev-page-work', nextPageBtnId: 'next-page-work', lastPageBtnId: 'last-page-work', renderRowFunction: renderWorkRow });
+    initializeListPage({ pageSelector: '.work-page', yamlPath: './data/yaml/works.yaml', tableBodyId: 'work-table-body', filterBarId: 'work-filter', searchInputId: 'work-search', noResultsId: 'no-results-work', paginationContainerId: 'pagination-container-work', pageInfoId: 'page-info-work', pageInputId: 'page-input-work', firstPageBtnId: 'first-page-work', prevPageBtnId: 'prev-page-work', nextPageBtnId: 'next-page-work', lastPageBtnId: 'last-page-work', renderRowFunction: renderWorkRow });
 
     // --- 5. 首頁3D旋轉木馬影音視窗 ---
     (function setupVideoWindow() {
