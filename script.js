@@ -443,12 +443,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
             }
             
-            // 格式2: "June 27-28 2025" 或 "21-25 April 2023"
+            // 格式2: "June 27, 2025" 或 "June 27-28 2025" 或 "21-25 April 2023"
             const monthYearMatch = str.match(/(\w+)\s+(\d{1,2})(?:-\d{1,2})?,?\s*(\d{4})|(\d{1,2})(?:-\d{1,2})?\s+(\w+),?\s*(\d{4})/);
             if (monthYearMatch) {
                 let month, year, day;
                 if (monthYearMatch[1]) {
-                    // "June 27-28 2025" format
+                    // "June 27, 2025" 或 "June 27-28 2025" format
                     month = monthYearMatch[1];
                     day = monthYearMatch[2];
                     year = monthYearMatch[3];
