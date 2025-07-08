@@ -248,6 +248,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Footer Year
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+
         // Dropdown Accordion - 桌面版和移動版
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         dropdownToggles.forEach(toggle => {
@@ -360,12 +366,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const footerHTML = await response.text();
             footerContainer.innerHTML = footerHTML;
-
-            // 在頁腳載入後更新年份
-            const yearSpan = document.getElementById('current-year');
-            if (yearSpan) {
-                yearSpan.textContent = new Date().getFullYear();
-            }
         } catch (error) {
             console.error('Error loading footer:', error);
             footerContainer.innerHTML = '<p style="color: red; text-align: center; padding: 1rem;">Error: Footer could not be loaded.</p>';
@@ -833,7 +833,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const highlightedTitle = highlightAuthorName(honor.title || '');
         
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle}</td><td data-label="Event">${honor.event || ''}</td><td data-label="Organizer">${honor.organizer || ''}</td>${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${highlightedMembers}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${highlightedSupervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle}</td><td data-label="Event">${honor.event || ''}</td>${honor.organizer ? `<td data-label="Organizer">${honor.organizer}</td>` : ''}${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${highlightedMembers}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${highlightedSupervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
@@ -2134,7 +2134,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         if (category === 'bonus') {
                             categoryScores.bonus += score;
-                        } else if (categoryWeightedScores.hasOwnProperty(category)) {
+                        } else if (categoryScores.hasOwnProperty(category)) {
                             categoryWeightedScores[category] += score * weight;
                         }
                     }
