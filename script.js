@@ -248,12 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Footer Year
-        const yearSpan = document.getElementById('current-year');
-        if (yearSpan) {
-            yearSpan.textContent = new Date().getFullYear();
-        }
-
         // Dropdown Accordion - 桌面版和移動版
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         dropdownToggles.forEach(toggle => {
@@ -366,6 +360,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const footerHTML = await response.text();
             footerContainer.innerHTML = footerHTML;
+
+            // 在頁腳載入後更新年份
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
         } catch (error) {
             console.error('Error loading footer:', error);
             footerContainer.innerHTML = '<p style="color: red; text-align: center; padding: 1rem;">Error: Footer could not be loaded.</p>';
@@ -2134,7 +2134,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         if (category === 'bonus') {
                             categoryScores.bonus += score;
-                        } else if (categoryScores.hasOwnProperty(category)) {
+                        } else if (categoryWeightedScores.hasOwnProperty(category)) {
                             categoryWeightedScores[category] += score * weight;
                         }
                     }
