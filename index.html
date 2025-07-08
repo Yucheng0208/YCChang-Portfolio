@@ -1,545 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu-Cheng Chang</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Yu-Cheng Chang</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <link rel="stylesheet" href="style.css">
+        
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
-    <meta name="theme-color" content="#0d1117">
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+        <meta name="theme-color" content="#0d1117">
 
-    <!-- js-yaml for parsing YAML files -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-    
-</head>
-<body>
-    <!-- 1. 輪播圖 -->
-    <header class="hero-slider">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url('images/slides/slide1.png');">
-                    <div class="slide-content">
-                        <h1>Vision of Intelligence & Technology</h1>
-                        <p>Integrating artificial intelligence with IoT to explore infinite possibilities for a smarter future.</p>
+        <!-- js-yaml for parsing YAML files -->
+        <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+        
+    </head>
+    <body>
+        <!-- 1. 輪播圖 -->
+        <header class="hero-slider">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide1.png');">
+                        <div class="slide-content">
+                            <h1>Vision of Intelligence & Technology</h1>
+                            <p>Integrating artificial intelligence with IoT to explore infinite possibilities for a smarter future.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide2.png');">
+                        <div class="slide-content">
+                            <h1>Research & Innovation Engine</h1>
+                            <p>Driving precision and efficiency in intelligent systems through deep learning and edge computing.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide3.png');">
+                        <div class="slide-content">
+                            <h1>Human-Centered Philosophy</h1>
+                            <p>Committed to creating intelligent solutions that meet user needs and enhance quality of life.</p></div></div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide4.png');">
+                        <div class="slide-content">
+                            <h1>Interdisciplinary Integration</h1>
+                            <p>Merging electrical engineering with information technology to advance cross-domain innovation and practical implementation.</p></div></div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide5.png');">
+                        <div class="slide-content">
+                            <h1>Future Research Blueprint</h1>
+                            <p>Exploring multi-object tracking and real-time recognition to pioneer new frontiers in intelligent interaction.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide6.png');">
+                        <div class="slide-content">
+                            <h1>Sustainable Development and Technology-Driven Education</h1>
+                            <p>Harnessing cutting-edge technologies to advance the United Nations Sustainable Development Goals (SDGs) through innovative, inclusive, and impactful education.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide7.png');">
+                        <div class="slide-content">
+                            <h1>International Inclusivity & Cross-Cultural Collaboration</h1>
+                            <p>Creating a platform for local revitalization and industry academia integration through global inclusivity and cross-border cooperation.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('images/slides/slide8.png');">
+                        <div class="slide-content">
+                            <h1>Igniting Awareness, Co-creating Solutions</h1>
+                            <p>Through website, videos, and presentations, we actively share insights to spark public concern and engagement with critical issues and are fully committed to crafting innovative solutions.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide2.png');">
-                    <div class="slide-content">
-                        <h1>Research & Innovation Engine</h1>
-                        <p>Driving precision and efficiency in intelligent systems through deep learning and edge computing.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide3.png');">
-                    <div class="slide-content">
-                        <h1>Human-Centered Philosophy</h1>
-                        <p>Committed to creating intelligent solutions that meet user needs and enhance quality of life.</p></div></div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide4.png');">
-                    <div class="slide-content">
-                        <h1>Interdisciplinary Integration</h1>
-                        <p>Merging electrical engineering with information technology to advance cross-domain innovation and practical implementation.</p></div></div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide5.png');">
-                    <div class="slide-content">
-                        <h1>Future Research Blueprint</h1>
-                        <p>Exploring multi-object tracking and real-time recognition to pioneer new frontiers in intelligent interaction.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide6.png');">
-                    <div class="slide-content">
-                        <h1>Sustainable Development and Technology-Driven Education</h1>
-                        <p>Harnessing cutting-edge technologies to advance the United Nations Sustainable Development Goals (SDGs) through innovative, inclusive, and impactful education.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide7.png');">
-                    <div class="slide-content">
-                        <h1>International Inclusivity & Cross-Cultural Collaboration</h1>
-                        <p>Creating a platform for local revitalization and industry academia integration through global inclusivity and cross-border cooperation.</p>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-image: url('images/slides/slide8.png');">
-                    <div class="slide-content">
-                        <h1>Igniting Awareness, Co-creating Solutions</h1>
-                        <p>Through website, videos, and presentations, we actively share insights to spark public concern and engagement with critical issues and are fully committed to crafting innovative solutions.</p>
-                    </div>
-                </div>
+                <div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
             </div>
-            <div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div>
-        </div>
-        <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content">
-            <i class="fas fa-chevron-down"></i>
-        </a>
-    </header>
-    <div id="navbar-container"></div>
-            
-    <!-- Main Content -->
-    <main id="page-content">
-        <div class="page-container">
-            <!-- Introduction Section -->
-            <div class="intro-section">
-                <div class="intro-text">
-                    <h1>Yu-Cheng Chang</h1>
-                    <p>
-                        Yu-Cheng Chang（張育丞） is a master's student in the Department of Computer Science and Information Engineering at National Taipei University of Technology. His research focuses on AIoT, embedded systems, and computer vision, strongly emphasizing interdisciplinary innovation and practical integration. He has received numerous national awards for participating in technology competitions and holds several technical inventions. Recently, his work has centered on combining sign language recognition with emotion analysis to enhance accessibility technologies, while actively contributing to technical mentorship and education.
+            <a href="#page-content" class="scroll-down-arrow" aria-label="Scroll to content">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </header>
+        <div id="navbar-container"></div>
+                
+        <!-- Main Content -->
+        <main id="page-content">
+            <div class="page-container">
+                <!-- Introduction Section -->
+                <div class="intro-section">
+                    <div class="intro-text">
+                        <h1>Yu-Cheng Chang</h1>
+                        <p>
+                            Yu-Cheng Chang（張育丞） is a master's student in the Department of Computer Science and Information Engineering at National Taipei University of Technology. His research focuses on AIoT, embedded systems, and computer vision, strongly emphasizing interdisciplinary innovation and practical integration. He has received numerous national awards for participating in technology competitions and holds several technical inventions. Recently, his work has centered on combining sign language recognition with emotion analysis to enhance accessibility technologies, while actively contributing to technical mentorship and education.
+                        </p>
+                    </div>
+                    <div class="intro-image">
+                        <img src="images/myphoto2.jpg" alt="Photo of Yu-Cheng Chang">
+                    </div>
+                </div>
+                
+                <!-- Motto Section -->
+                <div class="motto-section">
+                    <p class="motto">
+                        𝐹𝑒𝑎𝑟 𝑝𝑢𝑠ℎ𝑒𝑠 𝑠𝑢𝑐𝑐𝑒𝑠 𝑎𝑤𝑎𝑦, 𝑏𝑢𝑡 𝑤𝑖𝑡ℎ 𝑓𝑎𝑖𝑡ℎ, 𝑒𝑣𝑒𝑟𝑦𝑡ℎ𝑖𝑛𝑔 𝑠𝑒𝑒𝑚𝑠 𝑤𝑖𝑡ℎ𝑖𝑛 𝑟𝑒𝑎𝑐ℎ.
                     </p>
+                    <button class="motto-scroll-arrow" onclick="scrollToNextSection()" aria-label="Scroll to next section">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
-                <div class="intro-image">
-                    <img src="images/myphoto2.jpg" alt="Photo of Yu-Cheng Chang">
-                </div>
-            </div>
-            
-            <!-- Motto Section -->
-            <div class="motto-section">
-                <p class="motto">
-                    𝐹𝑒𝑎𝑟 𝑝𝑢𝑠ℎ𝑒𝑠 𝑠𝑢𝑐𝑐𝑒𝑠 𝑎𝑤𝑎𝑦, 𝑏𝑢𝑡 𝑤𝑖𝑡ℎ 𝑓𝑎𝑖𝑡ℎ, 𝑒𝑣𝑒𝑟𝑦𝑡ℎ𝑖𝑛𝑔 𝑠𝑒𝑒𝑚𝑠 𝑤𝑖𝑡ℎ𝑖𝑛 𝑟𝑒𝑎𝑐ℎ.
-                </p>
-                <button class="motto-scroll-arrow" onclick="scrollToNextSection()" aria-label="Scroll to next section">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>
-            <!-- End of Introduction Section -->
+                <!-- End of Introduction Section -->
 
-            <!-- Education Timeline -->
-            <section class="education-section">
-                <div class="education-container">
-                    <h2>Education</h2>
-                    <div class="timeline-wrapper">
-                        <!-- Timeline Item 1: Master's Degree -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">September 2024 ~ Present</span>
-                                <h3>Master of Science in Computer Science and Information Engineering</h3>
-                                <p class="timeline-school-name">National Taipei University of Technology</p>
-                                <p class="timeline-gpa">GPA 4.0 / 4.0</p>
+                <!-- Education Timeline -->
+                <section class="education-section">
+                    <div class="education-container">
+                        <h2>Education</h2>
+                        <div class="timeline-wrapper">
+                            <!-- Timeline Item 1: Master's Degree -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">September 2024 ~ Present</span>
+                                    <h3>Master of Science in Computer Science and Information Engineering</h3>
+                                    <p class="timeline-school-name">National Taipei University of Technology</p>
+                                    <p class="timeline-gpa">GPA 4.0 / 4.0</p>
+                                </div>
+                            </div>
+                            <!-- Timeline Item 2: Bachelor's Degree -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">September 2020 ~ June 2024</span>
+                                    <h3>Bachelor of Science in Computer Information and Network Engineering</h3>
+                                    <p class="timeline-school-name">Lunghwa University of Science and Technology</p>
+                                    <p class="timeline-gpa">Overall GPA 3.878 / 4.0</p>
+                                </div>
+                            </div>
+                            <!-- Timeline Item 3: High School's Degree -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">September 2018 ~ June 2020</span>
+                                    <h3>Vocational High School Diploma in Department of Electrical Engineering</h3>
+                                    <p class="timeline-school-name">New Taipei Municipal Tamsui Commercial Industrial Vocational Senior High School</p>
+                                </div>
                             </div>
                         </div>
-                        <!-- Timeline Item 2: Bachelor's Degree -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">September 2020 ~ June 2024</span>
-                                <h3>Bachelor of Science in Computer Information and Network Engineering</h3>
-                                <p class="timeline-school-name">Lunghwa University of Science and Technology</p>
-                                <p class="timeline-gpa">Overall GPA 3.878 / 4.0</p>
+                    </div>
+                </section>
+                <!-- End of Education Timeline -->
+            </div>
+            <!-- End of .page-container -->
+
+            <!-- ===== Recent Events Showcase Section ===== -->
+            <section id="recent-events" class="recent-events-section">
+                <div class="events-container">
+                    <div class="events-header">
+                        <h2>Recent Events & Activities</h2>
+                        <!--<p class="text-muted">
+                            A glimpse into my recent engagements, from academic conferences and workshops to community outreach and collaborative projects.
+                        </p>-->
+                    </div>
+                    <div class="events-carousel-container">
+                        <div id="events-grid" class="events-grid">
+                            <!-- Event cards will be dynamically inserted here by JavaScript -->
+                        </div>
+                        <button id="prev-event" class="event-nav-btn" aria-label="Previous event">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="next-event" class="event-nav-btn" aria-label="Next event">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <!-- New Autoplay Controls -->
+                    <div class="events-controls">
+                        <button id="pause-event-autoplay" class="event-autoplay-btn" aria-label="Pause autoplay">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button id="play-event-autoplay" class="event-autoplay-btn hidden" aria-label="Play autoplay">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- ===== End of Recent Events Showcase Section ===== -->
+
+            <!-- YouTube Section -->
+            <!-- Start of Sliding Window Video Section -->
+            <div class="video-carousel-section">
+                <header class="video-window-glw0pyx-header">
+                    <div class="video-carousel-title">Showcase of Moments</div>
+                    <!--<p class="text-muted">
+                        A curated collection of videos highlighting my innovative projects, competitive achievements, and in-depth technical demonstrations.
+                    </p>-->
+                </header>
+                <div class="video-carousel-display">
+                    <button class="video-carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="video-carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    <div class="video-carousel-container">
+                        <div class="video-carousel-slide" data-position="0">
+                            <div class="video-iframe-wrapper">
+                                <iframe src="" allowfullscreen></iframe>
                             </div>
                         </div>
-                        <!-- Timeline Item 3: High School's Degree -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">September 2018 ~ June 2020</span>
-                                <h3>Vocational High School Diploma in Department of Electrical Engineering</h3>
-                                <p class="timeline-school-name">New Taipei Municipal Tamsui Commercial Industrial Vocational Senior High School</p>
+                        <div class="video-carousel-slide" data-position="1">
+                            <div class="video-iframe-wrapper">
+                                <iframe src="" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="video-carousel-slide" data-position="2">
+                            <div class="video-iframe-wrapper">
+                                <iframe src="" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="video-carousel-slide" data-position="3">
+                            <div class="video-iframe-wrapper">
+                                <iframe src="" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="video-carousel-slide" data-position="4">
+                            <div class="video-iframe-wrapper">
+                                <iframe src="" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://www.youtube.com/@Ryan.02.08" class="video-carousel-more">Go to YouTube ›</a>
+            </div>
+            <!-- End of Sliding Window Video Section -->
+
+            <!-- ===== Skills Section (Single Source of Truth HTML) ===== -->
+            <section id="skills" class="skills-section">
+                <div class="skills-container">
+                    <div class="skills-text-center mb-5">
+                        <h2 class="section-title">Professional Expertise</h2>
+                        <!--<p class="text-muted">
+                        My research and teaching expertise covers multiple interdisciplinary fields including AI, IoT, design thinking, and innovation & entrepreneurship.
+                        </p>-->
+                    </div>
+                    
+                    <div class="skills-row">
+                        <!-- 1. 人工智慧 -->
+                        <div class="skills-col">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <div class="skill-icon bg-primary"><i class="fas fa-brain"></i></div>
+                                    <h3 class="skill-title">Artificial Intelligence</h3>
+                                </div>
+                                <div class="skill-body">
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- 2. 物聯網 -->
+                        <div class="skills-col">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <div class="skill-icon bg-info"><i class="fas fa-network-wired"></i></div>
+                                    <h3 class="skill-title">Internet of Things</h3>
+                                </div>
+                                <div class="skill-body">
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- 3. 設計思考與創新創業 -->
+                        <div class="skills-col">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <div class="skill-icon bg-success">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                        <h3 class="skill-title">Design & Innovation</h3>
+                                </div>
+                                <div class="skill-body">
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
+                                        </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
+                                        </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. 學術研究與出版 -->
+                        <div class="skills-col">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <div class="skill-icon bg-warning">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </div>
+                                    <h3 class="skill-title">Academic Research</h3>
+                                </div>
+                                <div class="skill-body">
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span>
+                                            <span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- 5. 產業合作與社會影響力 -->
+                        <div class="skills-col">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <div class="skill-icon bg-danger"><i class="fas fa-handshake text-danger"></i></div>
+                                    <h3 class="skill-title">Industry Collaboration</h3>
+                                </div>
+                                <div class="skill-body">
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- 6. 教學與領導力 -->
+                        <div class="skills-col">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <div class="skill-icon bg-secondary">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                    </div>
+                                        <h3 class="skill-title">Teaching & Leadership</h3>
+                                </div>
+                                <div class="skill-body">
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-medium">TBA</span><span class="text-muted"></span>
+                                        </div>
+                                        <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- End of Education Timeline -->
-        </div>
-        <!-- End of .page-container -->
-
-        <!-- ===== Recent Events Showcase Section ===== -->
-        <section id="recent-events" class="recent-events-section">
-            <div class="events-container">
-                <div class="events-header">
-                    <h2>Recent Events & Activities</h2>
+            <!-- ===== Skills Section End ===== -->
+            
+            <!-- ===== 新增的友善連結區塊 ===== -->
+            <section class="link-showcase-section">
+                <h2>Connect with Me</h2>
                     <!--<p class="text-muted">
-                        A glimpse into my recent engagements, from academic conferences and workshops to community outreach and collaborative projects.
+                        I actively engage with the following platforms to facilitate professional networking, disseminate research findings, and foster technical collaboration. Please feel free to explore and connect with me to gain deeper insights into my work and areas of expertise.
                     </p>-->
-                </div>
-                <div class="events-carousel-container">
-                    <div id="events-grid" class="events-grid">
-                        <!-- Event cards will be dynamically inserted here by JavaScript -->
+                <div class="link-groups-container">
+                    <div class="link-group">
+                        <div class="button-container">
+                            <a href="mailto:yucheng208@outlook.com" class="link-button">Outlook</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="link-button">IEEE Mail</a>
+                            <a href="https://t.me/Ryan_0208" target="_blank" rel="noopener noreferrer" class="link-button">Telegram</a>
+                            <a href="https://api.whatsapp.com/send/?phone=886975265171&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="link-button">WhatsApp</a>
+                            <!--<a href="#" target="_blank" rel="noopener noreferrer" class="link-button">WeChat</a>-->
+                        </br>
+                            <a href="https://www.youtube.com/@Ryan.02.08" target="_blank" rel="noopener noreferrer" class="link-button">YouTube</a>
+                            <a href="https://github.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitHub</a>
+                            <a href="https://gitlab.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitLab</a>
+                            <a href="https://hackmd.io/@Yucheng208" target="_blank" rel="noopener noreferrer" class="link-button">HackMD</a>
+                            <a href="https://medium.com/@Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">Medium</a>
+                        </br>
+                            <a href="https://ieeexplore.ieee.org/author/37089901051" target="_blank" rel="noopener noreferrer" class="link-button">IEEE Xplore</a>
+                            <a href="https://scholar.google.com/citations?user=-SWWt7kAAAAJ&hl=zh-TW" target="_blank" rel="noopener noreferrer" class="link-button">Google Scholar</a>
+                            <a href="https://www.researchgate.net/profile/Yu-Cheng-Chang-14" target="_blank" rel="noopener noreferrer" class="link-button">ResearchGate</a>
+                            <a href="https://orcid.org/0000-0003-1301-9192" target="_blank" rel="noopener noreferrer" class="link-button">ORCID</a>
+                            <a href="https://sciprofiles.com/profile/3276587" target="_blank" rel="noopener noreferrer" class="link-button">Sci-Profile</a>
+                        </div>
                     </div>
-                    <button id="prev-event" class="event-nav-btn" aria-label="Previous event">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button id="next-event" class="event-nav-btn" aria-label="Next event">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
                 </div>
-                <!-- New Autoplay Controls -->
-                <div class="events-controls">
-                    <button id="pause-event-autoplay" class="event-autoplay-btn" aria-label="Pause autoplay">
-                        <i class="fas fa-pause"></i>
-                    </button>
-                    <button id="play-event-autoplay" class="event-autoplay-btn hidden" aria-label="Play autoplay">
-                        <i class="fas fa-play"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-        <!-- ===== End of Recent Events Showcase Section ===== -->
+            </section>
+            <!-- ===== 友善連結區塊結束 ===== -->
 
-        <!-- YouTube Section -->
-        <!-- Start of Sliding Window Video Section -->
-        <div class="video-carousel-section">
-            <header class="video-window-glw0pyx-header">
-                <div class="video-carousel-title">Showcase of Moments</div>
+            <!-- ===== 合作機構區塊 ===== -->
+            <section class="partner-showcase-section">
+                <h2>Partnerships</h2>
                 <!--<p class="text-muted">
-                     A curated collection of videos highlighting my innovative projects, competitive achievements, and in-depth technical demonstrations.
+                        These represent my collaborative partnerships with university laboratories, research institutes, enterprises, academic societies, legal entities, governmental and non-governmental organizations. This network continues to evolve as new partnerships develop.
                 </p>-->
-            </header>
-            <div class="video-carousel-display">
-                <button class="video-carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="video-carousel-next"><i class="fas fa-chevron-right"></i></button>
-                <div class="video-carousel-container">
-                    <div class="video-carousel-slide" data-position="0">
-                        <div class="video-iframe-wrapper">
-                            <iframe src="" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="video-carousel-slide" data-position="1">
-                        <div class="video-iframe-wrapper">
-                            <iframe src="" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="video-carousel-slide" data-position="2">
-                        <div class="video-iframe-wrapper">
-                            <iframe src="" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="video-carousel-slide" data-position="3">
-                        <div class="video-iframe-wrapper">
-                            <iframe src="" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="video-carousel-slide" data-position="4">
-                        <div class="video-iframe-wrapper">
-                            <iframe src="" allowfullscreen></iframe>
+                <div class="partner-groups-container">
+                    <div class="partner-group">
+                        <div class="button-container">
+                            <a href="https://www.ntut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NTUT</a>
+                            <a href="https://www.nkust.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NKUST</a>
+                            <a href="https://www.yuntech.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NYUST</a>
+                            <a href="https://www.tku.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TKU</a>
+                            <a href="https://www.ttu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TTU</a>
+                            <a href="https://nfu.edu.tw/zh/" target="_blank" rel="noopener noreferrer" class="partner-button">NFU</a>
+                            <a href="https://www.ncut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NCUT</a>
+                            <a href="https://www.nqu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NQU</a>
+                            <a href="https://www.lhu.edu.tw/" class="partner-button">LHU</a>
+                            <a href="https://www.smsh.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">SMSH</a>
+                            <a href="https://www.saihs.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">SAIHS</a>
+                            <a href="https://www.tsvs.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TSVS</a>
+                            <a href="https://tarc.edu.my/" target="_blank" rel="noopener noreferrer" class="partner-button">TAR UMT</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <a href="https://www.youtube.com/@Ryan.02.08" class="video-carousel-more">Go to YouTube ›</a>
-        </div>
-        <!-- End of Sliding Window Video Section -->
+            </section>
+            <!-- ===== 合作機構區塊結束 ===== -->
 
-        <!-- ===== Skills Section (Single Source of Truth HTML) ===== -->
-        <section id="skills" class="skills-section">
-            <div class="skills-container">
-                <div class="skills-text-center mb-5">
-                    <h2 class="section-title">Professional Expertise</h2>
-                    <!--<p class="text-muted">
-                    My research and teaching expertise covers multiple interdisciplinary fields including AI, IoT, design thinking, and innovation & entrepreneurship.
-                    </p>-->
-                </div>
-                
-                <div class="skills-row">
-                    <!-- 1. 人工智慧 -->
-                    <div class="skills-col">
-                        <div class="skill-card">
-                            <div class="skill-header">
-                                <div class="skill-icon bg-primary"><i class="fas fa-brain"></i></div>
-                                <h3 class="skill-title">Artificial Intelligence</h3>
-                            </div>
-                            <div class="skill-body">
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-primary" data-width="100%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- 2. 物聯網 -->
-                    <div class="skills-col">
-                        <div class="skill-card">
-                            <div class="skill-header">
-                                <div class="skill-icon bg-info"><i class="fas fa-network-wired"></i></div>
-                                <h3 class="skill-title">Internet of Things</h3>
-                            </div>
-                            <div class="skill-body">
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-info" data-width="100%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- 3. 設計思考與創新創業 -->
-                    <div class="skills-col">
-                        <div class="skill-card">
-                            <div class="skill-header">
-                                <div class="skill-icon bg-success">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                    <h3 class="skill-title">Design & Innovation</h3>
-                            </div>
-                            <div class="skill-body">
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
-                                    </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
-                                    </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-success" data-width="100%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- 4. 學術研究與出版 -->
-                    <div class="skills-col">
-                        <div class="skill-card">
-                            <div class="skill-header">
-                                <div class="skill-icon bg-warning">
-                                    <i class="fa-solid fa-graduation-cap"></i>
-                                </div>
-                                <h3 class="skill-title">Academic Research</h3>
-                            </div>
-                            <div class="skill-body">
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span>
-                                        <span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-warning" data-width="100%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- 5. 產業合作與社會影響力 -->
-                    <div class="skills-col">
-                        <div class="skill-card">
-                            <div class="skill-header">
-                                <div class="skill-icon bg-danger"><i class="fas fa-handshake text-danger"></i></div>
-                                <h3 class="skill-title">Industry Collaboration</h3>
-                            </div>
-                            <div class="skill-body">
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-danger" data-width="100%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- 6. 教學與領導力 -->
-                    <div class="skills-col">
-                        <div class="skill-card">
-                            <div class="skill-header">
-                                <div class="skill-icon bg-secondary">
-                                    <i class="fas fa-chalkboard-teacher"></i>
-                                </div>
-                                    <h3 class="skill-title">Teaching & Leadership</h3>
-                            </div>
-                            <div class="skill-body">
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-medium">TBA</span><span class="text-muted"></span>
-                                    </div>
-                                    <div class="progress"><div class="progress-bar bg-secondary" data-width="100%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <div class="contact-container">
+                    <h2>Get in Touch</h2>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!</p>
+                    <a href="mailto:yucheng208@outlook.com" class="contact-btn">Send a Message</a>
                 </div>
-            </div>
-        </section>
-        <!-- ===== Skills Section End ===== -->
+            </section>
+        </main>
         
-        <!-- ===== 新增的友善連結區塊 ===== -->
-        <section class="link-showcase-section">
-            <h2>Connect with Me</h2>
-                <!--<p class="text-muted">
-                    I actively engage with the following platforms to facilitate professional networking, disseminate research findings, and foster technical collaboration. Please feel free to explore and connect with me to gain deeper insights into my work and areas of expertise.
-                </p>-->
-            <div class="link-groups-container">
-                <div class="link-group">
-                    <div class="button-container">
-                        <a href="mailto:yucheng208@outlook.com" class="link-button">Outlook</a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="link-button">IEEE Mail</a>
-                        <a href="https://t.me/Ryan_0208" target="_blank" rel="noopener noreferrer" class="link-button">Telegram</a>
-                        <a href="https://api.whatsapp.com/send/?phone=886975265171&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="link-button">WhatsApp</a>
-                        <!--<a href="#" target="_blank" rel="noopener noreferrer" class="link-button">WeChat</a>-->
-                    </br>
-                        <a href="https://www.youtube.com/@Ryan.02.08" target="_blank" rel="noopener noreferrer" class="link-button">YouTube</a>
-                        <a href="https://github.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitHub</a>
-                        <a href="https://gitlab.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitLab</a>
-                        <a href="https://hackmd.io/@Yucheng208" target="_blank" rel="noopener noreferrer" class="link-button">HackMD</a>
-                        <a href="https://medium.com/@Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">Medium</a>
-                    </br>
-                        <a href="https://ieeexplore.ieee.org/author/37089901051" target="_blank" rel="noopener noreferrer" class="link-button">IEEE Xplore</a>
-                        <a href="https://scholar.google.com/citations?user=-SWWt7kAAAAJ&hl=zh-TW" target="_blank" rel="noopener noreferrer" class="link-button">Google Scholar</a>
-                        <a href="https://www.researchgate.net/profile/Yu-Cheng-Chang-14" target="_blank" rel="noopener noreferrer" class="link-button">ResearchGate</a>
-                        <a href="https://orcid.org/0000-0003-1301-9192" target="_blank" rel="noopener noreferrer" class="link-button">ORCID</a>
-                        <a href="https://sciprofiles.com/profile/3276587" target="_blank" rel="noopener noreferrer" class="link-button">Sci-Profile</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ===== 友善連結區塊結束 ===== -->
+        <!-- Footer Section -->
+        <div id="footer-container"></div>
+        
+        <!-- Application Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="script.js"></script>
+    </body>
 
-        <!-- ===== 合作機構區塊 ===== -->
-        <section class="partner-showcase-section">
-            <h2>Partnerships</h2>
-            <!--<p class="text-muted">
-                    These represent my collaborative partnerships with university laboratories, research institutes, enterprises, academic societies, legal entities, governmental and non-governmental organizations. This network continues to evolve as new partnerships develop.
-            </p>-->
-            <div class="partner-groups-container">
-                <div class="partner-group">
-                    <div class="button-container">
-                        <a href="https://www.ntut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NTUT</a>
-                        <a href="https://www.nkust.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NKUST</a>
-                        <a href="https://www.yuntech.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NYUST</a>
-                        <a href="https://www.tku.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TKU</a>
-                        <a href="https://www.ttu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TTU</a>
-                        <a href="https://nfu.edu.tw/zh/" target="_blank" rel="noopener noreferrer" class="partner-button">NFU</a>
-                        <a href="https://www.ncut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NCUT</a>
-                        <a href="https://www.nqu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">NQU</a>
-                        <a href="https://www.lhu.edu.tw/" class="partner-button">LHU</a>
-                        <a href="https://www.smsh.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">SMSH</a>
-                        <a href="https://www.saihs.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">SAIHS</a>
-                        <a href="https://www.tsvs.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-button">TSVS</a>
-                        <a href="https://tarc.edu.my/" target="_blank" rel="noopener noreferrer" class="partner-button">TAR UMT</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ===== 合作機構區塊結束 ===== -->
-
-
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="contact-container">
-                <h2>Get in Touch</h2>
-                <p>I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!</p>
-                <a href="mailto:yucheng208@outlook.com" class="contact-btn">Send a Message</a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Application Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
-
-</body>
 </html>
