@@ -4,6 +4,7 @@
   title: "植基於多模態視覺感知網路於即時語意建構之手語轉譯研究"
   authors: "Yu-Cheng Lung, Yu-Xuan Lin, Yu-Cheng Chang*, Hua-Wen Tsai*, Yen-Da Chen"
   venue: "20th Workshop on Wireless, Ad-Hoc and Sensor Networks (WASN 2025)"
+  location: "National Taiwan University, Taipei City, Taiwan"
   authorrole: "Corresponding Author"
   date: "August 25-26, 2025"
   links:
@@ -16,12 +17,13 @@
   authorrole: "Co-Author(s)"
   date: "July 30, 2025"
   links:
-    DOI: "#"
+    Links: "#"
 
 - category: "conference"
   title: "Modular Model Stacking Based on YOLO: A Novel Approach for Model Extension Without Retraining"
   authors: "Yu-Cheng Chang*, Hong-Yuan Gu, Zong-Rong Wu, Zi-Qing Chang, Liang-Zhen Chen, Weng-Luen Willam Cheong, Xiang-Yann Lim, Wei Chien*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
+  location: "Tunku Abdul Rahman University of Management and Technology (TAR UMT), Penang Branch, Malaysia"
   authorrole: "First Author, Corresponding Author"
   date: "June 27-28, 2025"
   links:
@@ -31,6 +33,7 @@
   title: "Pixel-Level Cryptographic Hashing for Image Authentication and Recovery"
   authors: "Yu-Cheng Chang*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
+  location: "Tunku Abdul Rahman University of Management and Technology (TAR UMT), Penang Branch, Malaysia"
   authorrole: "First Author, Corresponding Author"
   date: "June 27-28, 2025"
   links:
@@ -39,7 +42,8 @@
 - category: "conference"
   title: "Vision-based Real-time Sign Spelling System for Cross-lingual Translation using Neural Models"
   authors: "Yu-Cheng Chang*, Yu-Xuan Lin, Yu-Cheng Lung, Shan-Xi Yang, Wei Chien*"
-  venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)5"
+  venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
+  location: "Tunku Abdul Rahman University of Management and Technology (TAR UMT), Penang Branch, Malaysia"
   authorrole: "First Author, Corresponding Author"
   date: "June 27-28, 2025"
   links:
@@ -49,6 +53,7 @@
   title: "Research on the Development of New Energy Technologies and Strategic Layout in Asia from a Global Perspective"
   authors: "Wei-Ming Xie, Ssu-Xuan Lu, Chung-Chih Yang, Zheng-Yu Wei, Yu-Xuan Lin, Yu-Cheng Lung, Yu-Cheng Chang*, Wei Chien*"
   venue: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
+  location: "Tunku Abdul Rahman University of Management and Technology (TAR UMT), Penang Branch, Malaysia"
   authorrole: "Corresponding Author"
   date: "June 27-28, 2025"
   links:
@@ -58,6 +63,7 @@
   title: "Comparative Analysis of Real-time Multi-person Pose Detection in Electrical Industrial Safety Scenarios using YOLOv8-Pose and OpenPose"
   authors: "Shang-Te Tsai, Zong-Rong Wu, Pin-Hsuan Lin, Chin-Hsiung Chen, Wei Chien, Yu-Cheng Chang*"
   venue: "4th IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2024 (IEEE ICEIB 2024)"
+  location: "Tamkang University, New Taipei City, Taiwan"
   authorrole: "Corresponding Author"
   date: "April 19-21, 2024"
   links:
@@ -67,6 +73,7 @@
   title: "Using Real-time Integrated Computer Vision and Deep Learning for Advanced Factory Safety"
   authors: "Shang-Te Tsai, Yu-Cheng Chang*,  Chao-Yi Huang, Fang-Yuan Yang, Wei Chien, Zong-Rong Wu*"
   venue: "4th IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2024 (IEEE ICEIB 2024)"
+  location: "Tamkang University, New Taipei City, Taiwan"
   authorrole: "Corresponding Author"
   date: "April 19-21, 2024"
   links:
@@ -76,6 +83,7 @@
   title: "Leveraging Advanced Computer Vision for Hazardous Behavior Monitoring on Campus Safety Maintenance"
   authors: "Shang-Te Tsai, Zong-Rong Wu, Yu-Cheng Chang*, Wei-Hsin Lin, Wei Chien*"
   venue: "4th IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2024 (IEEE ICEIB 2024)"
+  location: "Tamkang University, New Taipei City, Taiwan"
   authorrole: "Corresponding Author"
   date: "April 19-21, 2024"
   links:
@@ -85,6 +93,7 @@
   title: "應用電腦視覺的手語注音符號辨識與影像分析研究"
   authors: "Yen-Da Chen, Yu-Cheng Chang*, Hua-Wen Tsai*"
   venue: "18th Workshop on Wireless, Ad-Hoc and Sensor Networks 2023 (WASN 2023)"
+  location: "National Taiwan Ocean University, Keelung City, Taiwan"
   authorrole: "Corresponding Author"
   date: "August 28-29, 2023"
   links:
@@ -93,6 +102,7 @@
   title: "應用電腦視覺之大眾運輸維安輔助系統"
   authors: "蔡華文*, 張育丞*, 楊敦傑, 楊竣捷, 徐茂霖"
   venue: "2023 Symposium on Digital Life Technologies (2023 DLT)"
+  location: "National Kaohsiung University of Science and Technology (First Campus), Kaohsiung City, Taiwan"
   authorrole: "Corresponding Author"
   date: "May 12-13, 2023"
   links:
@@ -101,6 +111,7 @@
   title: "An Outdoor Rescue System Using LoRa Communication Network"
   authors: "Ming-Hsuan Ho*, Shao-Yuan Huang, Yu-Cheng Chang, Chi-Wei Ruo"
   venue: "9th IEEE International Conference on Applied System Innovation 2023 (IEEE ICASI 2023)"
+  location: ", Tokyo (Chiba), Japan"
   authorrole: "Co-Author(s)"
   date: "April 21-25, 2023"
   links:
@@ -109,6 +120,7 @@
   title: "Based-on Computer Vision Applications for Bus Stop Passenger Detection Systems"
   authors: "Yu-Cheng Chang; Hua-Wen Tsai*; Chao-Yi Huang; Zong-Rong Wu*"
   venue: "3rd IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2023 (IEEE ICEIB 2023)"
+  location: "Asia University, Taichung City, Taiwan"
   authorrole: "Corresponding Author"
   date: "April 16-17, 2023"
   links:
@@ -118,6 +130,7 @@
   title: "AI-DAS: An AI-based Driving Assistance System for Scooters for Traffic Accident Avoidance"
   authors: "Yen-Da Chen, Yu-Cheng Chang*"
   venue: "5th IEEE Eurasia Conference on Biomedical Engineering, Healthcare and Sustainability 2023 (IEEE ECBIOS 2023)"
+  location: "​Chia Nan University of Pharmacy and Science, Tainan City, Taiwan"
   links:
     DOI: "https://doi.org/10.3390/engproc2023055058"
   authorrole: "Corresponding Author"
@@ -127,6 +140,7 @@
   title: "An Outdoor Rescue System Using LoRa Communication Network"
   authors: "張哲唯*, 林千瓏, 林郁芮, 江采淳, 陳紫菱, 張育丞"
   venue: "Taiwan Academic Network Conference 2022 (TANET 2022)"
+  location: " National Taipei University of Business (Taoyuan Campus), Taoyuan City, Taiwan"
   authorrole: "Co-Author(s)"
   date: "December 15-17, 2022"
   links:
@@ -135,6 +149,7 @@
   title: "基於影像辨識之益智迷宮小遊戲"
   authors: "Yen-Da Chen*, Hua-Wen Tsai*, Yu-Zhu Liao, Yu-Cheng Chang"
   venue: "26th Mobile Computing Workshop 2022 (MC 2022)"
+  location: "Asia University, Taichung City, Taiwan"
   authorrole: "Co-Author(s)"
   date: "August 26-27, 2022"
   links:

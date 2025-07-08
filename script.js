@@ -804,7 +804,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const highlightedAuthors = highlightAuthorName(pub.authors || '');
         
         const row = document.createElement('tr');
-        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${highlightedAuthors}</td><td data-label="Venue">${pub.venue || ''}</td><td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+        row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td><td data-label="Authors">${highlightedAuthors}</td><td data-label="Venue">${pub.venue || ''}${pub.location ? `<td data-label="Location">${pub.location}</td>` : ''}<td data-label="Date">${pub.date || 'TBA'}</td><td data-label="Author Role">${pub.authorrole || ''}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
         return row;
     }
 
