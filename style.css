@@ -3426,8 +3426,8 @@ body.show-zh .lang-en { display: none; }
     /* 調整手機上影片輪播的按鈕 */
     .video-carousel-prev,
     .video-carousel-next {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         font-size: 1.1rem;
     }
     
