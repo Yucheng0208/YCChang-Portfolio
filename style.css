@@ -1198,10 +1198,6 @@ body.menu-open {
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-
-
-
-
 .video-carousel-subtitle {
     display: none;
 }
@@ -2885,6 +2881,15 @@ body.show-zh .lang-en { display: none; }
     background-color: var(--dark-bg);
 }
 
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 1rem 0;
+    }
+    .site-footer p {
+        font-size: 0.65rem !important;
+    }
+}
+
 .site-footer p {
     color: rgba(201, 209, 217, 0.6);
     font-size: 0.9rem;
@@ -4179,5 +4184,54 @@ body.show-zh .lang-en { display: none; }
     .education-container {
         max-width: 100%;
         padding: 0 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 1rem 0;
+    }
+    .site-footer p {
+        font-size: 0.65rem !important;
+    }
+}
+
+/* ============================================================
+   Pagination Mobile Layout - REVISED for Two-Row Display
+   (手機版分頁樣式 - 修正為兩行顯示)
+============================================================ */
+@media (max-width: 768px) {
+    .intro-text h1 {
+        font-size: 2rem !important;
+        margin-bottom: 1.5rem;
+    }
+
+    /* 1. 讓主容器可以換行，並將內容置中 */
+    .pagination-container {
+        flex-wrap: wrap;       /* 允許項目換行到下一行 */
+        justify-content: center; /* 將兩行的內容都水平置中 */
+        gap: 1rem;             /* 在兩行之間及按鈕之間增加一點間距 */
+    }
+
+    /* 2. 處理第一行："Page [1] of 5" */
+    .page-jump-section {
+        order: 1;              /* 視覺上將它排在最前面 */
+        flex-basis: 100%;      /* 讓它佔據100%寬度，從而獨立成一行 */
+        justify-content: center; /* 將它內部的 "Page", "input", "of 5" 置中對齊 */
+        margin: 0;             /* 移除原有的左右邊距 */
+    }
+
+    /* 3. 處理第二行：四個導航按鈕 */
+    .pagination-btn {
+        order: 2; /* 讓所有按鈕都在第二順位，它們會根據原始HTML順序排列 */
+    }
+
+    /* 4. 確保 "Page of" 文字是顯示的（覆蓋掉可能存在的 display:none） */
+    #page-info,
+    #page-info-honor,
+    #page-info-highlight,
+    #page-info-project,
+    #page-info-work {
+        display: inline-block !important; /* 強制顯示文字 */
     }
 }
