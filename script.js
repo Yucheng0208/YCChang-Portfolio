@@ -624,12 +624,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 pageInput.value = currentPage;
                 pageInput.min = 1;
                 pageInput.max = totalPages;
-                pageInput.style.width = '60px';
-                pageInput.style.textAlign = 'center';
-                pageInput.style.border = '1px solid #ccc';
-                pageInput.style.borderRadius = '4px';
-                pageInput.style.padding = '2px 4px';
-                pageInput.style.fontSize = '16px';
                 pageInfoSpan.appendChild(pageInput);
                 pageInfoSpan.insertAdjacentText('beforeend', ` of ${totalPages}`);
             } else if (pageInfoSpan) {

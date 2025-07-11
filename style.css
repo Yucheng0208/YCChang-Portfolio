@@ -292,12 +292,14 @@ body.menu-open {
     width: 60px;
     text-align: center;
     background-color: var(--dark-bg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
     color: var(--text-color);
-    border-radius: 5px;
-    padding: 8px;
-    height: 36px;      /* 統一高度與分页按鈕 */
-    line-height: 36px; /* 垂直置中輸入數字 */
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    height: auto;
+    line-height: normal;
     appearance: textfield;
     -moz-appearance: textfield;
 }
