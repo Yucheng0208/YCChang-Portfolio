@@ -619,10 +619,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             paginationContainer.style.display = 'flex';
-            if (pageInfoSpan) pageInfoSpan.textContent = `Page ${currentPage} of ${totalPages}`;
-            if (pageInput) {
+            if (pageInfoSpan && pageInput) {
+                pageInfoSpan.innerHTML = `Page `;
                 pageInput.value = currentPage;
+                pageInput.min = 1;
                 pageInput.max = totalPages;
+                pageInput.style.width = '60px';
+                pageInput.style.textAlign = 'center';
+                pageInput.style.border = '1px solid #ccc';
+                pageInput.style.borderRadius = '4px';
+                pageInput.style.padding = '2px 4px';
+                pageInput.style.fontSize = '16px';
+                pageInfoSpan.appendChild(pageInput);
+                pageInfoSpan.insertAdjacentText('beforeend', ` of ${totalPages}`);
+            } else if (pageInfoSpan) {
+                pageInfoSpan.textContent = `Page ${currentPage} of ${totalPages}`;
             }
             if (firstPageBtn) firstPageBtn.disabled = currentPage === 1;
             if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
@@ -775,8 +786,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let page = parseInt(pageInput.value, 10);
             if (isNaN(page) || page < 1) page = 1;
             if (page > totalPages) page = totalPages;
+            pageInput.value = page; // 確保輸入框顯示正確的值
             displayPage(page, refreshAnimation);
         });
+        
         loadData();
     }
 
