@@ -6,6 +6,26 @@
 # - title: 事件標題
 # - description: 事件的簡短描述
 
+- image: images/comingsoon.png
+  title: WASN 2025
+  description: Showcased research achievements in multimodal real-time international sign language translation.
+
+- image: images/comingsoon.png
+  title: 2025 捷運盃黑客松「設計創新 • AI 賦能」App 競賽
+  description:  Demonstrated intuitive improvement solutions for the Taipei Metro Go App.
+
+- image: images/comingsoon.png
+  title: 2025 7th Green Idea Invention and Design Fair
+  description: Presented academic achievements in new product development and patents.
+
+- image: images/comingsoon.png
+  title: 2025 國際傑人會 國際青年創業論壇
+  description: Presented innovative industry-academia entrepreneurship solutions.
+
+- image: images/comingsoon.png
+  title: IEEE AISTA 2025
+  description: Explored emerging trends and innovations in academic research.
+
 - image: images/events/event1.jpg
   title: IEEE ICCBE 2025
   description: Presented cutting-edge research findings.
