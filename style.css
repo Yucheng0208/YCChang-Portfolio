@@ -4235,3 +4235,123 @@ body.show-zh .lang-en { display: none; }
         display: inline-block !important; /* 強制顯示文字 */
     }
 }
+
+/* =================================================================== */
+/* ==           完整版 Partnership LOGO 牆 CSS 解決方案           == */
+/* =================================================================== */
+
+/* --- 合作夥伴 LOGO 牆樣式 --- */
+
+/* 1. LOGO 容器的整體佈局 */
+.partnership-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 24px; /* LOGO 之間的間距 */
+    padding: 30px 15px;
+}
+
+/* 2. 單一 LOGO 的外框 (<a> 標籤) */
+.partner-logo {
+    /* 統一樣式與尺寸 */
+    width: 160px;
+    height: 80px;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: rgba(30, 58, 95, 0.3); /* 半透明深藍背景 */
+    border: 1px solid rgba(127, 175, 224, 0.2);
+    border-radius: 8px;
+    
+    /* 用於置中圖片 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* 為了提示框 (Tooltip) */
+    position: relative; 
+    
+    /* 動畫效果 */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.partner-logo:hover {
+    transform: translateY(-6px);
+    background-color: rgba(48, 80, 130, 0.5);
+    border-color: rgba(127, 175, 224, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. LOGO 圖片本身 (<img> 標籤) */
+.partner-logo img {
+    /* 關鍵：處理不同尺寸的圖片 */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* 保持圖片比例並完整顯示 */
+    
+    /* 關鍵：灰階效果 */
+    filter: grayscale(100%) opacity(60%); /* 預設灰階且半透明 */
+    
+    /* 動畫效果 */
+    transition: filter 0.3s ease-in-out;
+}
+
+/* 4. 滑鼠懸停時，讓圖片恢復彩色 */
+.partner-logo:hover img {
+    filter: grayscale(0%) opacity(100%);
+}
+
+
+/* --- 5. 【最終健壯版】兩行提示框 (Tooltip) 樣式 --- */
+/* 我們只用一個偽元素 ::after 即可完成所有任務 */
+.partner-logo::after {
+    /* 關鍵：使用 \A 換行符將兩個屬性內容串接起來 */
+    content: attr(data-zh-name) '\A' attr(data-en-name);
+    white-space: pre-wrap; /* 讓 \A 換行符生效 */
+    
+    /* 定位 */
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 12px;
+    
+    /* 背景和外觀 (你喜歡的樣式) */
+    background-color: #0d1a2e;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    padding: 10px 16px;
+    width: max-content;
+    max-width: 320px; /* 限制最大寬度，避免過長的英文名讓提示框太寬 */
+    text-align: center;
+    
+    /* 動畫與初始狀態 */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 11;
+}
+
+/* 單獨設定第一行（中文）的樣式 */
+.partner-logo::after::first-line {
+    color: #cde4f8;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6; /* 控制中文行本身的高度 */
+}
+
+/* 設定整體（也就是第二行及之後，英文）的樣式 */
+.partner-logo::after {
+    color: #8aacc8;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4; /* 控制英文行的行高，這就是「間距控制器」 */
+}
+
+/* 6. 懸停效果 */
+.partner-logo:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-8px); /* 向上彈出效果 */
+}
