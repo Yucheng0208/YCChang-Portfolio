@@ -341,7 +341,7 @@ function renderWorkRow(work, globalIndex) {
     row.innerHTML = `
         <td data-label="Organization">${work.organization || ''}</td>
         <td data-label="Position">${work.position || ''}</td>
-        ${work.crn ? `<td data-label="CRN">Company Registration Numbers: ${work.crn}</td>` : ''}
+        ${work.crn ? `<td data-label="CRN">Company Registration Numbers: ${work.crn || ''}</td>` : ''}
         <td data-label="Date">${work.date || 'TBA'}</td>
         ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
     `;

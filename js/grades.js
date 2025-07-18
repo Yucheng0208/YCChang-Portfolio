@@ -684,7 +684,414 @@ document.addEventListener('DOMContentLoaded', function() {
                  studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
             }
         }
+
+        // 在您現有的 grades.js 檔案中，在 renderResults 函數之後添加以下缺少的函數：
+
+        // ===== 補上缺少的管理者功能 =====
         
+        async function showAllGrades(courseId) {
+            hideAllResults();
+            showLoading(true);
+    
+            try {
+                await waitForPapaParse();
+                const selectedCourse = availableCourses.find(c => c.id === courseId);
+                if (!selectedCourse) throw new Error('Course not found');
+                
+                const csvPath = selectedCourse.csv_path;
+                const response = await fetch(csvPath);
+                if (!response.ok) throw new Error(`Could not load grade file: ${csvPath}`);
+                
+                const csvText = await response.text();
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: async (results) => {
+                        await renderAllGrades(results.data, selectedCourse);
+                    },
+                    error: (error) => { throw new Error('Failed to parse CSV file.'); }
+                });
+    
+            } catch (error) {
+                console.error('Show all grades failed:', error);
+                await showAlert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`, true);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function renderAllGrades(data, courseInfo) {
+            const config = {};
+            const configRows = data.slice(0, 4);
+            const headers = Object.keys(data[0] || {});
+
+            headers.forEach(h => { config[h] = {}; });
+            configRows.forEach(row => {
+                const keyName = row.ID;
+                if (keyName) {
+                    headers.forEach(h => {
+                        if (h !== 'ID') {
+                            config[h][keyName] = row[h];
+                        }
+                    });
+                }
+            });
+
+            const studentRows = data.slice(4).filter(row => 
+                row.ID && row.ID.toUpperCase() !== 'YCCADMIN'
+            );
+
+            resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
+            resultCourseCode.textContent = courseInfo.code;
+            resultStudentId.innerHTML = `<span class="lang-en">All Students (Admin View)</span><span class="lang-zh">全班成績 (管理者檢視)</span>`;
+
+            const categoryWeights = {};
+            headers.forEach(h => {
+                if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
+                    const category = config[h].category;
+                    const weight = parseFloat(config[h].weight) || 0;
+                    if (!categoryWeights[category]) {
+                        categoryWeights[category] = 0;
+                    }
+                    categoryWeights[category] += weight;
+                }
+            });
+
+            const cardsContainer = document.querySelector('.grade-summary-cards');
+            cardsContainer.style.display = 'grid';
+            
+            const allCards = cardsContainer.querySelectorAll('.card');
+            allCards.forEach(card => card.style.display = 'none');
+            
+            let bonusTotal = 0;
+            let finalScoreTotal = 0;
+            let studentCount = 0;
+            
+            studentRows.forEach(student => {
+                if (!student.ID) return;
+                let studentBonusTotal = 0;
+                let studentFinalScoreTotal = 0;
+                let finalScoreWeight = 0;
+                
+                headers.forEach(h => {
+                    if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
+                        const score = parseFloat(student[h]) || 0;
+                        const weight = parseFloat(config[h].weight) || 0;
+                        const category = config[h].category;
+                        
+                        if (category === 'bonus') {
+                            studentBonusTotal += score;
+                        } else if (category === 'final') {
+                            studentFinalScoreTotal += score * weight;
+                            finalScoreWeight += weight;
+                        }
+                    }
+                });
+                
+                bonusTotal += studentBonusTotal;
+                if (finalScoreWeight > 0) {
+                    finalScoreTotal += (studentFinalScoreTotal / finalScoreWeight);
+                }
+                studentCount++;
+            });
+            
+            const finalScoreAverage = studentCount > 0 ? (finalScoreTotal / studentCount) : 0;
+
+            const cardMappings = {
+                'assignments': 'card-assignments',
+                'dailyPerformance': 'card-daily-performance', 
+                'attendance': 'card-attendance',
+                'midterm': 'card-midterm',
+                'final': 'card-final'
+            };
+            
+            Object.keys(cardMappings).forEach(category => {
+                const cardId = cardMappings[category];
+                const card = document.getElementById(cardId);
+                if (card && categoryWeights[category] > 0) {
+                    card.style.display = 'block';
+                    const scoreElement = card.querySelector('.score .value');
+                    if (scoreElement) {
+                        const percentage = (categoryWeights[category] * 100).toFixed(0);
+                        scoreElement.textContent = `${percentage}%`;
+                    }
+                    const scoreContainer = card.querySelector('.score');
+                    if (scoreContainer) {
+                        scoreContainer.innerHTML = `<span class="value">${(categoryWeights[category] * 100).toFixed(0)}%</span>`;
+                    }
+                }
+            });
+
+            const bonusCard = document.getElementById('card-bonus');
+            if (bonusCard) {
+                bonusCard.style.display = 'block';
+                const cardTitle = bonusCard.querySelector('h3');
+                if (cardTitle) {
+                    cardTitle.innerHTML = '<span class="lang-en">Final Avg</span><span class="lang-zh">期末平均</span>';
+                }
+                const scoreContainer = bonusCard.querySelector('.score');
+                if (scoreContainer) {
+                    const avgLabel = isChinese() ? '平均' : 'AVG';
+                    scoreContainer.innerHTML = `<span class="value">${finalScoreAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
+                }
+                bonusCard.classList.remove('bonus');
+                bonusCard.classList.add('final-avg');
+            }
+            
+            const gradeDetailsSection = document.querySelector('.grade-details');
+            const gradeDetailsTitle = gradeDetailsSection.querySelector('h3');
+            if (gradeDetailsTitle) gradeDetailsTitle.style.display = 'none';
+            
+            const thead = gradeDetailsSection.querySelector('thead');
+            if (thead) thead.style.display = 'none';
+            
+            const tfoot = gradeDetailsSection.querySelector('tfoot');
+            if (tfoot) tfoot.style.display = 'none';
+
+            gradeDetailsBody.innerHTML = '';
+            
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th><span class="lang-en">Rank</span><span class="lang-zh">排名</span></th>
+                <th><span class="lang-en">Student ID</span><span class="lang-zh">學號</span></th>
+                <th><span class="lang-en">Assignments</span><span class="lang-zh">平時成績</span></th>
+                <th><span class="lang-en">Daily Performance</span><span class="lang-zh">日常表現</span></th>
+                <th><span class="lang-en">Attendance</span><span class="lang-zh">點名</span></th>
+                <th><span class="lang-en">Midterm</span><span class="lang-zh">期中</span></th>
+                <th><span class="lang-en">Final</span><span class="lang-zh">期末</span></th>
+                <th><span class="lang-en">Bonus</span><span class="lang-zh">加分</span></th>
+                <th><span class="lang-en">Final Score</span><span class="lang-zh">總分</span></th>
+            `;
+            gradeDetailsBody.appendChild(headerRow);
+
+            const studentDataForProcessing = studentRows.map(student => {
+                if (!student.ID) return null;
+
+                const categoryScores = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0, bonus: 0 };
+                const categoryWeightedScores = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0 };
+
+                headers.forEach(h => {
+                    if (h !== 'ID' && config[h] && config[h].category && config[h].category !== 'code') {
+                        const score = parseFloat(student[h]) || 0;
+                        const weight = parseFloat(config[h].weight) || 0;
+                        const category = config[h].category;
+                        
+                        if (category === 'bonus') {
+                            categoryScores.bonus += score;
+                        } else if (categoryScores.hasOwnProperty(category)) {
+                            categoryWeightedScores[category] += score * weight;
+                        }
+                    }
+                });
+
+                Object.keys(categoryWeightedScores).forEach(category => {
+                    if (categoryWeights[category] > 0) {
+                        categoryScores[category] = categoryWeightedScores[category] / categoryWeights[category];
+                    }
+                });
+
+                const subtotal = Object.values(categoryWeightedScores).reduce((sum, score) => sum + score, 0);
+                const finalScore = Math.min(100, subtotal + categoryScores.bonus);
+
+                return { id: student.ID, ...categoryScores, finalScore: finalScore };
+            }).filter(student => student !== null);
+
+            studentDataForProcessing.sort((a, b) => b.finalScore - a.finalScore);
+            
+            studentDataForProcessing.forEach((student, index) => {
+                const rank = index + 1;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>#${rank}</strong></td>
+                    <td><strong>${student.id}</strong></td>
+                    <td>${student.assignments.toFixed(1)}</td>
+                    <td>${student.dailyPerformance.toFixed(1)}</td>
+                    <td>${student.attendance.toFixed(1)}</td>
+                    <td>${student.midterm.toFixed(1)}</td>
+                    <td>${student.final.toFixed(1)}</td>
+                    <td>+${student.bonus.toFixed(1)}</td>
+                    <td><strong style="color: var(--tech-cyan);">${student.finalScore.toFixed(2)}</strong></td>
+                `;
+                gradeDetailsBody.appendChild(row);
+            });
+
+            const categoryAverages = { assignments: 0, dailyPerformance: 0, attendance: 0, midterm: 0, final: 0, bonus: 0, finalScore: 0 };
+            studentDataForProcessing.forEach(student => {
+                Object.keys(categoryAverages).forEach(category => {
+                    categoryAverages[category] += student[category] || 0;
+                });
+            });
+            if (studentDataForProcessing.length > 0) {
+                Object.keys(categoryAverages).forEach(category => {
+                    categoryAverages[category] = categoryAverages[category] / studentDataForProcessing.length;
+                });
+            }
+
+            const classAverageRow = document.createElement('tr');
+            classAverageRow.classList.add('class-average-row');
+            classAverageRow.innerHTML = `
+                <td colspan="2" style="text-align: center;"><strong><span class="lang-en">Class Average</span><span class="lang-zh">班級平均</span></strong></td>
+                <td><strong>${categoryAverages.assignments.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.dailyPerformance.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.attendance.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.midterm.toFixed(1)}</strong></td>
+                <td><strong>${categoryAverages.final.toFixed(1)}</strong></td>
+                <td><strong>+${categoryAverages.bonus.toFixed(1)}</strong></td>
+                <td><strong style="color: var(--tech-cyan);">${categoryAverages.finalScore.toFixed(2)}</strong></td>
+            `;
+            gradeDetailsBody.appendChild(classAverageRow);
+
+            // 儲存資料並設置圖表UI
+            currentStudentDataForChart = studentDataForProcessing;
+            setupAdminUI();
+
+            resultsContainer.style.display = 'block';
+        }
+
+        // ===== 圖表相關功能 =====
+        
+        function setupAdminUI() {
+            adminControlsContainer.style.display = 'flex';
+            chartCheckboxes.forEach(cb => cb.checked = false);
+            
+            // 獲取全選和清除選擇按鈕
+            const selectAllBtn = document.getElementById('select-all-options');
+            const clearAllBtn = document.getElementById('clear-all-options');
+            
+            // 設置全選按鈕的點擊事件
+            if (selectAllBtn) {
+                selectAllBtn.onclick = function(event) {
+                    event.stopPropagation();
+                    chartCheckboxes.forEach(cb => cb.checked = true);
+                    updateChart();
+                };
+            }
+            
+            // 設置清除選擇按鈕的點擊事件
+            if (clearAllBtn) {
+                clearAllBtn.onclick = function(event) {
+                    event.stopPropagation();
+                    chartCheckboxes.forEach(cb => cb.checked = false);
+                    updateChart();
+                };
+            }
+            
+            if (chartOptionsBtn) {
+                chartOptionsBtn.onclick = function(event) {
+                    event.stopPropagation();
+                    chartOptionsDropdown.classList.toggle('show');
+                };
+            }
+
+            chartCheckboxes.forEach(checkbox => {
+                checkbox.onchange = () => updateChart();
+            });
+
+            window.onclick = function(event) {
+                if (!event.target.matches('.admin-btn, .admin-btn *')) {
+                    if (chartOptionsDropdown.classList.contains('show')) {
+                        chartOptionsDropdown.classList.remove('show');
+                    }
+                }
+            };
+        }
+
+        function updateChart() {
+            const checkedOptions = Array.from(chartCheckboxes)
+                                        .filter(cb => cb.checked)
+                                        .map(cb => ({ 
+                                            value: cb.value, 
+                                            label: isChinese() ? cb.parentElement.querySelector('.lang-zh').textContent.trim() : cb.parentElement.querySelector('.lang-en').textContent.trim()
+                                        }));
+            
+            if (checkedOptions.length === 0) {
+                chartContainer.style.display = 'none';
+                if (gradeChart) {
+                    gradeChart.destroy();
+                    gradeChart = null;
+                }
+                return;
+            }
+
+            chartContainer.style.display = 'block';
+
+            const labels = ['0~9', '10~19', '20~29', '30~39', '40~49', '50~59', '60-~69', '70~79', '80~89', '90~99+'];
+            const datasets = [];
+            const colors = ['#3fb950', '#58a6ff', '#f7b731', '#a371f7', '#f778ba', '#e85656'];
+
+            checkedOptions.forEach((option, index) => {
+                const distribution = Array(10).fill(0);
+                
+                currentStudentDataForChart.forEach(student => {
+                    const score = student[option.value];
+                    if (score >= 100) {
+                        distribution[0]++;
+                    } else if (score >= 0) {
+                        const bucketIndex = 9 - Math.floor(score / 10);
+                        distribution[bucketIndex]++;
+                    }
+                });
+
+                datasets.push({
+                    label: option.label,
+                    data: distribution.reverse(),
+                    backgroundColor: colors[index % colors.length],
+                    borderColor: colors[index % colors.length].replace('0.7', '1'),
+                    borderWidth: 1
+                });
+            });
+
+            if (gradeChart) {
+                gradeChart.destroy();
+            }
+
+            const ctx = document.getElementById('grade-distribution-chart').getContext('2d');
+            gradeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: isChinese() ? '成績分佈長條圖' : 'Grade Distribution Chart',
+                            color: '#c9d1d9',
+                            font: { size: 18 }
+                        },
+                        legend: {
+                            labels: { color: '#c9d1d9' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: isChinese() ? '成績級距' : 'Score Range',
+                                color: '#c9d1d9'
+                            },
+                            ticks: { color: '#c9d1d9' }
+                        },
+                        y: {
+                            title: { 
+                                display: true, 
+                                text: isChinese() ? '人數' : 'Number of Students',
+                                color: '#c9d1d9'
+                            },
+                            ticks: { 
+                                color: '#c9d1d9',
+                                stepSize: 1,
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+       
         // 事件監聽器
         schoolSelect.addEventListener('change', (e) => {
             loadCoursesForSchool(e.target.value);
@@ -723,5 +1130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
         }
     })();
+
+    
     
 });
