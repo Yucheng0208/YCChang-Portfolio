@@ -1,16 +1,11 @@
-列出磁碟區 DATA 的資料夾 PATH
-磁碟區序號為 F4D5-0B18
-D:.
+YCChang-Portfolio
 |   .gitignore
-|   chart.js
 |   CNAME
 |   generator.html
 |   grades.html
 |   highlights.html
 |   honors.html
 |   index.html
-|   js-yaml.min.js
-|   lib-fallback.js
 |   LICENSE
 |   materials.html
 |   navbar.html
@@ -18,13 +13,23 @@ D:.
 |   publications.html
 |   README.md
 |   schedule.html
-|   script.js
 |   style.css
-|   swiper-bundle.min.css
-|   swiper-bundle.min.js
 |   tree.txt
 |   works.html
 |   
++---css
+|       common.css
+|       generator.css
+|       grades.css
+|       highlights.css
+|       honors.css
+|       index.css
+|       materials.css
+|       projects.css
+|       publications.css
+|       schedule.css
+|       swiper-bundle.min.css
+|       
 +---data
 |   |   cv.pdf
 |   |   
@@ -89,11 +94,16 @@ D:.
 |           slide9.png
 |           
 \---js
-        common.js
-        generator.js
-        grades.js
-        index.js
-        list-pages.js
-        materials.js
-        schedule.js
-        
+    |   common.js
+    |   generator.js
+    |   grades.js
+    |   index.js
+    |   list-pages.js
+    |   materials.js
+    |   schedule.js
+    |   
+    \---vendor
+            chart.js
+            js-yaml.min.js
+            swiper-bundle.min.js
+            
