@@ -101,41 +101,150 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     })();
 
-    // Skills Section Progress Bar Animation
+    // Skills Section Progress Bar Animation - 增強版本
     (function setupSkillsObserver() {
         const skillsSection = document.querySelector('#skills');
         if (!skillsSection) return;
         
+        // 設定各技能的百分比數據
+        const skillsData = {
+            'Artificial Intelligence': [
+                { name: 'Machine Learning', percentage: 85 },
+                { name: 'Deep Learning', percentage: 80 },
+                { name: 'Computer Vision', percentage: 75 },
+                { name: 'Natural Language Processing', percentage: 70 }
+            ],
+            'Internet of Things': [
+                { name: 'Embedded Systems', percentage: 90 },
+                { name: 'Sensor Networks', percentage: 85 },
+                { name: 'Edge Computing', percentage: 80 },
+                { name: 'Real-time Systems', percentage: 75 }
+            ],
+            'Design & Innovation': [
+                { name: 'Design Thinking', percentage: 88 },
+                { name: 'User Experience Design', percentage: 75 },
+                { name: 'Innovation Management', percentage: 82 },
+                { name: 'Product Development', percentage: 78 }
+            ],
+            'Academic Research': [
+                { name: 'Research Methodology', percentage: 90 },
+                { name: 'Technical Writing', percentage: 85 },
+                { name: 'Data Analysis', percentage: 88 },
+                { name: 'Publication', percentage: 80 }
+            ],
+            'Industry Collaboration': [
+                { name: 'Project Management', percentage: 85 },
+                { name: 'Technology Transfer', percentage: 78 },
+                { name: 'Industry Partnerships', percentage: 82 },
+                { name: 'Business Development', percentage: 75 }
+            ],
+            'Teaching & Leadership': [
+                { name: 'Technical Mentoring', percentage: 90 },
+                { name: 'Team Leadership', percentage: 85 },
+                { name: 'Knowledge Transfer', percentage: 88 },
+                { name: 'Student Guidance', percentage: 92 }
+            ]
+        };
+
+        // 初始化技能數據到 HTML 元素
+        function initializeSkillsData() {
+            const skillCards = skillsSection.querySelectorAll('.skill-card');
+            
+            skillCards.forEach((card, cardIndex) => {
+                const skillTitle = card.querySelector('.skill-title').textContent.trim();
+                const skillItems = card.querySelectorAll('.skill-item');
+                const data = skillsData[skillTitle];
+                
+                if (data && skillItems.length >= data.length) {
+                    skillItems.forEach((item, itemIndex) => {
+                        if (data[itemIndex]) {
+                            const nameSpan = item.querySelector('.fw-medium');
+                            const percentageSpan = item.querySelector('.text-muted');
+                            const progressBar = item.querySelector('.progress-bar');
+                            
+                            if (nameSpan && percentageSpan && progressBar) {
+                                nameSpan.textContent = data[itemIndex].name;
+                                percentageSpan.textContent = '0%'; // 初始設為 0%
+                                progressBar.dataset.width = `${data[itemIndex].percentage}%`;
+                                progressBar.style.width = '0%'; // 初始寬度為 0
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // 動畫效果函數
+        function animateProgressBars() {
+            const progressBars = skillsSection.querySelectorAll('.progress-bar');
+            
+            progressBars.forEach((bar, index) => {
+                const targetWidth = parseInt(bar.dataset.width);
+                const skillItem = bar.closest('.skill-item');
+                const textSpan = skillItem ? skillItem.querySelector('.text-muted') : null;
+                
+                // 延遲動畫，讓每個進度條依序出現
+                setTimeout(() => {
+                    // 設定過渡效果
+                    bar.style.transition = 'width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    bar.style.width = `${targetWidth}%`;
+                    
+                    // 同時動畫化數字
+                    if (textSpan) {
+                        animatePercentageText(textSpan, targetWidth);
+                    }
+                }, index * 100); // 每個進度條延遲 100ms
+            });
+        }
+
+        // 百分比數字動畫
+        function animatePercentageText(element, targetValue) {
+            let currentValue = 0;
+            const duration = 1500; // 1.5 秒
+            const startTime = performance.now();
+            
+            function updateText(timestamp) {
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // 使用 easeOutCubic 緩動函數
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                currentValue = Math.round(targetValue * easedProgress);
+                
+                element.textContent = `${currentValue}%`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateText);
+                }
+            }
+            
+            requestAnimationFrame(updateText);
+        }
+        
         const observerOptions = {
             root: null,
-            rootMargin: '0px',
-            threshold: 0.2
+            rootMargin: '-50px 0px', // 進入視窗 50px 後觸發
+            threshold: 0.3 // 30% 可見時觸發
         };
         
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const progressBars = skillsSection.querySelectorAll('.progress-bar');
-                    progressBars.forEach(bar => {
-                        const targetWidth = bar.dataset.width;
-                        bar.style.width = targetWidth;
-                        const skillItem = bar.closest('.skill-item');
-                        if (skillItem) {
-                            const textSpan = skillItem.querySelector('.text-muted');
-                            if (textSpan) {
-                                textSpan.textContent = targetWidth;
-                            }
-                        }
-                    });
+                    // 添加一個小延遲讓用戶能看到動畫開始
+                    setTimeout(() => {
+                        animateProgressBars();
+                    }, 200);
                     observer.unobserve(skillsSection);
                 }
             });
         }, observerOptions);
         
+        // 初始化數據並開始觀察
+        initializeSkillsData();
         observer.observe(skillsSection);
     })();
 
-    // Recent Events Carousel
+    // Recent Events Carousel - 修正版本
     (async function setupRecentEventsCarousel() {
         const carouselSection = document.getElementById('recent-events');
         if (!carouselSection) return;
@@ -170,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let autoplayInterval = null;
         const AUTOPLAY_SPEED = 2000;
         let resizeTimer;
+        let isAutoplayActive = true; // 追蹤自動播放狀態
         
         function getVisibleCards() {
             if (window.innerWidth <= 600) return 1;
@@ -200,6 +310,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 prevBtn.style.display = 'flex';
                 nextBtn.style.display = 'flex';
+                // 顯示控制按鈕，但根據當前狀態決定顯示哪個
+                updateControlButtonsVisibility();
+                
                 for (let i = 0; i < visibleCards; i++) {
                     grid.appendChild(createCard(eventsData[eventsData.length - 1 - i]));
                 }
@@ -231,8 +344,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${event.description}</p>
                 </div>
             `;
-            card.addEventListener('mouseenter', pauseAutoplay);
-            card.addEventListener('mouseleave', startAutoplay);
+            
+            // 滑鼠懸停時暫停自動播放，離開時恢復（如果之前是啟用狀態）
+            card.addEventListener('mouseenter', () => {
+                if (isAutoplayActive) {
+                    pauseAutoplayTemporarily();
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                if (isAutoplayActive) {
+                    startAutoplay();
+                }
+            });
             
             cardWrapper.appendChild(card);
             return cardWrapper;
@@ -268,42 +392,89 @@ document.addEventListener('DOMContentLoaded', function() {
         function showNext() { handleSlide(1); }
         function showPrev() { handleSlide(-1); }
         
+        // 更新控制按鈕的顯示狀態
+        function updateControlButtonsVisibility() {
+            if (isAutoplayActive) {
+                // 自動播放啟用狀態，顯示暫停按鈕
+                pauseBtn.style.display = 'flex';
+                playBtn.style.display = 'none';
+            } else {
+                // 自動播放停止狀態，顯示播放按鈕
+                pauseBtn.style.display = 'none';
+                playBtn.style.display = 'flex';
+            }
+        }
+        
+        // 開始自動播放
         function startAutoplay() {
             const visibleCards = getVisibleCards();
             if (eventsData.length <= visibleCards) return;
-            if (autoplayInterval) return;
-            pauseBtn.classList.remove('hidden');
-            playBtn.classList.add('hidden');
+            if (autoplayInterval) return; // 避免重複設定
+            
+            isAutoplayActive = true;
             autoplayInterval = setInterval(showNext, AUTOPLAY_SPEED);
+            updateControlButtonsVisibility();
         }
 
+        // 完全暫停自動播放（用戶主動點擊暫停）
         function pauseAutoplay() {
             clearInterval(autoplayInterval);
             autoplayInterval = null;
-            pauseBtn.classList.add('hidden');
-            playBtn.classList.remove('hidden');
+            isAutoplayActive = false;
+            updateControlButtonsVisibility();
         }
         
+        // 臨時暫停自動播放（滑鼠懸停時）
+        function pauseAutoplayTemporarily() {
+            clearInterval(autoplayInterval);
+            autoplayInterval = null;
+            // 不改變 isAutoplayActive 狀態，這樣離開時可以恢復
+            // 暫時不更新按鈕顯示，保持原本的狀態
+        }
+        
+        // 重新啟動自動播放（用戶點擊播放或操作後重置）
         function resetAutoplay() {
-            pauseAutoplay();
-            startAutoplay();
+            if (isAutoplayActive) {
+                pauseAutoplayTemporarily(); // 先清除現有的
+                startAutoplay(); // 重新開始
+            }
         }
 
-        nextBtn.addEventListener('click', () => { showNext(); resetAutoplay(); });
-        prevBtn.addEventListener('click', () => { showPrev(); resetAutoplay(); });
-        pauseBtn.addEventListener('click', pauseAutoplay);
-        playBtn.addEventListener('click', startAutoplay);
+        // 事件監聽器
+        nextBtn.addEventListener('click', () => { 
+            showNext(); 
+            resetAutoplay(); 
+        });
+        
+        prevBtn.addEventListener('click', () => { 
+            showPrev(); 
+            resetAutoplay(); 
+        });
+        
+        // 用戶主動點擊暫停按鈕
+        pauseBtn.addEventListener('click', () => {
+            pauseAutoplay();
+        });
+        
+        // 用戶主動點擊播放按鈕
+        playBtn.addEventListener('click', () => {
+            startAutoplay();
+        });
 
+        // 視窗大小改變時重新渲染
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                 renderAllCards();
-                resetAutoplay();
+                if (isAutoplayActive) {
+                    resetAutoplay();
+                }
             }, 250);
         });
 
+        // 初始化
         renderAllCards();
-        startAutoplay();
+        startAutoplay(); // 預設開始自動播放
     })();
     
 });
