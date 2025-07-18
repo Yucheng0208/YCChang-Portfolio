@@ -157,7 +157,7 @@ window.Papa = window.Papa || {
     console.log('%cWelcome to my digital playground!', styles.header);
     console.log(
         `%cCurious how this website was built? Feel free to dive into the source code right here:\n` +
-        `%chttps://github.com/Yucheng0208/mywebsite`,
+        `%chttps://github.com/Yucheng0208/YCChang-Portfolio`,
         styles.body,
         styles.link
     );

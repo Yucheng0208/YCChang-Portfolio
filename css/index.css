@@ -618,25 +618,29 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(13, 17, 23, 0.7);
+    background-color: rgba(13, 17, 23, 0.8);
     color: #ffffff;
     border: 1px solid #30363d;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .video-carousel-prev:hover,
 .video-carousel-next:hover {
     background-color: rgba(35, 41, 49, 0.9);
-    border-color: #8b949e;
+    border-color: var(--tech-cyan);
+    color: var(--tech-cyan);
+    transform: translateY(-50%) scale(1.1);
 }
 
 .video-carousel-prev:disabled,
@@ -646,8 +650,8 @@
     pointer-events: none;
 }
 
-.video-carousel-prev { left: calc(50% - 400px - 22.5px); }
-.video-carousel-next { right: calc(50% - 400px - 22.5px); }
+.video-carousel-prev { left: calc(50% - 400px - 25px);  }
+.video-carousel-next { right: calc(50% - 400px - 25px); }
 
 .video-carousel-more {
     display: inline-block;
@@ -739,7 +743,7 @@
 
 .events-carousel-container {
     position: relative;
-    padding: 0 50px;
+    padding: 0 15px; /* 減少 padding，讓按鈕更靠近內容 */
     overflow: hidden;
 }
 
@@ -828,28 +832,32 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(13, 17, 23, 0.7);
+    background-color: rgba(13, 17, 23, 0.8);
     color: #ffffff;
     border: 1px solid #30363d;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .event-nav-btn:hover {
     background-color: rgba(35, 41, 49, 0.9);
-    border-color: #8b949e;
+    border-color: var(--tech-cyan);
+    color: var(--tech-cyan);
+    transform: translateY(-50%) scale(1.1);
 }
 
-#prev-event { left: 50px; }
-#next-event { right: 50px; }
+#prev-event { left: 15px;  }
+#next-event { right: 15px; }
 
 /* --- 7. Motto Section --- */
 .motto-section {
@@ -947,150 +955,322 @@
     }
 }
 
-/* --- 8. Link Showcase Section --- */
-.link-showcase-section {
+/* --- Connect with Me - 確保三列布局 --- */
+.connect-showcase-section {
     padding: 4rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(13, 17, 23, 0.95) 0%, 
+        rgba(22, 27, 34, 0.98) 50%, 
+        rgba(13, 17, 23, 0.95) 100%);
 }
 
-.link-showcase-section h2 {
+.connect-showcase-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(100, 210, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(10, 132, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.connect-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.connect-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.connect-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: var(--tech-cyan);
-    text-align: center;
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
 
-.link-showcase-section p {
-    font-size: 1.1rem;
-    color: #8b949e;
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
+.connect-subtitle {
+    font-size: 1.2rem;
+    color: rgba(201, 209, 217, 0.8);
+    margin: 0;
+    font-style: italic;
 }
 
-.link-groups-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: center;
+.connect-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 強制三列 */
     gap: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.link-group {
-    background-color: var(--light-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* 強制三列顯示，即使在較小屏幕上 */
+@media (min-width: 992px) {
+    .connect-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+.connect-category {
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.8) 0%, 
+        rgba(30, 35, 42, 0.6) 100%);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(100, 210, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    min-height: 400px; /* 確保卡片高度一致 */
     display: flex;
     flex-direction: column;
-    max-width: 1200px;
-    width: 100%;
 }
 
-.link-group:hover {
+.connect-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.connect-category:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(100, 210, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-.link-group h3 {
-    font-size: 1.5rem;
+.connect-category:hover::before {
+    transform: scaleX(1);
+}
+
+.category-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem auto;
+    font-size: 1.4rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.connect-category:hover .category-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.category-title {
+    font-size: 1.25rem;
+    font-weight: 600;
     color: #fff;
     margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 600;
+    text-align: center;
 }
 
-.button-container {
+.connect-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: auto;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1; /* 讓連結區域填滿剩餘空間 */
 }
 
-.link-button {
-    display: inline-block;
-    background-color: var(--dark-bg);
+.connect-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
     color: var(--text-color);
-    padding: 8px 18px;
-    border-radius: 50px;
     text-decoration: none;
     font-weight: 500;
     font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.link-button:hover {
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: var(--dark-bg);
+.connect-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(100, 210, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.connect-link:hover {
+    transform: translateX(6px);
+    background: rgba(100, 210, 255, 0.1);
     border-color: var(--tech-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
+    color: #fff;
 }
 
-/* --- 9. Partnership Section --- */
-.partner-showcase-section {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+.connect-link:hover::before {
+    left: 100%;
+}
+
+.connect-link i {
+    font-size: 1.1rem;
+    width: 18px;
+    text-align: center;
+    color: var(--tech-cyan);
+    transition: color 0.3s ease;
+}
+
+.connect-link:hover i {
+    color: #fff;
+}
+
+/* --- 響應式設計 - 只在小屏幕改變布局 --- */
+@media (max-width: 991px) {
+    .connect-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem;
+    }
+    
+    .connect-category {
+        padding: 2rem 1.5rem;
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .connect-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .connect-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .connect-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    .connect-category {
+        padding: 1.8rem 1.3rem;
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 600px) {
+    .connect-container {
+        padding: 0 1rem;
+    }
+    
+    .connect-header h2 {
+        font-size: 2rem;
+    }
+    
+    .connect-category {
+        padding: 1.5rem 1rem;
+        min-height: 300px;
+    }
+    
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .category-title {
+        font-size: 1.2rem;
+    }
+    
+    .connect-link {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.85rem;
+    }
+}
+
+
+
+.partner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .partner-showcase-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     color: var(--tech-cyan);
     text-align: center;
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
 
-.partner-showcase-section p {
-    font-size: 1.1rem;
-    color: #8b949e;
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
+.partner-carousel-container {
+    position: relative;
+    padding: 5rem 60px 3rem 60px; /* 增加上方padding為懸停效果留空間 */
+    overflow: visible; /* 確保懸停效果不被遮擋 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.partnership-container {
+.partner-carousel-wrapper {
+    width: 1120px; /* 5個LOGO的寬度: 5 * (200px + 24px) - 24px = 1096px + 24px margin */
+    overflow: hidden;
+    position: relative;
+}
+
+.partner-carousel-track {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     gap: 24px;
-    padding: 30px 15px;
+    will-change: transform;
 }
 
 .partner-logo {
-    width: 160px;
-    height: 80px;
-    padding: 12px;
+    width: 200px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 15px;
     box-sizing: border-box;
     background-color: rgba(30, 58, 95, 0.3);
     border: 1px solid rgba(127, 175, 224, 0.2);
-    border-radius: 8px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .partner-logo:hover {
-    transform: translateY(-6px);
     background-color: rgba(48, 80, 130, 0.5);
     border-color: rgba(127, 175, 224, 0.4);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .partner-logo img {
@@ -1098,98 +1278,358 @@
     max-height: 100%;
     object-fit: contain;
     filter: grayscale(100%) opacity(60%);
-    transition: filter 0.3s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .partner-logo:hover img {
     filter: grayscale(0%) opacity(100%);
+    transform: translateY(-8px) scale(1.05);
 }
 
-.partner-logo::after {
-    content: attr(data-zh-name) '\A' attr(data-en-name);
-    white-space: pre-wrap;
+.partner-nav-btn {
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 12px;
-    background-color: #0d1a2e;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    border-radius: 6px;
-    padding: 10px 16px;
-    width: max-content;
-    max-width: 320px;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 11;
-    color: #8aacc8;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.4;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(13, 17, 23, 0.8);
+    color: #ffffff;
+    border: 1px solid #30363d;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
-.partner-logo::after::first-line {
-    color: #cde4f8;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.6;
+.partner-nav-btn:hover {
+    background-color: rgba(35, 41, 49, 0.9);
+    border-color: var(--tech-cyan);
+    color: var(--tech-cyan);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.partner-logo:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-8px);
+.partner-prev {
+    left: 5px;
 }
 
-/* --- 10. Contact Section --- */
+.partner-next {
+    right: 5px;
+}
+
+/* --- 響應式設計 --- */
+@media (max-width: 1200px) {
+    .partner-carousel-container {
+        padding: 4rem 50px 3rem 50px;
+    }
+    
+    .partner-carousel-wrapper {
+        width: 920px;
+    }
+    
+    .partner-logo {
+        width: 170px;
+        height: 85px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .partner-carousel-container {
+        padding: 4rem 40px 3rem 40px;
+    }
+    
+    .partner-carousel-wrapper {
+        width: 820px;
+    }
+    
+    .partner-logo {
+        width: 150px;
+        height: 75px;
+    }
+    
+    .partner-nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .partner-carousel-container {
+        padding: 4rem 30px 3rem 30px;
+    }
+    
+    .partner-carousel-wrapper {
+        width: 700px;
+    }
+    
+    .partner-logo {
+        width: 130px;
+        height: 65px;
+    }
+    
+    .partner-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .partner-prev {
+        left: -10px;
+    }
+    
+    .partner-next {
+        right: -10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .partner-carousel-container {
+        padding: 3rem 20px 2rem 20px;
+    }
+    
+    .partner-carousel-wrapper {
+        width: 600px;
+    }
+    
+    .partner-logo {
+        width: 110px;
+        height: 55px;
+        padding: 8px;
+    }
+    
+    .partner-carousel-track {
+        gap: 16px;
+    }
+}
+
+/* --- Contact Form Section - 新的表單樣式 --- */
 .contact-section {
     background-color: var(--light-bg);
     padding: 5rem 2rem;
-    text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(100, 210, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(10, 132, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .contact-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .contact-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: var(--tech-cyan);
-    text-align: center;
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
 
-.contact-section p {
+.contact-header p {
     color: var(--text-color);
-    margin-bottom: 2.5rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
 }
 
-.contact-btn {
-    display: inline-block;
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: #fff;
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
+.contact-form {
+    background: rgba(13, 17, 23, 0.6);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(100, 210, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-color);
     font-size: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: inherit;
 }
 
-.contact-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 162, 255, 0.3);
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--tech-cyan);
+    box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-submit-btn {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
     color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(10, 132, 255, 0.3);
+}
+
+.contact-submit-btn:active {
+    transform: translateY(0);
+}
+
+.btn-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.form-message {
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.form-message.success {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    color: #28a745;
+}
+
+.form-message.error {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+}
+
+/* --- 響應式設計 --- */
+@media (max-width: 1024px) {
+    .partner-carousel-container {
+        padding: 0 30px;
+    }
+    
+    .partner-logo {
+        width: 180px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .partner-carousel-container {
+        padding: 0 15px;
+    }
+    
+    .partner-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .partner-prev {
+        left: -10px;
+    }
+    
+    .partner-next {
+        right: -10px;
+    }
+    
+    .partner-logo {
+        width: 160px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-section {
+        padding: 3rem 1rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem 1rem;
+    }
+    
+    .contact-section h2 {
+        font-size: 2rem;
+    }
+    
+    .partner-carousel-track {
+        gap: 16px;
+        padding: 1rem 0;
+    }
+    
+    .partner-logo {
+        width: 140px;
+        height: 70px;
+        padding: 10px;
+    }
 }
 
 /* --- 11. Responsive Styles --- */
@@ -1264,21 +1704,28 @@
 
 @media (max-width: 1024px) {
     .events-carousel-container { 
-        padding: 0 15px; 
+        padding: 0 10px; 
     }
     
     .event-nav-btn { 
-        width: 40px; 
-        height: 40px; 
+        width: 45px; 
+        height: 45px; 
         font-size: 1.2rem; 
     }
     
     #prev-event { 
-        left: -10px; 
+        left: 10px; 
     }
     
     #next-event { 
-        right: -10px; 
+        right: 10px; 
+    }
+    
+    .video-carousel-prev,
+    .video-carousel-next {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
     }
     
     .video-carousel-prev { 
@@ -1426,6 +1873,24 @@
         padding: 0 10px;
     }
 
+        .events-carousel-container {
+        padding: 0 5px;
+    }
+    
+    .event-nav-btn { 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1rem; 
+    }
+    
+    #prev-event { 
+        left: 5px; 
+    }
+    
+    #next-event { 
+        right: 5px; 
+    }
+
     .video-carousel-title {
         margin-top: 3rem;
     }
@@ -1450,6 +1915,21 @@
         transform: scale(1.02);
     }
 
+    .video-carousel-prev,
+    .video-carousel-next {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .video-carousel-prev { 
+        left: -5px; 
+    }
+    
+    .video-carousel-next { 
+        right: -5px; 
+    }
+
     .skills-col {
         flex: 0 0 100%;
         max-width: 100%;
@@ -1464,9 +1944,42 @@
         font-size: 2rem !important;
         margin-bottom: 1.5rem;
     }
+
+        .event-nav-btn { 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1rem; 
+    }
+    
+    #prev-event { 
+        left: -10px; 
+    }
+    
+    #next-event { 
+        right: -10px; 
+    }
+
 }
 
 @media (max-width: 600px) {
+    .events-carousel-container {
+        padding: 0;
+    }
+    
+    .event-nav-btn { 
+        width: 35px; 
+        height: 35px; 
+        font-size: 0.9rem; 
+    }
+    
+    #prev-event { 
+        left: 2px; 
+    }
+    
+    #next-event { 
+        right: 2px; 
+    }
+
     .events-header h2 {
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
@@ -1523,6 +2036,21 @@
 @media (max-width: 480px) {
     .video-carousel-section {
         padding: 20px 10px;
+    }
+
+    .video-carousel-prev,
+    .video-carousel-next {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .video-carousel-prev { 
+        left: 10px;
+    }
+    
+    .video-carousel-next { 
+        right: 10px;
     }
 
     .intro-image {

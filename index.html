@@ -14,6 +14,7 @@
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml" href="images/logo.svg">
         <meta name="theme-color" content="#0d1117">
+        <script src="js/email.min.js"></script>
   
     </head>
     <body>
@@ -470,141 +471,255 @@
             </section>
             <!-- ===== Skills Section End ===== -->
             
-            <!-- ===== 新增的友善連結區塊 ===== -->
-            <section class="link-showcase-section">
-                <h2>Connect with Me</h2>
-                    <!--<p class="text-muted">
-                        I actively engage with the following platforms to facilitate professional networking, disseminate research findings, and foster technical collaboration. Please feel free to explore and connect with me to gain deeper insights into my work and areas of expertise.
-                    </p>-->
-                <div class="link-groups-container">
-                    <div class="link-group">
-                        <div class="button-container">
-                            <a href="mailto:yucheng208@outlook.com" class="link-button">Outlook</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="link-button">IEEE Mail</a>
-                            <a href="https://t.me/Ryan_0208" target="_blank" rel="noopener noreferrer" class="link-button">Telegram</a>
-                            <a href="https://api.whatsapp.com/send/?phone=886975265171&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="link-button">WhatsApp</a>
-                            <!--<a href="#" target="_blank" rel="noopener noreferrer" class="link-button">WeChat</a>-->
-                        </br>
-                            <a href="https://www.youtube.com/@Ryan.02.08" target="_blank" rel="noopener noreferrer" class="link-button">YouTube</a>
-                            <a href="https://github.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitHub</a>
-                            <a href="https://gitlab.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">GitLab</a>
-                            <a href="https://hackmd.io/@Yucheng208" target="_blank" rel="noopener noreferrer" class="link-button">HackMD</a>
-                            <a href="https://medium.com/@Yucheng0208" target="_blank" rel="noopener noreferrer" class="link-button">Medium</a>
-                        </br>
-                            <a href="https://ieeexplore.ieee.org/author/37089901051" target="_blank" rel="noopener noreferrer" class="link-button">IEEE Xplore</a>
-                            <a href="https://scholar.google.com/citations?user=-SWWt7kAAAAJ&hl=zh-TW" target="_blank" rel="noopener noreferrer" class="link-button">Google Scholar</a>
-                            <a href="https://www.researchgate.net/profile/Yu-Cheng-Chang-14" target="_blank" rel="noopener noreferrer" class="link-button">ResearchGate</a>
-                            <a href="https://orcid.org/0000-0003-1301-9192" target="_blank" rel="noopener noreferrer" class="link-button">ORCID</a>
-                            <a href="https://sciprofiles.com/profile/3276587" target="_blank" rel="noopener noreferrer" class="link-button">Sci-Profile</a>
+            <!-- ===== 固定5個LOGO的無縫循環合作機構區塊 ===== -->
+            <section class="partner-showcase-section">
+                <div class="partner-container">
+                    <h2>Partnerships</h2>
+                    
+                    <div class="partner-carousel-container">
+                        <button class="partner-nav-btn partner-prev" aria-label="Previous partners">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="partner-carousel-wrapper">
+                            <div class="partner-carousel-track">
+                                <!-- 原始LOGO，JavaScript會自動複製創建循環 -->
+                                <a href="https://www.ntut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立臺北科技大學" 
+                                data-en-name="National Taipei University of Technology">
+                                    <img src="images/partnerships/ntut.png" alt="國立臺北科技大學 LOGO">
+                                </a>
+
+                                <a href="https://www.nkust.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立高雄科技大學" 
+                                data-en-name="National Kaohsiung University of Science and Technology">
+                                    <img src="images/partnerships/nkust.png" alt="國立高雄科技大學 LOGO">
+                                </a>
+
+                                <a href="https://www.yuntech.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立雲林科技大學" 
+                                data-en-name="National Yunlin University of Science and Technology">
+                                    <img src="images/partnerships/yuntech.png" alt="國立雲林科技大學 LOGO">
+                                </a>
+
+                                <a href="https://nfu.edu.tw/zh/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立虎尾科技大學" 
+                                data-en-name="National Formosa University">
+                                    <img src="images/partnerships/nfu.png" alt="國立虎尾科技大學 LOGO">
+                                </a>
+
+                                <a href="https://www.ncut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立勤益科技大學" 
+                                data-en-name="National Chin-Yi University of Technology">
+                                    <img src="images/partnerships/ncut.png" alt="國立勤益科技大學 LOGO">
+                                </a>
+
+                                <a href="https://front.nptu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立屏東大學" 
+                                data-en-name="National Pingtung University">
+                                    <img src="images/partnerships/nptu.png" alt="國立屏東大學 LOGO">
+                                </a>
+
+                                <a href="https://www.nqu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="國立金門大學" 
+                                data-en-name="National Quemoy University">
+                                    <img src="images/partnerships/nqu.png" alt="國立金門大學 LOGO">
+                                </a>
+
+                                <a href="https://www.tku.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="淡江大學" 
+                                data-en-name="Tamkang University">
+                                    <img src="images/partnerships/tku.png" alt="淡江大學 LOGO">
+                                </a>
+
+                                <a href="https://www.ttu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="大同大學" 
+                                data-en-name="Tatung University">
+                                    <img src="images/partnerships/ttu.png" alt="大同大學 LOGO">
+                                </a>
+
+                                <a href="https://www.lhu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="龍華科技大學" 
+                                data-en-name="Lunghwa University of Science and Technology">
+                                    <img src="images/partnerships/lhu.png" alt="龍華科技大學 LOGO">
+                                </a>
+
+                                <a href="https://www.smsh.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="新北市立三民高中" 
+                                data-en-name="New Taipei Municipal San-Chung Commercial and Industrial Vocational High School">
+                                    <img src="images/partnerships/smsh.png" alt="新北市立三民高中 LOGO">
+                                </a>
+
+                                <a href="https://www.saihs.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="臺北市立松山工農" 
+                                data-en-name="Taipei Municipal Song Shan High School of Agriculture and Industry">
+                                    <img src="images/partnerships/saihs.png" alt="臺北市立松山工農 LOGO">
+                                </a>
+
+                                <a href="https://www.tsvs.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="新北市立淡水商工" 
+                                data-en-name="New Taipei Municipal Tamsui Commercial Industrial Vocational High School">
+                                    <img src="images/partnerships/tsvs.png" alt="新北市立淡水商工 LOGO">
+                                </a>
+
+                                <a href="https://tarc.edu.my/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
+                                data-zh-name="拉曼理工大學" 
+                                data-en-name="Tunku Abdul Rahman University of Management and Technology">
+                                    <img src="images/partnerships/tarumt.png" alt="拉曼理工大學 LOGO">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <button class="partner-nav-btn partner-next" aria-label="Next partners">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- ===== 固定5個LOGO的無縫循環合作機構區塊結束 ===== -->
+
+            <!-- ===== 新的 Connect with Me 區塊 ===== -->
+            <section class="connect-showcase-section">
+                <div class="connect-container">
+                    <div class="connect-header">
+                        <h2>Connect with Me</h2>
+                        <p class="connect-subtitle">Let's build something amazing together</p>
+                    </div>
+                    
+                    <div class="connect-grid">
+                        <!-- Communication 分類 -->
+                        <div class="connect-category">
+                            <div class="category-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 class="category-title">Communication</h3>
+                            <div class="connect-links">
+                                <a href="mailto:yucheng208@outlook.com" class="connect-link">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Outlook</span>
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>IEEE Mail</span>
+                                </a>
+                                <a href="https://t.me/Ryan_0208" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-telegram"></i>
+                                    <span>Telegram</span>
+                                </a>
+                                <a href="https://api.whatsapp.com/send/?phone=886975265171&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Content & Code 分類 -->
+                        <div class="connect-category">
+                            <div class="category-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3 class="category-title">Content & Code</h3>
+                            <div class="connect-links">
+                                <a href="https://www.youtube.com/@Ryan.02.08" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-youtube"></i>
+                                    <span>YouTube</span>
+                                </a>
+                                <a href="https://github.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-github"></i>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="https://gitlab.com/Yucheng0208" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-gitlab"></i>
+                                    <span>GitLab</span>
+                                </a>
+                                <a href="https://hackmd.io/@Yucheng208" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>HackMD</span>
+                                </a>
+                                <a href="https://medium.com/@Yucheng0208" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-medium"></i>
+                                    <span>Medium</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Research 分類 -->
+                        <div class="connect-category">
+                            <div class="category-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="category-title">Research</h3>
+                            <div class="connect-links">
+                                <a href="https://ieeexplore.ieee.org/author/37089901051" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fas fa-microchip"></i>
+                                    <span>IEEE Xplore</span>
+                                </a>
+                                <a href="https://scholar.google.com/citations?user=-SWWt7kAAAAJ&hl=zh-TW" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-google"></i>
+                                    <span>Google Scholar</span>
+                                </a>
+                                <a href="https://www.researchgate.net/profile/Yu-Cheng-Chang-14" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-researchgate"></i>
+                                    <span>ResearchGate</span>
+                                </a>
+                                <a href="https://orcid.org/0000-0003-1301-9192" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fab fa-orcid"></i>
+                                    <span>ORCID</span>
+                                </a>
+                                <a href="https://sciprofiles.com/profile/3276587" target="_blank" rel="noopener noreferrer" class="connect-link">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>Sci-Profile</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- ===== 友善連結區塊結束 ===== -->
-
-            <!-- ===== 合作機構區塊 ===== -->
-            <section class="partner-showcase-section">
-                <h2>Partnerships</h2>
-                <!--<p class="text-muted">
-                        These represent my collaborative partnerships with university laboratories, research institutes, enterprises, academic societies, legal entities, governmental and non-governmental organizations. This network continues to evolve as new partnerships develop.
-                </p>-->
-                <div class="partnership-container">
-                    <a href="https://www.ntut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立臺北科技大學" 
-                    data-en-name="National Taipei University of Technology">
-                        <img src="images/partnerships/ntut.png" alt="國立臺北科技大學 LOGO">
-                    </a>
-
-                    <a href="https://www.nkust.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立高雄科技大學" 
-                    data-en-name="National Kaohsiung University of Science and Technology">
-                        <img src="images/partnerships/nkust.png" alt="國立高雄科技大學 LOGO">
-                    </a>
-
-                    <a href="https://www.yuntech.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立雲林科技大學" 
-                    data-en-name="National Yunlin University of Science and Technology">
-                        <img src="images/partnerships/yuntech.png" alt="國立雲林科技大學 LOGO">
-                    </a>
-
-                                        <a href="https://nfu.edu.tw/zh/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立虎尾科技大學" 
-                    data-en-name="National Formosa University">
-                        <img src="images/partnerships/nfu.png" alt="國立虎尾科技大學 LOGO">
-                    </a>
-
-                    <a href="https://www.ncut.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立勤益科技大學" 
-                    data-en-name="National Chin-Yi University of Technology">
-                        <img src="images/partnerships/ncut.png" alt="國立勤益科技大學 LOGO">
-                    </a>
-
-                    <a href="https://front.nptu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立屏東大學" 
-                    data-en-name="National Pingtung University">
-                        <img src="images/partnerships/nptu.png" alt="國立屏東大學 LOGO">
-                    </a>
-
-                    <a href="https://www.nqu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="國立金門大學" 
-                    data-en-name="National Quemoy University">
-                        <img src="images/partnerships/nqu.png" alt="國立金門大學 LOGO">
-                    </a>
-
-                    <a href="https://www.tku.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="淡江大學" 
-                    data-en-name="Tamkang University">
-                        <img src="images/partnerships/tku.png" alt="淡江大學 LOGO">
-                    </a>
-
-                    <a href="https://www.ttu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="大同大學" 
-                    data-en-name="Tatung University">
-                        <img src="images/partnerships/ttu.png" alt="大同大學 LOGO">
-                    </a>
-
-                    <a href="https://www.lhu.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="龍華科技大學" 
-                    data-en-name="Lunghwa University of Science and Technology">
-                        <img src="images/partnerships/lhu.png" alt="龍華科技大學 LOGO">
-                    </a>
-
-                    <a href="https://www.smsh.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="新北市立三民高中" 
-                    data-en-name="New Taipei Municipal San-Chung Commercial and Industrial Vocational High School">
-                        <img src="images/partnerships/smsh.png" alt="新北市立三民高中 LOGO">
-                    </a>
-
-                    <a href="https://www.saihs.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="臺北市立松山工農" 
-                    data-en-name="Taipei Municipal Song Shan High School of Agriculture and Industry">
-                        <img src="images/partnerships/saihs.png" alt="臺北市立松山工農 LOGO">
-                    </a>
-
-                    <a href="https://www.tsvs.ntpc.edu.tw/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="新北市立淡水商工" 
-                    data-en-name="New Taipei Municipal Tamsui Commercial Industrial Vocational High School">
-                        <img src="images/partnerships/tsvs.png" alt="新北市立淡水商工 LOGO">
-                    </a>
-
-                    <a href="https://tarc.edu.my/" target="_blank" rel="noopener noreferrer" class="partner-logo" 
-                    data-zh-name="拉曼理工大學" 
-                    data-en-name="Tunku Abdul Rahman University of Management and Technology">
-                        <img src="images/partnerships/tarumt.png" alt="拉曼理工大學 LOGO">
-                    </a>
-                </div>
-            </section>
-            <!-- ===== 合作機構區塊結束 ===== -->
-
-
-            <!-- Contact Section -->
+            <!-- ===== Connect with Me 區塊結束 ===== -->
+            <!-- ===== 新的聯絡表單區塊 ===== -->
             <section class="contact-section">
                 <div class="contact-container">
-                    <h2>Get in Touch</h2>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!</p>
-                    <a href="mailto:yucheng208@outlook.com" class="contact-btn">Send a Message</a>
+                    <div class="contact-header">
+                        <h2>Get in Touch</h2>
+                        <p>I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!</p>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or idea..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="contact-submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading hidden">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                Sending...
+                            </span>
+                        </button>
+                    </form>
+                    
+                    <!-- 成功/錯誤訊息 -->
+                    <div class="form-message hidden" id="formMessage"></div>
                 </div>
             </section>
+            <!-- ===== 聯絡表單區塊結束 ===== -->
         </main>
         
         <!-- Back to Top Button -->

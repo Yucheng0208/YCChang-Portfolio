@@ -476,5 +476,387 @@ document.addEventListener('DOMContentLoaded', function() {
         renderAllCards();
         startAutoplay(); // 預設開始自動播放
     })();
+
+    // 將這個函數添加到你的 index.js 文件中，放在 DOMContentLoaded 事件監聽器內部
+
+    // Partnerships Carousel - 簡單直接的懸停提示實現
+    (function setupPartnershipsCarousel() {
+        const carouselContainer = document.querySelector('.partner-carousel-container');
+        if (!carouselContainer) return;
+
+        const track = document.querySelector('.partner-carousel-track');
+        const prevBtn = document.querySelector('.partner-prev');
+        const nextBtn = document.querySelector('.partner-next');
+        const originalLogos = document.querySelectorAll('.partner-logo');
+        
+        if (!track || !prevBtn || !nextBtn || originalLogos.length === 0) return;
+
+        let currentIndex = 0;
+        let autoplayInterval = null;
+        let isAnimating = false;
+        const AUTOPLAY_SPEED = 3000; // 3秒
+        const VISIBLE_LOGOS = 5; // 固定顯示5個
+        const totalLogos = originalLogos.length;
+        
+        // 創建全局懸停提示元素
+        let globalTooltip = null;
+        
+        function createGlobalTooltip() {
+            if (globalTooltip) return;
+            
+            globalTooltip = document.createElement('div');
+            globalTooltip.id = 'partnership-tooltip';
+            globalTooltip.style.cssText = `
+                position: fixed;
+                background: rgba(13, 26, 46, 0.95);
+                color: white;
+                padding: 12px 16px;
+                border-radius: 8px;
+                font-size: 14px;
+                pointer-events: none;
+                z-index: 9999;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(127, 175, 224, 0.3);
+                text-align: center;
+                line-height: 1.4;
+                max-width: 250px;
+            `;
+            document.body.appendChild(globalTooltip);
+        }
+        
+        function showTooltip(event, zhName, enName) {
+            if (!globalTooltip || !zhName || !enName) return;
+            
+            globalTooltip.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 4px;">${zhName}</div>
+                <div style="font-size: 12px; opacity: 0.9;">${enName}</div>
+            `;
+            
+            const rect = event.target.closest('.partner-logo').getBoundingClientRect();
+            globalTooltip.style.left = (rect.left + rect.width / 2 - globalTooltip.offsetWidth / 2) + 'px';
+            globalTooltip.style.top = (rect.top - globalTooltip.offsetHeight - 10) + 'px';
+            globalTooltip.style.opacity = '1';
+        }
+        
+        function hideTooltip() {
+            if (globalTooltip) {
+                globalTooltip.style.opacity = '0';
+            }
+        }
+        
+        // 計算單個LOGO的寬度（包含gap）
+        function getLogoWidth() {
+            const screenWidth = window.innerWidth;
+            if (screenWidth <= 600) {
+                return 110 + 16;
+            } else if (screenWidth <= 768) {
+                return 130 + 24;
+            } else if (screenWidth <= 1024) {
+                return 150 + 24;
+            } else if (screenWidth <= 1200) {
+                return 170 + 24;
+            } else {
+                return 200 + 24;
+            }
+        }
+        
+        // 為LOGO添加事件監聽器
+        function addLogoEvents(logoElement) {
+            const zhName = logoElement.getAttribute('data-zh-name');
+            const enName = logoElement.getAttribute('data-en-name');
+            
+            // 測試：在console中顯示
+            console.log('Adding events to:', zhName, enName);
+            
+            logoElement.addEventListener('mouseenter', (e) => {
+                console.log('Mouse enter:', zhName, enName);
+                stopAutoplay();
+                showTooltip(e, zhName, enName);
+            });
+            
+            logoElement.addEventListener('mouseleave', () => {
+                console.log('Mouse leave');
+                startAutoplay();
+                hideTooltip();
+            });
+            
+            logoElement.addEventListener('mousemove', (e) => {
+                if (globalTooltip && globalTooltip.style.opacity === '1') {
+                    const rect = e.target.closest('.partner-logo').getBoundingClientRect();
+                    globalTooltip.style.left = (rect.left + rect.width / 2 - globalTooltip.offsetWidth / 2) + 'px';
+                    globalTooltip.style.top = (rect.top - globalTooltip.offsetHeight - 10) + 'px';
+                }
+            });
+            
+            // 觸摸設備支援
+            logoElement.addEventListener('touchstart', (e) => {
+                console.log('Touch start:', zhName, enName);
+                stopAutoplay();
+                showTooltip(e, zhName, enName);
+                
+                // 觸摸3秒後自動隱藏
+                setTimeout(() => {
+                    hideTooltip();
+                    startAutoplay();
+                }, 3000);
+            });
+        }
+        
+        // 創建LOGO元素
+        function createLogoElement(originalLogo) {
+            const logoClone = originalLogo.cloneNode(true);
+            
+            // 確保所有屬性都被複製
+            logoClone.href = originalLogo.href;
+            logoClone.target = originalLogo.target;
+            logoClone.rel = originalLogo.rel;
+            logoClone.className = originalLogo.className;
+            
+            const zhName = originalLogo.getAttribute('data-zh-name');
+            const enName = originalLogo.getAttribute('data-en-name');
+            
+            if (zhName) logoClone.setAttribute('data-zh-name', zhName);
+            if (enName) logoClone.setAttribute('data-en-name', enName);
+            
+            // 添加事件監聽器
+            addLogoEvents(logoClone);
+            
+            return logoClone;
+        }
+        
+        // 創建無縫循環的LOGO序列
+        function createSeamlessLoop() {
+            hideTooltip();
+            track.innerHTML = '';
+            
+            const totalNeeded = totalLogos + VISIBLE_LOGOS;
+            
+            for (let i = 0; i < totalNeeded; i++) {
+                const originalIndex = i % totalLogos;
+                const logoElement = createLogoElement(originalLogos[originalIndex]);
+                track.appendChild(logoElement);
+            }
+        }
+        
+        // 更新輪播位置
+        function updateCarouselPosition(animate = true) {
+            const logoWidth = getLogoWidth();
+            const offset = currentIndex * logoWidth;
+            
+            if (animate) {
+                track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            } else {
+                track.style.transition = 'none';
+            }
+            
+            track.style.transform = `translateX(-${offset}px)`;
+        }
+        
+        // 移動到下一個
+        function moveNext() {
+            if (isAnimating) return;
+            
+            hideTooltip();
+            isAnimating = true;
+            currentIndex++;
+            updateCarouselPosition(true);
+            
+            setTimeout(() => {
+                if (currentIndex >= totalLogos) {
+                    currentIndex = 0;
+                    updateCarouselPosition(false);
+                }
+                isAnimating = false;
+            }, 500);
+        }
+        
+        // 移動到上一個
+        function movePrev() {
+            if (isAnimating) return;
+            
+            hideTooltip();
+            isAnimating = true;
+            
+            if (currentIndex === 0) {
+                currentIndex = totalLogos;
+                updateCarouselPosition(false);
+                setTimeout(() => {
+                    currentIndex--;
+                    updateCarouselPosition(true);
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 500);
+                }, 10);
+            } else {
+                currentIndex--;
+                updateCarouselPosition(true);
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 500);
+            }
+        }
+        
+        // 自動播放控制
+        function startAutoplay() {
+            if (autoplayInterval) return;
+            autoplayInterval = setInterval(moveNext, AUTOPLAY_SPEED);
+        }
+        
+        function stopAutoplay() {
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+                autoplayInterval = null;
+            }
+        }
+        
+        function restartAutoplay() {
+            stopAutoplay();
+            startAutoplay();
+        }
+        
+        // 初始化
+        function initialize() {
+            createGlobalTooltip();
+            createSeamlessLoop();
+            updateCarouselPosition(false);
+            startAutoplay();
+        }
+        
+        // 事件監聽器
+        nextBtn.addEventListener('click', () => {
+            moveNext();
+            restartAutoplay();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            movePrev();
+            restartAutoplay();
+        });
+        
+        // 響應式處理
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                hideTooltip();
+                updateCarouselPosition(false);
+            }, 250);
+        });
+        
+        // 初始化
+        initialize();
+    })();
+
+    // Contact Form Handler - 聯絡表單處理功能
+    (function setupContactForm() {
+        const form = document.getElementById('contactForm');
+        const submitBtn = form?.querySelector('.contact-submit-btn');
+        const btnText = submitBtn?.querySelector('.btn-text');
+        const btnLoading = submitBtn?.querySelector('.btn-loading');
+        const formMessage = document.getElementById('formMessage');
+        
+        if (!form || !submitBtn || !btnText || !btnLoading || !formMessage) return;
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // 禁用提交按鈕並顯示載入狀態
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            formMessage.classList.add('hidden');
+            
+            // 收集表單資料
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+            
+            try {
+                // 模擬 API 請求（你可以替換成實際的後端 API）
+                await simulateEmailSend(data);
+                
+                // 成功處理
+                showMessage('Thank you for your message! I\'ll get back to you soon.', 'success');
+                form.reset();
+                
+            } catch (error) {
+                // 錯誤處理
+                showMessage('Sorry, something went wrong. Please try again or contact me directly.', 'error');
+            } finally {
+                // 恢復按鈕狀態
+                submitBtn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+            }
+        });
+        
+        // 顯示訊息函數
+        function showMessage(message, type) {
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type}`;
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // 5秒後自動隱藏訊息
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        }
+        
+    // 替換 simulateEmailSend 函數
+    async function sendEmailViaEmailJS(data) {
+        // 初始化 EmailJS（需要先註冊 EmailJS 獲得這些 ID）
+        emailjs.init("J-UdifHZeqCLC6e2Z");
+        
+        return emailjs.send(
+            "service_13p1trj",    // 郵件服務 ID
+            "template_2wy6r9m",   // 模板 ID  
+            {
+                from_name: data.name,
+                from_email: data.email,
+                subject: data.subject,
+                message: data.message,
+                to_email: "yucheng208@outlook.com" // 你的收件信箱
+            }
+        );
+    }
+        
+        // 表單驗證增強
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+        });
+        
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            
+            // 移除之前的錯誤樣式
+            field.style.borderColor = '';
+            
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+            } else if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                isValid = emailRegex.test(value);
+            }
+            
+            // 添加視覺回饋
+            if (!isValid) {
+                field.style.borderColor = '#dc3545';
+            } else if (value) {
+                field.style.borderColor = '#28a745';
+            }
+            
+            return isValid;
+        }
+    })();
     
 });
