@@ -391,6 +391,7 @@ body.menu-open {
 }
 
 .dropdown-menu {
+    display: none;
     position: absolute;
     top: 110%;
     left: 50%;
@@ -401,10 +402,12 @@ body.menu-open {
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, top 0.3s ease;
     min-width: 180px;
+}
+
+.nav-item-dropdown:hover > .dropdown-menu {
+    display: block;
+    top: 100%;
 }
 
 .nav-item-dropdown:hover .dropdown-menu {
@@ -625,10 +628,8 @@ body.menu-open {
     }
 
     .nav-item-dropdown .dropdown-menu {
-        position: static;
+            position: static;
         transform: none;
-        opacity: 1;
-        visibility: visible;
         width: 100%;
         min-width: unset;
         background-color: rgba(0, 0, 0, 0.2);
@@ -640,6 +641,7 @@ body.menu-open {
         padding-top: 0;
         padding-bottom: 0;
         overflow: hidden;
+        display: block; /* 行動版預設 block，由 JS 控制 max-height */
         transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
     }
 
