@@ -1,0 +1,291 @@
+/*
+======================================================================
+                   PROJECTS.CSS - 專案頁面專用樣式
+======================================================================
+此檔案包含專案頁面特有的樣式：
+- 專案表格樣式
+- 專案類型標籤
+- 專案狀態指示器
+- 響應式設計
+======================================================================
+*/
+
+/* --- 1. Project Page Container --- */
+.project-page .page-container {
+    max-width: 1200px;
+}
+
+/* --- 2. Project Table Specific Styles --- */
+.project-page .publication-table td[data-label="Members"],
+.project-page .publication-table td[data-label="Supervisor"],
+.project-page .publication-table td[data-label="Duration"],
+.project-page .publication-table td[data-label="Project ID"] {
+    font-style: normal;
+    color: rgba(201, 209, 217, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- 3. Project Type Badges --- */
+.project-type-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.project-type-badge.research {
+    background-color: rgba(88, 166, 255, 0.2);
+    color: #58a6ff;
+    border: 1px solid rgba(88, 166, 255, 0.3);
+}
+
+.project-type-badge.collaboration {
+    background-color: rgba(63, 185, 80, 0.2);
+    color: #3fb950;
+    border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.project-type-badge.development {
+    background-color: rgba(163, 113, 247, 0.2);
+    color: #a371f7;
+    border: 1px solid rgba(163, 113, 247, 0.3);
+}
+
+/* --- 4. Project Status Indicators --- */
+.project-status {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+
+.project-status.ongoing {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.project-status.completed {
+    background-color: rgba(63, 185, 80, 0.2);
+    color: #3fb950;
+    border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.project-status.paused {
+    background-color: rgba(139, 148, 158, 0.2);
+    color: #8b949e;
+    border: 1px solid rgba(139, 148, 158, 0.3);
+}
+
+/* --- 5. Project Stats --- */
+.project-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.8);
+}
+
+.project-count {
+    font-weight: 600;
+    color: var(--tech-cyan);
+}
+
+.project-filter-status {
+    font-style: italic;
+}
+
+/* --- 6. Project Metadata --- */
+.project-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.7);
+}
+
+.project-metadata .metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.project-metadata .metadata-item i {
+    color: var(--tech-cyan);
+    font-size: 0.85rem;
+}
+
+/* --- 7. Project Timeline --- */
+.project-timeline {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border-left: 3px solid var(--tech-cyan);
+}
+
+.project-timeline h4 {
+    color: var(--tech-cyan);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.project-milestone {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.project-milestone i {
+    color: var(--tech-cyan);
+    font-size: 0.8rem;
+}
+
+.project-milestone:last-child {
+    margin-bottom: 0;
+}
+
+/* --- 8. Project Search Enhancement --- */
+.project-search-highlight {
+    background-color: rgba(255, 193, 7, 0.3);
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* --- 9. Responsive Styles --- */
+@media (max-width: 768px) {
+    .project-page .page-container {
+        padding: 3rem 1rem;
+    }
+    
+    .project-type-badge {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+    }
+    
+    .project-status {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.4rem;
+    }
+    
+    .project-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .project-metadata {
+        gap: 0.5rem;
+    }
+    
+    .project-metadata .metadata-item {
+        font-size: 0.8rem;
+    }
+    
+    .project-timeline {
+        padding: 0.8rem;
+    }
+    
+    .project-milestone {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-type-badge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.3rem;
+    }
+    
+    .project-status {
+        font-size: 0.6rem;
+        padding: 0.08rem 0.3rem;
+        margin-left: 0.3rem;
+    }
+    
+    .project-stats {
+        font-size: 0.85rem;
+        padding: 0.75rem 0;
+    }
+    
+    .project-metadata {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .project-metadata .metadata-item {
+        font-size: 0.75rem;
+    }
+    
+    .project-timeline {
+        padding: 0.6rem;
+    }
+    
+    .project-timeline h4 {
+        font-size: 0.9rem;
+    }
+    
+    .project-milestone {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- 10. Print Styles --- */
+@media print {
+    .project-page .controls-container,
+    .pagination-container,
+    .back-to-top-btn {
+        display: none !important;
+    }
+    
+    .publication-table tr {
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+    }
+    
+    .publication-table td {
+        color: #000;
+    }
+    
+    .publication-table td[data-label="Title"] {
+        color: #000;
+        font-weight: bold;
+    }
+    
+    .project-type-badge,
+    .project-status {
+        border: 1px solid #000;
+        background-color: transparent;
+        color: #000;
+    }
+    
+    .project-timeline {
+        border-left-color: #000;
+        background-color: transparent;
+    }
+    
+    .project-timeline h4 {
+        color: #000;
+    }
+    
+    .project-milestone i {
+        color: #000;
+    }
+}

@@ -1,0 +1,801 @@
+/*
+======================================================================
+                   GRADES.CSS - 成績查詢頁面專用樣式
+======================================================================
+此檔案包含成績查詢頁面特有的樣式：
+- 查詢控制項
+- 成績結果顯示
+- 管理者圖表控制項
+- 響應式設計
+======================================================================
+*/
+
+/* --- 1. Inquiry Controls --- */
+.grade-inquiry-page .inquiry-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    background-color: var(--light-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 2.5rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grade-inquiry-page .lang-toggle-btn {
+    padding: 12px 24px;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+.grade-inquiry-page .lang-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
+}
+
+.grade-inquiry-page .dropdown-group {
+    display: flex;
+    flex-grow: 3;
+    min-width: 300px;
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px; /* 增加圓弧度 */
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grade-inquiry-page .dropdown-group:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.grade-inquiry-page .dropdown-group:focus-within {
+    border-color: var(--tech-cyan);
+    box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
+}
+
+.grade-inquiry-page .school-selector-wrapper label,
+.grade-inquiry-page .course-selector-wrapper label {
+    display: none;
+}
+
+.grade-inquiry-page .school-selector-wrapper,
+.grade-inquiry-page .course-selector-wrapper {
+    flex: 1;
+    display: flex;
+}
+
+.grade-inquiry-page #school-select,
+.grade-inquiry-page #course-select {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 10px 40px 10px 20px;
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23c9d1d9" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    outline: none;
+    height: auto;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.grade-inquiry-page #school-select option,
+.grade-inquiry-page #course-select option {
+    background-color: #21262d;
+    color: #c9d1d9;
+    padding: 8px 12px;
+    border: none;
+}
+
+.grade-inquiry-page #school-select {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.grade-inquiry-page .search-box-wrapper {
+    display: flex;
+    flex-grow: 2;
+    min-width: 250px;
+}
+
+.grade-inquiry-page #student-id-input {
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px 0 0 50px;
+    padding: 12px 20px;
+    color: var(--text-color);
+    flex-grow: 1;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    border-right: none;
+}
+
+.grade-inquiry-page #student-id-input:focus {
+    border-color: var(--tech-cyan);
+    box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
+    z-index: 1;
+    position: relative;
+}
+
+.grade-inquiry-page #student-id-input.invalid {
+    border-color: #ff6b6b !important;
+}
+
+.grade-inquiry-page #student-id-input.invalid:focus {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2) !important;
+}
+
+.grade-inquiry-page #search-btn {
+    padding: 12px 24px;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+    border: none;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: -1px;
+}
+
+.grade-inquiry-page #search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
+}
+
+/* --- 2. Grade Results Display --- */
+.grade-inquiry-page .results-container {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.grade-inquiry-page .result-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #30363d;
+}
+
+.grade-inquiry-page .result-header h2 {
+    font-size: 2rem;
+    color: var(--tech-cyan);
+    margin: 0 0 0.5rem 0;
+}
+
+.grade-inquiry-page .result-header p {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin: 0.25rem 0;
+    line-height: 1.5;
+}
+
+.grade-inquiry-page .result-header #result-student-id {
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.grade-inquiry-page .grade-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.grade-inquiry-page .grade-summary-cards .card {
+    background-color: var(--dark-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid #30363d;
+    border-bottom: 3px solid transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grade-inquiry-page .grade-summary-cards .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.grade-inquiry-page .grade-summary-cards .card h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.grade-inquiry-page .grade-summary-cards .card .score {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+}
+
+.grade-inquiry-page .grade-summary-cards .card .score .value {
+    color: #fff;
+}
+
+/* Individual Card Colors */
+.grade-inquiry-page #card-assignments {
+    border-bottom-color: #58a6ff;
+}
+.grade-inquiry-page #card-assignments .score .value {
+    color: #58a6ff;
+}
+
+.grade-inquiry-page #card-daily-performance {
+    border-bottom-color: #f7b731;
+}
+.grade-inquiry-page #card-daily-performance .score .value {
+    color: #f7b731;
+}
+
+.grade-inquiry-page #card-attendance {
+    border-bottom-color: #a371f7;
+}
+.grade-inquiry-page #card-attendance .score .value {
+    color: #a371f7;
+}
+
+.grade-inquiry-page #card-midterm {
+    border-bottom-color: #f778ba;
+}
+.grade-inquiry-page #card-midterm .score .value {
+    color: #f778ba;
+}
+
+.grade-inquiry-page #card-final {
+    border-bottom-color: #e85656;
+}
+.grade-inquiry-page #card-final .score .value {
+    color: #e85656;
+}
+
+.grade-inquiry-page #card-bonus {
+    border-bottom-color: #3fb950;
+}
+.grade-inquiry-page #card-bonus .score .value {
+    color: #3fb950;
+}
+
+.grade-inquiry-page #card-bonus.final-avg {
+    border-bottom-color: #3fb950;
+}
+.grade-inquiry-page #card-bonus.final-avg .score .value {
+    color: #3fb950;
+}
+.grade-inquiry-page #card-bonus.final-avg h3 {
+    color: #3fb950;
+}
+
+/* --- 3. Grade Details Table --- */
+.grade-inquiry-page .grade-details {
+    overflow-x: auto;
+}
+
+.grade-inquiry-page .grade-details h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.grade-inquiry-page .grade-details table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.grade-inquiry-page .grade-details th,
+.grade-inquiry-page .grade-details td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #30363d;
+}
+
+.grade-inquiry-page .grade-details thead th {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.grade-inquiry-page .grade-details th:nth-child(2),
+.grade-inquiry-page .grade-details th:nth-child(3),
+.grade-inquiry-page .grade-details th:nth-child(4),
+.grade-inquiry-page .grade-details td:nth-child(2),
+.grade-inquiry-page .grade-details td:nth-child(3),
+.grade-inquiry-page .grade-details td:nth-child(4) {
+    text-align: right;
+}
+
+.grade-inquiry-page .grade-details thead th:nth-child(2),
+.grade-inquiry-page .grade-details thead th:nth-child(3),
+.grade-inquiry-page .grade-details thead th:nth-child(4) {
+    text-align: center;
+}
+
+.grade-inquiry-page .grade-details tbody tr:hover {
+    background-color: rgba(100, 210, 255, 0.05);
+}
+
+.grade-inquiry-page .grade-details tfoot td {
+    font-weight: bold;
+}
+
+.grade-inquiry-page .grade-details .total-label {
+    text-align: right;
+    padding-right: 2rem;
+}
+
+.grade-inquiry-page .grade-details .total-score {
+    font-size: 1.2rem;
+    color: var(--tech-cyan);
+    text-align: right;
+}
+
+.grade-inquiry-page .grade-details tfoot tr:last-child {
+    border-top: 2px solid #30363d;
+}
+
+.grade-inquiry-page .grade-details .total-label.final,
+.grade-inquiry-page .grade-details .total-score.final {
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: rgba(10, 132, 255, 0.2);
+}
+
+.grade-inquiry-page .grade-details tbody tr:first-child th {
+    background-color: var(--tech-blue);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 8px;
+    border-bottom: 2px solid var(--tech-cyan);
+}
+
+.grade-inquiry-page .grade-details td:first-child {
+    font-weight: 600;
+    color: var(--tech-cyan);
+    background-color: rgba(100, 210, 255, 0.1);
+}
+
+.grade-inquiry-page .grade-details td:last-child {
+    font-weight: 700;
+    color: var(--tech-cyan);
+    font-size: 1.1rem;
+}
+
+.grade-inquiry-page .grade-details tbody tr:not(:first-child):hover {
+    background-color: rgba(100, 210, 255, 0.15);
+}
+
+.grade-inquiry-page .grade-details .total-score.final {
+    color: var(--tech-cyan);
+}
+
+.grade-inquiry-page .grade-details tbody tr.class-average-row {
+    border-top: 2px solid var(--tech-cyan);
+    border-bottom: 2px solid var(--tech-cyan);
+    background-color: rgba(100, 210, 255, 0.1);
+}
+
+.grade-inquiry-page .grade-details tbody tr.class-average-row td {
+    font-weight: 600;
+    color: var(--tech-cyan);
+    background-color: transparent;
+    border-bottom: none;
+}
+
+.grade-inquiry-page .grade-details tbody tr.class-average-row:hover {
+    background-color: rgba(100, 210, 255, 0.15);
+}
+
+.grade-inquiry-page #bonus-score {
+    color: #3fb950;
+}
+
+/* --- 4. Admin Controls --- */
+.admin-controls {
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.admin-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.admin-btn {
+    background-color: #30363d;
+    color: var(--text-color);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-btn:hover {
+    background-color: #484f58;
+    border-color: var(--tech-cyan);
+}
+
+.admin-btn i {
+    margin-right: 8px;
+}
+
+.admin-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--light-bg);
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 10;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #30363d;
+    margin-top: 5px;
+}
+
+.admin-dropdown-content.show {
+    display: block;
+}
+
+.admin-dropdown-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-dropdown-content li {
+    padding: 8px 4px;
+}
+
+.admin-dropdown-content label {
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.admin-dropdown-content input[type="checkbox"] {
+    margin-right: 12px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--tech-cyan);
+}
+
+.chart-option-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px;
+    border-bottom: 1px solid #30363d;
+    margin-bottom: 12px;
+}
+
+.chart-option-btn {
+    background-color: var(--tech-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.chart-option-btn:hover {
+    background-color: var(--tech-cyan);
+}
+
+#clear-all-options {
+    background-color: #6e7681;
+}
+
+#clear-all-options:hover {
+    background-color: #ff6b6b;
+}
+
+/* --- 5. Chart Container --- */
+#grade-chart-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--dark-bg);
+    border-radius: 12px;
+    border: 1px solid #30363d;
+}
+
+/* --- 6. Utility & Loading Styles --- */
+.grade-inquiry-page .loading-indicator {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.grade-inquiry-page .loading-indicator p::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(201, 209, 217, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--tech-cyan);
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.grade-note {
+    margin-top: 1rem;
+    color: var(--tech-cyan);
+    text-shadow: 
+        0 0 3px rgba(100, 210, 255, 0.4),
+        0 0 6px rgba(100, 210, 255, 0.2);
+    font-weight: 500;
+    animation: gentle-glow 4s ease-in-out infinite alternate;
+}
+
+.grade-note i {
+    margin-right: 0.5rem;
+    animation: bell-ring 2s ease-in-out infinite;
+}
+
+@keyframes gentle-glow {
+    0% {
+        text-shadow: 
+            0 0 3px rgba(100, 210, 255, 0.4),
+            0 0 6px rgba(100, 210, 255, 0.2);
+    }
+    100% {
+        text-shadow: 
+            0 0 5px rgba(100, 210, 255, 0.6),
+            0 0 10px rgba(100, 210, 255, 0.3);
+    }
+}
+
+@keyframes bell-ring {
+    0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(-10deg);
+    }
+    15% {
+        transform: rotate(10deg);
+    }
+    25% {
+        transform: rotate(-8deg);
+    }
+    35% {
+        transform: rotate(8deg);
+    }
+    45% {
+        transform: rotate(-5deg);
+    }
+    55% {
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- 7. Language Switch --- */
+.lang-zh { display: none; }
+body.show-zh .lang-zh { display: inline; }
+body.show-zh .lang-en { display: none; }
+
+/* --- 8. Responsive Styles --- */
+@media (max-width: 992px) {
+    .grade-inquiry-page .inquiry-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .grade-inquiry-page .lang-toggle-btn {
+        width: 100%;
+    }
+    
+    .grade-inquiry-page .grade-summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grade-inquiry-page .grade-summary-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .grade-inquiry-page .grade-details {
+        font-size: 0.9rem;
+    }
+    
+    .grade-inquiry-page .grade-details th,
+    .grade-inquiry-page .grade-details td {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grade-inquiry-page .inquiry-controls {
+        padding: 1rem 0.5rem;
+    }
+    
+    .grade-inquiry-page .dropdown-group {
+        min-width: 100%;
+        flex-direction: row; /* 保持水平排列 */
+        border-radius: 20px; /* 手機版更圓弧 */
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+        gap: 1px; /* 兩個選單之間的小間隙 */
+    }
+    
+    .grade-inquiry-page .school-selector-wrapper,
+    .grade-inquiry-page .course-selector-wrapper {
+        flex: 1;
+        min-width: 0; /* 允許收縮 */
+    }
+    
+    .grade-inquiry-page #school-select,
+    .grade-inquiry-page #course-select {
+        border-radius: 0;
+        margin: 0;
+        padding: 12px 30px 12px 12px; /* 減少左右 padding */
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 0.9rem; /* 稍微縮小字體 */
+    }
+    
+    .grade-inquiry-page #school-select {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+        border-top-left-radius: 20px; /* 更圓弧 */
+        border-bottom-left-radius: 20px; /* 更圓弧 */
+    }
+    
+    .grade-inquiry-page #course-select {
+        border-top-right-radius: 20px; /* 更圓弧 */
+        border-bottom-right-radius: 20px; /* 更圓弧 */
+    }
+    
+    .grade-inquiry-page .search-box-wrapper {
+        min-width: 100%;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    .grade-inquiry-page #student-id-input {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 50px 0 0 50px;
+        flex-shrink: 1;
+        padding: 12px 16px; /* 稍微減少 padding */
+    }
+    
+    .grade-inquiry-page #search-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 12px 20px; /* 稍微減少 padding */
+    }
+    
+    .grade-inquiry-page .grade-summary-cards .card {
+        padding: 1rem;
+    }
+    
+    .grade-inquiry-page .grade-summary-cards .card .score {
+        font-size: 2rem;
+    }
+    
+    .grade-inquiry-page .grade-details table {
+        min-width: 500px;
+    }
+    
+    .grade-inquiry-page .grade-details th,
+    .grade-inquiry-page .grade-details td {
+        padding: 6px 8px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .grade-inquiry-page .inquiry-controls {
+        padding: 1rem 0.5rem;
+    }
+    
+    .grade-inquiry-page .dropdown-group {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .grade-inquiry-page #school-select,
+    .grade-inquiry-page #course-select {
+        padding: 10px 25px 10px 10px; /* 進一步減少 padding */
+        font-size: 0.85rem; /* 更小的字體 */
+    }
+    
+    .grade-inquiry-page .search-box-wrapper {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .grade-inquiry-page #student-id-input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .grade-inquiry-page #search-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .grade-inquiry-page .results-container {
+        padding: 1rem;
+    }
+    
+    .grade-inquiry-page .result-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .grade-inquiry-page .grade-summary-cards {
+        gap: 1rem;
+    }
+    
+    .grade-inquiry-page .grade-summary-cards .card {
+        padding: 0.75rem;
+    }
+    
+    .grade-inquiry-page .grade-summary-cards .card h3 {
+        font-size: 0.9rem;
+    }
+    
+    .grade-inquiry-page .grade-summary-cards .card .score {
+        font-size: 1.8rem;
+    }
+    
+    .grade-inquiry-page .grade-details table {
+        min-width: 450px;
+    }
+    
+    .admin-controls {
+        margin-top: -1rem;
+    }
+    
+    .admin-dropdown-content {
+        min-width: 200px;
+        right: -1px;
+    }
+}

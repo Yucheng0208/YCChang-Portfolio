@@ -1,0 +1,187 @@
+/*
+======================================================================
+                  HIGHLIGHTS.CSS - 亮點頁面專用樣式
+======================================================================
+此檔案包含亮點頁面特有的樣式：
+- 亮點表格樣式
+- 亮點類型標籤
+- 篩選器樣式
+- 響應式設計
+======================================================================
+*/
+
+/* --- 1. Highlight Page Container --- */
+.highlight-page .page-container {
+    max-width: 1200px;
+}
+
+/* --- 2. Highlight Table Specific Styles --- */
+.highlight-page .publication-table td[data-label="Event"],
+.highlight-page .publication-table td[data-label="Organizer"],
+.highlight-page .publication-table td[data-label="Date"],
+.highlight-page .publication-table td[data-label="Location"] {
+    font-style: normal;
+    color: rgba(201, 209, 217, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- 3. Highlight Type Badges --- */
+.highlight-type-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-type-badge.media {
+    background-color: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.highlight-type-badge.talk {
+    background-color: rgba(63, 185, 80, 0.2);
+    color: #3fb950;
+    border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.highlight-type-badge.instruction {
+    background-color: rgba(88, 166, 255, 0.2);
+    color: #58a6ff;
+    border: 1px solid rgba(88, 166, 255, 0.3);
+}
+
+/* --- 4. Highlight Stats --- */
+.highlight-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.8);
+}
+
+.highlight-count {
+    font-weight: 600;
+    color: var(--tech-cyan);
+}
+
+.highlight-filter-status {
+    font-style: italic;
+    
+}
+
+/* --- 5. Highlight Metadata --- */
+.highlight-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.7);
+}
+
+.highlight-metadata .metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.highlight-metadata .metadata-item i {
+    color: var(--tech-cyan);
+    font-size: 0.85rem;
+}
+
+/* --- 6. Highlight Search Enhancement --- */
+.highlight-search-highlight {
+    background-color: rgba(255, 193, 7, 0.3);
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* --- 7. Responsive Styles --- */
+@media (max-width: 768px) {
+    .highlight-page .page-container {
+        padding: 3rem 1rem;
+    }
+    
+    .highlight-type-badge {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+    }
+    
+    .highlight-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .highlight-metadata {
+        gap: 0.5rem;
+    }
+    
+    .highlight-metadata .metadata-item {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .highlight-type-badge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.3rem;
+    }
+    
+    .highlight-stats {
+        font-size: 0.85rem;
+        padding: 0.75rem 0;
+    }
+    
+    .highlight-metadata {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .highlight-metadata .metadata-item {
+        font-size: 0.75rem;
+    }
+}
+
+/* --- 8. Print Styles --- */
+@media print {
+    .highlight-page .controls-container,
+    .pagination-container,
+    .back-to-top-btn {
+        display: none !important;
+    }
+    
+    .publication-table tr {
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+    }
+    
+    .publication-table td {
+        color: #000;
+    }
+    
+    .publication-table td[data-label="Title"] {
+        color: #000;
+        font-weight: bold;
+    }
+    
+    .highlight-type-badge {
+        border: 1px solid #000;
+        background-color: transparent;
+        color: #000;
+    }
+}

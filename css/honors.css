@@ -1,0 +1,190 @@
+/*
+======================================================================
+                    HONORS.CSS - 榮譽頁面專用樣式
+======================================================================
+此檔案包含榮譽頁面特有的樣式：
+- 榮譽表格樣式
+- 榮譽類型標籤
+- 篩選器樣式
+- 響應式設計
+======================================================================
+*/
+
+/* --- 1. Honor Page Container --- */
+.honor-page .page-container {
+    max-width: 1200px;
+}
+
+/* --- 2. Honor Table Specific Styles --- */
+.honor-page .publication-table td[data-label="Event"],
+.honor-page .publication-table td[data-label="Organizer"],
+.honor-page .publication-table td[data-label="Award"],
+.honor-page .publication-table td[data-label="Date"] {
+    font-style: normal;
+    color: rgba(201, 209, 217, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- 3. Honor Type Badges --- */
+.honor-type-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.honor-type-badge.certification {
+    background-color: rgba(88, 166, 255, 0.2);
+    color: #58a6ff;
+    border: 1px solid rgba(88, 166, 255, 0.3);
+}
+
+.honor-type-badge.competition {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.honor-type-badge.invention {
+    background-color: rgba(163, 113, 247, 0.2);
+    color: #a371f7;
+    border: 1px solid rgba(163, 113, 247, 0.3);
+}
+
+.honor-type-badge.pitch {
+    background-color: rgba(63, 185, 80, 0.2);
+    color: #3fb950;
+    border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.honor-type-badge.other {
+    background-color: rgba(139, 148, 158, 0.2);
+    color: #8b949e;
+    border: 1px solid rgba(139, 148, 158, 0.3);
+}
+
+/* --- 4. Honor Stats --- */
+.honor-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.8);
+}
+
+.honor-count {
+    font-weight: 600;
+    color: var(--tech-cyan);
+}
+
+.honor-filter-status {
+    font-style: italic;
+}
+
+/* --- 5. Honor Metadata --- */
+.honor-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(201, 209, 217, 0.7);
+}
+
+.honor-metadata .metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.honor-metadata .metadata-item i {
+    color: var(--tech-cyan);
+    font-size: 0.85rem;
+}
+
+/* --- 6. Responsive Styles --- */
+@media (max-width: 768px) {
+    .honor-page .page-container {
+        padding: 3rem 1rem;
+    }
+    
+    .honor-type-badge {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+    }
+    
+    .honor-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .honor-metadata {
+        gap: 0.5rem;
+    }
+    
+    .honor-metadata .metadata-item {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .honor-type-badge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.3rem;
+    }
+    
+    .honor-stats {
+        font-size: 0.85rem;
+        padding: 0.75rem 0;
+    }
+    
+    .honor-metadata {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .honor-metadata .metadata-item {
+        font-size: 0.75rem;
+    }
+}
+
+/* --- 7. Print Styles --- */
+@media print {
+    .honor-page .controls-container,
+    .pagination-container,
+    .back-to-top-btn {
+        display: none !important;
+    }
+    
+    .publication-table tr {
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+    }
+    
+    .publication-table td {
+        color: #000;
+    }
+    
+    .publication-table td[data-label="Title"] {
+        color: #000;
+        font-weight: bold;
+    }
+    
+    .honor-type-badge {
+        border: 1px solid #000;
+        background-color: transparent;
+        color: #000;
+    }
+}

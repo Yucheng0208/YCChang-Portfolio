@@ -1,0 +1,349 @@
+/*
+======================================================================
+                    SCHEDULE.CSS - 課程表頁面專用樣式
+======================================================================
+此檔案包含課程表頁面特有的樣式：
+- 課程表格樣式
+- 課程區塊樣式
+- 篩選器樣式
+- 響應式設計
+======================================================================
+*/
+
+/* --- 1. Schedule Section --- */
+.schedule-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.schedule-section h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #58a6ff;
+    text-align: center;
+}
+
+.schedule-section p {
+    color: #8b949e;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    text-align: left;
+}
+
+/* --- 2. Schedule Filter --- */
+.schedule-wrapper {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- 3. Schedule Table --- */
+.schedule-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    margin: 0 -15px;
+    padding: 0 15px;
+    position: relative;
+}
+
+.course-schedule {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+}
+
+.course-schedule th {
+    background-color: #161b22;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 8px;
+    color: #c9d1d9;
+}
+
+.course-schedule td {
+    border: 1px solid #30363d;
+    padding: 8px;
+    vertical-align: top;
+    height: 80px;
+    color: #8b949e;
+}
+
+.course-schedule td:first-child {
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    color: #c9d1d9;
+    width: 120px;
+}
+
+.course-schedule td:nth-child(2) {
+    width: 120px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+#university-schedule .course-schedule tbody td:nth-child(1),
+#university-schedule .course-schedule tbody td:nth-child(2) {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: clamp(0.7rem, 2.5vw, 0.75rem);
+}
+
+#high-school-schedule .course-schedule tbody td:nth-child(1),
+#high-school-schedule .course-schedule tbody td:nth-child(2) {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: clamp(0.7rem, 2.5vw, 0.75rem);
+}
+
+/* --- 4. Course Block Styles --- */
+.course-block {
+    background-color: #21262d;
+    padding: 12px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #c9d1d9;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.course-block strong {
+    font-weight: 600;
+    color: #fff;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.course-block .course-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.course-block .course-location {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.course-block .course-location i {
+    margin-right: 5px;
+    color: #8b949e;
+}
+
+/* Course Block Colors */
+.course-color-1 { border-left-color: #58a6ff; }
+.course-color-2 { border-left-color: #3fb950; }
+.course-color-3 { border-left-color: #a371f7; }
+.course-color-4 { border-left-color: #f778ba; }
+.course-color-5 { border-left-color: #d29922; }
+
+/* --- 5. Break Styles --- */
+.lunch-break,
+.dinner-break {
+    background-color: #21262d;
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+    color: #8b949e;
+    border-left: 4px solid #8b949e;
+}
+
+/* --- 6. Responsive Styles --- */
+@media (min-width: 769px) {
+    .schedule-table-wrapper {
+        overflow-x: visible;
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .course-schedule {
+        min-width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .course-schedule td:nth-child(2) {
+        width: 150px;
+        min-width: 150px;
+        font-size: 0.5rem;
+        white-space: nowrap;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+@media (min-width: 769px) {
+    .course-schedule {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -15px;
+        padding: 0 15px 10px 15px;
+        border-radius: 8px;
+    }
+    
+    .schedule-table-wrapper::after {
+        content: '← Swipe to see more →';
+        position: sticky;
+        right: 0;
+        top: 10px;
+        background: rgba(0, 162, 255, 0.8);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        float: right;
+        margin: 5px 0;
+        z-index: 10;
+        opacity: 0.8;
+        animation: fadeInOut 3s ease-in-out infinite;
+    }
+    
+    .course-schedule {
+        min-width: 650px;
+        table-layout: fixed;
+        font-size: 0.85rem;
+    }
+    
+    .course-schedule th:first-child,
+    .course-schedule td:first-child {
+        width: 80px;
+        min-width: 80px;
+    }
+    
+    .course-schedule th:nth-child(2),
+    .course-schedule td:nth-child(2) {
+        width: 90px;
+        min-width: 90px;
+        white-space: nowrap;
+        font-size: 0.75rem;
+    }
+    
+    .course-schedule th:nth-child(n+3),
+    .course-schedule td:nth-child(n+3) {
+        width: 100px;
+        min-width: 100px;
+    }
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+}
+
+@media (max-width: 480px) {
+    .course-schedule {
+        min-width: 600px;
+        font-size: 0.8rem;
+    }
+    
+    .course-schedule th {
+        font-size: 0.7rem;
+        padding: 6px 4px;
+    }
+
+    .course-schedule td:first-child {
+        width: 75px;
+        min-width: 75px;
+        font-size: 0.7rem;
+    }
+    
+    .course-schedule td:nth-child(2) {
+        width: 85px;
+        min-width: 85px;
+        font-size: 0.65rem;
+    }
+    
+    .course-schedule th:nth-child(n+3),
+    .course-schedule td:nth-child(n+3) {
+        width: 95px;
+        min-width: 95px;
+    }
+    
+    .course-block {
+        font-size: 0.7rem;
+        padding: 5px 3px;
+        min-height: 60px;
+    }
+    
+    .course-block strong {
+        font-size: 0.75rem;
+    }
+    
+    .course-block .course-code,
+    .course-block .course-location {
+        font-size: 0.65rem;
+    }
+}
+
+/* --- 7. Filter Styles --- */
+#schedule-filter {
+    justify-content: center;
+    margin-bottom: 2.5rem;
+}
+
+#schedule-filter.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: auto;
+    max-width: 300px;
+    margin: 0 auto 2.5rem auto;
+}
+
+#schedule-filter button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+}
+
+#schedule-filter button.active {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    color: var(--dark-bg);
+    box-shadow: 0 2px 8px rgba(0, 162, 255, 0.2);
+}
+
+#schedule-filter button:not(.active):hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
