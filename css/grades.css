@@ -657,7 +657,7 @@ body.show-zh .lang-en { display: none; }
     .grade-inquiry-page .dropdown-group {
         min-width: 100%;
         flex-direction: row; /* 保持水平排列 */
-        border-radius: 20px; /* 手機版更圓弧 */
+        border-radius: 50px; /* 手機版更圓弧 */
         margin: 0;
         width: 100%;
         box-sizing: border-box;

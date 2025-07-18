@@ -2,7 +2,7 @@
 //  共用核心功能 - common.js
 // =======================================================
 
-// 本地函式庫 - YAML 和 CSV 解析器
+// 🔧 改進的 YAML 解析器 - 修正引號問題
 window.jsyaml = window.jsyaml || {
     load: function(yamlText) {
         try {
@@ -37,6 +37,8 @@ window.jsyaml = window.jsyaml || {
                             value = value.substring(0, commentIndex).trim();
                         }
                         
+                        // 🔧 去除引號
+                        value = this.cleanValue(value);
                         currentItem[key] = value;
                     }
                 } else if (trimmed.includes(':')) {
@@ -48,6 +50,9 @@ window.jsyaml = window.jsyaml || {
                     if (commentIndex >= 0) {
                         value = value.substring(0, commentIndex).trim();
                     }
+                    
+                    // 🔧 去除引號
+                    value = this.cleanValue(value);
                     
                     if (leadingSpaces === 2) {
                         if (value) {
@@ -71,6 +76,22 @@ window.jsyaml = window.jsyaml || {
             console.error('YAML parsing error:', error);
             return [];
         }
+    },
+    
+    // 🆕 清理值的函數
+    cleanValue: function(value) {
+        if (!value) return '';
+        
+        // 轉換為字符串
+        value = String(value);
+        
+        // 去除前後的雙引號或單引號
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+            return value.slice(1, -1);
+        }
+        
+        return value;
     }
 };
 

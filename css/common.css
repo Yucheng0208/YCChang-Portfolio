@@ -1053,3 +1053,198 @@ body.menu-open {
     color: rgba(201, 209, 217, 0.5);
     pointer-events: none;
 }
+
+/* 
+   在您現有的 common.css 檔案最底部添加以下樣式
+   這些是分類標籤的樣式，用於 works 頁面顯示 Academic 和 Industry 分類
+*/
+
+/* --- 12. Category Badge Styles for Works Page --- */
+.category-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+}
+
+.category-academic {
+    background-color: rgba(0, 123, 255, 0.15);
+    color: #007bff;
+    border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.category-industry {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+/* 分類標籤動畫效果 */
+.category-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .category-badge {
+        display: block;
+        margin: 4px 0 0 0;
+        text-align: center;
+        max-width: fit-content;
+    }
+}
+
+/* 
+   在您現有的 common.css 檔案最底部添加以下樣式
+   這些是所有頁面的分類標籤樣式
+*/
+
+/* --- 12. Category Badge Styles for All Pages --- */
+.category-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+}
+
+/* Works 頁面分類 */
+.category-academic {
+    background-color: rgba(0, 123, 255, 0.15);
+    color: #007bff;
+    border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.category-industry {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+/* Publications 頁面分類 */
+.category-journal {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.category-conference {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.category-book {
+    background-color: rgba(138, 43, 226, 0.15);
+    color: #8a2be2;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.category-preprint {
+    background-color: rgba(255, 105, 180, 0.15);
+    color: #ff69b4;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+}
+
+/* Honors 頁面分類 */
+.category-competition {
+    background-color: rgba(255, 140, 0, 0.15);
+    color: #ff8c00;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.category-invention {
+    background-color: rgba(106, 90, 205, 0.15);
+    color: #6a5acd;
+    border: 1px solid rgba(106, 90, 205, 0.3);
+}
+
+.category-award {
+    background-color: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.category-certification {
+    background-color: rgba(32, 178, 170, 0.15);
+    color: #20b2aa;
+    border: 1px solid rgba(32, 178, 170, 0.3);
+}
+
+.category-pitch {
+    background-color: rgba(255, 105, 180, 0.18);
+    color: #ff69b4;
+    border: 1px solid rgba(255, 105, 180, 0.32);
+}
+
+.category-other {
+    background-color: rgba(0, 191, 255, 0.18);
+    color: #00bfff;
+    border: 1px solid rgba(0, 191, 255, 0.32);
+}
+
+/* Projects 頁面分類 */
+.category-research {
+    background-color: rgba(106, 90, 205, 0.15);
+    color: #6a5acd;
+    border: 1px solid rgba(106, 90, 205, 0.3);
+}
+
+.category-development {
+    background-color: rgba(34, 139, 34, 0.15);
+    color: #228b22;
+    border: 1px solid rgba(34, 139, 34, 0.3);
+}
+
+.category-collaboration {
+    background-color: rgba(255, 69, 0, 0.15);
+    color: #ff4500;
+    border: 1px solid rgba(255, 69, 0, 0.3);
+}
+
+/* Highlights 頁面分類 */
+.category-talk {
+    background-color: rgba(0, 191, 255, 0.15);
+    color: #00bfff;
+    border: 1px solid rgba(0, 191, 255, 0.3);
+}
+
+.category-instruction {
+    background-color: rgba(154, 205, 50, 0.15);
+    color: #9acd32;
+    border: 1px solid rgba(154, 205, 50, 0.3);
+}
+
+.category-media {
+    background-color: rgba(255, 105, 180, 0.18);
+    color: #ff69b4;
+    border: 1px solid rgba(255, 105, 180, 0.32);
+}
+
+/* 分類標籤動畫效果 */
+.category-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .category-badge {
+        display: block;
+        margin: 4px 0 0 0;
+        text-align: center;
+        max-width: fit-content;
+    }
+}

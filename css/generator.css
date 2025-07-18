@@ -43,7 +43,7 @@
     border: 1px solid #30363d;
     background-color: #0d1117;
     color: #c9d1d9;
-    border-radius: 6px;
+    border-radius: 50px;
     width: 120px;
     font-size: 1rem;
 }
@@ -58,7 +58,7 @@
     background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
     color: #fff;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 50px;
     font-size: 1rem;
     font-weight: 600;
     border: none;
@@ -67,6 +67,33 @@
 }
 
 .code-generator-page #generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
+}
+
+.code-generator-page #copy-all-btn,
+.code-generator-page #download-csv-btn {
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,162,255,0.08);
+    outline: none;
+    letter-spacing: 0.5px;
+}
+
+.code-generator-page #copy-all-btn:hover,
+.code-generator-page #download-csv-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
+}
+
+.code-generator-page #copy-all-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
 }
@@ -136,7 +163,7 @@
     padding: 0.9rem 0.5rem;
     margin-bottom: 0.9rem;
     background-color: #161b22;
-    border-radius: 4px;
+    border-radius: 5px;
     position: relative;
     margin-left: 0;
     font-family: 'Courier New', Courier, monospace;
@@ -315,10 +342,12 @@ body.show-zh .lang-en { display: none; }
     .code-generator-page #num-codes-input {
         width: 100%;
         margin-bottom: 1rem;
+        border-radius: 50px;
     }
 
     .code-generator-page #generate-btn {
         width: 100%;
+        border-radius: 50px;
     }
 
     .code-generator-page .results-container .result-header {
@@ -379,11 +408,13 @@ body.show-zh .lang-en { display: none; }
 @media (max-width: 480px) {
     .code-generator-page .generator-controls {
         padding: 0.75rem;
+        
     }
 
     .code-generator-page .lang-toggle-btn {
         padding: 10px 20px;
         font-size: 0.9rem;
+        border-radius: 50px; 
     }
 
     .code-generator-page #num-codes-input {

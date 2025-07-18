@@ -1,5 +1,5 @@
 // =======================================================
-//  列表頁面通用功能 - list-pages.js
+//  列表頁面通用功能 - list-pages.js（完整分類版）
 // =======================================================
 
 // 通用列表頁面初始化函數
@@ -150,7 +150,7 @@ function initializeListPage(config) {
         if (activeFilterButton) {
             const activeFilter = activeFilterButton.dataset.filter;
             if (activeFilter !== 'all') {
-                tempFiltered = tempFiltered.filter(item => item.category === activeFilter);
+                tempFiltered = tempFiltered.filter(item => String(item.category) === activeFilter);
             }
         }
         
@@ -267,7 +267,14 @@ function initializeListPage(config) {
     loadData();
 }
 
-// 表格行渲染函數
+// 🆕 創建分類標籤的輔助函數
+function createCategoryBadge(category) {
+    category = String(category).toLowerCase();
+    if (!category) return '';
+    return `<span class="category-badge category-${category}">${category.charAt(0).toUpperCase() + category.slice(1)}</span>`;
+}
+
+// 🔧 更新的 Publications 渲染函數
 function renderPublicationRow(pub, globalIndex) {
     let linksHTML = '';
     if (pub.links && typeof pub.links === 'object') {
@@ -278,12 +285,14 @@ function renderPublicationRow(pub, globalIndex) {
     }
     
     const highlightedAuthors = CommonUtils.highlightAuthorName(pub.authors || '');
+    const categoryBadge = createCategoryBadge(pub.category);
     
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''}</td>${pub.authors ? `<td data-label="Authors">${highlightedAuthors}</td>` : ''}${pub.venue ? `<td data-label="Venue">${pub.venue}</td>` : ''}${pub.location ? `<td data-label="Location">${pub.location}</td>` : ''}<td data-label="Author Role">${pub.authorrole || ''}</td>${pub.isbn ? `<td data-label="ISBN">ISBN: ${pub.isbn}</td>` : ''}<td data-label="Date">${pub.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''} ${categoryBadge}</td>${pub.authors ? `<td data-label="Authors">${highlightedAuthors}</td>` : ''}${pub.venue ? `<td data-label="Venue">${pub.venue}</td>` : ''}${pub.location ? `<td data-label="Location">${pub.location}</td>` : ''}<td data-label="Author Role">${pub.authorrole || ''}</td>${pub.isbn ? `<td data-label="ISBN">ISBN: ${pub.isbn}</td>` : ''}<td data-label="Date">${pub.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
     return row;
 }
 
+// 🔧 更新的 Honors 渲染函數
 function renderHonorRow(honor, globalIndex) {
     let linksHTML = '';
     if (honor.links && typeof honor.links === 'object') {
@@ -296,12 +305,14 @@ function renderHonorRow(honor, globalIndex) {
     const highlightedMembers = CommonUtils.highlightAuthorName(honor.members || '');
     const highlightedSupervisor = CommonUtils.highlightAuthorName(honor.supervisor || '');
     const highlightedTitle = CommonUtils.highlightAuthorName(honor.title || '');
+    const categoryBadge = createCategoryBadge(honor.category);
     
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle}</td><td data-label="Event">${honor.event || ''}</td>${honor.organizer ? `<td data-label="Organizer">${honor.organizer}</td>` : ''}${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${highlightedMembers}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${highlightedSupervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle} ${categoryBadge}</td><td data-label="Event">${honor.event || ''}</td>${honor.organizer ? `<td data-label="Organizer">${honor.organizer}</td>` : ''}${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members">${highlightedMembers}</td>` : ''}${honor.supervisor ? `<td data-label="Supervisor">Supervisor: ${highlightedSupervisor}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
     return row;
 }
 
+// 🔧 更新的 Highlights 渲染函數
 function renderHighlightRow(highlight, globalIndex) {
     const location = highlight.localtion || highlight.location || '';
     let linksHTML = '';
@@ -311,11 +322,15 @@ function renderHighlightRow(highlight, globalIndex) {
             linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
         }
     }
+    
+    const categoryBadge = createCategoryBadge(highlight.category);
+    
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data--label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'} ${categoryBadge}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
     return row;
 }
 
+// 🔧 更新的 Projects 渲染函數
 function renderProjectRow(project, globalIndex) {
     let linksHTML = '';
     if (project.links && typeof project.links === 'object') {
@@ -324,11 +339,15 @@ function renderProjectRow(project, globalIndex) {
             linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
         }
     }
+    
+    const categoryBadge = createCategoryBadge(project.category);
+    
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${project.title || ''}</td><td data-label="Class">${project.class || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="Position">${project.position || ''}</td>${project.members ? `<td data-label="Members">${project.members}</td>` : ''}${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${project.title || ''} ${categoryBadge}</td><td data-label="Class">${project.class || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="Position">${project.position || ''}</td>${project.members ? `<td data-label="Members">${project.members}</td>` : ''}${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
     return row;
 }
 
+// 🔧 修正的 Works 渲染函數
 function renderWorkRow(work, globalIndex) {
     let linksHTML = '';
     if (work.links && typeof work.links === 'object') {
@@ -337,11 +356,20 @@ function renderWorkRow(work, globalIndex) {
             linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
         }
     }
+    
+    // 更嚴格的 CRN 檢查
+    const crnValue = String(work.crn || '').trim();
+    const hasCRN = crnValue && crnValue !== '' && crnValue !== '""' && crnValue !== "''" && crnValue !== 'null' && crnValue !== 'undefined';
+    
+    // 添加分類標籤
+    const categoryBadge = createCategoryBadge(work.category);
+    
     const row = document.createElement('tr');
     row.innerHTML = `
-        <td data-label="Organization">${work.organization || ''}</td>
+        <td data-label="#">${globalIndex}.</td>
+        <td data-label="Organization">${work.organization || ''} ${categoryBadge}</td>
         <td data-label="Position">${work.position || ''}</td>
-        ${work.crn ? `<td data-label="CRN">Company Registration Numbers: ${work.crn || ''}</td>` : ''}
+        ${hasCRN ? `<td data-label="CRN">Company Registration Numbers: ${crnValue}</td>` : ''}
         <td data-label="Date">${work.date || 'TBA'}</td>
         ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
     `;

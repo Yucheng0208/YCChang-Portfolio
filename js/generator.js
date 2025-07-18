@@ -3,6 +3,13 @@
 // =======================================================
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    fetch('navbar.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('navbar-container').innerHTML = html;
+    });
+
     // 共用語言功能
     const langToggleBtn = document.getElementById('lang-toggle');
     const currentYearSpan = document.getElementById('current-year');
