@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     })();
 
-    // Skills Section Progress Bar Animation - 增強版本
+    // Skills Section Progress Bar Animation - 修正手機版問題
     (function setupSkillsObserver() {
         const skillsSection = document.querySelector('#skills');
         if (!skillsSection) return;
@@ -151,9 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const skillCards = skillsSection.querySelectorAll('.skill-card');
             
             skillCards.forEach((card, cardIndex) => {
-                const skillTitle = card.querySelector('.skill-title').textContent.trim();
+                const skillTitle = card.querySelector('.skill-title');
+                if (!skillTitle) return;
+                
+                const skillTitleText = skillTitle.textContent.trim();
                 const skillItems = card.querySelectorAll('.skill-item');
-                const data = skillsData[skillTitle];
+                const data = skillsData[skillTitleText];
                 
                 if (data && skillItems.length >= data.length) {
                     skillItems.forEach((item, itemIndex) => {
@@ -183,6 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const skillItem = bar.closest('.skill-item');
                 const textSpan = skillItem ? skillItem.querySelector('.text-muted') : null;
                 
+                if (!targetWidth || !textSpan) return;
+                
                 // 延遲動畫，讓每個進度條依序出現
                 setTimeout(() => {
                     // 設定過渡效果
@@ -190,10 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     bar.style.width = `${targetWidth}%`;
                     
                     // 同時動畫化數字
-                    if (textSpan) {
-                        animatePercentageText(textSpan, targetWidth);
-                    }
-                }, index * 100); // 每個進度條延遲 100ms
+                    animatePercentageText(textSpan, targetWidth);
+                }, index * 150); // 每個進度條延遲 150ms
             });
         }
 
@@ -221,27 +224,117 @@ document.addEventListener('DOMContentLoaded', function() {
             requestAnimationFrame(updateText);
         }
         
+        // 強制觸發動畫（用於手機版）
+        function forceAnimateSkills() {
+            console.log('Force animating skills...');
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+        
+        // 檢查是否在視窗中
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        // 滾動監聽器（備用方案）
+        function handleScroll() {
+            if (isElementInViewport(skillsSection)) {
+                console.log('Skills section is in viewport, animating...');
+                animateProgressBars();
+                window.removeEventListener('scroll', handleScroll);
+            }
+        }
+        
+        // 設定觀察器選項
         const observerOptions = {
             root: null,
-            rootMargin: '-50px 0px', // 進入視窗 50px 後觸發
-            threshold: 0.3 // 30% 可見時觸發
+            rootMargin: '-20px 0px', // 減少 margin
+            threshold: 0.2 // 降低 threshold
         };
         
+        // 創建觀察器
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
+                console.log('Intersection observed:', entry.isIntersecting, entry.intersectionRatio);
                 if (entry.isIntersecting) {
-                    // 添加一個小延遲讓用戶能看到動畫開始
+                    console.log('Skills section entered viewport, starting animation...');
                     setTimeout(() => {
                         animateProgressBars();
-                    }, 200);
+                    }, 300);
                     observer.unobserve(skillsSection);
                 }
             });
         }, observerOptions);
         
-        // 初始化數據並開始觀察
+        // 初始化
         initializeSkillsData();
-        observer.observe(skillsSection);
+        
+        // 檢查瀏覽器支援
+        if ('IntersectionObserver' in window) {
+            console.log('Using IntersectionObserver');
+            observer.observe(skillsSection);
+            
+            // 備用方案：如果 3 秒後還沒動畫，強制執行
+            setTimeout(() => {
+                const progressBars = skillsSection.querySelectorAll('.progress-bar');
+                const firstBar = progressBars[0];
+                if (firstBar && firstBar.style.width === '0%') {
+                    console.log('Fallback: Force animating after 3 seconds');
+                    forceAnimateSkills();
+                }
+            }, 3000);
+        } else {
+            console.log('IntersectionObserver not supported, using scroll listener');
+            // 如果不支援 IntersectionObserver，使用滾動監聽器
+            window.addEventListener('scroll', handleScroll);
+            
+            // 立即檢查是否已經在視窗中
+            if (isElementInViewport(skillsSection)) {
+                forceAnimateSkills();
+            }
+        }
+        
+        // 頁面載入完成後的備用檢查
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const progressBars = skillsSection.querySelectorAll('.progress-bar');
+                const firstBar = progressBars[0];
+                if (firstBar && firstBar.style.width === '0%') {
+                    console.log('Page loaded, force animating skills');
+                    forceAnimateSkills();
+                }
+            }, 1000);
+        });
+        
+        // 手機版觸摸事件檢測
+        let touchStartTime = 0;
+        document.addEventListener('touchstart', () => {
+            touchStartTime = Date.now();
+        });
+        
+        document.addEventListener('touchend', () => {
+            const touchDuration = Date.now() - touchStartTime;
+            if (touchDuration < 300) { // 短觸摸
+                setTimeout(() => {
+                    if (isElementInViewport(skillsSection)) {
+                        const progressBars = skillsSection.querySelectorAll('.progress-bar');
+                        const firstBar = progressBars[0];
+                        if (firstBar && firstBar.style.width === '0%') {
+                            console.log('Touch detected, force animating skills');
+                            forceAnimateSkills();
+                        }
+                    }
+                }, 100);
+            }
+        });
+        
     })();
 
     // Recent Events Carousel - 修正版本

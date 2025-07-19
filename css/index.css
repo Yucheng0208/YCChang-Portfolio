@@ -650,8 +650,8 @@
     pointer-events: none;
 }
 
-.video-carousel-prev { left: calc(50% - 400px - 25px);  }
-.video-carousel-next { right: calc(50% - 400px - 25px); }
+.video-carousel-prev { left: calc(50% - 400px - 144px);  }
+.video-carousel-next { right: calc(50% - 400px - 144px); }
 
 .video-carousel-more {
     display: inline-block;
@@ -856,8 +856,8 @@
     transform: translateY(-50%) scale(1.1);
 }
 
-#prev-event { left: 15px;  }
-#next-event { right: 15px; }
+#prev-event { left: calc(50% - 400px - 144px);  }
+#next-event { right: calc(50% - 400px - 144px); }
 
 /* --- 7. Motto Section --- */
 .motto-section {
@@ -1250,8 +1250,8 @@
 }
 
 .partner-logo {
-    width: 200px;
-    height: 100px;
+    width: 250px;
+    height: 150px;
     flex-shrink: 0;
     padding: 15px;
     box-sizing: border-box;
@@ -1314,11 +1314,19 @@
 }
 
 .partner-prev {
-    left: 5px;
+    left: calc(50% - 400px - 144px);
 }
 
 .partner-next {
-    right: 5px;
+    right: calc(50% - 400px - 144px);
+}
+
+.partner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 /* --- 響應式設計 --- */
@@ -1728,12 +1736,14 @@
         font-size: 1.2rem;
     }
     
+    .partner-prev,
     .video-carousel-prev { 
-        left: -10px; 
+        left: 22px; 
     }
     
+    .partner-nav-btn,
     .video-carousel-next { 
-        right: -10px; 
+        right: 22px; 
     }
 }
 
@@ -1873,24 +1883,16 @@
         padding: 0 10px;
     }
 
-        .events-carousel-container {
+    .events-carousel-container {
         padding: 0 5px;
     }
     
     .event-nav-btn { 
-        width: 40px; 
-        height: 40px; 
-        font-size: 1rem; 
+        width: 30px; 
+        height: 30px; 
+        font-size: 1.1rem; 
     }
     
-    #prev-event { 
-        left: 5px; 
-    }
-    
-    #next-event { 
-        right: 5px; 
-    }
-
     .video-carousel-title {
         margin-top: 3rem;
     }
@@ -1945,18 +1947,18 @@
         margin-bottom: 1.5rem;
     }
 
-        .event-nav-btn { 
+    .event-nav-btn { 
         width: 40px; 
         height: 40px; 
         font-size: 1rem; 
     }
     
-    #prev-event { 
-        left: -10px; 
+    .event-nav-btn #prev-event { 
+        left: 2px; 
     }
     
-    #next-event { 
-        right: -10px; 
+    .event-nav-btn #next-event { 
+        right: 2px; 
     }
 
 }
@@ -1967,8 +1969,8 @@
     }
     
     .event-nav-btn { 
-        width: 35px; 
-        height: 35px; 
+        width: 40px; 
+        height: 40px; 
         font-size: 0.9rem; 
     }
     
@@ -1983,14 +1985,6 @@
     .events-header h2 {
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
-    }
-
-    #prev-event { 
-        left: -5px; 
-    }
-    
-    #next-event { 
-        right: -5px; 
     }
 
     .video-carousel-prev { 
