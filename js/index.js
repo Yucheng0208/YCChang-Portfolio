@@ -363,10 +363,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const grid = document.getElementById('events-grid');
         const prevBtn = document.getElementById('prev-event');
         const nextBtn = document.getElementById('next-event');
-        const playBtn = document.getElementById('play-event-autoplay');
-        const pauseBtn = document.getElementById('pause-event-autoplay');
 
-        if (!grid || !prevBtn || !nextBtn || !playBtn || !pauseBtn) return;
+        if (!grid || !prevBtn || !nextBtn) return;
         
         let currentIndex = 0;
         let autoplayInterval = null;
@@ -398,13 +396,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 eventsData.forEach(event => grid.appendChild(createCard(event)));
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
-                playBtn.style.display = 'none';
-                pauseBtn.style.display = 'none';
             } else {
                 prevBtn.style.display = 'flex';
                 nextBtn.style.display = 'flex';
-                // 顯示控制按鈕，但根據當前狀態決定顯示哪個
-                updateControlButtonsVisibility();
                 
                 for (let i = 0; i < visibleCards; i++) {
                     grid.appendChild(createCard(eventsData[eventsData.length - 1 - i]));
@@ -484,20 +478,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function showNext() { handleSlide(1); }
         function showPrev() { handleSlide(-1); }
-        
-        // 更新控制按鈕的顯示狀態
-        function updateControlButtonsVisibility() {
-            if (isAutoplayActive) {
-                // 自動播放啟用狀態，顯示暫停按鈕
-                pauseBtn.style.display = 'flex';
-                playBtn.style.display = 'none';
-            } else {
-                // 自動播放停止狀態，顯示播放按鈕
-                pauseBtn.style.display = 'none';
-                playBtn.style.display = 'flex';
-            }
-        }
-        
+                
         // 開始自動播放
         function startAutoplay() {
             const visibleCards = getVisibleCards();
@@ -506,7 +487,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             isAutoplayActive = true;
             autoplayInterval = setInterval(showNext, AUTOPLAY_SPEED);
-            updateControlButtonsVisibility();
         }
 
         // 完全暫停自動播放（用戶主動點擊暫停）
@@ -514,7 +494,6 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(autoplayInterval);
             autoplayInterval = null;
             isAutoplayActive = false;
-            updateControlButtonsVisibility();
         }
         
         // 臨時暫停自動播放（滑鼠懸停時）
@@ -542,16 +521,6 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.addEventListener('click', () => { 
             showPrev(); 
             resetAutoplay(); 
-        });
-        
-        // 用戶主動點擊暫停按鈕
-        pauseBtn.addEventListener('click', () => {
-            pauseAutoplay();
-        });
-        
-        // 用戶主動點擊播放按鈕
-        playBtn.addEventListener('click', () => {
-            startAutoplay();
         });
 
         // 視窗大小改變時重新渲染

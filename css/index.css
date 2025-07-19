@@ -714,33 +714,6 @@
     line-height: 1.6;
 }
 
-.events-controls {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.event-autoplay-btn {
-    background: #21262d;
-    border: 1px solid #30363d;
-    color: #c9d1d9;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.event-autoplay-btn:hover {
-    background-color: #30363d;
-    border-color: #8b949e;
-}
-
 .events-carousel-container {
     position: relative;
     padding: 0 15px; /* 減少 padding，讓按鈕更靠近內容 */
