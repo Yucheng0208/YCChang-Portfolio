@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 強制觸發動畫（用於手機版）
         function forceAnimateSkills() {
-            console.log('Force animating skills...');
+            //console.log('Force animating skills...');
             setTimeout(() => {
                 animateProgressBars();
             }, 500);
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 創建觀察器
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                console.log('Intersection observed:', entry.isIntersecting, entry.intersectionRatio);
+                //console.log('Intersection observed:', entry.isIntersecting, entry.intersectionRatio);
                 if (entry.isIntersecting) {
                     console.log('Skills section entered viewport, starting animation...');
                     setTimeout(() => {
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 檢查瀏覽器支援
         if ('IntersectionObserver' in window) {
-            console.log('Using IntersectionObserver');
+            //console.log('Using IntersectionObserver');
             observer.observe(skillsSection);
             
             // 備用方案：如果 3 秒後還沒動畫，強制執行
@@ -286,12 +286,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const progressBars = skillsSection.querySelectorAll('.progress-bar');
                 const firstBar = progressBars[0];
                 if (firstBar && firstBar.style.width === '0%') {
-                    console.log('Fallback: Force animating after 3 seconds');
+                    //console.log('Fallback: Force animating after 3 seconds');
                     forceAnimateSkills();
                 }
             }, 3000);
         } else {
-            console.log('IntersectionObserver not supported, using scroll listener');
+            //console.log('IntersectionObserver not supported, using scroll listener');
             // 如果不支援 IntersectionObserver，使用滾動監聽器
             window.addEventListener('scroll', handleScroll);
             
@@ -630,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const enName = logoElement.getAttribute('data-en-name');
             
             // 測試：在console中顯示
-            console.log('Adding events to:', zhName, enName);
+            //console.log('Adding events to:', zhName, enName);
             
             logoElement.addEventListener('mouseenter', (e) => {
                 console.log('Mouse enter:', zhName, enName);

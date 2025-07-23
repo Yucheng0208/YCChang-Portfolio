@@ -416,6 +416,41 @@
     color: #3fb950;
 }
 
+/* 表格特定欄位右對齊 - 添加到 grades.css */
+
+/* 針對管理者檢視的全班成績表格 */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(3),  /* Assignments */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(4),  /* Daily Performance */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(5),  /* Attendance */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(6),  /* Midterm */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(7),  /* Final */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(8),  /* Bonus */
+.grade-inquiry-page .grade-details tbody tr td:nth-child(9) { /* Final Score */
+    text-align: right;
+}
+
+/* 確保表格標題也右對齊 */
+.grade-inquiry-page .grade-details thead tr th:nth-child(3),
+.grade-inquiry-page .grade-details thead tr th:nth-child(4),
+.grade-inquiry-page .grade-details thead tr th:nth-child(5),
+.grade-inquiry-page .grade-details thead tr th:nth-child(6),
+.grade-inquiry-page .grade-details thead tr th:nth-child(7),
+.grade-inquiry-page .grade-details thead tr th:nth-child(8),
+.grade-inquiry-page .grade-details thead tr th:nth-child(9) {
+    text-align: right;
+}
+
+/* 班級平均那行也右對齊 */
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(3),
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(4),
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(5),
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(6),
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(7),
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(8),
+.grade-inquiry-page .grade-details tbody tr.class-average-row td:nth-child(9) {
+    text-align: right;
+}
+
 /* --- 4. Admin Controls --- */
 .admin-controls {
     margin-top: -1.5rem;
@@ -798,4 +833,54 @@ body.show-zh .lang-en { display: none; }
         min-width: 200px;
         right: -1px;
     }
+}
+
+/* 簡單的膠囊狀密碼輸入框樣式 - 添加到 grades.css 最底部 */
+
+/* Modal 基本樣式 */
+.custom-modal .modal-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 膠囊狀輸入框 */
+.custom-modal .modal-input {
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px; /* 膠囊狀 */
+    padding: 12px 50px 12px 20px;
+    color: var(--text-color);
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.custom-modal .modal-input:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.custom-modal .modal-input:focus {
+    border-color: var(--tech-cyan);
+    box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
+}
+
+/* 顯示密碼按鈕 */
+.custom-modal .modal-toggle-password {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #8b949e;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.custom-modal .modal-toggle-password:hover {
+    color: var(--tech-cyan);
+    background-color: rgba(100, 210, 255, 0.1);
 }
