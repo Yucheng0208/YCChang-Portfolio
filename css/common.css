@@ -992,27 +992,43 @@ body.menu-open {
     margin: 2rem 0;
 }
 
+/* --- 改進的篩選選單樣式 --- */
 .filter-bar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    background-color: var(--light-bg);
-    border-radius: 50px;
-    padding: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: nowrap; /* 強制不換行 */
+    gap: 12px; /* 桌面版較大間距 */
+    justify-content: center; /* 居中對齊 */
+    align-items: center;
+    background: none; /* 移除背景 */
+    border: none; /* 移除邊框 */
+    border-radius: 0; /* 移除圓角 */
+    padding: 0; /* 移除內邊距 */
     width: 100%;
+    max-width: 100%; /* 確保不超過容器寬度 */
+    overflow-x: auto; /* 如果內容太寬可以橫向滾動 */
+    overflow-y: hidden;
+    /* 隱藏滾動條但保持功能 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.filter-bar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
 }
 
 .filter-bar button {
-    background: none;
-    border: none;
+    background-color: var(--light-bg); /* 給每個按鈕背景色 */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* 給每個按鈕邊框 */
     color: var(--text-color);
     padding: 10px 20px;
-    border-radius: 50px;
+    border-radius: 25px; /* 圓角按鈕 */
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s ease;
-    flex: 1;
+    flex: 0 0 auto; /* 不允許按鈕縮小，保持原始大小 */
+    white-space: nowrap; /* 防止文字換行 */
+    min-width: fit-content; /* 確保按鈕有足夠寬度 */
+    font-size: 0.9rem;
 }
 
 .filter-bar button.active {
@@ -1023,6 +1039,164 @@ body.menu-open {
 
 .filter-bar button:not(.active):hover {
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 大螢幕優化 */
+@media (min-width: 1200px) {
+    .filter-bar {
+        gap: 16px; /* 更大螢幕上更大的間距 */
+    }
+    
+    .filter-bar button {
+        padding: 12px 24px; /* 稍微增加按鈕大小 */
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .filter-bar {
+        gap: 14px; /* 中大螢幕適中間距 */
+    }
+    
+    .filter-bar button {
+        padding: 11px 22px;
+        font-size: 0.92rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    .filter-bar {
+        gap: 10px; /* 平板尺寸間距 */
+    }
+}
+
+/* 手機版特殊樣式 - 增加按鈕之間的左右間距 */
+@media (max-width: 768px) {
+    .filter-bar {
+        gap: 12px; /* 大幅增加按鈕之間的間距 */
+        justify-content: center;
+        padding: 0 15px;
+        flex-wrap: wrap;
+        row-gap: 12px;
+    }
+    
+    .filter-bar button {
+        padding: 12px 28px;
+        font-size: 0.9rem;
+        min-width: 85px;
+        border-radius: 50px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .filter-bar {
+        gap: 10px; /* 增加間距 */
+        padding: 0 10px;
+        row-gap: 10px;
+    }
+    
+    .filter-bar button {
+        padding: 11px 26px;
+        font-size: 0.85rem;
+        min-width: 80px;
+        border-radius: 50px;
+        display: flex;
+    }
+}
+
+@media (max-width: 600px) {
+    .filter-bar {
+        gap: 8px; /* 增加間距 */
+        padding: 0 8px;
+        row-gap: 10px;
+    }
+    
+    .filter-bar button {
+        padding: 11px 24px;
+        font-size: 0.8rem;
+        min-width: 75px;
+        border-radius: 50px;
+        display: flex;
+    }
+}
+
+@media (max-width: 550px) {
+    .filter-bar {
+        gap: 7px; /* 增加間距 */
+        padding: 0 5px;
+        row-gap: 8px;
+    }
+    
+    .filter-bar button {
+        padding: 11px 24px;
+        font-size: 0.78rem;
+        min-width: 70px;
+        border-radius: 50px;
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-bar {
+        gap: 10px; /* 增加間距，避免太擠 */
+        row-gap: 8px;
+    }
+    
+    .filter-bar button {
+        padding: 11px 22px;
+        font-size: 0.75rem;
+        min-width: 60px;
+        border-radius: 50px;
+        display: flex;
+    }
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+/* 移除不需要的滑動提示和偽元素 */
+.controls-container {
+    position: relative;
+}
+
+/* 添加相對定位以支持偽元素 */
+.controls-container {
+    position: relative;
 }
 
 .search-container {
@@ -1248,5 +1422,140 @@ body.menu-open {
         margin: 4px 0 0 0;
         text-align: center;
         max-width: fit-content;
+    }
+}
+
+
+/* 符合網頁風格的漸層標題樣式 */
+
+/* 選項 1: 主色調漸層 (最符合您的設計) */
+.page-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 700;
+    /* 確保漸層文字效果正確套用 */
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    /* 確保在 WebKit 瀏覽器中正確顯示 */
+    display: inline-block;
+}
+
+/* 選項 2: 如果變數不work，使用具體顏色值 */
+.page-container h1.fallback-gradient {
+    background: linear-gradient(135deg, #0a84ff, #64d2ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+}
+
+/* 選項 3: 藍色深淺漸層 */
+.page-container h1.blue-depth {
+    background: linear-gradient(135deg, #0a84ff, #64d2ff, #58a6ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+}
+
+/* 選項 4: 科技感漸層 (配合您的科技主題) */
+.page-container h1.tech-gradient {
+    background: linear-gradient(135deg, #0a84ff, #00d4ff, #64d2ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+}
+
+/* 選項 5: 動態主色調漸層 */
+.page-container h1.animated-main {
+    background: linear-gradient(45deg, #0a84ff, #64d2ff, #0a84ff) !important;
+    background-size: 200% 200%;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* 圖標樣式配合您的設計風格 */
+.page-container h1 i {
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+    /* 選項 1: 圖標使用相同漸層 */
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* 選項 2: 圖標使用純色 (更清晰) */
+.page-container h1 i.solid-icon {
+    color: var(--tech-cyan); /* 使用您定義的主色 */
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+}
+
+/* 選項 3: 圖標有光暈效果 (配合您的 breathing-glow) */
+.page-container h1 i.glow-icon {
+    color: var(--tech-cyan);
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    text-shadow: 
+        0 0 5px rgba(100, 210, 255, 0.6),
+        0 0 10px rgba(100, 210, 255, 0.3);
+    animation: breathing-glow 2.5s ease-in-out infinite;
+}
+
+/* 確保在較老的瀏覽器中有降級方案 */
+@supports not (-webkit-background-clip: text) {
+    .page-container h1 {
+        color: #64d2ff !important; /* 降級為具體顏色值 */
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+    }
+    
+    .page-container h1 i {
+        color: #64d2ff !important;
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+    }
+}
+
+/* 如果您的 common.css 中有覆蓋樣式，用這個更強的選擇器 */
+.page-container.gradient-titles h1 {
+    background: linear-gradient(135deg, #0a84ff, #64d2ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    display: inline-block;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .page-container h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .page-container h1 {
+        font-size: 2rem;
     }
 }

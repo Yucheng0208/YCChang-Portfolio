@@ -21,32 +21,25 @@
 
     <main id="page-content">
         <div class="page-container">
-            <h1>
-                <span class="lang-en">Materials</span>
-                <span class="lang-zh">教材</span>
-            </h1>
-            <p>
-                <span class="lang-en">This page provides access to materials for the courses I teach, including syllabi, lecture notes, and other resources. Use the filters below to find your course.</span>
-                <span class="lang-zh">此頁面提供我所教授課程的相關教材，包含課程大綱、講義與其他資源。請使用下方的篩選器來尋找您的課程。</span>
-            </p>
+            <h1><i class="fas fa-books"></i> Materials</h1>
+            <p>This page provides access to materials for the courses I teach, including syllabi, lecture notes, and other resources. Use the filters below to find your course.</p>
 
             <!-- 控制項：篩選和搜尋 -->
             <div class="controls-container">
                 <div class="filter-group">
-                    <!--<button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>-->
                     <!-- 學校篩選 -->
                     <div id="school-filter" class="filter-bar">
-                        <button class="active" data-filter="all"><span class="lang-en">All</span><span class="lang-zh">全部</span></button>
-                        <button data-filter="high-school"><span class="lang-en">High School</span><span class="lang-zh">高中</span></button>
-                        <button data-filter="university"><span class="lang-en">University</span><span class="lang-zh">大學</span></button>
+                        <button class="active" data-filter="all">All</button>
+                        <button data-filter="high-school">High School</button>
+                        <button data-filter="university">University</button>
                     </div>
                         <!-- 下拉選單篩選 (用 wrapper 包起來) -->
                     <div class="dropdown-filters-wrapper">
                         <select id="year-filter">
-                            <option value="all"><span class="lang-en">All Academic Years</span><span class="lang-zh">所有學年</span></option>
+                            <option value="all">All Academic Years</option>
                         </select>
                         <select id="semester-filter">
-                            <option value="all"><span class="lang-en">All Semesters</span><span class="lang-zh">所有學期</span></option>
+                            <option value="all">All Semesters</option>
                         </select>
                     </div>
                 </div>
@@ -63,10 +56,7 @@
 
             <!-- 無結果時顯示 -->
             <div id="no-results-materials" class="no-results" style="display: none;">
-                <p>
-                    <span class="lang-en">No materials found matching your criteria.</span>
-                    <span class="lang-zh">找不到符合條件的課程資料。</span>
-                </p>
+                <p>No materials found matching your criteria.</p>
             </div>
         </div>
 

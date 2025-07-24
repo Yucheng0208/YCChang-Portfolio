@@ -10,46 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('navbar-container').innerHTML = html;
     });
 
-    // 共用語言功能
-    const langToggleBtn = document.getElementById('lang-toggle');
+    // 共用功能
     const currentYearSpan = document.getElementById('current-year');
     const backToTopBtn = document.getElementById('back-to-top-btn');
-    
-    let currentLang = localStorage.getItem('preferredLang') || 'en';
-
-    // 語言切換功能
-    const setLanguage = (lang) => {
-        document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
-            el.style.display = 'none';
-        });
-        document.querySelectorAll(`.lang-${lang}`).forEach(el => {
-            el.style.display = 'inline';
-        });
-        
-        // 更新佔位符
-        document.querySelectorAll('[data-placeholder-en]').forEach(input => {
-            if (lang === 'zh') {
-                input.placeholder = input.getAttribute('data-placeholder-zh');
-            } else {
-                input.placeholder = input.getAttribute('data-placeholder-en');
-            }
-        });
-        
-        document.documentElement.lang = lang;
-        localStorage.setItem('preferredLang', lang);
-        currentLang = lang;
-    };
-
-    // 語言切換事件
-    if (langToggleBtn) {
-        langToggleBtn.addEventListener('click', () => {
-            const newLang = currentLang === 'en' ? 'zh' : 'en';
-            setLanguage(newLang);
-        });
-    }
-
-    // 設定初始語言
-    setLanguage(currentLang);
 
     // 設定頁腳年份
     if (currentYearSpan) {
@@ -91,12 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 輸入驗證
             if (isNaN(numCodes) || numCodes < 1 || numCodes > 1000) {
-                let errorTextEn = 'Please enter a valid number between 1 and 1000.';
-                let errorTextZh = '請輸入一個介於 1 到 1000 之間的有效數字。';
-                errorMessageDiv.innerHTML = `<span class="lang-en">${errorTextEn}</span><span class="lang-zh">${errorTextZh}</span>`;
+                errorMessageDiv.innerHTML = 'Please enter a valid number between 1 and 1000.';
                 errorMessageDiv.style.display = 'block';
                 resultsContainer.style.display = 'none';
-                setLanguage(currentLang);
                 return;
             }
 
@@ -123,14 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             navigator.clipboard.writeText(textToCopy).then(() => {
                 // 成功回饋
-                const originalTextEn = copyAllBtn.querySelector('.lang-en').textContent;
-                const originalTextZh = copyAllBtn.querySelector('.lang-zh').textContent;
-                copyAllBtn.querySelector('.lang-en').textContent = 'Copied!';
-                copyAllBtn.querySelector('.lang-zh').textContent = '已複製！';
+                const originalText = copyAllBtn.textContent;
+                copyAllBtn.textContent = 'Copied!';
                 
                 setTimeout(() => {
-                    copyAllBtn.querySelector('.lang-en').textContent = originalTextEn;
-                    copyAllBtn.querySelector('.lang-zh').textContent = originalTextZh;
+                    copyAllBtn.textContent = originalText;
                 }, 2000);
 
             }).catch(err => {

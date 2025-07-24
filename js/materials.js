@@ -14,36 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const yearFilter = document.getElementById('year-filter');
         const semesterFilter = document.getElementById('semester-filter');
         const searchInput = document.getElementById('materials-search');
-        const langToggleButton = document.getElementById('lang-toggle');
         
         let allCourses = [];
-        const yearOptionMap = {};
-        const semesterOptionMap = {};
-
-        function updateDropdownLanguage() {
-            const isZh = document.body.classList.contains('show-zh');
-            const allYearOption = yearFilter.querySelector('option[value="all"]');
-            if (allYearOption) {
-                allYearOption.textContent = isZh ? '所有學年度' : 'All Academic Years';
-            }
-            for (const year in yearOptionMap) {
-                yearOptionMap[year].textContent = isZh ? `${year} 學年度` : `Academic Year ${year}`;
-            }
-            const allSemesterOption = semesterFilter.querySelector('option[value="all"]');
-            if (allSemesterOption) {
-                allSemesterOption.textContent = isZh ? '所有學期' : 'All Semesters';
-            }
-            for (const semester in semesterOptionMap) {
-                semesterOptionMap[semester].textContent = isZh ? `第 ${semester} 學期` : `Semester ${semester}`;
-            }
-        }
-        
-        if (langToggleButton) {
-            langToggleButton.addEventListener('click', () => {
-                document.body.classList.toggle('show-zh');
-                updateDropdownLanguage();
-            });
-        }
         
         async function loadMaterials() {
             try {
@@ -73,18 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
             years.sort().reverse().forEach(year => {
                 const option = document.createElement('option');
                 option.value = year;
-                option.textContent = `${year} (AY)`;
+                option.textContent = `Academic Year ${year}`;
                 yearFilter.appendChild(option);
-                yearOptionMap[year] = option;
             });
             semesters.sort().forEach(semester => {
                 const option = document.createElement('option');
                 option.value = semester;
                 option.textContent = `Semester ${semester}`;
                 semesterFilter.appendChild(option);
-                semesterOptionMap[semester] = option;
             });
-            updateDropdownLanguage();
         }
 
         function renderCourses(courses) {
@@ -100,32 +69,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 const links = course.links || {};
                 courseCard.innerHTML = `
                     <h3>
-                        <span class="lang-en">${course.courseName.en}</span>
-                        <span class="lang-zh">${course.courseName.zh}</span>
+                        ${course.courseName.en}
                         <span style="font-size: 0.6em; color: #8b949e; font-weight: normal;">
-                            (${course.academicYear}-${course.semester} @ <span class="lang-en">${course.school.en}</span><span class="lang-zh">${course.school.zh}</span>)
+                            (${course.academicYear}-${course.semester} @ ${course.school.en})
                         </span>
                     </h3>
                     <div class="course-details">
-                        <p><strong><span class="lang-en">Educational</span><span class="lang-zh">授課學制</span>:</strong> <span class="lang-en">${course.educational.en}</span><span class="lang-zh">${course.educational.zh}</span></p>
-                        <p><strong><span class="lang-en">Course Time</span><span class="lang-zh">授課時間</span>:</strong> <span class="lang-en">${course.courseTime.en}</span><span class="lang-zh">${course.courseTime.zh}</span></p>
-                        <p><strong><span class="lang-en">Office Hours</span><span class="lang-zh">輔導時間</span>:</strong> <span class="lang-en">${course.officeHours.en}</span><span class="lang-zh">${course.officeHours.zh}</span></p>
-                        <p><strong><span class="lang-en">Class</span><span class="lang-zh">授課班級</span>:</strong> <span class="lang-en">${course.class.en}</span><span class="lang-zh">${course.class.zh}</span></p>
-                        <p><strong><span class="lang-en">Classroom</span><span class="lang-zh">授課教室</span>:</strong> <span class="lang-en">${course.classroom.en}</span><span class="lang-zh">${course.classroom.zh}</span></p>
-                        <p><strong><span class="lang-en">Language</span><span class="lang-zh">授課語言</span>:</strong> <span class="lang-en">${course.language.en}</span><span class="lang-zh">${course.language.zh}</span></p>
-                        <p><strong><span class="lang-en">Teaching Assistents</span><span class="lang-zh">課程助教</span>:</strong> <span>${course.ta || 'N/A'}</span></p>
-                        <p><strong><span class="lang-en">Description</span><span class="lang-zh">課程簡介</span>:</strong> <span class="lang-en">${course.description.en}</span><span class="lang-zh">${course.description.zh}</span></p>
+                        <p><strong>Educational:</strong> ${course.educational.en}</p>
+                        <p><strong>Course Time:</strong> ${course.courseTime.en}</p>
+                        <p><strong>Office Hours:</strong> ${course.officeHours.en}</p>
+                        <p><strong>Class:</strong> ${course.class.en}</p>
+                        <p><strong>Classroom:</strong> ${course.classroom.en}</p>
+                        <p><strong>Language:</strong> ${course.language.en}</p>
+                        <p><strong>Teaching Assistents:</strong> ${course.ta || 'N/A'}</p>
+                        <p><strong>Description:</strong> ${course.description.en}</p>
                     </div>
                     <div class="course-links">
-                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn"><span class="lang-en">Contact Me</span><span class="lang-zh">聯繫老師</span></a>
-                        ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn"><span class="lang-en">Materials</span><span class="lang-zh">課程教材</span></a>` : ''}
-                        ${links.linechat ? `<a href="${links.linechat}" target="_blank" class="btn"><span class="lang-en">LINE Chat</span><span class="lang-zh">LINE 群組</span></a>` : ''}
-                        ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn"><span class="lang-en">Announcements</span><span class="lang-zh">課程公告</span></a>` : ''}
-                        ${links.msteams ? `<a href="${links.msteams}" target="_blank" class="btn"><span class="lang-en">Microsoft Teams</span><span class="lang-zh">Microsoft Teams</span></a>` : ''}
-                        ${links.googlemeet ? `<a href="${links.googlemeet}" target="_blank" class="btn"><span class="lang-en">Google Meet</span><span class="lang-zh">Google Meet</span></a>` : ''}
-                        ${links.googleclassroom ? `<a href="${links.googleclassroom}" target="_blank" class="btn"><span class="lang-en">Google Classroom</span><span class="lang-zh">Google Classroom</span></a>` : ''}
-                        ${links.zuvio ? `<a href="${links.zuvio}" target="_blank" class="btn"><span class="lang-en">Zuvio</span><span class="lang-zh">Zuvio</span></a>` : ''}
-                        ${links.github ? `<a href="${links.github}" target="_blank" class="btn"><span class="lang-en">GitHub</span><span class="lang-zh">GitHub</span></a>` : ''}
+                        <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn">Contact Me</a>
+                        ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn">Materials</a>` : ''}
+                        ${links.linechat ? `<a href="${links.linechat}" target="_blank" class="btn">LINE Chat</a>` : ''}
+                        ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn">Announcements</a>` : ''}
+                        ${links.msteams ? `<a href="${links.msteams}" target="_blank" class="btn">Microsoft Teams</a>` : ''}
+                        ${links.googlemeet ? `<a href="${links.googlemeet}" target="_blank" class="btn">Google Meet</a>` : ''}
+                        ${links.googleclassroom ? `<a href="${links.googleclassroom}" target="_blank" class="btn">Google Classroom</a>` : ''}
+                        ${links.zuvio ? `<a href="${links.zuvio}" target="_blank" class="btn">Zuvio</a>` : ''}
+                        ${links.github ? `<a href="${links.github}" target="_blank" class="btn">GitHub</a>` : ''}
                     </div>`;
                 listContainer.appendChild(courseCard);
             });
@@ -154,13 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const semesterMatch = selectedSemester === 'all' || course.semester === selectedSemester;
                 const searchMatch = !searchTerm || 
                     (course.courseName.en && course.courseName.en.toLowerCase().includes(searchTerm)) || 
-                    (course.courseName.zh && course.courseName.zh.toLowerCase().includes(searchTerm)) || 
                     (course.description.en && course.description.en.toLowerCase().includes(searchTerm)) || 
-                    (course.description.zh && course.description.zh.toLowerCase().includes(searchTerm)) || 
                     (course.school && course.school.en && course.school.en.toLowerCase().includes(searchTerm)) ||
-                    (course.school && course.school.zh && course.school.zh.toLowerCase().includes(searchTerm)) ||
-                    (course.educational && course.educational.en && course.educational.en.toLowerCase().includes(searchTerm)) ||
-                    (course.educational && course.educational.zh && course.educational.zh.toLowerCase().includes(searchTerm));
+                    (course.educational && course.educational.en && course.educational.en.toLowerCase().includes(searchTerm));
                 
                 return educationalMatch && yearMatch && semesterMatch && searchMatch;
             });

@@ -23,24 +23,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.grade-inquiry-page .lang-toggle-btn {
-    padding: 12px 24px;
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    flex-shrink: 0;
-}
-
-.grade-inquiry-page .lang-toggle-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
-}
-
 .grade-inquiry-page .dropdown-group {
     display: flex;
     flex-grow: 3;
@@ -648,20 +630,11 @@
     to { transform: rotate(360deg); }
 }
 
-/* --- 7. Language Switch --- */
-.lang-zh { display: none; }
-body.show-zh .lang-zh { display: inline; }
-body.show-zh .lang-en { display: none; }
-
-/* --- 8. Responsive Styles --- */
+/* --- 7. Responsive Styles --- */
 @media (max-width: 992px) {
     .grade-inquiry-page .inquiry-controls {
         flex-direction: column;
         align-items: stretch;
-    }
-
-    .grade-inquiry-page .lang-toggle-btn {
-        width: 100%;
     }
     
     .grade-inquiry-page .grade-summary-cards {
@@ -691,39 +664,39 @@ body.show-zh .lang-en { display: none; }
     
     .grade-inquiry-page .dropdown-group {
         min-width: 100%;
-        flex-direction: row; /* 保持水平排列 */
-        border-radius: 50px; /* 手機版更圓弧 */
+        flex-direction: row;
+        border-radius: 50px;
         margin: 0;
         width: 100%;
         box-sizing: border-box;
-        gap: 1px; /* 兩個選單之間的小間隙 */
+        gap: 1px;
     }
     
     .grade-inquiry-page .school-selector-wrapper,
     .grade-inquiry-page .course-selector-wrapper {
         flex: 1;
-        min-width: 0; /* 允許收縮 */
+        min-width: 0;
     }
     
     .grade-inquiry-page #school-select,
     .grade-inquiry-page #course-select {
         border-radius: 0;
         margin: 0;
-        padding: 12px 30px 12px 12px; /* 減少左右 padding */
+        padding: 12px 30px 12px 12px;
         width: 100%;
         box-sizing: border-box;
-        font-size: 0.9rem; /* 稍微縮小字體 */
+        font-size: 0.9rem;
     }
     
     .grade-inquiry-page #school-select {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
-        border-top-left-radius: 20px; /* 更圓弧 */
-        border-bottom-left-radius: 20px; /* 更圓弧 */
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
     }
     
     .grade-inquiry-page #course-select {
-        border-top-right-radius: 20px; /* 更圓弧 */
-        border-bottom-right-radius: 20px; /* 更圓弧 */
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
     }
     
     .grade-inquiry-page .search-box-wrapper {
@@ -738,13 +711,13 @@ body.show-zh .lang-en { display: none; }
         box-sizing: border-box;
         border-radius: 50px 0 0 50px;
         flex-shrink: 1;
-        padding: 12px 16px; /* 稍微減少 padding */
+        padding: 12px 16px;
     }
     
     .grade-inquiry-page #search-btn {
         flex-shrink: 0;
         white-space: nowrap;
-        padding: 12px 20px; /* 稍微減少 padding */
+        padding: 12px 20px;
     }
     
     .grade-inquiry-page .grade-summary-cards .card {
@@ -778,8 +751,8 @@ body.show-zh .lang-en { display: none; }
     
     .grade-inquiry-page #school-select,
     .grade-inquiry-page #course-select {
-        padding: 10px 25px 10px 10px; /* 進一步減少 padding */
-        font-size: 0.85rem; /* 更小的字體 */
+        padding: 10px 25px 10px 10px;
+        font-size: 0.85rem;
     }
     
     .grade-inquiry-page .search-box-wrapper {
@@ -835,8 +808,6 @@ body.show-zh .lang-en { display: none; }
     }
 }
 
-/* 簡單的膠囊狀密碼輸入框樣式 - 添加到 grades.css 最底部 */
-
 /* Modal 基本樣式 */
 .custom-modal .modal-input-container {
     position: relative;
@@ -848,7 +819,7 @@ body.show-zh .lang-en { display: none; }
 .custom-modal .modal-input {
     background-color: var(--dark-bg);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50px; /* 膠囊狀 */
+    border-radius: 50px;
     padding: 12px 50px 12px 20px;
     color: var(--text-color);
     font-size: 1rem;

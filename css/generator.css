@@ -93,31 +93,7 @@
     box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
 }
 
-.code-generator-page #copy-all-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
-}
-
-/* --- 2. Language Toggle --- */
-.code-generator-page .lang-toggle-btn {
-    padding: 12px 24px;
-    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    flex-shrink: 0;
-}
-
-.code-generator-page .lang-toggle-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
-}
-
-/* --- 3. Results Container --- */
+/* --- 2. Results Container --- */
 .code-generator-page .results-container {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -146,7 +122,7 @@
     gap: 0.5rem;
 }
 
-/* --- 4. Code List --- */
+/* --- 3. Code List --- */
 .code-generator-page #code-list {
     list-style-type: none;
     background-color: #0d1117;
@@ -184,7 +160,7 @@
     border-color: var(--tech-cyan);
 }
 
-/* --- 5. Code Container --- */
+/* --- 4. Code Container --- */
 .code-generator-page #code-list li .code-container {
     display: flex;
     width: 100%;
@@ -229,7 +205,7 @@
     color: #89e0ff;
 }
 
-/* --- 6. Code Details --- */
+/* --- 5. Code Details --- */
 .code-generator-page #code-list li .code-details {
     margin-top: 0.5rem;
     padding: 0.5rem;
@@ -250,7 +226,7 @@
     color: #c9d1d9;
 }
 
-/* --- 7. Message Styles --- */
+/* --- 6. Message Styles --- */
 .code-generator-page .error-message {
     background-color: rgba(255, 107, 107, 0.1);
     color: #ff6b6b;
@@ -271,7 +247,7 @@
     text-align: center;
 }
 
-/* --- 8. Copy Animation --- */
+/* --- 7. Copy Animation --- */
 @keyframes copySuccess {
     0% {
         transform: scale(1);
@@ -291,7 +267,7 @@
     animation: copySuccess 0.6s ease-out;
 }
 
-/* --- 9. Loading State --- */
+/* --- 8. Loading State --- */
 .code-generator-page .loading {
     display: flex;
     align-items: center;
@@ -316,12 +292,7 @@
     to { transform: rotate(360deg); }
 }
 
-/* --- 10. Language Switch --- */
-.lang-zh { display: none; }
-body.show-zh .lang-zh { display: inline; }
-body.show-zh .lang-en { display: none; }
-
-/* --- 11. Responsive Styles --- */
+/* --- 9. Responsive Styles --- */
 @media (max-width: 992px) {
     .code-generator-page #code-list {
         column-count: 2;
@@ -408,13 +379,6 @@ body.show-zh .lang-en { display: none; }
 @media (max-width: 480px) {
     .code-generator-page .generator-controls {
         padding: 0.75rem;
-        
-    }
-
-    .code-generator-page .lang-toggle-btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-        border-radius: 50px; 
     }
 
     .code-generator-page #num-codes-input {

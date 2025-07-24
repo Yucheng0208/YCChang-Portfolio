@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu-Cheng Chang - Grade Inquiry</title>
+    <title>Yu-Cheng Chang - Grade</title>
     <!-- 連結到您的 CSS 檔案 -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/grades.css">
@@ -24,26 +24,16 @@
     <main id="page-content">
         <div class="page-container">
             <!-- 頁面標題 -->
-            <h1>
-                <span class="lang-en">Grade Inquiry</span>
-                <span class="lang-zh">成績查詢</span>
-            </h1>
-            <p>
-                <span class="lang-en">Select your course and enter your Student ID to check your grades.</span>
-                <span class="lang-zh">請選擇您的課程並輸入學號以查詢成績。</span>
-            </p>
+            <h1>Grade Inquiry</h1>
+            <p>Select your course and enter your Student ID to check your grades.</p>
 
             <!-- 查詢控制區塊 -->
             <div class="inquiry-controls">
-                <!--<button id="lang-toggle" class="lang-toggle-btn">EN ↔️ 中文</button>-->
                 
                 <div class="dropdown-group">
                     <!-- 學校選擇下拉選單 -->
                     <div class="school-selector-wrapper">
-                        <label for="school-select">
-                            <span class="lang-en">School:</span>
-                            <span class="lang-zh">學校：</span>
-                        </label>
+                        <label for="school-select">School:</label>
                         <select id="school-select">
                             <option value="">Please select a school</option>
                             <!-- 學校選項會由 JS 動態載入 -->
@@ -52,10 +42,7 @@
                     
                     <!-- 課程選擇下拉選單 -->
                     <div class="course-selector-wrapper">
-                        <label for="course-select">
-                            <span class="lang-en">Course:</span>
-                            <span class="lang-zh">課程：</span>
-                        </label>
+                        <label for="course-select">Course:</label>
                         <select id="course-select" disabled>
                             <option value="">Please select a course</option>
                             <!-- 選項會由 JS 動態載入 -->
@@ -68,12 +55,8 @@
                     <input type="text" id="student-id-input" 
                            placeholder="Enter Student ID..." 
                            data-placeholder-en="Enter Student ID..."
-                           data-placeholder-zh="請輸入您的學號..."
                            aria-label="Student ID Input">
-                    <button id="search-btn" aria-label="Search Grades">
-                        <span class="lang-en">Search</span>
-                        <span class="lang-zh">查詢</span>
-                    </button>
+                    <button id="search-btn" aria-label="Search Grades">Search</button>
                 </div>
             </div>
 
@@ -82,25 +65,20 @@
                 <div class="admin-dropdown">
                     <button id="chart-options-btn" class="admin-btn">
                         <i class="fas fa-chart-bar"></i>
-                        <span class="lang-en">Chart Options</span>
-                        <span class="lang-zh">圖表選項</span>
+                        Chart Options
                     </button>
                     <div id="chart-options-dropdown" class="admin-dropdown-content">
                         <div class="chart-option-buttons">
-                            <button id="select-all-options" class="chart-option-btn">
-                                <span class="lang-en">Select All</span><span class="lang-zh">全選</span>
-                            </button>
-                            <button id="clear-all-options" class="chart-option-btn">
-                                <span class="lang-en">Clear All</span><span class="lang-zh">清除</span>
-                            </button>
+                            <button id="select-all-options" class="chart-option-btn">Select All</button>
+                            <button id="clear-all-options" class="chart-option-btn">Clear All</button>
                         </div>
                         <ul>
-                            <li><label><input type="checkbox" value="finalScore"> <span class="lang-en">Final Score</span><span class="lang-zh">總分</span></label></li>
-                            <li><label><input type="checkbox" value="assignments"> <span class="lang-en">Assignments</span><span class="lang-zh">平時成績</span></label></li>
-                            <li><label><input type="checkbox" value="dailyPerformance"> <span class="lang-en">Daily Performance</span><span class="lang-zh">日常表現</span></label></li>
-                            <li><label><input type="checkbox" value="attendance"> <span class="lang-en">Attendance</span><span class="lang-zh">點名</span></label></li>
-                            <li><label><input type="checkbox" value="midterm"> <span class="lang-en">Midterm</span><span class="lang-zh">期中</span></label></li>
-                            <li><label><input type="checkbox" value="final"> <span class="lang-en">Final</span><span class="lang-zh">期末</span></label></li>
+                            <li><label><input type="checkbox" value="finalScore"> Final Score</label></li>
+                            <li><label><input type="checkbox" value="assignments"> Assignments</label></li>
+                            <li><label><input type="checkbox" value="dailyPerformance"> Daily Performance</label></li>
+                            <li><label><input type="checkbox" value="attendance"> Attendance</label></li>
+                            <li><label><input type="checkbox" value="midterm"> Midterm</label></li>
+                            <li><label><input type="checkbox" value="final"> Final</label></li>
                         </ul>
                     </div>
                 </div>
@@ -115,13 +93,11 @@
                         <!-- JS 填入課程名稱 -->
                     </h2>
                     <p>
-                        <span class="lang-en">Course Code: </span>
-                        <span class="lang-zh">課程號碼：</span>
+                        Course Code: 
                         <span id="result-course-code"></span>
                     </p>
                     <p>
-                        <span class="lang-en">Student ID: </span>
-                        <span class="lang-zh">查詢學號：</span>
+                        Student ID: 
                         <span id="result-student-id"></span>
                     </p>
                 </div>
@@ -130,51 +106,48 @@
                 <div class="grade-summary-cards">
                     <!-- 平時成績卡 -->
                     <div class="card" id="card-assignments">
-                        <h3><span class="lang-en">Assignments</span><span class="lang-zh">平時成績</span></h3>
+                        <h3>Assignments</h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
 
                     <!-- 日常表現卡 (Daily Performance) -->
                     <div class="card" id="card-daily-performance">
-                        <h3><span class="lang-en">Daily Performance</span><span class="lang-zh">日常表現</span></h3>
+                        <h3>Daily Performance</h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
                     
                     <!-- 點名成績卡 -->
                     <div class="card" id="card-attendance">
-                        <h3><span class="lang-en">Attendance</span><span class="lang-zh">點名</span></h3>
+                        <h3>Attendance</h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
                     <!-- 期中成績卡 -->
                     <div class="card" id="card-midterm">
-                        <h3><span class="lang-en">Midterm</span><span class="lang-zh">期中</span></h3>
+                        <h3>Midterm</h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
                     <!-- 期末成績卡 -->
                     <div class="card" id="card-final">
-                        <h3><span class="lang-en">Final</span><span class="lang-zh">期末</span></h3>
+                        <h3>Final</h3>
                         <p class="score"><span class="value">--</span> / 100</p>
                     </div>
                     <!-- 加分項目卡 -->
                      <div class="card bonus" id="card-bonus">
-                        <h3><span class="lang-en">Bonus</span><span class="lang-zh">額外加分</span></h3>
+                        <h3>Bonus</h3>
                         <p class="score">+<span class="value">--</span></p>
                     </div>
                 </div>
 
                 <!-- 成績明細表格 -->
                 <div class="grade-details">
-                    <h3>
-                        <span class="lang-en">Grade Breakdown</span>
-                        <span class="lang-zh">成績細項</span>
-                    </h3>
+                    <h3>Grade Breakdown</h3>
                     <table>
                         <thead>
                             <tr>
-                                <th><span class="lang-en">Item</span><span class="lang-zh">項目</span></th>
-                                <th><span class="lang-en">Score</span><span class="lang-zh">得分</span></th>
-                                <th><span class="lang-en">Weight</span><span class="lang-zh">佔比</span></th>
-                                <th><span class="lang-en">Weighted Score</span><span class="lang-zh">加權分數</span></th>
+                                <th>Item</th>
+                                <th>Score</th>
+                                <th>Weight</th>
+                                <th>Weighted Score</th>
                             </tr>
                         </thead>
                         <tbody id="grade-details-body">
@@ -183,28 +156,19 @@
                         <tfoot>
                             <tr>
                                 <td colspan="3" class="total-label">
-                                    <strong>
-                                        <span class="lang-en">Final Score (Before Bonus)</span>
-                                        <span class="lang-zh">總成績 (加分前)</span>
-                                    </strong>
+                                    <strong>Final Score (Before Bonus)</strong>
                                 </td>
                                 <td class="total-score" id="subtotal-score">--</td>
                             </tr>
                              <tr>
                                 <td colspan="3" class="total-label">
-                                    <strong>
-                                        <span class="lang-en">Bonus Points</span>
-                                        <span class="lang-zh">加分</span>
-                                    </strong>
+                                    <strong>Bonus Points</strong>
                                 </td>
                                 <td class="total-score" id="bonus-score">+--</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="total-label final">
-                                    <strong>
-                                        <span class="lang-en">FINAL TOTAL</span>
-                                        <span class="lang-zh">最終總分</span>
-                                    </strong>
+                                    <strong>FINAL TOTAL</strong>
                                 </td>
                                 <td class="total-score final" id="final-total-score">--</td>
                             </tr>
@@ -222,21 +186,14 @@
 
             <!-- 查無資料時顯示的訊息 -->
             <div id="no-results-message" class="no-results" style="display: none;">
-                <p>
-                    <span class="lang-en">No grade record found for this Student ID in the selected course. Please check your input.</span>
-                    <span class="lang-zh">在所選課程中找不到此學號的成績紀錄，請檢查您的輸入是否正確。</span>
-                </p>
+                <p>No grade record found for this Student ID in the selected course. Please check your input.</p>
             </div>
              <!-- 載入中提示 -->
             <div id="loading-indicator" class="loading-indicator" style="display: none;">
-                <p>
-                    <span class="lang-en">Loading...</span>
-                    <span class="lang-zh">載入中...</span>
-                </p>
+                <p>Loading...</p>
             </div>
             <p class="grade-note">
-                <span class="lang-en"><i class="fas fa-bell"></i> Note: Grades will be retained for one academic year.</span>
-                <span class="lang-zh"><i class="fas fa-bell"></i> 備註：成績將保留一個學年度。</span>
+                <i class="fas fa-bell"></i> Note: Grades will be retained for one academic year.
             </p>
 
         </div>

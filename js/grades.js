@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const courseSelect = document.getElementById('course-select');
         const studentIdInput = document.getElementById('student-id-input');
         const searchBtn = document.getElementById('search-btn');
-        const langToggleBtn = document.getElementById('lang-toggle');
         const resultsContainer = document.getElementById('grade-results-container');
         const noResultsMessage = document.getElementById('no-results-message');
         const loadingIndicator = document.getElementById('loading-indicator');
@@ -46,34 +45,28 @@ document.addEventListener('DOMContentLoaded', function() {
         let gradeChart = null;
         let currentStudentDataForChart = [];
         
-        // 標頭翻譯字典
+        // 標頭翻譯字典 (保留英文部分)
         const headerTranslations = {
-            'HW': { en: 'Homework', zh: '作業' },
-            'Quiz': { en: 'Quiz', zh: '小考' },
-            'Bonus': { en: 'Bonus', zh: '加分' },
-            'Daily': {en: 'Daily', zh: '日常'},
-            'Participation': {en: 'Participation', zh: '參與分數'},
-            'Attendance': { en: 'Attendance', zh: '點名分數' },
-            'Midterm': { en: 'Midterm', zh: '期中' },
-            'Final': { en: 'Final', zh: '期末' },
+            'HW': 'Homework',
+            'Quiz': 'Quiz',
+            'Bonus': 'Bonus',
+            'Daily': 'Daily',
+            'Participation': 'Participation',
+            'Attendance': 'Attendance',
+            'Midterm': 'Midterm',
+            'Final': 'Final',
         };
         
-        // 核心功能函式
-        function isChinese() {
-            return document.body.classList.contains('show-zh');
-        }
-
         function getDisplayName(header) {
-            const lang = isChinese() ? 'zh' : 'en';
             if (headerTranslations[header]) {
-                return headerTranslations[header][lang];
+                return headerTranslations[header];
             }
             const match = header.match(/^([a-zA-Z]+)(\d+)$/);
             if (match) {
                 const base = match[1];
                 const number = match[2];
                 if (headerTranslations[base]) {
-                    return `${headerTranslations[base][lang]} ${number}`;
+                    return `${headerTranslations[base]} ${number}`;
                 }
             }
             return header;
@@ -126,15 +119,14 @@ document.addEventListener('DOMContentLoaded', function() {
             schoolSelect.options.length = 1;
             const schoolMap = new Map();
             availableCourses.forEach(c => {
-                if (c.school && c.school_id && c.school_id !== 'NA' && c.school_id.trim() !== '' && c.school.en && c.school.zh && !schoolMap.has(c.school_id)) {
+                if (c.school && c.school_id && c.school_id !== 'NA' && c.school_id.trim() !== '' && c.school.en && !schoolMap.has(c.school_id)) {
                     schoolMap.set(c.school_id, c.school);
                 }
             });
             schoolMap.forEach((school, id) => {
-                const option = new Option(isChinese() ? school.zh : school.en, id);
+                const option = new Option(school.en, id);
                 schoolSelect.add(option);
             });
-            updateSchoolSelectLanguage();
         }
         
         function loadCoursesForSchool(schoolId) {
@@ -142,34 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
             courseSelect.disabled = !schoolId;
             if (!schoolId) return;
             availableCourses.filter(c => c.school_id === schoolId).forEach(c => {
-                const text = isChinese() ? `${c.name.zh} (${c.code})` : `${c.name.en} (${c.code})`;
+                const text = `${c.name.en} (${c.code})`;
                 const option = new Option(text, c.id);
                 courseSelect.add(option);
-            });
-            updateCourseSelectLanguage();
-        }
-        
-        function updateSchoolSelectLanguage() {
-            const isZh = isChinese();
-            Array.from(schoolSelect.options).forEach(opt => {
-                if (opt.value === "") {
-                    opt.textContent = isZh ? "請選擇學校" : "Please select a school";
-                } else {
-                    const course = availableCourses.find(c => c.school_id === opt.value);
-                    if (course) opt.textContent = isZh ? course.school.zh : course.school.en;
-                }
-            });
-        }
-        
-        function updateCourseSelectLanguage() {
-            const isZh = isChinese();
-            Array.from(courseSelect.options).forEach(opt => {
-                if (opt.value === "") {
-                    opt.textContent = isZh ? "請選擇一門課程" : "Please select a course";
-                } else {
-                    const course = availableCourses.find(c => c.id === opt.value);
-                    if (course) opt.textContent = isZh ? `${course.name.zh} (${course.code})` : `${course.name.en} (${course.code})`;
-                }
             });
         }
     
@@ -186,21 +153,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p class="modal-message"></p>
                         <div class="modal-input-container">
                             <input type="password" class="modal-input" maxlength="20" />
-                            <button type="button" class="modal-toggle-password" title="顯示/隱藏密碼">
+                            <button type="button" class="modal-toggle-password" title="Show/Hide Password">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
                         <div class="modal-error"></div>
                     </div>
                     <div class="modal-footer">
-                        <button class="modal-btn modal-btn-secondary" data-action="cancel">
-                            <span class="lang-en">Cancel</span>
-                            <span class="lang-zh">取消</span>
-                        </button>
-                        <button class="modal-btn modal-btn-primary" data-action="confirm">
-                            <span class="lang-en">Confirm</span>
-                            <span class="lang-zh">確認</span>
-                        </button>
+                        <button class="modal-btn modal-btn-secondary" data-action="cancel">Cancel</button>
+                        <button class="modal-btn modal-btn-primary" data-action="confirm">Confirm</button>
                     </div>
                 </div>
             `;
@@ -226,10 +187,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cancelBtn = modal.querySelector('[data-action="cancel"]');
                 const confirmBtn = modal.querySelector('[data-action="confirm"]');
 
-                titleEl.innerHTML = isChinese() ? '🔐 輸入查詢代碼' : '🔐 Enter Access Code';
-                messageEl.innerHTML = isChinese() 
-                    ? '請輸入六位數查詢代碼 (由大小寫英文字母和數字組成)' 
-                    : 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)';
+                titleEl.innerHTML = '🔐 Enter Access Code';
+                messageEl.innerHTML = 'Please enter the 6-digit access code (consisting of uppercase/lowercase letters and numbers)';
                 inputEl.placeholder = '＊＊＊＊＊＊';
 
                 let isPasswordVisible = false;
@@ -239,11 +198,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (isPasswordVisible) {
                         inputEl.type = 'text';
                         iconEl.className = 'fas fa-eye-slash';
-                        toggleBtn.title = isChinese() ? '隱藏密碼' : 'Hide password';
+                        toggleBtn.title = 'Hide password';
                     } else {
                         inputEl.type = 'password';
                         iconEl.className = 'fas fa-eye';
-                        toggleBtn.title = isChinese() ? '顯示密碼' : 'Show password';
+                        toggleBtn.title = 'Show password';
                     }
                 });
 
@@ -256,9 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const isValidAdminCode = value.startsWith('ADMIN_');
                     
                     if (value.length > 0 && !isValidStudentCode && !isValidAdminCode) {
-                        errorEl.textContent = isChinese() 
-                            ? '格式錯誤！請輸入6位英文字母和數字，或管理者代碼' 
-                            : 'Invalid format! Please enter 6 letters and numbers, or admin code';
+                        errorEl.textContent = 'Invalid format! Please enter 6 letters and numbers, or admin code';
                         errorEl.style.display = 'block';
                         confirmBtn.disabled = true;
                         confirmBtn.style.opacity = '0.5';
@@ -323,9 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorEl.style.display = 'none';
                 cancelBtn.style.display = 'none';
 
-                titleEl.innerHTML = isError 
-                    ? (isChinese() ? '❌ 錯誤' : '❌ Error')
-                    : (isChinese() ? '✅ 提示' : '✅ Notice');
+                titleEl.innerHTML = isError ? '❌ Error' : '✅ Notice';
                 messageEl.textContent = message;
                 messageEl.style.textAlign = 'center';
 
@@ -336,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => modal.classList.add('show'), 10);
                 confirmBtn.focus();
 
-                confirmBtn.innerHTML = isChinese() ? '確定' : 'OK';
+                confirmBtn.innerHTML = 'OK';
                 confirmBtn.addEventListener('click', () => {
                     modal.classList.remove('show');
                     setTimeout(() => {
@@ -389,14 +344,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const studentId = studentIdInput.value.trim().toUpperCase();
 
             if (!courseId || !studentId) {
-                await showAlert(isChinese() ? '請選擇課程並輸入學號。' : 'Please select a course and enter your Student ID.', true);
+                await showAlert('Please select a course and enter your Student ID.', true);
                 return;
             }
 
             if (!validateStudentId(studentId)) {
-                await showAlert(isChinese() 
-                    ? '學號格式錯誤！請輸入有效的學號格式。' 
-                    : 'Invalid Student ID format! Please enter a valid Student ID.', true);
+                await showAlert('Invalid Student ID format! Please enter a valid Student ID.', true);
                 return;
             }
             
@@ -405,9 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showLoading(false);
             
             if (!studentExists) {
-                await showAlert(isChinese() 
-                    ? '找不到該學號的資料。請確認學號是否正確。' 
-                    : 'No data found for this Student ID.Please verify the Student ID.', true);
+                await showAlert('No data found for this Student ID. Please verify the Student ID.', true);
                 return;
             }
 
@@ -420,17 +371,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     await showAllGrades(courseId);
                     return;
                 } else {
-                    await showAlert(isChinese() 
-                        ? '管理者代碼錯誤！請確認您輸入的代碼是否正確。' 
-                        : 'Admin code is incorrect! Please verify the code you entered.', true);
+                    await showAlert('Admin code is incorrect! Please verify the code you entered.', true);
                     return;
                 }
             }
             
             if (!validateAccessCode(accessCode)) {
-                await showAlert(isChinese() 
-                    ? '代碼格式錯誤！請輸入六位由大小寫英文字母和數字組成的代碼。' 
-                    : 'Invalid code format! Please enter a 6-character code consisting of uppercase/lowercase letters and numbers.', true);
+                await showAlert('Invalid code format! Please enter a 6-character code consisting of uppercase/lowercase letters and numbers.', true);
                 return;
             }
     
@@ -460,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Search failed:', error);
                 noResultsMessage.style.display = 'block';
-                await showAlert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`, true);
+                await showAlert(`Search failed: ${error.message}`, true);
             } finally {
                 showLoading(false);
             }
@@ -574,15 +521,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!studentData) {
                 noResultsMessage.style.display = 'block';
-                await showAlert(isChinese() ? '找不到該學號的資料。' : 'No data found for this Student ID.', true);
+                await showAlert('No data found for this Student ID.', true);
                 return;
             }
 
             const studentAccessCode = studentData.Code || studentData.code;
             if (!studentAccessCode || studentAccessCode !== accessCode) {
-                await showAlert(isChinese() 
-                    ? '查詢代碼錯誤！請確認您輸入的代碼是否正確。' 
-                    : 'Access code is incorrect! Please verify the code you entered.', true);
+                await showAlert('Access code is incorrect! Please verify the code you entered.', true);
                 return;
             }
 
@@ -607,13 +552,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (bonusCard) {
                 const cardTitle = bonusCard.querySelector('h3');
                 if (cardTitle) {
-                    cardTitle.innerHTML = '<span class="lang-en">Bonus</span><span class="lang-zh">額外加分</span>';
+                    cardTitle.innerHTML = 'Bonus';
                 }
                 bonusCard.classList.remove('final-avg');
                 bonusCard.classList.add('bonus');
             }
             
-            resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
+            resultCourseName.innerHTML = courseInfo.name.en;
             resultCourseCode.textContent = courseInfo.code;
             resultStudentId.textContent = student.ID;
             gradeDetailsBody.innerHTML = '';
@@ -676,19 +621,7 @@ document.addEventListener('DOMContentLoaded', function() {
             finalTotalScoreEl.textContent = finalScore.toFixed(2);
         }
 
-        function updateDynamicLanguage() {
-            updateSchoolSelectLanguage();
-            updateCourseSelectLanguage();
-            const isZh = isChinese();
-            if (studentIdInput) {
-                 studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
-            }
-        }
-
-        // 在您現有的 grades.js 檔案中，在 renderResults 函數之後添加以下缺少的函數：
-
-        // ===== 補上缺少的管理者功能 =====
-        
+        // 管理者功能
         async function showAllGrades(courseId) {
             hideAllResults();
             showLoading(true);
@@ -714,7 +647,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
             } catch (error) {
                 console.error('Show all grades failed:', error);
-                await showAlert(isChinese() ? `查詢失敗：${error.message}` : `Search failed: ${error.message}`, true);
+                await showAlert(`Search failed: ${error.message}`, true);
             } finally {
                 showLoading(false);
             }
@@ -741,9 +674,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 row.ID && row.ID.toUpperCase() !== 'YCCADMIN'
             );
 
-            resultCourseName.innerHTML = `<span class="lang-en">${courseInfo.name.en}</span><span class="lang-zh">${courseInfo.name.zh}</span>`;
+            resultCourseName.innerHTML = courseInfo.name.en;
             resultCourseCode.textContent = courseInfo.code;
-            resultStudentId.innerHTML = `<span class="lang-en">All Students (Admin View)</span><span class="lang-zh">全班成績 (管理者檢視)</span>`;
+            resultStudentId.innerHTML = 'All Students (Admin View)';
 
             const categoryWeights = {};
             headers.forEach(h => {
@@ -827,12 +760,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 bonusCard.style.display = 'block';
                 const cardTitle = bonusCard.querySelector('h3');
                 if (cardTitle) {
-                    cardTitle.innerHTML = '<span class="lang-en">Final Avg</span><span class="lang-zh">期末平均</span>';
+                    cardTitle.innerHTML = 'Final Avg';
                 }
                 const scoreContainer = bonusCard.querySelector('.score');
                 if (scoreContainer) {
-                    const avgLabel = isChinese() ? '平均' : 'AVG';
-                    scoreContainer.innerHTML = `<span class="value">${finalScoreAverage.toFixed(1)}</span> <small>(${avgLabel})</small>`;
+                    scoreContainer.innerHTML = `<span class="value">${finalScoreAverage.toFixed(1)}</span> <small>(AVG)</small>`;
                 }
                 bonusCard.classList.remove('bonus');
                 bonusCard.classList.add('final-avg');
@@ -852,15 +784,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const headerRow = document.createElement('tr');
             headerRow.innerHTML = `
-                <th><span class="lang-en">Rank</span><span class="lang-zh">排名</span></th>
-                <th><span class="lang-en">Student ID</span><span class="lang-zh">學號</span></th>
-                <th><span class="lang-en">Assignments</span><span class="lang-zh">平時成績</span></th>
-                <th><span class="lang-en">Daily Performance</span><span class="lang-zh">日常表現</span></th>
-                <th><span class="lang-en">Attendance</span><span class="lang-zh">點名</span></th>
-                <th><span class="lang-en">Midterm</span><span class="lang-zh">期中</span></th>
-                <th><span class="lang-en">Final</span><span class="lang-zh">期末</span></th>
-                <th><span class="lang-en">Bonus</span><span class="lang-zh">加分</span></th>
-                <th><span class="lang-en">Final Score</span><span class="lang-zh">總分</span></th>
+                <th>Rank</th>
+                <th>Student ID</th>
+                <th>Assignments</th>
+                <th>Daily Performance</th>
+                <th>Attendance</th>
+                <th>Midterm</th>
+                <th>Final</th>
+                <th>Bonus</th>
+                <th>Final Score</th>
             `;
             gradeDetailsBody.appendChild(headerRow);
 
@@ -930,7 +862,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const classAverageRow = document.createElement('tr');
             classAverageRow.classList.add('class-average-row');
             classAverageRow.innerHTML = `
-                <td colspan="2" style="text-align: center;"><strong><span class="lang-en">Class Average</span><span class="lang-zh">班級平均</span></strong></td>
+                <td colspan="2" style="text-align: center;"><strong>Class Average</strong></td>
                 <td><strong>${categoryAverages.assignments.toFixed(1)}</strong></td>
                 <td><strong>${categoryAverages.dailyPerformance.toFixed(1)}</strong></td>
                 <td><strong>${categoryAverages.attendance.toFixed(1)}</strong></td>
@@ -941,24 +873,20 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             gradeDetailsBody.appendChild(classAverageRow);
 
-            // 儲存資料並設置圖表UI
             currentStudentDataForChart = studentDataForProcessing;
             setupAdminUI();
 
             resultsContainer.style.display = 'block';
         }
 
-        // ===== 圖表相關功能 =====
-        
+        // 圖表相關功能
         function setupAdminUI() {
             adminControlsContainer.style.display = 'flex';
             chartCheckboxes.forEach(cb => cb.checked = false);
             
-            // 獲取全選和清除選擇按鈕
             const selectAllBtn = document.getElementById('select-all-options');
             const clearAllBtn = document.getElementById('clear-all-options');
             
-            // 設置全選按鈕的點擊事件
             if (selectAllBtn) {
                 selectAllBtn.onclick = function(event) {
                     event.stopPropagation();
@@ -967,7 +895,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             }
             
-            // 設置清除選擇按鈕的點擊事件
             if (clearAllBtn) {
                 clearAllBtn.onclick = function(event) {
                     event.stopPropagation();
@@ -1001,7 +928,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         .filter(cb => cb.checked)
                                         .map(cb => ({ 
                                             value: cb.value, 
-                                            label: isChinese() ? cb.parentElement.querySelector('.lang-zh').textContent.trim() : cb.parentElement.querySelector('.lang-en').textContent.trim()
+                                            label: cb.parentElement.textContent.trim()
                                         }));
             
             if (checkedOptions.length === 0) {
@@ -1058,7 +985,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     plugins: {
                         title: {
                             display: true,
-                            text: isChinese() ? '成績分佈長條圖' : 'Grade Distribution Chart',
+                            text: 'Grade Distribution Chart',
                             color: '#c9d1d9',
                             font: { size: 18 }
                         },
@@ -1070,7 +997,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         x: {
                             title: { 
                                 display: true, 
-                                text: isChinese() ? '成績級距' : 'Score Range',
+                                text: 'Score Range',
                                 color: '#c9d1d9'
                             },
                             ticks: { color: '#c9d1d9' }
@@ -1078,7 +1005,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         y: {
                             title: { 
                                 display: true, 
-                                text: isChinese() ? '人數' : 'Number of Students',
+                                text: 'Number of Students',
                                 color: '#c9d1d9'
                             },
                             ticks: { 
@@ -1104,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (studentId && !isValid) {
                 studentIdInput.classList.add('invalid');
-                studentIdInput.title = isChinese() ? '學號格式不正確' : 'Invalid Student ID format';
+                studentIdInput.title = 'Invalid Student ID format';
             } else {
                 studentIdInput.classList.remove('invalid');
                 studentIdInput.title = '';
@@ -1115,22 +1042,8 @@ document.addEventListener('DOMContentLoaded', function() {
         studentIdInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') performSearch();
         });
-
-        if (langToggleBtn) {
-            langToggleBtn.addEventListener('click', () => {
-                document.body.classList.toggle('show-zh');
-                updateDynamicLanguage();
-            });
-        }
     
         // 頁面初始化
         loadCourses();
-        const isZh = isChinese();
-        if (studentIdInput) {
-            studentIdInput.placeholder = isZh ? studentIdInput.dataset.placeholderZh : studentIdInput.dataset.placeholderEn;
-        }
     })();
-
-    
-    
 });
