@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 //console.log('Intersection observed:', entry.isIntersecting, entry.intersectionRatio);
                 if (entry.isIntersecting) {
-                    console.log('Skills section entered viewport, starting animation...');
+                    //console.log('Skills section entered viewport, starting animation...');
                     setTimeout(() => {
                         animateProgressBars();
                     }, 300);
