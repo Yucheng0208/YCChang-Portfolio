@@ -69,23 +69,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const links = course.links || {};
                 courseCard.innerHTML = `
                     <h3>
-                        ${course.courseName.en}
+                        ${course.courseName}
                         <span style="font-size: 0.6em; color: #8b949e; font-weight: normal;">
-                            (${course.academicYear}-${course.semester} @ ${course.school.en})
+                            (${course.academicYear}-${course.semester} @ ${course.school})
                         </span>
                     </h3>
                     <div class="course-details">
-                        <p><strong>Educational:</strong> ${course.educational.en}</p>
-                        <p><strong>Course Time:</strong> ${course.courseTime.en}</p>
-                        <p><strong>Office Hours:</strong> ${course.officeHours.en}</p>
-                        <p><strong>Class:</strong> ${course.class.en}</p>
-                        <p><strong>Classroom:</strong> ${course.classroom.en}</p>
-                        <p><strong>Language:</strong> ${course.language.en}</p>
-                        <p><strong>Teaching Assistents:</strong> ${course.ta || 'N/A'}</p>
-                        <p><strong>Description:</strong> ${course.description.en}</p>
+                        <p><strong>學制 (Educational)：</strong> ${course.educational}</p>
+                        <p><strong>課程時間 (Course Time)：</strong> ${course.courseTime}</p>
+                        <p><strong>辦公時間 (Office Hours)：</strong> ${course.officeHours}</p>
+                        <p><strong>班級 (Class)：</strong> ${course.class}</p>
+                        <p><strong>教室 (Classroom)：</strong> ${course.classroom}</p>
+                        <p><strong>語言 (Language)：</strong> ${course.language}</p>
+                        <p><strong>助教 (Teaching Assistents)：</strong> ${course.ta || 'N/A'}</p>
+                        <p><strong>簡介 (Description)：</strong></br> ${course.description}</p>
                     </div>
                     <div class="course-links">
                         <a href="mailto:${course.contactEmailPlaceholder || '#'}" class="btn contact-btn">Contact Me</a>
+                        ${links.introduction ? `<a href="${links.introduction}" target="_blank" class="btn">Introduction</a>` : ''}
                         ${links.materials ? `<a href="${links.materials}" target="_blank" class="btn">Materials</a>` : ''}
                         ${links.linechat ? `<a href="${links.linechat}" target="_blank" class="btn">LINE Chat</a>` : ''}
                         ${links.announcements ? `<a href="${links.announcements}" target="_blank" class="btn">Announcements</a>` : ''}
@@ -113,18 +114,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (activeFilter === 'all') {
                     educationalMatch = true;
                 } else if (activeFilter === 'high-school') {
-                    educationalMatch = course.educational && course.educational.en === 'High School';
+                    educationalMatch = course.educationalClass === 'High School';
                 } else if (activeFilter === 'university') {
-                    educationalMatch = course.educational && course.educational.en === 'University';
+                    educationalMatch = course.educationalClass === 'University';
                 }
                 
                 const yearMatch = selectedYear === 'all' || course.academicYear === selectedYear;
                 const semesterMatch = selectedSemester === 'all' || course.semester === selectedSemester;
                 const searchMatch = !searchTerm || 
-                    (course.courseName.en && course.courseName.en.toLowerCase().includes(searchTerm)) || 
-                    (course.description.en && course.description.en.toLowerCase().includes(searchTerm)) || 
-                    (course.school && course.school.en && course.school.en.toLowerCase().includes(searchTerm)) ||
-                    (course.educational && course.educational.en && course.educational.en.toLowerCase().includes(searchTerm));
+                    (course.courseName && course.courseName.toLowerCase().includes(searchTerm)) || 
+                    (course.description && course.description.toLowerCase().includes(searchTerm)) || 
+                    (course.school && course.school && course.school.toLowerCase().includes(searchTerm)) ||
+                    (course.educational && course.educational && course.educational.toLowerCase().includes(searchTerm));
                 
                 return educationalMatch && yearMatch && semesterMatch && searchMatch;
             });

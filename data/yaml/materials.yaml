@@ -8,73 +8,52 @@
 # classroom: 教室 (例如: 101, 102)
 # github, msteams, googlemeet, googleclassroom, zuvio
 
-
 - academicYear: "114"
   semester: "1"
-  educational: 
-    zh: "高中職"
-    en: "High School"
-  school:
-    zh: "新北市立三民高級中學"
-    en: "SMSH"
-  class: 
-    zh: "1"
-    en: "1"
-  classroom:
-    zh: "即將公告..."
-    en: "TBA"
-  courseName:
-    zh: "資訊課"
-    en: "Information Course"
-  courseTime:
-    zh: "星期二  18:15 - 19:45"
-    en: "Tue 18:15 - 19:45"
-  officeHours:
-    zh: "採預約制"
-    en: "By Appointment"
-  description:
-    zh: "即將公告..."
-    en: "Coming Soon..."
-  language:
-    zh: "繁體中文（臺灣）"
-    en: "Traditional Chinese (Taiwan)"
+  educationalClass: "High School"
+  educational: "高中職 (High School)"
+  school: "SMSH"
+  class: "無分班 (Non-class)"
+  classroom: "TBA"
+  courseName: "多元選修 - 進階電腦社 (Advanced Computer Club)"
+  courseTime: "星期二 19:50 - 21:20 (Tue 19:50 - 21:20)"
+  officeHours: "採預約制"
+  description: "進階電腦社透過影像編輯、短影音製作、品牌網站建置及人工智慧協作等課程，幫助學員掌握數位內容創作與行銷技能，提升實務能力，為未來職場做好準備。</br>The Advanced Computer Club helps students master digital content creation and marketing skills through courses in image editing, short video production, brand website building, and AI collaboration, enhancing practical abilities for future careers."
+  language: "繁體中文 (臺灣), 閩南語 (臺灣)"
+  ta: "尚無"
+  contactEmailPlaceholder: "#"
+  links:
+    introduction: "data/course/Advanced Computer Club/114-1_Introduction.pdf"
+
+    
+- academicYear: "114"
+  semester: "1"
+  educationalClass: "High School"
+  educational: "高中職 (High School)"
+  school: "SMSH"
+  class: "高二甲"
+  classroom: "TBA"
+  courseName: "資訊科技 - 進階程式設計 (Advanced Programming)"
+  courseTime: "星期二 18:15 - 19:45 (Tue 18:15 - 19:45)"
+  officeHours: "採預約制 (Pre-appointment required)"
+  description: "進階程式設計課程將聚焦Canvas繪圖與指示工程的實作，並結合AI技術協助完成簡報與專案，提升學生跨領域整合與實務應用能力。 </br> The Advanced Programming course focuses on hands-on practice with Canvas drawing and prompt engineering, integrating AI techniques to assist in creating presentations and projects, enhancing students’ interdisciplinary integration and practical skills."
+  language: "繁體中文 (臺灣), 閩南語 (臺灣)"
   ta: "尚無 (N/A)"
   contactEmailPlaceholder: "#"
   links:
-    materials: "#"
-    linechat: "#"
 
 - academicYear: "114"
   semester: "1"
-  educational: 
-    zh: "高中職"
-    en: "High School"
-  school:
-    zh: "新北市立三民高級中學"
-    en: "SMSH"
-  class: 
-    zh: "無班級"
-    en: "N/A"
-  classroom:
-    zh: "即將公告..."
-    en: "TBA"
-  courseName:
-    zh: "進階電腦社"
-    en: "Advanced Computer Club"
-  courseTime:
-    zh: "星期二  19:50 - 21:20"
-    en: "Tue 19:50 - 21:20"
-  officeHours:
-    zh: "採預約制"
-    en: "By Appointment"
-  description:
-    zh: "即將公告..."
-    en: "Coming Soon..."
-  language:
-    zh: "繁體中文（臺灣）"
-    en: "Traditional Chinese (Taiwan)"
+  educationalClass: "High School"
+  educational: "高中職 (High School)"
+  school: "SMSH"
+  class: "高二乙"
+  classroom: "TBA"
+  courseName: "資訊科技 - 進階程式設計 (Advanced Programming)"
+  courseTime: "星期二 18:15 - 19:45 (Tue 18:15 - 19:45)"
+  officeHours: "採預約制 (Pre-appointment required)"
+  description: "進階程式設計課程將聚焦Canvas繪圖與指示工程的實作，並結合AI技術協助完成簡報與專案，提升學生跨領域整合與實務應用能力。 </br> The Advanced Programming course focuses on hands-on practice with Canvas drawing and prompt engineering, integrating AI techniques to assist in creating presentations and projects, enhancing students’ interdisciplinary integration and practical skills."
+  language: "繁體中文 (臺灣), 閩南語 (臺灣)"
   ta: "尚無 (N/A)"
   contactEmailPlaceholder: "#"
   links:
-    materials: "#"
-    linechat: "#"
