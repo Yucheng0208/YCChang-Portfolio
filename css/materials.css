@@ -52,6 +52,12 @@
     font-size: 0.9rem;
 }
 
+/* 只改 select 展開選項的背景色和文字色 */
+.dropdown-filters-wrapper select option {
+    background-color: #161b22; /* 或自訂深色，例如 #161b22 */
+    color: var(--text-color);         /* 保持文字可讀 */
+}
+
 /* --- 4. Course Materials List --- */
 .course-materials-list {
     display: grid;
