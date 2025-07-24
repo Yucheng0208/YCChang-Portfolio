@@ -300,6 +300,11 @@ body.menu-open {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.nav-links i {
+    margin-right: 0.5em; /* 或 8px，依需求調整 */
+    vertical-align: middle;
+}
+
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
