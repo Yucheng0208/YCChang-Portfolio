@@ -138,7 +138,7 @@
     font-size: 1.1rem;
     text-align: justify;
     line-height: 1.8;
-    color: rgba(201, 209, 217, 0.9);
+    color: rgb(166, 213, 255);
 }
 
 .intro-image {
@@ -925,6 +925,49 @@
     }
     60% {
         transform: translateX(-50%) translateY(-4px);
+    }
+}
+
+.motto {
+    background: linear-gradient(90deg, #58a6ff 0%, #0a84ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow:
+        0 0 8px #58a6ff,
+        0 0 16px #0a84ff,
+        0 0 32px #58a6ff,
+        0 0 2px #58a6ff;
+    position: relative;
+    display: inline-block;
+    animation: motto-blue-glow 2s infinite alternate;
+}
+
+@keyframes motto-blue-glow {
+    0% {
+        text-shadow:
+            0 0 8px #58a6ff,
+            0 0 16px #0a84ff,
+            0 0 32px #58a6ff,
+            0 0 2px #58a6ff;
+        filter: brightness(1);
+    }
+    50% {
+        text-shadow:
+            0 0 16px #58a6ff,
+            0 0 32px #0a84ff,
+            0 0 48px #58a6ff,
+            0 0 6px #0a84ff;
+        filter: brightness(1.15);
+    }
+    100% {
+        text-shadow:
+            0 0 8px #58a6ff,
+            0 0 16px #0a84ff,
+            0 0 32px #58a6ff,
+            0 0 2px #58a6ff;
+        filter: brightness(1);
     }
 }
 
