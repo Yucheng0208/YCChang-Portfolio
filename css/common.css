@@ -1425,26 +1425,49 @@ body.menu-open {
     }
 }
 
+/* --- 13. Custom Scrollbar Styles --- */
 
-/* 符合網頁風格的漸層標題樣式 */
+/* --- 完整的漸層標題樣式（圖標+文字統一漸層）--- */
 
-/* 選項 1: 主色調漸層 (最符合您的設計) */
+/* 統一的標題樣式 - 整個標題（圖標+文字）一起漸層 */
+body .page-container h1,
+.honor-page .page-container h1,
+.schedule-section h1,
 .page-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-weight: 700;
-    /* 確保漸層文字效果正確套用 */
+    /* 漸層效果套用到整個標題 */
     background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan)) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
     color: transparent !important;
-    /* 確保在 WebKit 瀏覽器中正確顯示 */
-    display: inline-block;
+    
+    /* 基本樣式 */
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem !important;
+    font-weight: 700 !important;
+    
+    /* 置中效果 */
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
 }
 
-/* 選項 2: 如果變數不work，使用具體顏色值 */
+/* 圖標樣式 - 繼承父元素的漸層，不單獨設定 */
+body .page-container h1 i,
+.honor-page .page-container h1 i,
+.schedule-section h1 i,
+.page-container h1 i {
+    margin-right: 0.5rem !important;
+    font-size: 0.9em !important;
+    /* 移除圖標的獨立漸層設定，讓它繼承父元素 */
+    background: inherit !important;
+    -webkit-background-clip: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+    background-clip: inherit !important;
+    color: inherit !important;
+}
+
+/* 如果 CSS 變數不work，使用具體顏色值 */
 .page-container h1.fallback-gradient {
     background: linear-gradient(135deg, #0a84ff, #64d2ff) !important;
     -webkit-background-clip: text !important;
@@ -1453,33 +1476,60 @@ body.menu-open {
     color: transparent !important;
 }
 
-/* 選項 3: 藍色深淺漸層 */
-.page-container h1.blue-depth {
-    background: linear-gradient(135deg, #0a84ff, #64d2ff, #58a6ff) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    color: transparent !important;
+/* 瀏覽器兼容性降級 */
+@supports not (-webkit-background-clip: text) {
+    body .page-container h1,
+    .honor-page .page-container h1,
+    .schedule-section h1,
+    .page-container h1 {
+        color: var(--tech-cyan) !important;
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+    }
+    
+    body .page-container h1 i,
+    .honor-page .page-container h1 i,
+    .schedule-section h1 i,
+    .page-container h1 i {
+        color: var(--tech-cyan) !important;
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+    }
 }
 
-/* 選項 4: 科技感漸層 (配合您的科技主題) */
-.page-container h1.tech-gradient {
-    background: linear-gradient(135deg, #0a84ff, #00d4ff, #64d2ff) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    color: transparent !important;
+/* 動畫漸層選項（如果需要） */
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
-/* 選項 5: 動態主色調漸層 */
-.page-container h1.animated-main {
-    background: linear-gradient(45deg, #0a84ff, #64d2ff, #0a84ff) !important;
-    background-size: 200% 200%;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    color: transparent !important;
+.page-container h1.animated-gradient {
+    background: linear-gradient(45deg, var(--tech-blue), var(--tech-cyan), var(--tech-blue)) !important;
+    background-size: 200% 200% !important;
     animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    body .page-container h1,
+    .honor-page .page-container h1,
+    .schedule-section h1,
+    .page-container h1 {
+        font-size: 2.2rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body .page-container h1,
+    .honor-page .page-container h1,
+    .schedule-section h1,
+    .page-container h1 {
+        font-size: 2rem !important;
+    }
 }
 
 @keyframes gradient-shift {
