@@ -270,7 +270,7 @@ window.CommonUtils = {
         if (!text) return text;
         const namePatterns = [
             'Yu-Cheng Chang\\*?', 'Chang Yu-Cheng\\*?', 'Chang, Yu-Cheng\\*?',
-            'Yu-Cheng Chang', 'Chang Yu-Cheng', '張育丞',
+            'Yu-Cheng Chang', 'Chang Yu-Cheng', '張育丞\\*?',
             'Ryan Chang\\*?', 'Ryan Chang', 'Chang Ryan\\*?', 'Chang Ryan',
             'Yu-Cheng (Ryan) Chang\\*?', 'Yu-Cheng (Ryan) Chang',
             'Ryan Yu-Cheng Chang\\*?', 'Ryan Yu-Cheng Chang',
