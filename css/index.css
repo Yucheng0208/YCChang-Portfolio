@@ -832,7 +832,37 @@
 #prev-event { left: calc(50% - 400px - 144px);  }
 #next-event { right: calc(50% - 400px - 144px); }
 
-/* --- 7. Motto Section --- */
+/* === 字體定義 === */
+/* Google Fonts 下載的 TTF 文件名稱 */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('./fonts/PlayfairDisplay/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* 如果需要正體字重 */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('./fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 如果想要更好的性能，可以將 TTF 轉換成 WOFF2 */
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('./fonts/PlayfairDisplay/PlayfairDisplay-Italic.woff2') format('woff2'),
+         url('./fonts/PlayfairDisplay/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* === 7. Motto Section === */
 .motto-section {
     width: 100%;
     margin: 2rem 0 3rem 0;
@@ -847,14 +877,32 @@
     margin: 0;
     padding-top: 2rem;
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
+    
+    /* 使用 Playfair Display 字體 */
+    font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+    font-weight: 400;
     font-style: italic;
-    font-size: 1.1rem;
-    color: rgba(201, 209, 217, 0.8);
-    letter-spacing: 0.5px;
-    line-height: 1.6;
+    font-size: 1.2rem;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    
+    /* 漸層文字效果 - 修正瀏覽器相容性 */
+    background: linear-gradient(90deg, #58a6ff 0%, #0a84ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* 修正：某些瀏覽器需要這個 */
+    color: transparent;
+    
+    /* subtle 光暈效果 */
+    text-shadow: 0 0 4px rgba(88, 166, 255, 0.3);
+    
+    display: inline-block;
+    animation: motto-subtle-glow 3s ease-in-out infinite alternate;
 }
 
+/* 分隔線 */
 .motto::before {
     content: '';
     position: absolute;
@@ -867,6 +915,54 @@
     background-color: rgba(255, 255, 255, 0.25);
 }
 
+/* 動畫效果 */
+@keyframes motto-subtle-glow {
+    0% {
+        text-shadow: 0 0 4px rgba(88, 166, 255, 0.3);
+        filter: brightness(1);
+    }
+    100% {
+        text-shadow: 0 0 6px rgba(88, 166, 255, 0.4);
+        filter: brightness(1.1);
+    }
+}
+
+/* === 瀏覽器相容性版本 === */
+/* 如果漸層文字有問題，可以用這個替代方案 */
+.motto-fallback {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding-top: 2rem;
+    text-align: center;
+    
+    font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.2rem;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    
+    /* 純色版本，更穩定 */
+    color: #58a6ff;
+    text-shadow: 0 0 4px rgba(88, 166, 255, 0.3);
+    
+    display: inline-block;
+    animation: motto-brightness-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes motto-brightness-glow {
+    0% {
+        filter: brightness(1);
+        text-shadow: 0 0 4px rgba(88, 166, 255, 0.3);
+    }
+    100% {
+        filter: brightness(1.15);
+        text-shadow: 0 0 6px rgba(88, 166, 255, 0.4);
+    }
+}
+
+/* === 滾動箭頭 === */
 .motto-scroll-arrow {
     position: absolute;
     bottom: -2.5rem;
@@ -928,46 +1024,32 @@
     }
 }
 
-.motto {
-    background: linear-gradient(90deg, #58a6ff 0%, #0a84ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    text-shadow:
-        0 0 8px #58a6ff,
-        0 0 16px #0a84ff,
-        0 0 32px #58a6ff,
-        0 0 2px #58a6ff;
-    position: relative;
-    display: inline-block;
-    animation: motto-blue-glow 2s infinite alternate;
+/* === 響應式設計 === */
+@media (max-width: 768px) {
+    .motto,
+    .motto-fallback {
+        font-size: 1rem;
+        letter-spacing: 0.2px;
+    }
+    
+    .motto::before {
+        width: 80%;
+    }
 }
 
-@keyframes motto-blue-glow {
-    0% {
-        text-shadow:
-            0 0 8px #58a6ff,
-            0 0 16px #0a84ff,
-            0 0 32px #58a6ff,
-            0 0 2px #58a6ff;
-        filter: brightness(1);
+@media (max-width: 480px) {
+    .motto,
+    .motto-fallback {
+        font-size: 0.95rem;
+        padding-top: 1.5rem;
     }
-    50% {
-        text-shadow:
-            0 0 16px #58a6ff,
-            0 0 32px #0a84ff,
-            0 0 48px #58a6ff,
-            0 0 6px #0a84ff;
-        filter: brightness(1.15);
-    }
-    100% {
-        text-shadow:
-            0 0 8px #58a6ff,
-            0 0 16px #0a84ff,
-            0 0 32px #58a6ff,
-            0 0 2px #58a6ff;
-        filter: brightness(1);
+}
+
+/* === 如果字體載入失敗的後備方案 === */
+@supports not (font-display: swap) {
+    .motto,
+    .motto-fallback {
+        font-family: Georgia, 'Times New Roman', Times, serif;
     }
 }
 
