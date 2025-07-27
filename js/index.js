@@ -922,3 +922,49 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
     
 });
+
+// Research Interests Section Animation
+function initResearchInterestsAnimation() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const researchCategories = entry.target.querySelectorAll('.research-category');
+                
+                researchCategories.forEach((category, index) => {
+                    setTimeout(() => {
+                        category.style.opacity = '1';
+                        category.style.transform = 'translateY(0)';
+                    }, index * 200);
+                });
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const researchSection = document.querySelector('.research-interests-section');
+    if (researchSection) {
+        // 初始化隱藏狀態
+        const categories = researchSection.querySelectorAll('.research-category');
+        categories.forEach(category => {
+            category.style.opacity = '0';
+            category.style.transform = 'translateY(30px)';
+            category.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        observer.observe(researchSection);
+    }
+}
+
+// 在 DOMContentLoaded 事件中調用
+document.addEventListener('DOMContentLoaded', function() {
+    // 您現有的初始化代碼...
+    
+    // 添加研究興趣動畫
+    initResearchInterestsAnimation();
+});
