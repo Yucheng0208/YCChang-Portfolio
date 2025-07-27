@@ -29,7 +29,7 @@
     min-width: 300px;
     background-color: var(--dark-bg);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px; /* 增加圓弧度 */
+    border-radius: 50px; /* 增加圓弧度 */
     overflow: hidden;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
