@@ -1335,7 +1335,7 @@
 
 .partner-carousel-container {
     position: relative;
-    padding: 5rem 60px 3rem 60px; /* 增加上方padding為懸停效果留空間 */
+    padding: 2rem 60px 3rem 60px; /* 增加上方padding為懸停效果留空間 */
     overflow: visible; /* 確保懸停效果不被遮擋 */
     display: flex;
     align-items: center;
