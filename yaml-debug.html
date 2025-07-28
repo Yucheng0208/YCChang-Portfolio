@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAML Debug Tool</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+        }
+        .debug-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .debug-title {
+            color: #64d2ff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success { background: #238636; color: white; }
+        .error { background: #da3633; color: white; }
+        .warning { background: #bf8700; color: white; }
+        .info { background: #1f6feb; color: white; }
+        pre {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            padding: 15px;
+            border-radius: 6px;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+        button {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2ea043;
+        }
+        input[type="text"] {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 8px 12px;
+            border-radius: 6px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 YAML Debug Tool</h1>
+    
+    <div class="debug-section">
+        <div class="debug-title">📁 檔案路徑測試</div>
+        <input type="text" id="yamlPath" value="data/yaml/organizations.yaml" placeholder="YAML 檔案路徑">
+        <button onclick="testFilePath()">測試路徑</button>
+        <div id="pathResult"></div>
+    </div>
+
+    <div class="debug-section">
+        <div class="debug-title">📚 js-yaml 庫檢查</div>
+        <div id="jsyamlStatus"></div>
+        <button onclick="checkJsYaml()">檢查 js-yaml</button>
+    </div>
+
+    <div class="debug-section">
+        <div class="debug-title">🌐 網路請求測試</div>
+        <div id="networkResult"></div>
+        <button onclick="testNetworkRequest()">測試網路請求</button>
+    </div>
+
+    <div class="debug-section">
+        <div class="debug-title">📄 YAML 內容預覽</div>
+        <div id="yamlPreview"></div>
+        <button onclick="loadAndShowYaml()">載入並顯示 YAML</button>
+    </div>
+
+    <div class="debug-section">
+        <div class="debug-title">🧪 YAML 解析測試</div>
+        <div id="parseResult"></div>
+        <button onclick="testYamlParsing()">測試解析</button>
+    </div>
+
+    <div class="debug-section">
+        <div class="debug-title">🏗️ 建議的修復方案</div>
+        <div id="suggestions"></div>
+    </div>
+
+    <script src="js/js-yaml.min.js"></script>
+    <script>
+        let yamlContent = '';
+        
+        // 檢查 js-yaml 庫
+        function checkJsYaml() {
+            const statusDiv = document.getElementById('jsyamlStatus');
+            if (typeof jsyaml !== 'undefined') {
+                statusDiv.innerHTML = `
+                    <span class="status success">✅ js-yaml 庫載入成功</span>
+                    <pre>版本: ${jsyaml.VERSION || 'Unknown'}
+可用方法: ${Object.keys(jsyaml).join(', ')}</pre>
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <span class="status error">❌ js-yaml 庫未載入</span>
+                    <pre>請檢查 js/js-yaml.min.js 檔案是否存在</pre>
+                `;
+            }
+        }
+
+        // 測試檔案路徑
+        async function testFilePath() {
+            const path = document.getElementById('yamlPath').value;
+            const resultDiv = document.getElementById('pathResult');
+            
+            try {
+                const response = await fetch(path, { method: 'HEAD' });
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <span class="status success">✅ 檔案路徑正確</span>
+                        <pre>狀態碼: ${response.status}
+檔案類型: ${response.headers.get('content-type') || 'Unknown'}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <span class="status error">❌ 檔案不存在</span>
+                        <pre>狀態碼: ${response.status}
+錯誤: ${response.statusText}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="status error">❌ 網路錯誤</span>
+                    <pre>錯誤訊息: ${error.message}
+可能原因: 
+1. 檔案路徑不正確
+2. 本地檔案系統限制 (CORS)
+3. 伺服器未運行</pre>
+                `;
+            }
+        }
+
+        // 測試網路請求
+        async function testNetworkRequest() {
+            const path = document.getElementById('yamlPath').value;
+            const resultDiv = document.getElementById('networkResult');
+            
+            try {
+                const response = await fetch(path);
+                const text = await response.text();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <span class="status success">✅ 網路請求成功</span>
+                        <pre>檔案大小: ${text.length} 字符
+前 200 字符: 
+${text.substring(0, 200)}...</pre>
+                    `;
+                    yamlContent = text;
+                } else {
+                    resultDiv.innerHTML = `
+                        <span class="status error">❌ 請求失敗</span>
+                        <pre>狀態: ${response.status} ${response.statusText}
+響應內容: ${text}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="status error">❌ 請求異常</span>
+                    <pre>${error.message}</pre>
+                `;
+            }
+        }
+
+        // 載入並顯示 YAML
+        async function loadAndShowYaml() {
+            const path = document.getElementById('yamlPath').value;
+            const previewDiv = document.getElementById('yamlPreview');
+            
+            try {
+                const response = await fetch(path);
+                const text = await response.text();
+                yamlContent = text;
+                
+                previewDiv.innerHTML = `
+                    <span class="status info">📄 YAML 內容</span>
+                    <pre>${text}</pre>
+                `;
+            } catch (error) {
+                previewDiv.innerHTML = `
+                    <span class="status error">❌ 無法載入檔案</span>
+                    <pre>${error.message}</pre>
+                `;
+            }
+        }
+
+        // 測試 YAML 解析
+        function testYamlParsing() {
+            const resultDiv = document.getElementById('parseResult');
+            
+            if (!yamlContent) {
+                resultDiv.innerHTML = `
+                    <span class="status warning">⚠️ 請先載入 YAML 內容</span>
+                `;
+                return;
+            }
+
+            if (typeof jsyaml === 'undefined') {
+                resultDiv.innerHTML = `
+                    <span class="status error">❌ js-yaml 庫未載入</span>
+                `;
+                return;
+            }
+
+            try {
+                const parsed = jsyaml.load(yamlContent);
+                resultDiv.innerHTML = `
+                    <span class="status success">✅ YAML 解析成功</span>
+                    <pre>解析結果:
+${JSON.stringify(parsed, null, 2)}</pre>
+                `;
+                
+                // 生成建議
+                generateSuggestions(parsed);
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="status error">❌ YAML 解析失敗</span>
+                    <pre>錯誤訊息: ${error.message}
+錯誤行號: ${error.mark ? error.mark.line + 1 : 'Unknown'}
+錯誤列號: ${error.mark ? error.mark.column + 1 : 'Unknown'}</pre>
+                `;
+            }
+        }
+
+        // 生成修復建議
+        function generateSuggestions(parsedData) {
+            const suggestionsDiv = document.getElementById('suggestions');
+            const suggestions = [];
+
+            if (!parsedData) {
+                suggestions.push('❌ YAML 檔案為空或解析失敗');
+            } else {
+                if (!parsedData.organizations) {
+                    suggestions.push('❌ 缺少 "organizations" 陣列');
+                } else if (!Array.isArray(parsedData.organizations)) {
+                    suggestions.push('❌ "organizations" 應該是陣列格式');
+                } else if (parsedData.organizations.length === 0) {
+                    suggestions.push('⚠️ "organizations" 陣列為空');
+                } else {
+                    suggestions.push(`✅ 找到 ${parsedData.organizations.length} 個組織`);
+                    
+                    // 檢查每個組織的必填欄位
+                    parsedData.organizations.forEach((org, index) => {
+                        const required = ['id', 'title', 'subtitle', 'description', 'status'];
+                        const missing = required.filter(field => !org[field]);
+                        if (missing.length > 0) {
+                            suggestions.push(`❌ 組織 ${index + 1} 缺少必填欄位: ${missing.join(', ')}`);
+                        }
+                    });
+                }
+
+                if (!parsedData.status_config) {
+                    suggestions.push('⚠️ 建議添加 "status_config" 配置');
+                }
+
+                if (!parsedData.page_config) {
+                    suggestions.push('⚠️ 建議添加 "page_config" 配置');
+                }
+            }
+
+            // 通用建議
+            suggestions.push('');
+            suggestions.push('🔧 常見解決方案:');
+            suggestions.push('1. 確保 YAML 檔案縮排正確 (使用空格，不要用 Tab)');
+            suggestions.push('2. 檢查檔案編碼是否為 UTF-8');
+            suggestions.push('3. 確保字串值使用引號包圍');
+            suggestions.push('4. 檢查特殊字符是否正確轉義');
+            suggestions.push('5. 使用本地伺服器測試 (如 Live Server)');
+
+            suggestionsDiv.innerHTML = `<pre>${suggestions.join('\n')}</pre>`;
+        }
+
+        // 頁面載入時自動檢查
+        window.onload = function() {
+            checkJsYaml();
+            
+            // 檢查是否在本地檔案系統
+            if (window.location.protocol === 'file:') {
+                document.body.insertAdjacentHTML('afterbegin', `
+                    <div class="debug-section">
+                        <span class="status warning">⚠️ 注意：您正在使用 file:// 協議</span>
+                        <p>建議使用本地伺服器 (如 Live Server, Python http.server 等) 來測試 YAML 載入功能</p>
+                    </div>
+                `);
+            }
+        };
+    </script>
+</body>
+</html>

@@ -66,9 +66,15 @@ body.menu-open {
 }
 
 .page-container p {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.2rem;
+    color: rgba(162, 201, 255, 0.928);
+    margin: 0;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+
 }
+
 
 .table-container {
     overflow-x: visible;
