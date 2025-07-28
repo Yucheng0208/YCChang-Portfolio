@@ -1330,7 +1330,6 @@
     font-style: italic;
     max-width: 800px;
     margin: 0 auto;
-    margin-bottom: 3rem; 
     text-align: center;
 }
 
@@ -1439,7 +1438,7 @@
 /* --- 響應式設計 --- */
 @media (max-width: 1200px) {
     .partner-carousel-container {
-        padding: 4rem 50px 3rem 50px;
+        padding: 2rem 50px 3rem 50px;
     }
     
     .partner-carousel-wrapper {
@@ -1453,8 +1452,9 @@
 }
 
 @media (max-width: 1024px) {
+
     .partner-carousel-container {
-        padding: 4rem 40px 3rem 40px;
+        padding: 2rem 40px 3rem 40px;
     }
     
     .partner-carousel-wrapper {
@@ -1475,7 +1475,7 @@
 
 @media (max-width: 768px) {
     .partner-carousel-container {
-        padding: 4rem 30px 3rem 30px;
+        padding: 2rem 30px 3rem 30px;
     }
     
     .partner-carousel-wrapper {
