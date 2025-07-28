@@ -285,7 +285,7 @@ function createOrganizationElement(org, index) {
                 ${org.title}
                 <span class="status-badge ${statusInfo.class}">${statusInfo.text}</span>
             </h2>
-            ${org.subtitle ? `<p class="organization-subtitle-text">${org.subtitle}</p>` : ''}
+            ${org.subtitle !== undefined ? `<p class="organization-subtitle-text">${org.subtitle}</p>` : ''}
             <p class="organization-description">${org.description}</p>
             ${detailsHtml}
             ${linksHtml}
