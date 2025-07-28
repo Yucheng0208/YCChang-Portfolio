@@ -24,20 +24,26 @@
 #       icon: "fas fa-building"
 
 organizations:
-  - id: emolab
-    title: "EMO Lab"
-    subtitle: "Department of Computer Science and Information Engineering"
-    description: "EMO Lab is a research collective built on the ideas of Elements, Modularity, and Optimization, aiming to simplify complexity and foster human-centered technologies. But “EMO” also stands for Emotion. We believe that technology should not only be intelligent, but also empathetic, making life a little softer, kinder, and more inclusive. We are not affiliated with any formal institution. We are a small group of people brought together by shared dreams, hoping to do each thing well, and in doing so, make the world a little more livable — especially in the moments that feel most emo."
-    image: "images/organizations/emolab.png"
-    status: "current"
-    period: "August 2024 - Present"
-    location: "Taipei, Taiwan"
-    role: "Leader"
-    icon: "fas fa-graduation-cap"
-    links:
-      - text: "Official Website"
-        url: "https://www.ntut.edu.tw/"
-        icon: "fas fa-external-link-alt"
-      - text: "Department"
-        url: "https://csie.ntut.edu.tw/"
-        icon: "fas fa-building"
+- id: emolab
+  title: "EMO Lab"
+  subtitle: " "
+  description: "EMO Lab is a research collective built on the ideas of Elements, Modularity, and Optimization, aiming to simplify complexity and foster human-centered technologies. But “EMO” also stands for Emotion. We believe that technology should not only be intelligent, but also empathetic, making life a little softer, kinder, and more inclusive. We are not affiliated with any formal institution. We are a small group of people brought together by shared dreams, hoping to do each thing well, and in doing so, make the world a little more livable — especially in the moments that feel most emo."
+  image: "images/organizations/emolab.png"
+  status: "current"
+  period: "August 2024 - Present"
+  location: "Taiwan"
+  role: "Leader"
+  icon: "fa-solid fa-people-group"
+
+
+# organizations:
+#   - id: emolab
+#     title: "EMO Lab"
+#     subtitle: ""
+#     description: "EMO Lab is a research collective built on the ideas of Elements, Modularity, and Optimization, aiming to simplify complexity and foster human-centered technologies. But “EMO” also stands for Emotion. We believe that technology should not only be intelligent, but also empathetic, making life a little softer, kinder, and more inclusive. We are not affiliated with any formal institution. We are a small group of people brought together by shared dreams, hoping to do each thing well, and in doing so, make the world a little more livable — especially in the moments that feel most emo."
+#     image: "images/organizations/emolab.png"
+#     status: "current"
+#     period: "August 2024 - Present"
+#     location: "Taipei, Taiwan"
+#     role: "Leader"
+#     icon: "fa-solid fa-people-group"

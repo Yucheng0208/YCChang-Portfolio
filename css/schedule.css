@@ -25,10 +25,14 @@
 }
 
 .schedule-section p {
-    color: #8b949e;
-    max-width: 1020px;
-    margin: 0 auto 40px auto;
+    font-size: 1.2rem;
+    color: rgba(162, 201, 255, 0.928);
+    margin: 0;
+    font-style: italic;
+    max-width: 1200px;
+    margin: 0 auto;
     text-align: left;
+    margin-bottom: 1.3rem;
 }
 
 /* --- 2. Schedule Filter - 使用 common.css 的統一樣式 --- */

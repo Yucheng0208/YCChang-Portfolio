@@ -44,11 +44,12 @@
 
 .organizations-subtitle {
     font-size: 1.2rem;
-    color: rgba(201, 209, 217, 0.8);
+    color: rgba(162, 201, 255, 0.928);
     margin: 0;
     font-style: italic;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
+    text-align: center;
 }
 
 /* --- 3. Organization Item Styles --- */

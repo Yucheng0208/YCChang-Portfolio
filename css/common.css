@@ -70,9 +70,10 @@ body.menu-open {
     color: rgba(162, 201, 255, 0.928);
     margin: 0;
     font-style: italic;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
-
+    text-align: center;
+    margin-bottom: 1.3rem;
 }
 
 
