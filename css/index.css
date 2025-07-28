@@ -1335,7 +1335,7 @@
 
 .partner-carousel-container {
     position: relative;
-    padding: 2rem 60px 3rem 60px; /* 增加上方padding為懸停效果留空間 */
+    padding: 3rem 60px 3rem 60px; /* 增加上方padding為懸停效果留空間 */
     overflow: visible; /* 確保懸停效果不被遮擋 */
     display: flex;
     align-items: center;
@@ -1438,7 +1438,7 @@
 /* --- 響應式設計 --- */
 @media (max-width: 1200px) {
     .partner-carousel-container {
-        padding: 2rem 50px 3rem 50px;
+        padding: 3rem 50px 3rem 50px;
     }
     
     .partner-carousel-wrapper {
@@ -1454,7 +1454,7 @@
 @media (max-width: 1024px) {
 
     .partner-carousel-container {
-        padding: 2rem 40px 3rem 40px;
+        padding: 3rem 40px 3rem 40px;
     }
     
     .partner-carousel-wrapper {
@@ -1475,7 +1475,7 @@
 
 @media (max-width: 768px) {
     .partner-carousel-container {
-        padding: 2rem 30px 3rem 30px;
+        padding: 3rem 30px 3rem 30px;
     }
     
     .partner-carousel-wrapper {
