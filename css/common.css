@@ -382,6 +382,7 @@ body.menu-open {
 .nav-cv a {
     border: 2px solid var(--tech-cyan);
     border-radius: 50px;
+    color: #55b0d7;
 }
 
 .nav-cv a:hover {
