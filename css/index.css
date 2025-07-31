@@ -169,15 +169,45 @@
 }
 
 /* --- 3. Skills Section --- */
+/* 技能項目內容字體調整 */
+.skill-item .fw-medium {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #f0f6fc;
+    margin-bottom: 0.2rem;
+}
+
+.skill-item .text-muted {
+    font-size: 0.75rem;
+    color: #8b949e;
+}/* === Skills Section - Enhanced with Consistent Hover Effects === */
 .skills-section {
     padding: 80px 0;
     background-color: #0d1117;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skills-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(100, 210, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(10, 132, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .skills-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .skills-text-center {
@@ -223,63 +253,311 @@
 }
 
 .skill-card {
-    background-color: #161b22;
-    border-radius: 15px;
-    padding: 2.5rem;
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.8) 0%, 
+        rgba(30, 35, 42, 0.6) 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
     width: 100%;
-    border: 1px solid #30363d;
-    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     display: flex;
     flex-direction: column;
-    min-height: 400px;
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+/* 頂部導光條 - 每個技能卡片不同顏色 */
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.15s ease;
+    border-radius: 16px 16px 0 0;
+    will-change: transform;
+}
+
+/* Artificial Intelligence - 主要藍色 */
+.skills-col:nth-child(1) .skill-card::before {
+    background: linear-gradient(90deg, #007bff, #0056b3, #004085, #002752);
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.4);
+}
+
+/* Internet of Things - 信息藍色 */
+.skills-col:nth-child(2) .skill-card::before {
+    background: linear-gradient(90deg, #17a2b8, #138496, #10707f, #0c5460);
+    box-shadow: 0 2px 10px rgba(23, 162, 184, 0.4);
+}
+
+/* Design & Innovation - 成功綠色 */
+.skills-col:nth-child(3) .skill-card::before {
+    background: linear-gradient(90deg, #28a745, #1e7e34, #155724, #0d4b14);
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.4);
+}
+
+/* Academic Research - 警告黃色 */
+.skills-col:nth-child(4) .skill-card::before {
+    background: linear-gradient(90deg, #ffc107, #e0a800, #d39e00, #b8860b);
+    box-shadow: 0 2px 10px rgba(255, 193, 7, 0.4);
+}
+
+/* Industry Collaboration - 危險紅色 */
+.skills-col:nth-child(5) .skill-card::before {
+    background: linear-gradient(90deg, #ff4545, #dc3545, #c82333, #bd2130);
+    box-shadow: 0 2px 10px rgba(255, 69, 69, 0.4);
+}
+
+/* Teaching & Leadership - 次要紫色 */
+.skills-col:nth-child(6) .skill-card::before {
+    background: linear-gradient(90deg, #8a2be2, #7b68ee, #6a5acd, #483d8b);
+    box-shadow: 0 2px 10px rgba(138, 43, 226, 0.4);
+}
+
+/* 基本懸停效果 */
+.skill-card:hover::before {
+    transform: scaleX(1);
 }
 
 .skill-card:hover {
     transform: translateY(-8px);
-    border-color: #58a6ff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* 每個技能卡片的特定懸停效果 */
+.skills-col:nth-child(1) .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 123, 255, 0.6);
+    box-shadow: 
+        0 20px 45px rgba(0, 123, 255, 0.25),
+        0 0 30px rgba(0, 123, 255, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.95) 0%, 
+        rgba(30, 35, 42, 0.8) 50%,
+        rgba(0, 123, 255, 0.1) 100%);
+}
+
+.skills-col:nth-child(2) .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(23, 162, 184, 0.6);
+    box-shadow: 
+        0 20px 45px rgba(23, 162, 184, 0.25),
+        0 0 30px rgba(23, 162, 184, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.95) 0%, 
+        rgba(30, 35, 42, 0.8) 50%,
+        rgba(23, 162, 184, 0.1) 100%);
+}
+
+.skills-col:nth-child(3) .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(40, 167, 69, 0.6);
+    box-shadow: 
+        0 20px 45px rgba(40, 167, 69, 0.25),
+        0 0 30px rgba(40, 167, 69, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.95) 0%, 
+        rgba(30, 35, 42, 0.8) 50%,
+        rgba(40, 167, 69, 0.1) 100%);
+}
+
+.skills-col:nth-child(4) .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 193, 7, 0.6);
+    box-shadow: 
+        0 20px 45px rgba(255, 193, 7, 0.25),
+        0 0 30px rgba(255, 193, 7, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.95) 0%, 
+        rgba(30, 35, 42, 0.8) 50%,
+        rgba(255, 193, 7, 0.1) 100%);
+}
+
+.skills-col:nth-child(5) .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 69, 69, 0.6);
+    box-shadow: 
+        0 20px 45px rgba(255, 69, 69, 0.25),
+        0 0 30px rgba(255, 69, 69, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.95) 0%, 
+        rgba(30, 35, 42, 0.8) 50%,
+        rgba(255, 69, 69, 0.1) 100%);
+}
+
+.skills-col:nth-child(6) .skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(138, 43, 226, 0.6);
+    box-shadow: 
+        0 20px 45px rgba(138, 43, 226, 0.25),
+        0 0 30px rgba(138, 43, 226, 0.15);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.95) 0%, 
+        rgba(30, 35, 42, 0.8) 50%,
+        rgba(138, 43, 226, 0.1) 100%);
 }
 
 .skill-header {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
 }
 
 .skill-icon {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1rem;
-    border-radius: 50%;
+    margin-right: 0.7rem;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.skill-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    opacity: 0.2;
+    border-radius: inherit;
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .skill-title {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
     margin: 0;
     color: #f0f6fc;
+    line-height: 1.3;
 }
 
 .skill-body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 0.6rem;
+    min-height: 0;
 }
 
-.skill-body .skill-item {
-    margin-bottom: 1rem;
+.skill-item {
+    margin-bottom: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0.6rem 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+    min-height: 0;
 }
 
-.skill-body .skill-item:last-child {
+.skill-item:last-child {
     margin-bottom: 0;
+}
+
+/* 技能項目流光效果 */
+.skill-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.25s ease;
+    will-change: left;
+}
+
+/* 每個技能卡片的技能項目懸停效果 */
+.skills-col:nth-child(1) .skill-item::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.15), rgba(0, 123, 255, 0.1), transparent);
+}
+
+.skills-col:nth-child(1) .skill-item:hover {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.15), rgba(0, 123, 255, 0.08));
+    border-color: #007bff;
+    transform: translateX(8px);
+}
+
+.skills-col:nth-child(2) .skill-item::before {
+    background: linear-gradient(90deg, transparent, rgba(23, 162, 184, 0.15), rgba(23, 162, 184, 0.1), transparent);
+}
+
+.skills-col:nth-child(2) .skill-item:hover {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.15), rgba(23, 162, 184, 0.08));
+    border-color: #17a2b8;
+    transform: translateX(6px);
+}
+
+.skills-col:nth-child(3) .skill-item::before {
+    background: linear-gradient(90deg, transparent, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.1), transparent);
+}
+
+.skills-col:nth-child(3) .skill-item:hover {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.08));
+    border-color: #28a745;
+    transform: translateX(8px);
+}
+
+.skills-col:nth-child(4) .skill-item::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.1), transparent);
+}
+
+.skills-col:nth-child(4) .skill-item:hover {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.08));
+    border-color: #ffc107;
+    transform: translateX(8px);
+}
+
+.skills-col:nth-child(5) .skill-item::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 69, 69, 0.15), rgba(255, 69, 69, 0.1), transparent);
+}
+
+.skills-col:nth-child(5) .skill-item:hover {
+    background: linear-gradient(135deg, rgba(255, 69, 69, 0.15), rgba(255, 69, 69, 0.08));
+    border-color: #ff4545;
+    transform: translateX(8px);
+}
+
+.skills-col:nth-child(6) .skill-item::before {
+    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.15), rgba(138, 43, 226, 0.1), transparent);
+}
+
+.skills-col:nth-child(6) .skill-item:hover {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(138, 43, 226, 0.08));
+    border-color: #8a2be2;
+    transform: translateX(8px);
+}
+
+.skill-item:hover::before {
+    left: 100%;
+}
+
+.skill-item:hover .fw-medium,
+.skill-item:hover .text-muted {
+    color: #fff;
 }
 
 .skill-card .text-muted {
@@ -287,10 +565,11 @@
 }
 
 .progress {
-    height: 8px;
+    height: 6px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 999px;
     overflow: hidden;
+    margin-top: 0.3rem;
 }
 
 .progress-bar {
@@ -298,15 +577,63 @@
     height: 100%;
     transition: width 1.5s ease-out;
     border-radius: inherit;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Skill Icon Colors */
-.skill-icon.bg-primary { background-color: rgba(0, 123, 255, 0.2) !important; }
-.skill-icon.bg-info { background-color: rgba(23, 162, 184, 0.2) !important; }
-.skill-icon.bg-success { background-color: rgba(40, 167, 69, 0.2) !important; }
-.skill-icon.bg-warning { background-color: rgba(255, 193, 7, 0.2) !important; }
-.skill-icon.bg-danger { background-color: rgba(255, 69, 69, 0.25) !important; }
-.skill-icon.bg-secondary { background-color: rgba(138, 43, 226, 0.2) !important; }
+/* 進度條動畫光效 - 簡化版 */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: progressShine 1.2s ease-in-out infinite;
+    will-change: left;
+}
+
+@keyframes progressShine {
+    0% { 
+        left: -100%; 
+        opacity: 0;
+    }
+    50% { 
+        left: 50%; 
+        opacity: 1;
+    }
+    100% { 
+        left: 100%; 
+        opacity: 0;
+    }
+}
+
+/* Skill Icon Colors - Enhanced with gradients */
+.skill-icon.bg-primary { 
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important; 
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+}
+.skill-icon.bg-info { 
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important; 
+    box-shadow: 0 8px 25px rgba(23, 162, 184, 0.3);
+}
+.skill-icon.bg-success { 
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important; 
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+.skill-icon.bg-warning { 
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%) !important; 
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
+}
+.skill-icon.bg-danger { 
+    background: linear-gradient(135deg, #ff4545 0%, #dc3545 100%) !important; 
+    box-shadow: 0 8px 25px rgba(255, 69, 69, 0.3);
+}
+.skill-icon.bg-secondary { 
+    background: linear-gradient(135deg, #8a2be2 0%, #7b68ee 100%) !important; 
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+}
 
 /* Progress Bar Colors */
 .progress-bar.bg-primary { background-color: #007bff !important; }
@@ -317,12 +644,146 @@
 .progress-bar.bg-secondary { background-color: #8a2be2 !important; }
 
 /* Skill Icon Text Colors */
-.skill-icon.bg-primary i { color: #007bff !important; }
-.skill-icon.bg-info i { color: #17a2b8 !important; }
-.skill-icon.bg-success i { color: #28a745 !important; }
-.skill-icon.bg-warning i { color: #ffc107 !important; }
-.skill-icon.bg-danger i { color: #ff4545 !important; }
-.skill-icon.bg-secondary i { color: #8a2be2 !important; }
+.skill-icon.bg-primary i { color: #fff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+.skill-icon.bg-info i { color: #fff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+.skill-icon.bg-success i { color: #fff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+.skill-icon.bg-warning i { color: #fff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+.skill-icon.bg-danger i { color: #fff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+.skill-icon.bg-secondary i { color: #fff !important; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+
+/* === 響應式設計 === */
+@media (min-width: 993px) {
+    .skills-col {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+@media (max-width: 992px) {
+    .skills-col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .skill-card {
+        aspect-ratio: 1;
+        padding: 1.3rem 1.1rem;
+    }
+    
+    .skill-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        margin-right: 0.6rem;
+    }
+    
+    .skill-title {
+        font-size: 0.95rem;
+    }
+    
+    .skill-item {
+        padding: 0.5rem 0.7rem;
+    }
+    
+    .skill-item .fw-medium {
+        font-size: 0.8rem;
+    }
+    
+    .skill-item .text-muted {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .skills-text-center .text-muted {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .skills-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .skill-card {
+        aspect-ratio: 1;
+        padding: 1.2rem 1rem;
+    }
+    
+    .skill-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        margin-right: 0.5rem;
+    }
+    
+    .skill-title {
+        font-size: 0.9rem;
+    }
+    
+    .skill-item {
+        padding: 0.5rem 0.6rem;
+    }
+    
+    .skill-item .fw-medium {
+        font-size: 0.75rem;
+    }
+    
+    .skill-item .text-muted {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .skills-container {
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .skill-card {
+        aspect-ratio: 1;
+        padding: 1rem 0.8rem;
+    }
+    
+    .skill-icon {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        margin-right: 0.4rem;
+    }
+    
+    .skill-title {
+        font-size: 0.85rem;
+    }
+    
+    .skill-item {
+        padding: 0.4rem 0.5rem;
+    }
+    
+    .skill-item .fw-medium {
+        font-size: 0.7rem;
+    }
+    
+    .skill-item .text-muted {
+        font-size: 0.6rem;
+    }
+    
+    .progress {
+        height: 4px;
+        margin-top: 0.2rem;
+    }
+}
 
 /* --- 4. Education Timeline --- */
 .education-section {
@@ -2631,7 +3092,6 @@
     }
 }
 
-
 /* === Research Interests Section - Enhanced with Connect Me Effects === */
 .research-interests-section {
     padding: 80px 0;
@@ -2753,11 +3213,12 @@
 
 .research-category:hover {
     transform: translateY(-12px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
 }
 
-/* 每個類別的特定懸停效果 */
+/* 每個類別的特定懸停效果 - 確保包含 transform */
 .research-category:nth-child(1):hover {
+    transform: translateY(-12px) !important;
     border-color: rgba(0, 212, 255, 0.6);
     box-shadow: 
         0 25px 60px rgba(0, 212, 255, 0.3),
@@ -2771,6 +3232,7 @@
 }
 
 .research-category:nth-child(2):hover {
+    transform: translateY(-12px) !important;
     border-color: rgba(17, 153, 142, 0.6);
     box-shadow: 
         0 25px 60px rgba(17, 153, 142, 0.3),
@@ -2784,6 +3246,7 @@
 }
 
 .research-category:nth-child(3):hover {
+    transform: translateY(-12px) !important;
     border-color: rgba(255, 154, 86, 0.6);
     box-shadow: 
         0 25px 60px rgba(255, 154, 86, 0.3),
@@ -2797,6 +3260,7 @@
 }
 
 .research-category:nth-child(4):hover {
+    transform: translateY(-12px) !important;
     border-color: rgba(240, 147, 251, 0.6);
     box-shadow: 
         0 25px 60px rgba(240, 147, 251, 0.3),
