@@ -582,6 +582,7 @@
         0 0 6px rgba(100, 210, 255, 0.2);
     font-weight: 500;
     animation: gentle-glow 4s ease-in-out infinite alternate;
+    
 }
 
 .grade-note i {

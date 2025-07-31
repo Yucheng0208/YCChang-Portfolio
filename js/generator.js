@@ -70,6 +70,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 generatedCodes.push(code);
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `<div class="code-container"><span class="code-index">${i+1}.</span> <span class="code-value">${code}</span></div>`;
+                
+                // 添加點擊事件來複製單一密碼
+                listItem.addEventListener('click', function() {
+                    const codeValue = this.querySelector('.code-value').textContent;
+                    
+                    navigator.clipboard.writeText(codeValue).then(() => {
+                        // 顯示複製成功訊息
+                        const codeContainer = this.querySelector('.code-container');
+                        const originalHTML = codeContainer.innerHTML;
+                        codeContainer.innerHTML = `<span class="code-index">${this.querySelector('.code-index').textContent}</span> <span class="code-value">Copied!</span>`;
+                        
+                        setTimeout(() => {
+                            codeContainer.innerHTML = originalHTML;
+                        }, 1500);
+                        
+                    }).catch(err => {
+                        console.error('Failed to copy code: ', err);
+                        alert('Could not copy code to clipboard.');
+                    });
+                });
+                
+                // 添加 CSS 游標樣式提示可點擊
+                listItem.style.cursor = 'pointer';
+                
                 codeList.appendChild(listItem);
             }
             
@@ -115,4 +139,38 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.removeChild(link);
         });
     }
+    // 在生成密碼的部分修改如下：
+
+    for (let i = 0; i < numCodes; i++) {
+        const code = generateRandomCode(6);
+        generatedCodes.push(code);
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<div class="code-container"><span class="code-index">${i+1}.</span> <span class="code-value">${code}</span></div>`;
+        
+        // 添加點擊事件來複製單一密碼
+        listItem.addEventListener('click', function() {
+            const codeValue = this.querySelector('.code-value').textContent;
+            
+            navigator.clipboard.writeText(codeValue).then(() => {
+                // 視覺回饋 - 暫時改變樣式
+                const originalStyle = this.style.backgroundColor;
+                this.style.backgroundColor = '#d4edda';
+                this.style.transition = 'background-color 0.3s';
+                
+                setTimeout(() => {
+                    this.style.backgroundColor = originalStyle;
+                }, 1000);
+                
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
+                alert('Could not copy code to clipboard.');
+            });
+        });
+        
+        // 添加 CSS 游標樣式提示可點擊
+        listItem.style.cursor = 'pointer';
+        
+        codeList.appendChild(listItem);
+    }
 });
+

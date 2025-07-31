@@ -91,6 +91,7 @@
     box-shadow: 0 2px 8px rgba(0,162,255,0.08);
     outline: none;
     letter-spacing: 0.5px;
+    margin-right: 1.2rem;
 }
 
 .code-generator-page #copy-all-btn:hover,
@@ -144,8 +145,7 @@
 .code-generator-page #code-list li {
     padding: 0.9rem 0.5rem;
     margin-bottom: 0.9rem;
-    background-color: #161b22;
-    border-radius: 5px;
+    border-radius: 50px;
     position: relative;
     margin-left: 0;
     font-family: 'Courier New', Courier, monospace;
@@ -172,7 +172,6 @@
     width: 100%;
     align-items: center;
     padding: 0.2rem;
-    background-color: #161b22;
     border-radius: 4px;
     color: #89e0ff;
     font-family: 'Courier New', Courier, monospace;
