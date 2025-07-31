@@ -478,6 +478,16 @@
     line-height: 1.4;
 }
 
+/* 奇數項目（第1、3、5...個）科系名稱靠右對齊 */
+.timeline-item:nth-child(odd) .timeline-content h3 {
+    text-align: right;
+}
+
+/* 偶數項目（第2、4、6...個）科系名稱靠左對齊 */
+.timeline-item:nth-child(even) .timeline-content h3 {
+    text-align: left;
+}
+
 .timeline-school-name {
     font-size: 1rem;
     color: var(--text-color);
@@ -485,6 +495,18 @@
     margin-bottom: 1.25rem;
     opacity: 0.9;
 }
+
+/* 奇數項目（第1、3、5...個）靠右對齊 */
+.timeline-item:nth-child(odd) .timeline-school-name {
+    text-align: right;
+}
+
+/* 偶數項目（第2、4、6...個）靠左對齊 */
+.timeline-item:nth-child(even) .timeline-school-name {
+    text-align: left;
+}
+
+
 
 /* --- 5. Video Carousel Section --- */
 .video-carousel-section {
