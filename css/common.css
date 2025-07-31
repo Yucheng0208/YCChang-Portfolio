@@ -1643,3 +1643,162 @@ body .page-container h1 i,
         font-size: 2rem;
     }
 }
+
+/* === 小屏幕響應式修正 (992px 以下) === */
+@media (max-width: 992px) {
+    /* 確保所有時間軸內容左對齊 */
+    .timeline-item .timeline-content {
+        text-align: left !important;
+    }
+    
+    /* 日期標籤左對齊 */
+    .timeline-date {
+        text-align: left !important;
+        display: inline-block !important;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* 科系名稱左對齊 */
+    .timeline-content h3 {
+        text-align: left !important;
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* 學校名稱左對齊 */
+    .timeline-school-name {
+        text-align: left !important;
+        font-style: italic;
+        margin-bottom: 1.25rem;
+        opacity: 0.9;
+    }
+    
+    /* GPA 資訊左對齊 */
+    .timeline-gpa {
+        text-align: left !important;
+        display: inline-block !important;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* 確保其他段落內容也左對齊 */
+    .timeline-content p {
+        text-align: left !important;
+    }
+    
+    /* 移除原本的奇偶數對齊規則在小屏幕上的影響 */
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        text-align: left !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content h3,
+    .timeline-item:nth-child(even) .timeline-content h3 {
+        text-align: left !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-school-name,
+    .timeline-item:nth-child(even) .timeline-school-name {
+        text-align: left !important;
+    }
+}
+
+/* === 平板屏幕優化 (768px 以下) === */
+@media (max-width: 768px) {
+    /* 保持左對齊並調整間距 */
+    .timeline-content {
+        padding: 1.5rem !important;
+        text-align: left !important;
+    }
+    
+    /* 調整日期標籤樣式 */
+    .timeline-date {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.75rem !important;
+        padding: 0.25rem 0.6rem !important;
+    }
+    
+    /* 調整科系標題大小 */
+    .timeline-content h3 {
+        font-size: 1.15rem !important;
+        margin-bottom: 0.75rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* 調整學校名稱樣式 */
+    .timeline-school-name {
+        font-size: 0.95rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* 調整 GPA 樣式 */
+    .timeline-gpa {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.75rem !important;
+        padding: 0.25rem 0.6rem !important;
+    }
+}
+
+/* === 手機屏幕優化 (600px 以下) === */
+@media (max-width: 600px) {
+    .timeline-content {
+        padding: 1.2rem !important;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.05rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .timeline-school-name {
+        font-size: 0.9rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .timeline-date,
+    .timeline-gpa {
+        font-size: 0.8rem !important;
+        padding: 0.2rem 0.5rem !important;
+    }
+}
+
+/* === 超小屏幕優化 (480px 以下) === */
+@media (max-width: 480px) {
+    .timeline-content {
+        padding: 1rem !important;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1rem !important;
+        line-height: 1.25 !important;
+    }
+    
+    .timeline-school-name {
+        font-size: 0.85rem !important;
+    }
+    
+    .timeline-date,
+    .timeline-gpa {
+        font-size: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+}
+
+/* === 確保覆蓋原有樣式的強化選擇器 === */
+@media (max-width: 992px) {
+    .education-section .timeline-wrapper .timeline-item .timeline-content,
+    .education-section .timeline-wrapper .timeline-item .timeline-content h3,
+    .education-section .timeline-wrapper .timeline-item .timeline-content .timeline-school-name,
+    .education-section .timeline-wrapper .timeline-item .timeline-content .timeline-date,
+    .education-section .timeline-wrapper .timeline-item .timeline-content .timeline-gpa,
+    .education-section .timeline-wrapper .timeline-item .timeline-content p {
+        text-align: left !important;
+    }
+}
+
+/* === 如果還是有問題，使用最強的選擇器 === */
+@media (max-width: 992px) {
+    body .education-section .timeline-wrapper .timeline-item .timeline-content * {
+        text-align: left !important;
+    }
+}
