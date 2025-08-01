@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>學制 (Educational)：</strong> ${course.educational}</p>
                         <p><strong>課程時間 (Course Time)：</strong> ${course.courseTime}</p>
                         <p><strong>辦公時間 (Office Hours)：</strong> ${course.officeHours}</p>
-                        <p><strong>班級 (Class)：</strong> ${course.class}</p>
+                        <p><strong>班級 (Class)：</strong> ${course.class || '無分班 (Non-class)'}</p>
                         <p><strong>教室 (Classroom)：</strong> ${course.classroom}</p>
                         <p><strong>語言 (Language)：</strong> ${course.language}</p>
                         <p><strong>助教 (Teaching Assistents)：</strong> ${course.ta || 'N/A'}</p>
