@@ -14,9 +14,9 @@
 #   title: 2025 捷運盃黑客松「設計創新 • AI 賦能」App 競賽
 #   description:  Demonstrated intuitive improvement solutions for the Taipei Metro Go App.
 
-# - image: images/comingsoon.png
-#   title: 2025 7th Green Idea Invention and Design Fair
-#   description: Presented academic achievements in new product development and patents.
+- image: images/events/2025-08-02.jpg
+  title: 2025 7th Green Idea Invention and Design Fair
+  description: Showcasing advanced intelligent dispatching electrical device for vehicles parking.
 
 - image: images/events/2025-07-30.jpg
   title: The 9th International Youth Entrepreneurship Forum 2025
@@ -27,7 +27,6 @@
   description:  - image: images/comingsoon.png
   title: Technical Exchange with Taipei Metro Engineers
   description: Engaged in in-depth technical discussions and collaborative problem-solving with engineers from Taipei Metro.
-
 
 - image: images/events/2025-07-15.jpg
   title: 2025 IEEE AISTA 
