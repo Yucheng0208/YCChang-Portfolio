@@ -3296,10 +3296,6 @@
 .connect-showcase-section {
     padding: 4rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-
-@@ -1156,6 +1156,245 @@
-    flex-direction: column;
 }
 
 /* 第一個分類 - Communication (通訊綠 - 更明顯的漸層) */
@@ -3544,8 +3540,4 @@
 .connect-category::before {
     content: '';
     position: absolute;
-
-
-@@ -2392,7 +2631,8 @@
-    }
 }
