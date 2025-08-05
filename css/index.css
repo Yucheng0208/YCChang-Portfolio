@@ -2922,7 +2922,7 @@
     }
 }
 
-/* === Research Interests Section === */
+/* === Enhanced Research Interests Section with Connect Effects === */
 .research-interests-section {
     padding: 80px 0;
     background-color: #0d1117;
@@ -2984,12 +2984,8 @@
 }
 
 .research-category {
-    background: linear-gradient(135deg, 
-        rgba(22, 27, 34, 0.8) 0%, 
-        rgba(30, 35, 42, 0.6) 100%);
     border-radius: 20px;
     padding: 2rem 1.5rem;
-    border: 1px solid rgba(100, 210, 255, 0.1);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
@@ -2998,41 +2994,217 @@
     flex-direction: column;
 }
 
-.research-category::before {
+/* === 四個不同配色主題 === */
+
+/* 第一個類別 - Machine Intelligence (科技藍色系) */
+.research-category:nth-child(1) {
+    border: 1px solid rgba(0, 210, 211, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(0, 210, 211, 0.12) 100%);
+}
+
+.research-category:nth-child(1)::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 4px;
+    background: linear-gradient(90deg, #00d2d3, #0099cc, #58a6ff, #0084ff);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(0, 210, 211, 0.3);
 }
 
-/* 為每個類別設定對應的導光條顏色 */
-.research-category:nth-child(1)::before {
-    background: linear-gradient(90deg, #00d4ff, #0099cc);
+.research-category:nth-child(1):hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 210, 211, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 210, 211, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(0, 210, 211, 0.12) 100%);
+}
+
+.research-category:nth-child(1) .category-icon {
+    background: linear-gradient(135deg, #00d2d3 0%, #0099cc 30%, #58a6ff 70%, #0084ff 100%);
+    box-shadow: 0 8px 25px rgba(0, 210, 211, 0.3);
+}
+
+.research-category:nth-child(1) .research-item i {
+    color: #58a6ff;
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+.research-category:nth-child(1) .research-item:hover {
+    background: linear-gradient(135deg, rgba(0, 210, 211, 0.15), rgba(88, 166, 255, 0.08));
+    border-color: #58a6ff;
+}
+
+.research-category:nth-child(1) .research-item::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 210, 211, 0.2), rgba(88, 166, 255, 0.15), transparent);
+}
+
+/* 第二個類別 - Connected Systems (綠色系) */
+.research-category:nth-child(2) {
+    border: 1px solid rgba(46, 213, 115, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(46, 213, 115, 0.12) 100%);
 }
 
 .research-category:nth-child(2)::before {
-    background: linear-gradient(90deg, #11998e, #38ef7d);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #11998e, #2ed573, #7bed9f, #70e000);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(46, 213, 115, 0.3);
+}
+
+.research-category:nth-child(2):hover {
+    transform: translateY(-8px);
+    border-color: rgba(46, 213, 115, 0.5);
+    box-shadow: 0 20px 50px rgba(46, 213, 115, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(46, 213, 115, 0.12) 100%);
+}
+
+.research-category:nth-child(2) .category-icon {
+    background: linear-gradient(135deg, #11998e 0%, #2ed573 30%, #7bed9f 70%, #70e000 100%);
+    box-shadow: 0 8px 25px rgba(46, 213, 115, 0.3);
+}
+
+.research-category:nth-child(2) .research-item i {
+    color: #7bed9f;
+    text-shadow: 0 0 8px rgba(123, 237, 159, 0.5);
+}
+
+.research-category:nth-child(2) .research-item:hover {
+    background: linear-gradient(135deg, rgba(46, 213, 115, 0.15), rgba(123, 237, 159, 0.08));
+    border-color: #7bed9f;
+}
+
+.research-category:nth-child(2) .research-item::before {
+    background: linear-gradient(90deg, transparent, rgba(46, 213, 115, 0.2), rgba(123, 237, 159, 0.15), transparent);
+}
+
+/* 第三個類別 - Smart Mobility (橙粉色系) */
+.research-category:nth-child(3) {
+    border: 1px solid rgba(255, 159, 67, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(255, 159, 67, 0.12) 100%);
 }
 
 .research-category:nth-child(3)::before {
-    background: linear-gradient(90deg, #ff9a56, #ff6b95);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #ff9f43, #feca57, #ff7675);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(255, 159, 67, 0.3);
+}
+
+.research-category:nth-child(3):hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 159, 67, 0.5);
+    box-shadow: 0 20px 50px rgba(255, 159, 67, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(255, 159, 67, 0.12) 100%);
+}
+
+.research-category:nth-child(3) .category-icon {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 30%, #feca57 70%, #ff7675 100%);
+    box-shadow: 0 8px 25px rgba(255, 159, 67, 0.3);
+}
+
+.research-category:nth-child(3) .research-item i {
+    color: #feca57;
+    text-shadow: 0 0 8px rgba(254, 202, 87, 0.5);
+}
+
+.research-category:nth-child(3) .research-item:hover {
+    background: linear-gradient(135deg, rgba(255, 159, 67, 0.15), rgba(254, 202, 87, 0.08));
+    border-color: #feca57;
+}
+
+.research-category:nth-child(3) .research-item::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 159, 67, 0.2), rgba(254, 202, 87, 0.15), transparent);
+}
+
+/* 第四個類別 - Human-Centered Tech (紫粉色系) */
+.research-category:nth-child(4) {
+    border: 1px solid rgba(240, 147, 251, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(240, 147, 251, 0.12) 100%);
 }
 
 .research-category:nth-child(4)::before {
-    background: linear-gradient(90deg, #f093fb, #f5576c);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f093fb, #f5576c, #a8edea, #fed6e3);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(240, 147, 251, 0.3);
 }
 
-.research-category:hover {
+.research-category:nth-child(4):hover {
     transform: translateY(-8px);
-    border-color: rgba(100, 210, 255, 0.3);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(240, 147, 251, 0.5);
+    box-shadow: 0 20px 50px rgba(240, 147, 251, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(240, 147, 251, 0.12) 100%);
 }
 
+.research-category:nth-child(4) .category-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 30%, #a8edea 70%, #fed6e3 100%);
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+}
+
+.research-category:nth-child(4) .research-item i {
+    color: #f093fb;
+    text-shadow: 0 0 8px rgba(240, 147, 251, 0.5);
+}
+
+.research-category:nth-child(4) .research-item:hover {
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.15), rgba(240, 147, 251, 0.08));
+    border-color: #f093fb;
+}
+
+.research-category:nth-child(4) .research-item::before {
+    background: linear-gradient(90deg, transparent, rgba(240, 147, 251, 0.2), rgba(240, 147, 251, 0.15), transparent);
+}
+
+/* === 通用懸停效果 === */
 .research-category:hover::before {
     transform: scaleX(1);
 }
@@ -3067,22 +3239,6 @@
     background: inherit;
     opacity: 0.2;
     border-radius: inherit;
-}
-
-.category-icon.ai-ml {
-    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-}
-
-.category-icon.iot-hardware {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-}
-
-.category-icon.mobility-energy {
-    background: linear-gradient(135deg, #ff9a56 0%, #ff6b95 100%);
-}
-
-.category-icon.hci-media {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
 .research-category:hover .category-icon {
@@ -3134,14 +3290,11 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(100, 210, 255, 0.08), transparent);
     transition: left 0.5s ease;
 }
 
 .research-item:hover {
     transform: translateX(8px);
-    background: rgba(100, 210, 255, 0.08);
-    border-color: rgba(100, 210, 255, 0.2);
     color: #fff;
 }
 
@@ -3157,40 +3310,7 @@
     flex-shrink: 0;
 }
 
-/* 為每個類別的研究項目圖標設定對應顏色 */
-/* Machine Intelligence 類別 - 科技藍色 */
-.research-category:nth-child(1) .research-item i {
-    color: #00d4ff;
-}
-
-.research-category:nth-child(1) .research-item:hover i {
-    color: #fff;
-}
-
-/* Connected Technologies 類別 - 藍綠色 */
-.research-category:nth-child(2) .research-item i {
-    color: #31e07f;
-}
-
-.research-category:nth-child(2) .research-item:hover i {
-    color: #fff;
-}
-
-/* Smart Mobility & Energy 類別 - 橙粉色 */
-.research-category:nth-child(3) .research-item i {
-    color: #ff7588;
-}
-
-.research-category:nth-child(3) .research-item:hover i {
-    color: #fff;
-}
-
-/* Human Technologies 類別 - 粉紅色 */
-.research-category:nth-child(4) .research-item i {
-    color: #f093fb;
-}
-
-.research-category:nth-child(4) .research-item:hover i {
+.research-item:hover i {
     color: #fff;
 }
 
@@ -3292,6 +3412,7 @@
         font-size: 1.1rem;
     }
 }
+
 /* --- Connect with Me - 三個不同配色主題 --- */
 .connect-showcase-section {
     padding: 4rem 0;
