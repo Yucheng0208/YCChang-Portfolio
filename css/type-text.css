@@ -1,0 +1,25 @@
+/* 打字機效果核心樣式 */
+.hashtag-text {
+    color: #00d4ff;                    /* 科技藍色 */
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    border-right: 3px solid #00d4ff;   /* 閃爍游標 */
+    padding-right: 8px;
+    animation: blink 1s infinite;
+}
+
+.hashtag-text::before {
+    content: ">";                /* 打字機效果前綴 */
+    margin-right: 10px;
+    color: #ff6b6b;                    /* # 符號顏色 */
+}
+
+/* 閃爍游標動畫 */
+@keyframes blink {
+    0%, 50% { 
+        border-color: #00d4ff; 
+    }
+    51%, 100% { 
+        border-color: transparent; 
+    }
+}

@@ -7,13 +7,14 @@
         <link rel="stylesheet" href="css/swiper-bundle.min.css"/>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/skills.css">
+        <link rel="stylesheet" href="css/type-text.css">
         <link rel="stylesheet" href="css/all.min.css">
 
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml" href="images/logo.svg">
         <meta name="theme-color" content="#0d1117">
         <script src="js/email.min.js"></script>
-  
     </head>
     <body>
         <!-- 1. 輪播圖 -->
@@ -89,12 +90,16 @@
                         <p>
                             Yu-Cheng Chang (張育丞) is a master's student in the Department of Computer Science and Information Engineering at National Taipei University of Technology. His research focuses on AIoT, embedded systems, and computer vision, strongly emphasizing interdisciplinary innovation and practical integration. He has received numerous national awards for participating in technology competitions and holds several technical inventions. Recently, his work has centered on combining sign language recognition with emotion analysis to enhance accessibility technologies, while actively contributing to technical mentorship and education.
                         </p>
+                        <div class="hashtag-container">
+                            <div class="hashtag-display">
+                                <span class="hashtag-text" id="hashtag-text"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="intro-image">
                         <img src="images/myphoto2.jpg" alt="Photo of Yu-Cheng Chang">
                     </div>
                 </div>
-                
                 <!-- Motto Section -->
                 <div class="motto-section">
                     <p class="motto">
@@ -356,255 +361,205 @@
                     </div>
                 </div>
             </section>
-            <!-- ===== Skills Section (Single Source of Truth HTML) ===== -->
+            
             <section id="skills" class="skills-section">
-                <div class="skills-container">
-                    <div class="skills-text-center mb-5">
-                        <h2 class="section-title"><i class="fas fa-cogs"></i> Professional Expertise</h2>
-                        <p class="text-muted" style="color: #e0d902ee;">
-                            <strong>
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                Notice:
-                            </strong>
-                            This section has not yet been written. The information has been temporarily entered for related code testing.
-                        </p>
-                    </div>
-                    
-                    <div class="skills-row">
-                        <!-- 1. 人工智慧 -->
-                        <div class="skills-col">
-                            <div class="skill-card">
-                                <div class="skill-header">
-                                    <div class="skill-icon bg-primary"><i class="fas fa-brain"></i></div>
-                                    <h3 class="skill-title">Artificial Intelligence</h3>
-                                </div>
-                                <div class="skill-body">
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-primary"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-primary"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-primary"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-primary"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <!-- 2. 物聯網 -->
-                        <div class="skills-col">
-                            <div class="skill-card">
-                                <div class="skill-header">
-                                    <div class="skill-icon bg-info"><i class="fas fa-network-wired"></i></div>
-                                    <h3 class="skill-title">Internet of Things</h3>
-                                </div>
-                                <div class="skill-body">
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-info"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-info"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-info"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-info"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <!-- 3. 設計思考與創新創業 -->
-                        <div class="skills-col">
-                            <div class="skill-card">
-                                <div class="skill-header">
-                                    <div class="skill-icon bg-success">
-                                        <i class="fas fa-lightbulb"></i>
-                                    </div>
-                                        <h3 class="skill-title">Design & Innovation</h3>
-                                </div>
-                                <div class="skill-body">
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-success"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-success"></div></div>
-                                        </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-success"></div></div>
-                                        </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-success"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="skills-container">
+                <div class="skills-text-center mb-5">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Professional Expertise</h2>
+                <p class="text-muted">
+                    <!--Combining academic research with practical innovation to drive technological advancement.-->
+                    <strong>📢Notice:</strong> This section has not yet been written. The information has been temporarily entered for related code testing.
+                </p>
+                </div>
 
-                        <!-- 4. 學術研究與出版 -->
-                        <div class="skills-col">
-                            <div class="skill-card">
-                                <div class="skill-header">
-                                    <div class="skill-icon bg-warning">
-                                        <i class="fa-solid fa-graduation-cap"></i>
-                                    </div>
-                                    <h3 class="skill-title">Academic Research</h3>
-                                </div>
-                                <div class="skill-body">
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-warning"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-warning"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-warning"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span>
-                                            <span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-warning"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <!-- 5. 產業合作與社會影響力 -->
-                        <div class="skills-col">
-                            <div class="skill-card">
-                                <div class="skill-header">
-                                    <div class="skill-icon bg-danger"><i class="fas fa-handshake text-danger"></i></div>
-                                    <h3 class="skill-title">Industry Collaboration</h3>
-                                </div>
-                                <div class="skill-body">
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-danger"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-danger"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-danger"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-danger"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <!-- 6. 教學與領導力 -->
-                        <div class="skills-col">
-                            <div class="skill-card">
-                                <div class="skill-header">
-                                    <div class="skill-icon bg-secondary">
-                                        <i class="fas fa-chalkboard-teacher"></i>
-                                    </div>
-                                        <h3 class="skill-title">Teaching & Leadership</h3>
-                                </div>
-                                <div class="skill-body">
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-secondary"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-secondary"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-secondary"></div></div>
-                                    </div>
-                                    <div class="skill-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="fw-medium"></span><span class="text-muted"></span>
-                                        </div>
-                                        <div class="progress"><div class="progress-bar bg-secondary"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="skills-row">
+
+                <!-- AI -->
+                <div class="skill-card ai">
+                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                    <h3 class="skill-title">Artificial Intelligence</h3>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Machine Learning</span><span class="percent">85%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Deep Learning</span><span class="percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Computer Vision</span><span class="percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Natural Language Processing</span><span class="percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:80%"></div></div>
                     </div>
                 </div>
+
+                <!-- IoT -->
+                <div class="skill-card iot">
+                    <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3 class="skill-title">Internet of Things</h3>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Embedded Systems</span><span class="percent">90%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Edge Computing</span><span class="percent">75%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:75%"></div></div>
+                    </div>
+                                        <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Edge Computing</span><span class="percent">90%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Real-time Systems</span><span class="percent">75%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:75%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Design -->
+                <div class="skill-card design">
+                    <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="skill-title">Design & Innovation</h3>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>User Experience Design</span><span class="percent">70%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:70%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Product Development</span><span class="percent">60%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:60%"></div></div>
+                    </div>
+                                        <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>User Experience Design</span><span class="percent">70%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:70%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Product Development</span><span class="percent">60%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:60%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Academic -->
+                <div class="skill-card academic">
+                    <div class="skill-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="skill-title">Academic Research</h3>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Research Methodology</span><span class="percent">88%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:88%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Technical Writing</span><span class="percent">82%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:82%"></div></div>
+                    </div>
+                                        <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Research Methodology</span><span class="percent">88%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:88%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Technical Writing</span><span class="percent">82%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:82%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Industry -->
+                <div class="skill-card industry">
+                    <div class="skill-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 class="skill-title">Industry Collaboration</h3>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Project Management</span><span class="percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Team Leadership</span><span class="percent">75%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:75%"></div></div>
+                    </div>
+                                        <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Project Management</span><span class="percent">80%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Team Leadership</span><span class="percent">75%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:75%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Teaching -->
+                <div class="skill-card teaching">
+                    <div class="skill-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="skill-title">Teaching & Leadership</h3>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Technical Mentoring</span><span class="percent">85%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Curriculum Development</span><span class="percent">70%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:70%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Technical Mentoring</span><span class="percent">85%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                    <div class="skill-item-header">
+                        <span>Curriculum Development</span><span class="percent">70%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--progress:70%"></div></div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
             </section>
-            <!-- ===== Skills Section End ===== -->
-            
+
+
+           
             <!-- ===== 新的 Connect with Me 區塊 ===== -->
             <section class="connect-showcase-section">
                 <div class="connect-container">
@@ -727,6 +682,7 @@
                 </div>
             </section>
             <!-- ===== Connect with Me 區塊結束 ===== -->
+            
             <!-- ===== 新的聯絡表單區塊 ===== -->
             <section class="contact-section">
                 <div class="contact-container">
@@ -894,6 +850,7 @@
         <script src="js/vendor/swiper-bundle.min.js"></script>
         <script src="js/common.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/type-text.js"></script>
     </body>
 
 </html>
