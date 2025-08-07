@@ -11,11 +11,13 @@
     DOI: "#"
 
 - category: "book"
-  title: "生程式AI素養全解：從模型原理到教育應用的實戰教學書"
+  title: "生成式AI素養全解: 從模型原理到教育應用的實戰教學書"
   authorrole: "Co-Author(s)"
   location: "Taipei City, Taiwan"
   isbn: "978-696-01-4422-7"
   date: "July 30, 2025"
+  links:
+    ISBN: "https://isbn.ncl.edu.tw/NEW_ISBNNet/main_DisplayRecord_Popup.php?&Pact=view&Pkey=1140710*0020&KeepThis=true&TB_iframe=true&width=780&height=400"
 
 - category: "conference"
   title: "Modular Model Stacking Based on YOLO: A Novel Approach for Model Extension Without Retraining"
