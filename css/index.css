@@ -1981,6 +1981,7 @@
         font-size: 2rem;
         margin-bottom: 1.5rem;
         line-height: 1.2;
+        padding: 0 10px;
     }
 
     .skills-text-center .text-muted,
@@ -2967,4 +2968,46 @@
 .connect-category::before {
     content: '';
     position: absolute;
+}
+
+.section-title,
+.research-header h2,
+.education-section h2,
+.events-header h2,
+.video-carousel-title,
+.link-showcase-section h2,
+.partner-showcase-section h2,
+.connect-header h2,
+.contact-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: linear-gradient(
+        45deg,
+        #58a6ff,
+        #00d2d3,
+        #2ed573,
+        #f093fb,
+        #58a6ff
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 4s ease-in-out infinite;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

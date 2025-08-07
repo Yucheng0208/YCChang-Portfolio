@@ -1,17 +1,39 @@
-/* 打字機效果核心樣式 */
 .hashtag-text {
-    color: #00d4ff;                    /* 科技藍色 */
     font-family: 'Courier New', monospace;
     font-weight: bold;
     border-right: 3px solid #00d4ff;   /* 閃爍游標 */
     padding-right: 8px;
     animation: blink 1s infinite;
+    
+    /* 漸層文字效果 */
+    background: linear-gradient(
+        45deg,
+        #58a6ff,
+        #00d2d3,
+        #2ed573,
+        #11998e,
+        #00cec9,
+        #74b9ff,
+        #58a6ff
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 4s ease-in-out infinite, blink 1s infinite;
 }
 
-.hashtag-text::before {
-    content: ">";                /* 打字機效果前綴 */
-    margin-right: 10px;
-    color: #ff6b6b;                    /* # 符號顏色 */
+/* 漸層流動動畫 */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* 閃爍游標動畫 */
@@ -22,4 +44,47 @@
     51%, 100% { 
         border-color: transparent; 
     }
+}
+
+.hashtag-text::before {
+    content: "#";                /* 打字機效果前綴 */
+    margin-right: 10px;
+    
+    /* ⚡ 符號也使用漸層 - 加強版 */
+    background: linear-gradient(
+        45deg,
+        #ff6b6b,
+        #e55a4e,
+        #ff4757,
+        #ff3742,
+        #ff6b6b
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientFlow 1.5s ease-in-out infinite;
+    
+    /* 備用方案 */
+    display: inline-block;
+}
+
+/* 如果 background-clip 不支援，使用備用方案 */
+@supports not (-webkit-background-clip: text) {
+    .hashtag-text::before {
+        background: none;
+        color: #ff6b6b;
+        animation: colorPulse 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes colorPulse {
+    0% { color: #ff6b6b; }
+    25% { color: #e55a4e; }
+    50% { color: #ff5722; }
+    75% { color: #ff4757; }
+    100% { color: #ff6b6b; }
 }
