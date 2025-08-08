@@ -18,7 +18,7 @@
 .skill-card {
   width: 100%;
   max-width: 500px;        /* 控制最大寬度 */
-  aspect-ratio: 1 / 1.7;     /* 嘗試接近正方形 */
+  aspect-ratio: 1 / 1.60;     /* 嘗試接近正方形 */
   border-radius: 20px;
   background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.03),
@@ -145,6 +145,7 @@
 /* 主題色 */
 .skill-card.ai {
   --theme-main: #00d2d3;
+  --theme-rgb: 0,210,211;
   --theme-gradient: linear-gradient(135deg,#00d2d3,#58a6ff);
   --theme-shadow: rgba(88,166,255,0.6);
   --theme-bg: linear-gradient(145deg, rgba(0,210,211,0.05), rgba(88,166,255,0.05));
@@ -152,6 +153,7 @@
 
 .skill-card.iot {
   --theme-main: #2ed573;
+  --theme-rgb: 46,213,115;
   --theme-gradient: linear-gradient(135deg,#2ed573,#11998e);
   --theme-shadow: rgba(46,213,115,0.6);
   --theme-bg: linear-gradient(145deg, rgba(46,213,115,0.05), rgba(17,153,142,0.05));
@@ -159,6 +161,7 @@
 
 .skill-card.design {
   --theme-main: #ff9f43;
+  --theme-rgb: 255,159,67;
   --theme-gradient: linear-gradient(135deg,#ff9f43,#ff6b6b);
   --theme-shadow: rgba(255,159,67,0.6);
   --theme-bg: linear-gradient(145deg, rgba(255,159,67,0.05), rgba(255,107,107,0.05));
@@ -166,6 +169,7 @@
 
 .skill-card.academic {
   --theme-main: #74b9ff;
+  --theme-rgb: 116,185,255;
   --theme-gradient: linear-gradient(135deg,#74b9ff,#0984e3);
   --theme-shadow: rgba(116,185,255,0.6);
   --theme-bg: linear-gradient(145deg, rgba(116,185,255,0.05), rgba(9,132,227,0.05));
@@ -173,6 +177,7 @@
 
 .skill-card.industry {
   --theme-main: #f093fb;
+  --theme-rgb: 240,147,251;
   --theme-gradient: linear-gradient(135deg,#f093fb,#f5576c);
   --theme-shadow: rgba(240,147,251,0.6);
   --theme-bg: linear-gradient(145deg, rgba(240,147,251,0.05), rgba(245,87,108,0.05));
@@ -180,6 +185,7 @@
 
 .skill-card.teaching {
   --theme-main: #a29bfe;
+  --theme-rgb: 162,155,254;
   --theme-gradient: linear-gradient(135deg,#a29bfe,#6c5ce7);
   --theme-shadow: rgba(162,155,254,0.6);
   --theme-bg: linear-gradient(145deg, rgba(162,155,254,0.05), rgba(108,92,231,0.05));
