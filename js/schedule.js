@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!filterContainer) return;
         
         // 頁面載入時預設顯示 High School
-        const defaultButton = filterContainer.querySelector('[data-schedule="high-school"]');
-        const defaultSchedule = document.getElementById('high-school-schedule');
+        const defaultButton = filterContainer.querySelector('[data-schedule="junior-high-school"]');
+        const defaultSchedule = document.getElementById('junior-high-school-schedule');
         if (defaultButton && defaultSchedule) {
             // 移除所有按鈕的 active 狀態
             filterContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
