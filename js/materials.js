@@ -113,6 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 let educationalMatch = false;
                 if (activeFilter === 'all') {
                     educationalMatch = true;
+                } else if (activeFilter === 'junior-high') {
+                    educationalMatch = course.educationalClass === 'Junior High';
+                } else if (activeFilter === 'high-school') {
+                    educationalMatch = course.educationalClass === 'High School';
                 } else if (activeFilter === 'high-school') {
                     educationalMatch = course.educationalClass === 'High School';
                 } else if (activeFilter === 'university') {
