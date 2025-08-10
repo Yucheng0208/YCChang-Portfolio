@@ -4,3 +4,7 @@
     display: none !important;
 }
 
+.gt_float_switcher.notranslate {
+    border-radius: 10px;
+
+}
