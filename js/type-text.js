@@ -1,13 +1,10 @@
 // 要輪播的 hashtag 陣列
 const hashtags = [
     'Researcher',
+    'Lecturer',
     'Teacher',
     'Writer',
-    'Creator',
-    'Innovator',
-    'Developer',
     'Blogger',
-    'Master Student',
     
 ];
 
