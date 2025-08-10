@@ -1,0 +1,6 @@
+/* 隱藏 GTranslate 產生的國旗圖示 */
+.gtranslate_wrapper img,
+.gtranslate_wrapper .gt_flag {
+    display: none !important;
+}
+

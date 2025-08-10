@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/swiper-bundle.min.css"/>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/translate.css">
         <link rel="stylesheet" href="css/type-text.css">
         <link rel="stylesheet" href="css/skills.css">
         <link rel="stylesheet" href="css/all.min.css">
@@ -91,7 +92,7 @@
                             Yu-Cheng Chang (張育丞) is a master's student in the Department of Computer Science and Information Engineering at National Taipei University of Technology. His research focuses on AIoT, embedded systems, and computer vision, strongly emphasizing interdisciplinary innovation and practical integration. He has received numerous national awards for participating in technology competitions and holds several technical inventions. Recently, his work has centered on combining sign language recognition with emotion analysis to enhance accessibility technologies, while actively contributing to technical mentorship and education.
                         </p>
                         <div class="hashtag-display">
-                            <span class="hashtag-text" id="hashtag-text"></span>
+                            <span class="hashtag-text notranslate" id="hashtag-text"></span>
                         </div>
                     </div>
                     <div class="intro-image">
@@ -833,11 +834,61 @@
             </section>
             <!-- ===== 固定5個LOGO的無縫循環合作機構區塊結束 ===== -->
         </main>
+        <!-- 多語系區塊 -->
+
+        <!-- 多語系區塊 (下拉選單版) -->
+
+        <div class="gtranslate_wrapper">
+        <!--<label for="language-switcher" class="sr-only">網站語言切換</label>-->
+        <!--<select id="language-switcher" name="language-switcher" class="language-select">
+            <option value="zh-TW">繁體中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="ko">한국어</option>
+            <option value="ms">Bahasa Melayu</option>
+            <option value="vi">Tiếng Việt</option>
+        </select>-->
+        </div>
+
+        <div aria-live="polite" aria-atomic="true" class="sr-only" id="translation-status"></div>
+        </div>
+        <script>
+
         
+        window.gtranslateSettings = {
+            default_language: "en",
+            // 限制語言，與您的下拉選單保持一致
+            languages: ["zh-TW", "zh-CN", "en", "ja", "ko", "ms", "vi"], 
+            // 【關鍵】告訴 GTranslate 在哪裡生成它的背景元件
+            wrapper_selector: ".gtranslate_wrapper", 
+            alt_flags: { en: "usa" }
+        };
+
+        </script>
+        <!-- 【最重要的修正】我們載入正確的 float.js 腳本！ -->
+        <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+
+
         <!-- Back to Top Button -->
         <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
             <i class="fas fa-chevron-up"></i>
         </a>
+        <div class="custom-lang-switcher">
+            <div class="lang-ball">
+                <i class="fas fa-globe"></i>
+                <span class="lang-arrow"></span>
+            </div>
+            <!--<div class="lang-menu">
+                <button data-lang="zh-TW">繁體中文</button>
+                <button data-lang="zh-CN">简体中文</button>
+                <button data-lang="en">English</button>
+                <button data-lang="ja">日本語</button>
+                <button data-lang="ko">한국어</button>
+                <button data-lang="ms">Bahasa Melayu</button>
+                <button data-lang="vi">Tiếng Việt</button>
+            </div>-->
+        </div>
 
         <!-- 頁腳 (統一模組) -->
         <footer class="site-footer">
@@ -849,6 +900,7 @@
         <script src="js/common.js"></script>
         <script src="js/index.js"></script>
         <script src="js/type-text.js"></script>
+
     </body>
 
 </html>
