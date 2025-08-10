@@ -2,6 +2,8 @@
   padding: 60px 0;
   background: linear-gradient(135deg, #0d1117, #161b22);
   color: #fff;
+  /* 在section上方加一條線 */
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .skills-row {
