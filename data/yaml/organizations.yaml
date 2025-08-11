@@ -35,6 +35,28 @@ organizations:
   role: "Leader"
   icon: "fa-solid fa-people-group"
 
+# - id: bhjh
+#   title: "New Taipei Municipal Bi-hua Junior High School"
+#   subtitle: " "
+#   description: "New Taipei Municipal Bi-hua Junior High School is a vibrant educational institution dedicated to fostering creativity, critical thinking, and holistic development among its students. With a strong emphasis on academic excellence and character building, the school provides a nurturing environment where students can thrive and reach their full potential."
+#   image: "images/partners/bhjh.png"
+#   status: "current"
+#   period: "August 2025 - Present"
+#   location: "Taiwan"
+#   role: "Substitute Teacher"
+#   icon: "fa-solid fa-school"
+
+# - id: smsh
+#   title: "New Taipei Municipal San-Min High School"
+#   subtitle: " "
+#   description: "New Taipei Municipal San-Min High School is a vibrant educational institution dedicated to fostering creativity, critical thinking, and holistic development among its students. With a strong emphasis on academic excellence and character building, the school provides a nurturing environment where students can thrive and reach their full potential."
+#   image: "images/partners/smsh.png"
+#   status: "current"
+#   period: "August 2025 - Present"
+#   location: "Taiwan"
+#   role: "Substitute Teacher"
+#   icon: "fa-solid fa-school"
+
 # organizations:
 #   - id: emolab
 #     title: "EMO Lab"
