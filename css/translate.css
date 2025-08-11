@@ -4,6 +4,16 @@
     display: none !important;
 }
 
+/* 強化文字顏色設定 - 使用更高權重 */
+.gtranslate_wrapper .nturl,
+.gtranslate_wrapper a,
+.gt_float_switcher .nturl,
+.gt_float_switcher a,
+.gt_float_switcher .gt_options a.nturl,
+.gt_float_switcher .gt_options a {
+    color: #58a6ff !important;
+}
+
 /* 隱藏原本的箭頭 */
 .gt_float_switcher-arrow {
     display: none !important;
@@ -38,7 +48,7 @@
 .gt-current-lang {
     display: flex;
     align-items: center;
-    color: #58a6ff;
+    color: #58a6ff !important;
     font-size: 13px;
 }
 
@@ -50,7 +60,7 @@
 
 .gt-lang-code {
     margin-right: 6px;
-    color: #58a6ff;
+    color: #58a6ff !important;
     font-weight: normal;
 }
 
@@ -59,7 +69,7 @@
     content: "\f077"; /* fas fa-chevron-up */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    color: #58a6ff;
+    color: #58a6ff !important;
     font-size: 12px;
     margin-left: 8px;
     transition: all 0.3s ease;
@@ -69,6 +79,7 @@
 .gt_options:not([style*="display: none"]) ~ .gt-selected .gt-current-lang::after,
 .gt_float_switcher.open .gt-current-lang::after {
     content: "\f078"; /* fas fa-chevron-down */
+    color: #58a6ff !important;
 }
 
 .gt_options {
@@ -76,34 +87,72 @@
     bottom: 100%;
     left: 0;
     background-color: #0d1117;
-    color:  #58a6ff;
+    color: #58a6ff !important;
     margin-bottom: 2px;
     min-width: 180px;
+    max-height: none !important;
+    overflow: visible !important;
+    overflow-y: visible !important;
+    height: auto !important;
 }
 
-.gt_options a.nturl {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    color: #58a6ff;
-    text-decoration: none;
-    font-size: 13px;
+/* 更具體的選擇器針對選項文字 */
+.gt_float_switcher .gt_options a.nturl,
+.gt_float_switcher .gt_options a,
+.gt_options a.nturl,
+.gt_options a {
+    display: flex !important;
+    align-items: center !important;
+    padding: 8px 12px !important;
+    color: #58a6ff !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
 }
 
-.gt_options a.nturl:hover {
-    background-color: rgba(88, 166, 255, 0.1);
+.gt_float_switcher .gt_options a.nturl:hover,
+.gt_float_switcher .gt_options a:hover,
+.gt_options a.nturl:hover,
+.gt_options a:hover {
+    background-color: rgba(88, 166, 255, 0.1) !important;
+    color: #58a6ff !important;
 }
 
-.gt_options a.nturl img {
+.gt_options a.nturl img,
+.gt_options a img {
     width: 16px;
     height: 12px;
     margin-right: 8px;
 }
 
-.gt_float_switcher .gt_options a {
-    color: #58a6ff;
+/* 針對所有可能的文字元素 */
+.gt_float_switcher *,
+.gt_options *,
+.gtranslate_wrapper * {
+    color: #58a6ff !important;
 }
-.gt_float_switcher .gt_options a:hover {
-    background-color: rgba(88, 166, 255, 0.1);
-    color: #58a6ff;
+
+/* 覆蓋任何繼承的顏色 */
+.gt_float_switcher,
+.gt_options,
+.gtranslate_wrapper {
+    color: #58a6ff !important;
+}
+
+/* 移除滑動桿和限制高度 */
+.gt_options::-webkit-scrollbar {
+    display: none !important;
+}
+
+.gt_options {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* 確保所有語言選項都能顯示 */
+.gt_float_switcher .gt_options,
+#gt_float_wrapper .gt_options {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    overflow-y: visible !important;
 }
