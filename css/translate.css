@@ -4,7 +4,99 @@
     display: none !important;
 }
 
+/* 隱藏原本的箭頭 */
+.gt_float_switcher-arrow {
+    display: none !important;
+}
+
 .gt_float_switcher.notranslate {
     border-radius: 10px;
+    background-color: #0d1117;
+    border: 1px solid #58a6ff;
+}
 
+#gt_float_wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999999;
+}
+
+.gt_float_switcher {
+    opacity: 1;
+}
+
+.gt_float_switcher.notranslate .gt-selected {
+    background-color: #0d1117;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+.gt-current-lang {
+    display: flex;
+    align-items: center;
+    color: #58a6ff;
+    font-size: 13px;
+}
+
+.gt-current-lang img {
+    width: 16px;
+    height: 12px;
+    margin-right: 6px;
+}
+
+.gt-lang-code {
+    margin-right: 6px;
+    color: #58a6ff;
+    font-weight: normal;
+}
+
+/* 關閉時顯示向上箭頭 */
+.gt-current-lang::after {
+    content: "\f077"; /* fas fa-chevron-up */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #58a6ff;
+    font-size: 12px;
+    margin-left: 8px;
+    transition: all 0.3s ease;
+}
+
+/* 展開時顯示向下箭頭 */
+.gt_options:not([style*="display: none"]) ~ .gt-selected .gt-current-lang::after,
+.gt_float_switcher.open .gt-current-lang::after {
+    content: "\f078"; /* fas fa-chevron-down */
+}
+
+.gt_options {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background-color: #0d1117;
+    color:  #58a6ff;
+    border-radius: 20px;
+    margin-bottom: 2px;
+    min-width: 180px;
+}
+
+.gt_options a.nturl {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #58a6ff;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.gt_options a.nturl:hover {
+    background-color: rgba(88, 166, 255, 0.1);
+}
+
+.gt_options a.nturl img {
+    width: 16px;
+    height: 12px;
+    margin-right: 8px;
 }
