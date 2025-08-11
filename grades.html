@@ -7,8 +7,9 @@
     <!-- 連結到您的 CSS 檔案 -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/grades.css">
-    <link rel="stylesheet" href="css/all.min.css"">
-    
+    <link rel="stylesheet" href="css/translate.css">
+    <link rel="stylesheet" href="css/all.min.css">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="images/logo.svg">
     <meta name="theme-color" content="#0d1117">
@@ -193,9 +194,7 @@
             <p class="grade-note">
                 <i class="fas fa-bell"></i> Note: Grades will be retained for one academic year.
             </p>
-
         </div>
-
         <!-- Back to Top Button -->
         <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
             <i class="fas fa-chevron-up"></i>
@@ -205,12 +204,43 @@
         <footer class="site-footer">
             <p>Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
         </footer>
-
     </main>
+
+    <!-- 多語系區塊 (下拉選單版) -->
+    <div class="gtranslate_wrapper">
+    <!--<label for="language-switcher" class="sr-only">網站語言切換</label>-->
+    <!--<select id="language-switcher" name="language-switcher" class="language-select">
+        <option value="zh-TW">繁體中文</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="ms">Bahasa Melayu</option>
+        <option value="vi">Tiếng Việt</option>
+    </select>-->
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="translation-status"></div>
+    </div>
+    <script>
+
+    
+    window.gtranslateSettings = {
+        default_language: "en",
+        // 限制語言，與您的下拉選單保持一致
+        languages: ["zh-TW", "zh-CN", "en", "ja", "ko", "ms", "vi"], 
+        // 【關鍵】告訴 GTranslate 在哪裡生成它的背景元件
+        wrapper_selector: ".gtranslate_wrapper", 
+        alt_flags: { en: "usa" }
+    };
+
+    </script>
+    <!-- 【最重要的修正】我們載入正確的 float.js 腳本！ -->
+    <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 
     <!-- JS 檔案 -->
     <script src="js/common.js"></script>
     <script src="js/grades.js"></script>
     <script src="js/vendor/chart.js"></script>
+    <script src="js/translate.js"></script>
 </body>
 </html>
