@@ -4,9 +4,16 @@
 
 - category: "academic"
   date: "September 2025 ~ Present"
-  organization: "New Taipei City Municipal SanMin High School, Taiwan"
+  organization: "New Taipei Municipal Bi-Hua Junior High School, Taiwan"
   crn: "76892038"
-  position: "Teacher"
+  position: "Substitute Teacher"
+  links: {}
+
+- category: "academic"
+  date: "September 2025 ~ Present"
+  organization: "New Taipei City Municipal San-Min High School, Taiwan"
+  crn: "76892038"
+  position: "Substitute Teacher"
   links: {}
 
 - category: "academic"
@@ -18,7 +25,7 @@
 
 - category: "academic"
   date: "September 2022 ~ March 2023"
-  organization: "New Taipei City Municipal SanMin High School, Taiwan"
+  organization: "New Taipei City Municipal San-Min High School, Taiwan"
   crn: "76892038"
   position: "Guest Lecturer"
   links: {}
