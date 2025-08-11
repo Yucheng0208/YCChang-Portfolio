@@ -77,7 +77,6 @@
     left: 0;
     background-color: #0d1117;
     color:  #58a6ff;
-    border-radius: 20px;
     margin-bottom: 2px;
     min-width: 180px;
 }
@@ -99,4 +98,12 @@
     width: 16px;
     height: 12px;
     margin-right: 8px;
+}
+
+.gt_float_switcher .gt_options a {
+    color: #58a6ff;
+}
+.gt_float_switcher .gt_options a:hover {
+    background-color: rgba(88, 166, 255, 0.1);
+    color: #58a6ff;
 }
