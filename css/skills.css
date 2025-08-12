@@ -71,7 +71,7 @@
   display: flex; 
   justify-content: center; 
   align-items: center;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 0.5rem;
   font-size: 1.6rem;
   color: #fff;
   background: var(--theme-gradient);
@@ -120,9 +120,14 @@
   color: var(--theme-main);
   text-shadow: 0 0 6px var(--theme-shadow);
   font-size: 0.85rem;
-  min-width: 48px;
+  min-width: 55px; /* 增加最小寬度 */
+  width: 55px; /* 固定寬度確保對齊 */
   text-align: center;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace; /* 使用等寬字體 */
 }
 .skill-item:hover {
   background: rgba(255, 255, 255, 0.1);
