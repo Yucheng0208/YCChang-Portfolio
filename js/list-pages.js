@@ -308,7 +308,7 @@ function renderHonorRow(honor, globalIndex) {
     const categoryBadge = createCategoryBadge(honor.category);
     
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle} ${categoryBadge}</td><td data-label="Event">${honor.event || ''}</td>${honor.organizer ? `<td data-label="Organizer">${honor.organizer}</td>` : ''}${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members" class="notranslate">${highlightedMembers}</td>` : ''}${honor.advisors ? `<td data-label="Advisors">Advisors: ${highlightedAdvisors}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle} ${categoryBadge}</td><td data-label="Event">${honor.event || ''}</td>${honor.organizer ? `<td data-label="Organizer">${honor.organizer}</td>` : ''}${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members" class="notranslate">${highlightedMembers}</td>` : ''}${honor.advisors ? `<td data-label="Advisors" class="notranslate">Advisors: ${highlightedAdvisors}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
     return row;
 }
 
