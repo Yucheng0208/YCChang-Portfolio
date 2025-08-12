@@ -20,7 +20,7 @@
 .skill-card {
   width: 100%;
   max-width: 500px;        /* 控制最大寬度 */
-  aspect-ratio: 1 / 1.60;     /* 嘗試接近正方形 */
+  aspect-ratio: 1 / 1.75;     /* 嘗試接近正方形 */
   border-radius: 20px;
   background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.03),
@@ -63,7 +63,7 @@
 
 /* Icon */
 .skill-icon {
-  width: 60px; height: 60px;
+  width: 70px; height: 70px;
   border-radius: 16px;
   display: flex; justify-content: center; align-items: center;
   margin: 0 auto 1rem;
