@@ -19,8 +19,8 @@
 /* Card */
 .skill-card {
   width: 100%;
-  max-width: 500px;        /* 控制最大寬度 */
-  aspect-ratio: 1 / 1.75;     /* 嘗試接近正方形 */
+  max-width: 500px;
+  min-height: 400px; /* 用最小高度替代固定比例 */
   border-radius: 20px;
   background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.03),
@@ -61,19 +61,29 @@
 }
 .skill-card:hover::before { width: 100%; }
 
-/* Icon */
+/* Icon - 響應式但保持比例 */
 .skill-icon {
-  width: 70px; height: 70px;
+  width: 70px; 
+  height: 70px;
+  min-width: 60px; /* 最小尺寸保護 */
+  min-height: 60px;
   border-radius: 16px;
-  display: flex; justify-content: center; align-items: center;
-  margin: 0 auto 1rem;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  margin: 0 auto 1.5rem;
   font-size: 1.6rem;
   color: #fff;
   background: var(--theme-gradient);
   box-shadow: 0 0 20px var(--theme-shadow);
   transition: transform 0.3s ease;
+  flex-shrink: 0; /* 防止被壓縮 */
 }
-.skill-card:hover .skill-icon { transform: scale(1.1) rotate(5deg); }
+
+/* 只保留旋轉效果，移除縮放以維持固定大小 */
+.skill-card:hover .skill-icon { 
+  transform: rotate(5deg); 
+}
 
 /* Title */
 .skill-title {
@@ -238,121 +248,33 @@
     text-align: center; 
 }
 
-@media (max-width: 2000px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.7;
+/* 簡化的響應式設計 */
+@media (max-width: 768px) {
+  .skill-card {
+    min-height: 350px;
+  }
+  
+  .skill-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
   }
 }
 
-@media (max-width: 1200px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 2;
+@media (max-width: 480px) {
+  .skill-card {
+    min-height: 320px;
+    padding: 1.2rem;
   }
-}
-
-@media (max-width: 1020px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 2.5;
+  
+  .skill-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
   }
-}
-
-@media (max-width: 980px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.4;
-  }
-}
-
-@media (max-width: 800px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.8;
-  }
-}
-
-@media (max-width: 764px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.95;
-  }
-}
-
-@media (max-width: 733px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 2;
-  }
-}
-
-@media (max-width: 719px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 2.15;
-  }
-}
-
-@media (max-width: 630px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1;
-  }
-}
-
-@media (max-width: 560px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.2;
-  }
-}
-
-@media (max-width: 530px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.25;
-  }
-}
-
-@media (max-width: 510px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.3;
-  }
-}
-
-@media (max-width: 490px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.4;
-  }
-}
-
-@media (max-width: 460px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.5;
-  }
-}
-
-@media (max-width: 460px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.65;
-  }
-}
-
-@media (max-width: 430px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.5;
-  }
-}
-
-@media (max-width: 400px) {
- .skill-card {
-    max-width: 100%;
-    aspect-ratio: 1 / 1.75;
+  
+  .skills-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
