@@ -1369,6 +1369,13 @@ body.menu-open {
     box-shadow: 0 0 8px rgba(255, 140, 0, 0.1);
 }
 
+.category-preprint {
+    background-color: rgba(32, 201, 151, 0.2);
+    color: #20c997;
+    border: 1px solid rgba(32, 201, 151, 0.4);
+    box-shadow: 0 0 8px rgba(32, 201, 151, 0.1);
+}
+
 .category-book {
     background-color: rgba(111, 66, 193, 0.2);
     color: #6f42c1;
@@ -1376,11 +1383,11 @@ body.menu-open {
     box-shadow: 0 0 8px rgba(111, 66, 193, 0.1);
 }
 
-.category-preprint {
-    background-color: rgba(32, 201, 151, 0.2);
-    color: #20c997;
-    border: 1px solid rgba(32, 201, 151, 0.4);
-    box-shadow: 0 0 8px rgba(32, 201, 151, 0.1);
+.category-patent {
+    background-color: rgba(255, 193, 7, 0.18);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.35);
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.08);
 }
 
 /* Projects 頁面分類 */

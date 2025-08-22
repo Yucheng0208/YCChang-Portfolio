@@ -286,9 +286,20 @@ function renderPublicationRow(pub, globalIndex) {
     
     const highlightedAuthors = CommonUtils.highlightAuthorName(pub.authors || '');
     const categoryBadge = createCategoryBadge(pub.category);
-    
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${pub.title || ''} ${categoryBadge}</td>${pub.authors ? `<td data-label="Authors" class="notranslate">${highlightedAuthors}</td>` : ''}${pub.venue ? `<td data-label="Venue">${pub.venue}</td>` : ''}${pub.location ? `<td data-label="Location">${pub.location}</td>` : ''}<td data-label="Author Role">${pub.authorrole || ''}</td>${pub.isbn ? `<td data-label="ISBN">ISBN: ${pub.isbn}</td>` : ''}<td data-label="Date">${pub.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `
+        <td data-label="#">${globalIndex}.</td>
+        <td data-label="Title">${pub.title || ''} ${categoryBadge}</td>
+        ${pub.authors ? `<td data-label="Authors"><strong>Authors:</strong> <span class="notranslate">${highlightedAuthors}</span></td>` : ''}
+        ${pub.venue ? `<td data-label="Venue"><strong>Venue:</strong> ${pub.venue}</td>` : ''}
+        ${pub.location ? `<td data-label="Location"><strong>Location:</strong> ${pub.location}</td>` : ''}
+        ${pub.patentnumber ? `<td data-label="Patent Number"><strong>Patent Number:</strong> ${pub.patentnumber}</td>` : ''}
+        ${pub.authorrole ? `<td data-label="Author Role"><strong>Author Role:</strong> ${pub.authorrole}</td>` : ''}
+        ${pub.isbn ? `<td data-label="ISBN"><strong>ISBN:</strong> ${pub.isbn}</td>` : ''}
+        ${pub.patentterm ? `<td data-label="Patent Term"><strong>Patent Term:</strong> ${pub.patentterm}</td>` : ''}
+        <td data-label="Date"><strong>Date:</strong> ${pub.date || 'TBA'}</td>
+        ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+    `;
     return row;
 }
 
@@ -308,7 +319,18 @@ function renderHonorRow(honor, globalIndex) {
     const categoryBadge = createCategoryBadge(honor.category);
     
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlightedTitle} ${categoryBadge}</td><td data-label="Event">${honor.event || ''}</td>${honor.organizer ? `<td data-label="Organizer">${honor.organizer}</td>` : ''}${honor.award ? `<td data-label="Award">${honor.award}</td>` : ''}${honor.bonus ? `<td data-label="Bonus">${honor.bonus}</td>` : ''}${honor.members ? `<td data-label="Members" class="notranslate">${highlightedMembers}</td>` : ''}${honor.advisors ? `<td data-label="Advisors" class="notranslate">Advisors: ${highlightedAdvisors}</td>` : ''}<td data-label="Date">${honor.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `
+        <td data-label="#">${globalIndex}.</td>
+        <td data-label="Title">${highlightedTitle} ${categoryBadge}</td>
+        ${honor.event ? `<td data-label="Event"><strong>Event:</strong> ${honor.event}</td>` : ''}
+        ${honor.organizer ? `<td data-label="Organizer"><strong>Organizer:</strong> ${honor.organizer}</td>` : ''}
+        ${honor.award ? `<td data-label="Award"><strong>Award:</strong> ${honor.award}</td>` : ''}
+        ${honor.bonus ? `<td data-label="Bonus"><strong>Bonus:</strong> ${honor.bonus}</td>` : ''}
+        ${highlightedMembers ? `<td data-label="Members" class="notranslate"><strong>Members:</strong> ${highlightedMembers}</td>` : ''}
+        ${highlightedAdvisors ? `<td data-label="Advisors" class="notranslate"><strong>Advisors:</strong> ${highlightedAdvisors}</td>` : ''}
+        <td data-label="Date"><strong>Date:</strong> ${honor.date || 'TBA'}</td>
+        ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+    `;
     return row;
 }
 
@@ -326,7 +348,15 @@ function renderHighlightRow(highlight, globalIndex) {
     const categoryBadge = createCategoryBadge(highlight.category);
     
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${highlight.title || 'No Title'} ${categoryBadge}</td>${highlight.position ? `<td data-label="Position">${highlight.position}</td>` : ''}${location ? `<td data-label="Location">${location}</td>` : ''}${highlight.organizer ? `<td data-label="Organizer">${highlight.organizer}</td>` : ''}<td data-label="Date">${highlight.date || 'TBA'}</td>${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `
+        <td data-label="#">${globalIndex}.</td>
+        <td data-label="Title">${highlight.title || 'No Title'} ${categoryBadge}</td>
+        ${highlight.position ? `<td data-label="Position"><strong>Position:</strong> ${highlight.position}</td>` : ''}
+        ${location ? `<td data-label="Location"><strong>Location:</strong> ${location}</td>` : ''}
+        ${highlight.organizer ? `<td data-label="Organizer"><strong>Organizer:</strong> ${highlight.organizer}</td>` : ''}
+        <td data-label="Date"><strong>Date:</strong> ${highlight.date || 'TBA'}</td>
+        ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+    `;
     return row;
 }
 
@@ -343,8 +373,19 @@ function renderProjectRow(project, globalIndex) {
     const categoryBadge = createCategoryBadge(project.category);
     
     const row = document.createElement('tr');
-    row.innerHTML = `<td data-label="#">${globalIndex}.</td><td data-label="Title">${project.title || ''} ${categoryBadge}</td><td data-label="Class">${project.class || ''}</td><td data-label="Project ID">${project.number || ''}</td><td data-label="Duration">${project.date || 'TBA'}</td><td data-label="Position">${project.position || ''}</td>${project.members ? `<td data-label="Members">${project.members}</td>` : ''}${project.bonus ? `<td data-label="Bonus">${project.bonus}</td>` : ''}${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}`;
+    row.innerHTML = `
+        <td data-label="#">${globalIndex}.</td>
+        <td data-label="Title">${project.title || ''} ${categoryBadge}</td>
+        ${project.class ? `<td data-label="Class"><strong>Class:</strong> ${project.class}</td>` : ''}
+        ${project.number ? `<td data-label="Project ID"><strong>Project ID:</strong> ${project.number}</td>` : ''}
+        ${project.date ? `<td data-label="Duration"><strong>Duration:</strong> ${project.date}</td>` : ''}
+        ${project.position ? `<td data-label="Position"><strong>Position:</strong> ${project.position}</td>` : ''}
+        ${project.members ? `<td data-label="Members"><strong>Members:</strong> ${project.members}</td>` : ''}
+        ${project.bonus ? `<td data-label="Bonus"><strong>Bonus:</strong> ${project.bonus}</td>` : ''}
+        ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
+    `;
     return row;
+
 }
 
 // 🔧 修正的 Works 渲染函數
@@ -368,9 +409,9 @@ function renderWorkRow(work, globalIndex) {
     row.innerHTML = `
         <td data-label="#">${globalIndex}.</td>
         <td data-label="Organization">${work.organization || ''} ${categoryBadge}</td>
-        <td data-label="Position">${work.position || ''}</td>
-        ${hasCRN ? `<td data-label="CRN">Company Registration Numbers: ${crnValue}</td>` : ''}
-        <td data-label="Date">${work.date || 'TBA'}</td>
+        <td data-label="Position"><strong>Position:</strong> ${work.position || ''}</td>
+        ${hasCRN ? `<td data-label="CRN"><strong>Company Registration Numbers:</strong> ${crnValue}</td>` : ''}
+        <td data-label="Date"><strong>Date:</strong> ${work.date || 'TBA'}</td>
         ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
     `;
     return row;

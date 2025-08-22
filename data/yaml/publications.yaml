@@ -1,4 +1,14 @@
 # authorrole: Co-Author(s), First Author, Corresponding Author
+- category: "patent"
+  title: "太陽能板自動清洗裝置"
+  authors: "林世偉, 康才華, 丘建青, 錢威, 張育丞"
+  venue: "中華民國專利證書 Patent Certificate of the Republic of China (ROC)"
+  patentnumber: "Utility Model Patent No. M673849"
+  authorrole: "Creator"
+  patentterm: "August 21, 2025 - March 13, 2035"
+  date: "August 21, 2025"
+  links:
+    DOI: "#"
 
 - category: "conference"
   title: "植基於多模態視覺感知網路於即時語意建構之手語轉譯研究"

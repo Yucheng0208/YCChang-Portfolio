@@ -19,6 +19,8 @@
 .honor-page .publication-table td[data-label="Event"],
 .honor-page .publication-table td[data-label="Organizer"],
 .honor-page .publication-table td[data-label="Award"],
+.honor-page .publication-table td[data-label="Members"],
+.honor-page .publication-table td[data-label="Advisors"],
 .honor-page .publication-table td[data-label="Date"] {
     font-style: normal;
     color: rgba(201, 209, 217, 0.85);

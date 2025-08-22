@@ -19,7 +19,9 @@
 .publication-table td[data-label="Authors"],
 .publication-table td[data-label="Venue"],
 .publication-table td[data-label="Date"],
-.publication-table td[data-label="Author Role"] {
+.publication-table td[data-label="Author Role"],
+.publication-table td[data-label="Location"],
+.publication-table td[data-label="ISBN"]  {
     font-style: normal;
     color: rgba(201, 209, 217, 0.85);
     font-size: 0.95rem;

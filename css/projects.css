@@ -19,6 +19,8 @@
 .project-page .publication-table td[data-label="Members"],
 .project-page .publication-table td[data-label="Supervisor"],
 .project-page .publication-table td[data-label="Duration"],
+.project-page .publication-table td[data-label="Position"],
+.project-page .publication-table td[data-label="Bonus"],
 .project-page .publication-table td[data-label="Project ID"] {
     font-style: normal;
     color: rgba(201, 209, 217, 0.85);

@@ -18,6 +18,7 @@
 /* --- 2. Highlight Table Specific Styles --- */
 .highlight-page .publication-table td[data-label="Event"],
 .highlight-page .publication-table td[data-label="Organizer"],
+.highlight-page .publication-table td[data-label="Position"],
 .highlight-page .publication-table td[data-label="Date"],
 .highlight-page .publication-table td[data-label="Location"] {
     font-style: normal;
