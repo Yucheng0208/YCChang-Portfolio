@@ -8,7 +8,6 @@
   patentterm: "August 21, 2025 - March 13, 2035"
   date: "August 21, 2025"
   links:
-    DOI: "#"
 
 - category: "conference"
   title: "植基於多模態視覺感知網路於即時語意建構之手語轉譯研究"
@@ -18,7 +17,7 @@
   authorrole: "Corresponding Author"
   date: "August 25-26, 2025"
   links:
-    DOI: "#"
+    DOI: "https://www.researchgate.net/publication/392963823_zhijiyuduomotaishijueganzhiwangluyujishiyuyijiangouzhishouyuzhuanyiyanjiu"
 
 - category: "book"
   title: "生成式AI素養全解: 從模型原理到教育應用的實戰教學書"
