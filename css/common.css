@@ -1384,10 +1384,10 @@ body.menu-open {
 }
 
 .category-patent {
-    background-color: rgba(255, 193, 7, 0.18);
-    color: #ffc107;
-    border: 1px solid rgba(255, 193, 7, 0.35);
-    box-shadow: 0 0 8px rgba(255, 193, 7, 0.08);
+    background-color: rgba(100, 210, 255, 0.18);  /* 淺藍背景 */
+    color: #64d2ff;                              /* 淺藍文字 */
+    border: 1px solid rgba(100, 210, 255, 0.35); /* 淺藍邊框 */
+    box-shadow: 0 0 8px rgba(100, 210, 255, 0.08);
 }
 
 /* Projects 頁面分類 */
