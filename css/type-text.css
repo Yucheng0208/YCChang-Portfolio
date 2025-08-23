@@ -88,3 +88,71 @@
     75% { color: #ff4757; }
     100% { color: #ff6b6b; }
 }
+
+/* Motto 輪播效果 CSS - 修正版 */
+.motto-container {
+    position: relative;
+    max-width: 100%; /* 移除最大寬度限制，讓它與 section 一樣寬 */
+    width: 100%;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 2rem; /* 使用你指定的 padding */
+    margin-bottom: 2rem;
+}
+
+.motto {
+    position: absolute;
+    font-size: 1.8rem;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-in-out;
+    width: 100%; /* 佔滿整個容器寬度 */
+    box-sizing: border-box;
+    padding: 20px 2rem;
+    white-space: nowrap; /* 強制單行顯示 */
+    overflow: hidden; /* 隱藏超出部分 */
+    text-overflow: ellipsis; /* 超出部分顯示省略號 */
+}
+
+.motto.active {
+    opacity: 1;
+    transform: translateY(0); /* 保持在原位 */
+}
+
+.motto.fade-out {
+    opacity: 0;
+    transform: translateY(0); /* 保持在原位 */
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .motto {
+        font-size: 1.4rem;
+        padding: 0 1rem;
+    }
+    
+    .motto-container {
+        min-height: 120px;
+        padding: 10px 1rem; /* 保持你指定的 padding 比例 */
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .motto {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        padding: 0 0.5rem;
+    }
+    
+    .motto-container {
+        min-height: 100px;
+        padding: 10px 0.5rem; /* 保持你指定的 padding 比例 */
+        margin-bottom: 1rem;
+    }
+}
