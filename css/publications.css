@@ -21,7 +21,9 @@
 .publication-table td[data-label="Date"],
 .publication-table td[data-label="Author Role"],
 .publication-table td[data-label="Location"],
-.publication-table td[data-label="ISBN"]  {
+.publication-table td[data-label="ISBN"] , 
+.publication-table td[data-label="Patent Number"],
+.publication-table td[data-label="Patent Term"] {
     font-style: normal;
     color: rgba(201, 209, 217, 0.85);
     font-size: 0.95rem;

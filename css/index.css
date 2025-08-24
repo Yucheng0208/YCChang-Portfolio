@@ -341,7 +341,7 @@
 }
 
 /* 奇數項目（第1、3、5...個）靠右對齊 */
-.timeline-item:nth-child(odd) .timeline-school-name {
+.timeline-item:nth-child(odd) .timeline-school-name{
     text-align: right;
 }
 
@@ -350,6 +350,15 @@
     text-align: left;
 }
 
+/* 奇數項目（第1、3、5...個）學校位置靠右對齊 */
+.timeline-item:nth-child(odd) .timeline-school-location {
+    text-align: right;
+}
+
+/* 偶數項目（第2、4、6...個）學校位置靠左對齊 */
+.timeline-item:nth-child(even) .timeline-school-location {
+    text-align: left;
+}
 
 
 /* --- 5. Video Carousel Section --- */
