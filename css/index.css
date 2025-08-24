@@ -2565,7 +2565,7 @@
 .research-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1rem; /* 原本是 0.6rem，改成 1rem */
     padding: 0.7rem 0.8rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -2799,7 +2799,7 @@
     padding: 2.2rem 1.7rem;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     min-height: 400px;
     height: 100%;              /* 等高 */
     width: 100%;               /* 等寬 */
@@ -2846,11 +2846,9 @@
     content: '';
     position: absolute;
     top: 0;
-    left: 13px;
-    right: 13px;
+    left: 0;
+    right: 0;
     height: 4px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
     background: linear-gradient(90deg, #00d2d3, #0099cc, #58a6ff, #0084ff);
     transform: scaleX(0);
     transform-origin: left;
@@ -2900,11 +2898,9 @@
     content: '';
     position: absolute;
     top: 0;
-    left: 13px;
-    right: 13px;
+    left: 0;
+    right: 0;
     height: 4px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
     background: linear-gradient(90deg, #11998e, #2ed573, #7bed9f, #70e000);
     transform: scaleX(0);
     transform-origin: left;
@@ -2941,58 +2937,55 @@
     background: linear-gradient(90deg, transparent, rgba(46, 213, 115, 0.2), rgba(123, 237, 159, 0.15), transparent);
 }
 
-/* 第三個類別 - When (橙粉色系) */
 .research-question-category:nth-child(3) {
-    border: 1px solid rgba(255, 159, 67, 0.3);
+    border: 1px solid rgba(255, 193, 7, 0.3); /* 金黃 */
     background: linear-gradient(135deg, 
         rgba(22, 27, 34, 0.85) 0%, 
         rgba(30, 35, 42, 0.7) 50%,
-        rgba(255, 159, 67, 0.12) 100%);
+        rgba(255, 193, 7, 0.12) 100%);
 }
 
 .research-question-category:nth-child(3)::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 13px;
-    right: 13px;
+    left: 0;
+    right: 0;
     height: 4px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    background: linear-gradient(90deg, #ff6b6b, #ff9f43, #feca57, #ff7675);
+    background: linear-gradient(90deg, #ffd600, #ffb300, #ff9800, #ffcc80); /* 金黃橘 */
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
-    box-shadow: 0 2px 10px rgba(255, 159, 67, 0.3);
+    box-shadow: 0 2px 10px rgba(255, 193, 7, 0.3);
 }
 
 .research-question-category:nth-child(3):hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 159, 67, 0.5);
-    box-shadow: 0 20px 50px rgba(255, 159, 67, 0.25);
+    border-color: rgba(255, 193, 7, 0.5);
+    box-shadow: 0 20px 50px rgba(255, 193, 7, 0.25);
     background: linear-gradient(135deg, 
         rgba(22, 27, 34, 0.9) 0%, 
         rgba(30, 35, 42, 0.7) 50%,
-        rgba(255, 159, 67, 0.12) 100%);
+        rgba(255, 193, 7, 0.12) 100%);
 }
 
 .research-question-category:nth-child(3) .category-icon {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 30%, #feca57 70%, #ff7675 100%);
-    box-shadow: 0 8px 25px rgba(255, 159, 67, 0.3);
+    background: linear-gradient(135deg, #ffd600 0%, #ffb300 30%, #ff9800 70%, #ffcc80 100%);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
 }
 
 .research-question-category:nth-child(3) .research-question-item i {
-    color: #feca57;
-    text-shadow: 0 0 8px rgba(254, 202, 87, 0.5);
+    color: #ffd600;
+    text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
 }
 
 .research-question-category:nth-child(3) .research-question-item:hover {
-    background: linear-gradient(135deg, rgba(255, 159, 67, 0.15), rgba(254, 202, 87, 0.08));
-    border-color: #feca57;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.08));
+    border-color: #ffd600;
 }
 
 .research-question-category:nth-child(3) .research-question-item::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 159, 67, 0.2), rgba(254, 202, 87, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.15), transparent);
 }
 
 /* 第四個類別 - Why (紫粉色系) */
@@ -3008,11 +3001,9 @@
     content: '';
     position: absolute;
     top: 0;
-    left: 13px;
-    right: 13px;
+    left: 0;
+    right: 0;
     height: 4px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
     background: linear-gradient(90deg, #f093fb, #f5576c, #ff97a1, #ffbdc3);
     transform: scaleX(0);
     transform-origin: left;
@@ -3061,11 +3052,9 @@
     content: '';
     position: absolute;
     top: 0;
-    left: 13px;
-    right: 13px;
+    left: 0;
+    right: 0;
     height: 4px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
     background: linear-gradient(90deg, #5865f2, #8e54e9, #3f5fff, #7cbdff);
     transform: scaleX(0);
     transform-origin: left;
@@ -3097,52 +3086,49 @@
     background: linear-gradient(90deg, transparent, rgba(88, 101, 242, 0.2), rgba(88, 101, 242, 0.15), transparent);
 }
 
-/* 第六個類別 - How (紅橙色系) */
 .research-question-category:nth-child(6) {
-    border: 1px solid rgba(255, 94, 98, 0.3);
+    border: 1.5px solid rgba(186, 104, 255, 0.3);
     background: linear-gradient(135deg, 
         rgba(22, 27, 34, 0.85) 0%, 
         rgba(30, 35, 42, 0.7) 50%,
-        rgba(255, 94, 98, 0.12) 100%);
+        rgba(186, 104, 255, 0.12) 100%);
 }
 .research-question-category:nth-child(6)::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 13px;
-    right: 13px;
+    left: 0;
+    right: 0;
     height: 4px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    background: linear-gradient(90deg, #ff5e62, #ff9966, #f7971e, #f953c6);
+    background: linear-gradient(90deg, #ba68ff, #f8baff, #a084ee, #f093fb);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
-    box-shadow: 0 2px 10px rgba(255, 94, 98, 0.3);
+    box-shadow: 0 2px 10px rgba(186, 104, 255, 0.3);
 }
 .research-question-category:nth-child(6):hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 94, 98, 0.5);
-    box-shadow: 0 20px 50px rgba(255, 94, 98, 0.25);
+    border-color: rgba(186, 104, 255, 0.5);
+    box-shadow: 0 20px 50px rgba(186, 104, 255, 0.25);
     background: linear-gradient(135deg, 
         rgba(22, 27, 34, 0.9) 0%, 
         rgba(30, 35, 42, 0.7) 50%,
-        rgba(255, 94, 98, 0.12) 100%);
+        rgba(186, 104, 255, 0.12) 100%);
 }
 .research-question-category:nth-child(6) .category-icon {
-    background: linear-gradient(135deg, #ff5e62 0%, #ff9966 30%, #f7971e 70%, #f953c6 100%);
-    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.3);
+    background: linear-gradient(135deg, #ba68ff 0%, #f8baff 30%, #a084ee 70%, #f093fb 100%);
+    box-shadow: 0 8px 25px rgba(186, 104, 255, 0.3);
 }
 .research-question-category:nth-child(6) .research-question-item i {
-    color: #ff9966;
-    text-shadow: 0 0 8px rgba(255, 94, 98, 0.5);
+    color: #ba68ff;
+    text-shadow: 0 0 8px rgba(186, 104, 255, 0.5);
 }
 .research-question-category:nth-child(6) .research-question-item:hover {
-    background: linear-gradient(135deg, rgba(255, 94, 98, 0.15), rgba(255, 94, 98, 0.08));
-    border-color: #ff9966;
+    background: linear-gradient(135deg, rgba(186, 104, 255, 0.15), rgba(248, 186, 255, 0.08));
+    border-color: #ba68ff;
 }
 .research-question-category:nth-child(6) .research-question-item::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 94, 98, 0.2), rgba(255, 94, 98, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(186, 104, 255, 0.2), rgba(248, 186, 255, 0.15), transparent);
 }
 
 /* === 通用懸停效果 === */
@@ -3209,7 +3195,7 @@
 .research-question-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1rem; /* 原本是 0.6rem，改大一點 */
     padding: 0.7rem 0.8rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -3220,8 +3206,8 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    white-space: normal;      /* 允許自動換行 */
-    word-break: break-word
+    white-space: normal;
+    word-break: break-word;
 }
 
 .research-question-item::before {
