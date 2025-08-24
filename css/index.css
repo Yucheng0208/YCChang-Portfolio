@@ -2263,15 +2263,6 @@
     margin-bottom: 4rem;
 }
 
-.research-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--tech-cyan);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-}
-
 .research-subtitle {
     font-size: 1.2rem;
     color: rgba(201, 209, 217, 0.8);
@@ -2474,7 +2465,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #f093fb, #f5576c, #a8edea, #fed6e3);
+    background: linear-gradient(90deg, #f8baff, #f5576c, #ff97a1, #ffbdc3);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
@@ -2492,7 +2483,7 @@
 }
 
 .research-category:nth-child(4) .category-icon {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 30%, #a8edea 70%, #fed6e3 100%);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 30%, #ff97a1 70%, #ffbdc3 100%);
     box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
 }
 
@@ -2714,6 +2705,651 @@
     }
     
     .research-item i {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- Research Question Section --- */
+/* === Enhanced Research Interests Section with Connect Effects === */
+.research-question-section {
+    margin-top: 60px;         /* 與上方區塊拉開距離 */
+    padding-bottom: 60px;     /* 與下方底線拉開距離 */
+    border-top: 1.5px solid rgba(120, 140, 255, 0.12); /* 與上方有明顯分隔 */
+    border-bottom: 1.5px solid rgba(120, 140, 255, 0.10); /* 下方底線不會貼太近 */
+    background: none;         /* 保持原本背景 */
+}
+
+.research-question-header {
+    margin-top: 50px;
+}
+
+.research-question-interests-section {
+    padding: 80px 0;
+    background-color: #0d1117;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.research-question-interests-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(100, 210, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(10, 132, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.research-question-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.research-question-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.research-question-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--tech-cyan);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.category-subtitle{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tech-cyan);
+    margin-bottom: 0.5rem;
+    display: none
+}
+
+.research-question-subtitle {
+    font-size: 1.2rem;
+    color: rgba(201, 209, 217, 0.8);
+    margin: 0;
+    font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.research-question-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2.8rem 2.2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-items: stretch; /* 讓每個卡片都撐滿欄寬 */
+    align-items: stretch;   /* 讓每個卡片都等高 */
+}
+
+.research-question-category {
+    border-radius: 22px;
+    padding: 2.2rem 1.7rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: visible;
+    min-height: 400px;
+    height: 100%;              /* 等高 */
+    width: 100%;               /* 等寬 */
+    display: flex;
+    flex-direction: column;
+    background-clip: padding-box;
+    background-color: rgba(22, 27, 34, 0.97);
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+    border: 1.5px solid rgba(120, 140, 255, 0.08);
+}
+
+.research-question-category:nth-child(1) { grid-row: 1; grid-column: 1; }
+.research-question-category:nth-child(2) { grid-row: 1; grid-column: 2; }
+.research-question-category:nth-child(3) { grid-row: 1; grid-column: 3; }
+.research-question-category:nth-child(4) { grid-row: 2; grid-column: 1; } /* Why 下排最前面 */
+.research-question-category:nth-child(5) { grid-row: 2; grid-column: 2; }
+.research-question-category:nth-child(6) { grid-row: 2; grid-column: 3; }
+
+@media (max-width: 900px) {
+    .research-question-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 1.2rem;
+    }
+    .research-question-category {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        justify-self: stretch;
+    }
+}
+
+/* === 六個不同配色主題 === */
+
+/* 第一個類別 - What (科技藍色系) */
+.research-question-category:nth-child(1) {
+    border: 1px solid rgba(0, 210, 211, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(0, 210, 211, 0.12) 100%);
+}
+
+.research-question-category:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13px;
+    right: 13px;
+    height: 4px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background: linear-gradient(90deg, #00d2d3, #0099cc, #58a6ff, #0084ff);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(0, 210, 211, 0.3);
+}
+
+.research-question-category:nth-child(1):hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 210, 211, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 210, 211, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(0, 210, 211, 0.12) 100%);
+}
+
+.research-question-category:nth-child(1) .category-icon {
+    background: linear-gradient(135deg, #00d2d3 0%, #0099cc 30%, #58a6ff 70%, #0084ff 100%);
+    box-shadow: 0 8px 25px rgba(0, 210, 211, 0.3);
+}
+
+.research-question-category:nth-child(1) .research-question-item i {
+    color: #58a6ff;
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+.research-question-category:nth-child(1) .research-question-item:hover {
+    background: linear-gradient(135deg, rgba(0, 210, 211, 0.15), rgba(88, 166, 255, 0.08));
+    border-color: #58a6ff;
+}
+
+.research-question-category:nth-child(1) .research-question-item::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 210, 211, 0.2), rgba(88, 166, 255, 0.15), transparent);
+}
+
+/* 第二個類別 - Who (綠色系) */
+.research-question-category:nth-child(2) {
+    border: 1px solid rgba(46, 213, 115, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(46, 213, 115, 0.12) 100%);
+}
+
+.research-question-category:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13px;
+    right: 13px;
+    height: 4px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background: linear-gradient(90deg, #11998e, #2ed573, #7bed9f, #70e000);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(46, 213, 115, 0.3);
+}
+
+.research-question-category:nth-child(2):hover {
+    transform: translateY(-8px);
+    border-color: rgba(46, 213, 115, 0.5);
+    box-shadow: 0 20px 50px rgba(46, 213, 115, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(46, 213, 115, 0.12) 100%);
+}
+
+.research-question-category:nth-child(2) .category-icon {
+    background: linear-gradient(135deg, #11998e 0%, #2ed573 30%, #7bed9f 70%, #70e000 100%);
+    box-shadow: 0 8px 25px rgba(46, 213, 115, 0.3);
+}
+
+.research-question-category:nth-child(2) .research-question-item i {
+    color: #7bed9f;
+    text-shadow: 0 0 8px rgba(123, 237, 159, 0.5);
+}
+
+.research-question-category:nth-child(2) .research-question-item:hover {
+    background: linear-gradient(135deg, rgba(46, 213, 115, 0.15), rgba(123, 237, 159, 0.08));
+    border-color: #7bed9f;
+}
+
+.research-question-category:nth-child(2) .research-question-item::before {
+    background: linear-gradient(90deg, transparent, rgba(46, 213, 115, 0.2), rgba(123, 237, 159, 0.15), transparent);
+}
+
+/* 第三個類別 - When (橙粉色系) */
+.research-question-category:nth-child(3) {
+    border: 1px solid rgba(255, 159, 67, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(255, 159, 67, 0.12) 100%);
+}
+
+.research-question-category:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13px;
+    right: 13px;
+    height: 4px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background: linear-gradient(90deg, #ff6b6b, #ff9f43, #feca57, #ff7675);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(255, 159, 67, 0.3);
+}
+
+.research-question-category:nth-child(3):hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 159, 67, 0.5);
+    box-shadow: 0 20px 50px rgba(255, 159, 67, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(255, 159, 67, 0.12) 100%);
+}
+
+.research-question-category:nth-child(3) .category-icon {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 30%, #feca57 70%, #ff7675 100%);
+    box-shadow: 0 8px 25px rgba(255, 159, 67, 0.3);
+}
+
+.research-question-category:nth-child(3) .research-question-item i {
+    color: #feca57;
+    text-shadow: 0 0 8px rgba(254, 202, 87, 0.5);
+}
+
+.research-question-category:nth-child(3) .research-question-item:hover {
+    background: linear-gradient(135deg, rgba(255, 159, 67, 0.15), rgba(254, 202, 87, 0.08));
+    border-color: #feca57;
+}
+
+.research-question-category:nth-child(3) .research-question-item::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 159, 67, 0.2), rgba(254, 202, 87, 0.15), transparent);
+}
+
+/* 第四個類別 - Why (紫粉色系) */
+.research-question-category:nth-child(4) {
+    border: 1px solid rgba(240, 147, 251, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(240, 147, 251, 0.12) 100%);
+}
+
+.research-question-category:nth-child(4)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13px;
+    right: 13px;
+    height: 4px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background: linear-gradient(90deg, #f093fb, #f5576c, #ff97a1, #ffbdc3);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(240, 147, 251, 0.3);
+}
+
+.research-question-category:nth-child(4):hover {
+    transform: translateY(-8px);
+    border-color: rgba(240, 147, 251, 0.5);
+    box-shadow: 0 20px 50px rgba(240, 147, 251, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(240, 147, 251, 0.12) 100%);
+}
+
+.research-question-category:nth-child(4) .category-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 30%, #ff97a1 70%, #ffbdc3 100%);
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+}
+
+.research-question-category:nth-child(4) .research-question-item i {
+    color: #f093fb;
+    text-shadow: 0 0 8px rgba(240, 147, 251, 0.5);
+}
+
+.research-question-category:nth-child(4) .research-question-item:hover {
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.15), rgba(240, 147, 251, 0.08));
+    border-color: #f093fb;
+}
+
+.research-question-category:nth-child(4) .research-question-item::before {
+    background: linear-gradient(90deg, transparent, rgba(240, 147, 251, 0.2), rgba(240, 147, 251, 0.15), transparent);
+}
+
+/* 第五個類別 - Where (藍紫色系) */
+.research-question-category:nth-child(5) {
+    border: 1px solid rgba(88, 101, 242, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(88, 101, 242, 0.12) 100%);
+}
+.research-question-category:nth-child(5)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13px;
+    right: 13px;
+    height: 4px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background: linear-gradient(90deg, #5865f2, #8e54e9, #3f5fff, #7cbdff);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(88, 101, 242, 0.3);
+}
+.research-question-category:nth-child(5):hover {
+    transform: translateY(-8px);
+    border-color: rgba(88, 101, 242, 0.5);
+    box-shadow: 0 20px 50px rgba(88, 101, 242, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(88, 101, 242, 0.12) 100%);
+}
+.research-question-category:nth-child(5) .category-icon {
+    background: linear-gradient(135deg, #5865f2 0%, #8e54e9 30%, #3f5fff 70%, #7cbdff 100%);
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.3);
+}
+.research-question-category:nth-child(5) .research-question-item i {
+    color: #8e54e9;
+    text-shadow: 0 0 8px rgba(88, 101, 242, 0.5);
+}
+.research-question-category:nth-child(5) .research-question-item:hover {
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.15), rgba(88, 101, 242, 0.08));
+    border-color: #8e54e9;
+}
+.research-question-category:nth-child(5) .research-question-item::before {
+    background: linear-gradient(90deg, transparent, rgba(88, 101, 242, 0.2), rgba(88, 101, 242, 0.15), transparent);
+}
+
+/* 第六個類別 - How (紅橙色系) */
+.research-question-category:nth-child(6) {
+    border: 1px solid rgba(255, 94, 98, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.85) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(255, 94, 98, 0.12) 100%);
+}
+.research-question-category:nth-child(6)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13px;
+    right: 13px;
+    height: 4px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    background: linear-gradient(90deg, #ff5e62, #ff9966, #f7971e, #f953c6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    box-shadow: 0 2px 10px rgba(255, 94, 98, 0.3);
+}
+.research-question-category:nth-child(6):hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 94, 98, 0.5);
+    box-shadow: 0 20px 50px rgba(255, 94, 98, 0.25);
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 50%,
+        rgba(255, 94, 98, 0.12) 100%);
+}
+.research-question-category:nth-child(6) .category-icon {
+    background: linear-gradient(135deg, #ff5e62 0%, #ff9966 30%, #f7971e 70%, #f953c6 100%);
+    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.3);
+}
+.research-question-category:nth-child(6) .research-question-item i {
+    color: #ff9966;
+    text-shadow: 0 0 8px rgba(255, 94, 98, 0.5);
+}
+.research-question-category:nth-child(6) .research-question-item:hover {
+    background: linear-gradient(135deg, rgba(255, 94, 98, 0.15), rgba(255, 94, 98, 0.08));
+    border-color: #ff9966;
+}
+.research-question-category:nth-child(6) .research-question-item::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 94, 98, 0.2), rgba(255, 94, 98, 0.15), transparent);
+}
+
+/* === 通用懸停效果 === */
+.research-question-category:hover::before {
+    transform: scaleX(1);
+}
+
+.category-header {
+    text-align: center;
+}
+
+.category-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem auto;
+    font-size: 1.8rem;
+    color: white;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    opacity: 0.2;
+    border-radius: inherit;
+}
+
+.research-question-category:hover .category-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.category-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
+    text-align: center;
+    min-height: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+}
+
+.research-question-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+.research-question-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: normal;      /* 允許自動換行 */
+    word-break: break-word
+}
+
+.research-question-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.5s ease;
+}
+
+.research-question-item:hover {
+    transform: translateX(8px);
+    color: #fff;
+}
+
+.research-question-item:hover::before {
+    left: 100%;
+}
+
+.research-question-item i {
+    font-size: 1rem;
+    width: 16px;
+    text-align: center;
+    transition: color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.research-question-item:hover i {
+    color: #fff;
+}
+
+.justify-content-between {
+    margin-bottom: 0.3rem;
+}
+
+/* === 響應式設計 === */
+@media (max-width: 1400px) {
+    .research-question-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .research-question-category {
+        min-height: 380px;
+    }
+    
+    .category-title {
+        font-size: 1.1rem;
+    }
+    
+    .research-question-item {
+        font-size: 0.8rem;
+        padding: 0.8rem 1rem;
+    }
+    
+    .research-question-item i {
+        font-size: 1.1rem;
+        width: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .research-question-interests-section {
+        padding: 60px 0;
+    }
+    
+    .research-question-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .research-question-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .research-question-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .research-question-category {
+        padding: 1.8rem 1.3rem;
+        min-height: 400px;
+    }
+    
+    .category-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+    
+    .category-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .research-question-container {
+        padding: 0 1rem;
+    }
+    
+    .research-question-header h2 {
+        font-size: 2rem;
+    }
+    
+    .research-question-category {
+        padding: 1.5rem 1rem;
+        min-height: 280px;
+    }
+    
+    .category-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 1.5rem;
+    }
+    
+    .category-title {
+        font-size: 1.2rem;
+    }
+    
+    .research-question-item {
+        padding: 0.9rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .research-question-item i {
         font-size: 1.1rem;
     }
 }
@@ -2970,6 +3606,7 @@
 
 .section-title,
 .research-header h2,
+.research-question-header h2,
 .education-section h2,
 .events-header h2,
 .video-carousel-title,
