@@ -95,7 +95,7 @@ const mottoTexts = [
 let currentMotto = 0;
 let mottos = [];
 let autoSlideInterval;
-const slideInterval = 4000; // 4秒切換
+const slideInterval = 3000; // 3秒切換
 
 // 初始化函數
 function initMottoCarousel() {
