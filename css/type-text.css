@@ -89,16 +89,16 @@
     100% { color: #ff6b6b; }
 }
 
-/* Motto 輪播效果 CSS - 修正版 */
+/* Motto 輪播效果 CSS - 響應式換行版 */
 .motto-container {
     position: relative;
-    max-width: 100%; /* 移除最大寬度限制，讓它與 section 一樣寬 */
+    max-width: 100%;
     width: 100%;
-    min-height: 150px;
+    min-height: 180px; /* 增加最小高度 */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 2rem; /* 使用你指定的 padding */
+    padding: 25px 2rem; /* 增加上下 padding */
     margin-bottom: 2rem;
 }
 
@@ -111,48 +111,86 @@
     opacity: 0;
     transform: translateY(0);
     transition: opacity 0.8s ease-in-out;
-    width: 100%; /* 佔滿整個容器寬度 */
+    width: 100%;
     box-sizing: border-box;
-    padding: 20px 2rem;
-    white-space: nowrap; /* 強制單行顯示 */
-    overflow: hidden; /* 隱藏超出部分 */
-    text-overflow: ellipsis; /* 超出部分顯示省略號 */
+    padding: 30px 2rem; /* 增加上下 padding */
+    /* 移除強制單行的限制 */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto; /* 支援自動斷詞 */
 }
 
 .motto.active {
     opacity: 1;
-    transform: translateY(0); /* 保持在原位 */
+    transform: translateY(0);
 }
 
 .motto.fade-out {
     opacity: 0;
-    transform: translateY(0); /* 保持在原位 */
+    transform: translateY(0);
 }
 
-/* 響應式設計 */
+/* 響應式設計 - 漸進式調整 */
+/* 大螢幕：優先保持單行 */
+@media (min-width: 1200px) {
+    .motto {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* 中等螢幕：允許適度換行 */
+@media (max-width: 1199px) and (min-width: 769px) {
+    .motto {
+        white-space: normal; /* 允許換行 */
+        overflow: visible;
+    }
+}
+
+/* 平板尺寸 */
 @media (max-width: 768px) {
     .motto {
         font-size: 1.4rem;
-        padding: 0 1rem;
+        padding: 20px 1rem; /* 調整 padding */
+        white-space: normal; /* 允許換行 */
+        overflow: visible;
     }
     
     .motto-container {
-        min-height: 120px;
-        padding: 10px 1rem; /* 保持你指定的 padding 比例 */
+        min-height: 150px; /* 增加最小高度 */
+        padding: 20px 1rem; /* 調整 padding */
         margin-bottom: 1.5rem;
     }
 }
 
+/* 手機尺寸 */
 @media (max-width: 480px) {
     .motto {
         font-size: 1.2rem;
         line-height: 1.5;
-        padding: 0 0.5rem;
+        padding: 15px 0.5rem; /* 調整 padding */
+        white-space: normal; /* 允許換行 */
+        overflow: visible;
     }
     
     .motto-container {
-        min-height: 100px;
-        padding: 10px 0.5rem; /* 保持你指定的 padding 比例 */
+        min-height: 130px; /* 增加最小高度 */
+        padding: 15px 0.5rem; /* 調整 padding */
         margin-bottom: 1rem;
+    }
+}
+
+/* 極小螢幕：確保文字可讀性 */
+@media (max-width: 320px) {
+    .motto {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        padding: 15px 0.25rem;
+    }
+    
+    .motto-container {
+        min-height: 80px;
+        padding: 15px 0.25rem;
     }
 }
