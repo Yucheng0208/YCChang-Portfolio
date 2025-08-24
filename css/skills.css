@@ -8,10 +8,10 @@
 
 .skills-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 水平3欄 */
   gap: 1.5rem;
   justify-items: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -19,8 +19,8 @@
 /* Card */
 .skill-card {
   width: 100%;
-  max-width: 500px;
-  min-height: 400px; /* 用最小高度替代固定比例 */
+  max-width: 600px;
+  min-height: 300px; /* 用最小高度替代固定比例 */
   border-radius: 20px;
   background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.03),
