@@ -332,7 +332,8 @@
     text-align: left;
 }
 
-.timeline-school-name {
+.timeline-school-name,
+.timeline-school-location {
     font-size: 1rem;
     color: var(--text-color);
     font-style: italic;
@@ -3316,6 +3317,11 @@
 }
 
 @media (max-width: 600px) {
+    .timeline-school-name,
+    .timeline-school-location {
+        font-size: 1rem !important;
+    }
+
     .research-question-container {
         padding: 0 1rem;
     }
