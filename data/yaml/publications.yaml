@@ -8,7 +8,8 @@
   patentterm: "August 21, 2025 - March 13, 2035"
   date: "August 21, 2025"
   links:
-
+    Certificate: "data/patent/太陽能板自動清洗裝置.jpg"
+    
 - category: "conference"
   title: "植基於多模態視覺感知網路於即時語意建構之手語轉譯研究"
   authors: "Yu-Cheng Lung, Yu-Xuan Lin, Yu-Cheng Chang*, Hua-Wen Tsai*, Yen-Da Chen"
@@ -17,7 +18,7 @@
   authorrole: "Corresponding Author"
   date: "August 25-26, 2025"
   links:
-    DOI: "https://www.researchgate.net/publication/392963823_zhijiyuduomotaishijueganzhiwangluyujishiyuyijiangouzhishouyuzhuanyiyanjiu"
+    ResearchGate: "https://www.researchgate.net/publication/392963823_zhijiyuduomotaishijueganzhiwangluyujishiyuyijiangouzhishouyuzhuanyiyanjiu"
 
 - category: "book"
   title: "生成式AI素養全解: 從模型原理到教育應用的實戰教學書"
@@ -106,6 +107,7 @@
   authorrole: "Corresponding Author"
   date: "August 28-29, 2023"
   links:
+    ResearchGate: "https://www.researchgate.net/publication/378968439_jiyudiannaoshijuedeshouyuzhuyinfuhaobianshiyuyingxiangfenleiyanjiu"
 
 - category: "conference"
   title: "應用電腦視覺之大眾運輸維安輔助系統"
@@ -115,6 +117,7 @@
   authorrole: "Corresponding Author"
   date: "May 12-13, 2023"
   links:
+    ResearchGate: "https://www.researchgate.net/publication/378970969_yingyongdiannaoshijuezhidazhongyunshuweianfuzhuxitong"
 
 - category: "conference"
   title: "An Outdoor Rescue System Using LoRa Communication Network"
@@ -140,9 +143,9 @@
   authors: "Yen-Da Chen, Yu-Cheng Chang*"
   venue: "5th IEEE Eurasia Conference on Biomedical Engineering, Healthcare and Sustainability 2023 (IEEE ECBIOS 2023)"
   location: "​Chia Nan University of Pharmacy and Science, Tainan City, Taiwan"
+  authorrole: "Corresponding Author"
   links:
     DOI: "https://doi.org/10.3390/engproc2023055058"
-  authorrole: "Corresponding Author"
   date: "June, 2-4 2023"
 
 - category: "conference"
@@ -162,3 +165,4 @@
   authorrole: "Co-Author(s)"
   date: "August 26-27, 2022"
   links:
+    ResearchGate: "https://www.researchgate.net/publication/380482912_jiyuyingxiangbianshizhizhihuimigongxiaoyouxi"
