@@ -1,0 +1,744 @@
+/*
+======================================================================
+                     EMO LAB CSS - 實驗室專用樣式
+======================================================================
+此文件包含實驗室頁面的專用樣式：
+- CSS 變數定義
+- 全局樣式
+- Hero Section (英雄區塊)
+- About Section (關於我們)
+- News Section (最新消息)
+- Members Section (團隊成員)
+- 響應式設計
+- 動畫效果
+======================================================================
+*/
+
+/* --- CSS 變數定義 --- */
+:root {
+    --tech-blue: #0a84ff;
+    --tech-cyan: #64d2ff;
+    --dark-bg: #0d1117;
+    --light-bg: #161b22;
+    --text-primary: #f0f6fc;
+    --text-secondary: #c9d1d9;
+    --text-muted: rgba(201, 209, 217, 0.8);
+}
+
+/* --- 全局樣式 --- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- 通用動畫 --- */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 通用樣式類別 --- */
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.fade-in-up-delay-1 { animation-delay: 0.1s; }
+.fade-in-up-delay-2 { animation-delay: 0.2s; }
+.fade-in-up-delay-3 { animation-delay: 0.3s; }
+
+/* 統一的區塊標題樣式 */
+.section-title,
+.lab-about-section h2,
+.lab-news-section h2, 
+.lab-members-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: linear-gradient(
+        45deg,
+        #58a6ff,
+        #00d2d3,
+        #2ed573,
+        #f093fb,
+        #58a6ff
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 4s ease-in-out infinite;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* --- 1. Hero Section --- */
+.lab-hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, 
+        rgba(13, 17, 23, 0.95) 0%, 
+        rgba(22, 27, 34, 0.98) 50%, 
+        rgba(13, 17, 23, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hero 背景效果 */
+.lab-hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(100, 210, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(10, 132, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(88, 166, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+}
+
+.lab-hero-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.lab-logo-container {
+    margin-bottom: 2rem;
+}
+
+.lab-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    box-shadow: 0 15px 35px rgba(100, 210, 255, 0.4);
+    animation: logoFloat 3s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.lab-logo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    animation: logoShine 3s infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes logoShine {
+    0% { transform: translateX(-100%); }
+    50%, 100% { transform: translateX(100%); }
+}
+
+.lab-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% { filter: drop-shadow(0 0 10px rgba(100, 210, 255, 0.3)); }
+    100% { filter: drop-shadow(0 0 20px rgba(100, 210, 255, 0.6)); }
+}
+
+.lab-subtitle {
+    font-size: 1.5rem;
+    color: var(--tech-cyan);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.lab-tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 滾動指示器 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.scroll-arrow {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--tech-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    transition: all 0.3s ease;
+    background-color: rgba(13, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.scroll-arrow:hover {
+    background-color: rgba(100, 210, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.scroll-arrow i {
+    color: var(--tech-cyan);
+    font-size: 1.2rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* --- 2. About Section --- */
+.lab-about-section {
+    padding: 6rem 0;
+    background-color: var(--light-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-description {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.main-description p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.main-description p:last-child {
+    margin-bottom: 0;
+}
+
+.main-description strong {
+    color: var(--tech-cyan);
+    font-weight: 600;
+}
+
+/* 理念區塊 */
+.principles-section h3 {
+    font-size: 2rem;
+    color: var(--tech-cyan);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.principle-card {
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.8) 0%, 
+        rgba(30, 35, 42, 0.6) 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(100, 210, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.principle-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.principle-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(100, 210, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.principle-card:hover::before {
+    transform: scaleX(1);
+}
+
+.principle-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.principle-card:hover .principle-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.principle-card h4 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.principle-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* --- 3. News Section --- */
+.lab-news-section {
+    padding: 6rem 0;
+    background-color: var(--dark-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.news-container {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.9) 0%, 
+        rgba(30, 35, 42, 0.7) 100%);
+    border: 1px solid rgba(100, 210, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.news-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.news-table thead {
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+}
+
+.news-table thead th {
+    padding: 1rem;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.news-table tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.news-table tbody tr:hover {
+    background-color: rgba(100, 210, 255, 0.05);
+}
+
+.news-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.news-table tbody td {
+    padding: 1rem;
+    color: var(--text-secondary);
+    vertical-align: top;
+}
+
+.news-date-cell {
+    font-weight: 500;
+    color: var(--tech-cyan);
+    white-space: nowrap;
+    width: 120px;
+}
+
+.news-title-cell {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.news-content-cell {
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.news-category-cell {
+    width: 100px;
+}
+
+.news-category-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: rgba(100, 210, 255, 0.1);
+    color: var(--tech-cyan);
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(100, 210, 255, 0.2);
+    text-transform: uppercase;
+}
+
+/* --- 4. Members Section --- */
+.lab-members-section {
+    padding: 6rem 0;
+    background-color: var(--light-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.member-card {
+    background: linear-gradient(135deg, 
+        rgba(22, 27, 34, 0.8) 0%, 
+        rgba(30, 35, 42, 0.6) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(100, 210, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(100, 210, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.member-card:hover::before {
+    transform: scaleX(1);
+}
+
+.member-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--tech-cyan);
+    box-shadow: 0 8px 25px rgba(100, 210, 255, 0.3);
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* 默認頭像 */
+.member-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+
+.member-avatar img[src*="default-avatar"],
+.member-avatar img[src=""] {
+    display: none;
+}
+
+.member-avatar:has(img[src*="default-avatar"])::after,
+.member-avatar:has(img[src=""])::after {
+    content: '\f007';
+    display: flex;
+}
+
+.member-card:hover .member-avatar img {
+    transform: scale(1.1);
+}
+
+.member-name {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.member-position {
+    color: var(--tech-cyan);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.member-organization {
+    color: rgba(201, 209, 217, 0.7);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* --- 5. Loading States --- */
+.loading-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+}
+
+.loading-state i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--tech-cyan);
+}
+
+.loading-state p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* --- 6. 響應式設計 --- */
+
+/* Tablet 尺寸 */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .lab-title {
+        font-size: 3rem;
+    }
+    
+    .lab-subtitle {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+    
+    .lab-tagline {
+        font-size: 1rem;
+    }
+    
+    .lab-logo {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+    
+    .principles-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-description p {
+        font-size: 1.1rem;
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .member-card {
+        padding: 1.5rem;
+    }
+    
+    .news-table {
+        font-size: 0.9rem;
+    }
+    
+    .news-table thead th,
+    .news-table tbody td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .news-date-cell {
+        width: 80px;
+        font-size: 0.8rem;
+    }
+    
+    .news-category-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+/* 小尺寸手機 */
+@media (max-width: 600px) {
+    /* 新聞表格響應式 */
+    .news-table,
+    .news-table thead,
+    .news-table tbody,
+    .news-table th,
+    .news-table td,
+    .news-table tr {
+        display: block;
+    }
+    
+    .news-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    .news-table tr {
+        background: linear-gradient(135deg, 
+            rgba(22, 27, 34, 0.9) 0%, 
+            rgba(30, 35, 42, 0.7) 100%);
+        border: 1px solid rgba(100, 210, 255, 0.1);
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .news-table tr::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--tech-blue), var(--tech-cyan));
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .news-table td {
+        border: none;
+        padding: 0.5rem 0;
+        position: relative;
+        text-align: left !important;
+    }
+    
+    .news-table td:before {
+        content: attr(data-label) ": ";
+        font-weight: bold;
+        color: var(--tech-cyan);
+        display: inline-block;
+        width: auto;
+        margin-right: 0.5rem;
+    }
+    
+    .news-date-cell:before { content: "Date: "; }
+    .news-title-cell:before { content: ""; }
+    .news-category-cell:before { content: "Category: "; }
+    .news-category-cell { width: auto; }
+}
+
+/* 極小尺寸手機 */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .lab-hero-container {
+        padding: 1rem;
+    }
+    
+    .lab-title {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+    
+    .lab-subtitle {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+    
+    .lab-logo {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    
+    .main-description p {
+        font-size: 1rem;
+    }
+    
+    .principle-card {
+        padding: 1.5rem;
+    }
+    
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .member-avatar {
+        width: 80px;
+        height: 80px;
+    }
+}

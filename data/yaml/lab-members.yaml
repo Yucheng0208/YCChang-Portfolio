@@ -1,0 +1,41 @@
+# EMO Lab 團隊成員數據
+- name: "Yu-Cheng Chang"
+  position: "Principal Investigator & Founder"
+  organization: "National Taipei University of Technology"
+  order: 1
+
+- name: "Yu-Cheng Lung"
+  position: "MCP Researcher"
+  organization: "Lunghwa University of Science and Technology"
+  order: 2
+
+- name: "Yu-Xuan Lin"
+  position: "CV Researcher"
+  organization: "Lunghwa University of Science and Technology"
+  order: 3
+
+- name: "Zong-Rong Wu"
+  position: "DL Researcher"
+  organization: "National Yunlin University of Science and Technology"
+  order: 4
+
+- name: "Liang-Zhen Chen"
+  position: "UI/UX Designer"
+  organization: "National Taipei University of Technology"
+  order: 5
+
+- name: "Shan-Xi Yang"
+  position: "NodeRED Researcher"
+  organization: "National Formosa University"
+  order: 6
+
+- name: "Yi-You Sia"
+  position: "Junior Researcher"
+  organization: "Lunghwa University of Science and Technology"
+  order: 7
+
+- name: "Chia-Wei Chen"
+  position: "Junior Researcher"
+  organization: "Lunghwa University of Science and Technology"
+  order: 8
+
