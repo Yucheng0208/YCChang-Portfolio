@@ -1,20 +1,37 @@
 # EMO Lab 最新消息數據
-- date: "2024-12-15"
-  title: "EMO Lab Official Launch"
-  content: "We are excited to announce the official launch of EMO Lab! Our research team is now fully operational."
+
+- date: "2025-08-29"
+  title: "Merit Student Paper Award at MC / WASN 2025"
+  content: "EMO Lab participated in the MC / WASN 2025 conference and received the Merit Student Paper Award for outstanding research contributions."
+  category: "Conference"
+
+- date: "2025-06-27~29"
+  title: "Co-organizer of 2025 IEEE International Conference on Computation, Big-Data and Engineering"
+  content: "EMO Lab served as a co-organizer for the 2025 IEEE International Conference on Computation, Big-Data and Engineering, supporting the advancement of academic exchange and research."
+  category: "Conference"
+
+- date: "2025-03-15"
+  title: "Awarded Merit at 2025 E化系統創新應用競賽"
+  content: "EMO Lab participated in the 2025 E-System Creative Application Competition and received a Merit Award for the project 'Intelligent Workshop Safety System Integrating Deep Learning and Real-Time Computer Vision.'"
+  category: "Competition"
+
+- date: "2025-03-15"
+  title: "Second Place at 2025 E化系統創新應用競賽"
+  content: "EMO Lab participated in the 2025 E-System Creative Application Competition and won Second Place for the project 'Real-Time Multi-User English Spelling Translation Sign Language System Based on Skeleton Object Recognition.'"
+  category: "Competition"
+
+
+- date: "2025-02-10"
+  title: "Submission to 2025 IEEE International Conference on Computation, Big-Data and Engineering"
+  content: "EMO Lab has submitted a research paper to the 2025 IEEE International Conference on Computation, Big-Data and Engineering. We are excited to share our latest research results with the global academic community."
+  category: "Conference"
+
+- date: "2024-12-31"
+  title: "Submission to 2025 E化系統創新應用競賽"
+  content: "EMO Lab has submitted a project to the 2025 E化系統創新應用競賽. We look forward to showcasing our innovative ideas and competing with other talented teams."
+  category: "Competition"
+
+- date: "2024-08-31"
+  title: "EMO Lab Founding Day"
+  content: "We are excited to announce the founding of EMO Lab! Our team is officially established and ready to embark on new research journeys."
   category: "Announcement"
-
-- date: "2024-11-28"
-  title: "New Research Project on Human-Centered AI"
-  content: "Our team has initiated a groundbreaking research project focusing on human-centered artificial intelligence applications."
-  category: "Research"
-
-- date: "2024-11-15"
-  title: "Collaboration with Cross-Disciplinary Teams"
-  content: "EMO Lab has established partnerships with various academic institutions and industry partners."
-  category: "Partnership"
-
-- date: "2024-10-30"
-  title: "Open Source Initiative Launch"
-  content: "We have launched our open-source initiative, making several of our research tools available to the community."
-  category: "Technology"

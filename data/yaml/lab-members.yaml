@@ -1,41 +1,55 @@
 # EMO Lab 團隊成員數據
 - name: "Yu-Cheng Chang"
+  zh: "張育丞"
   position: "Principal Investigator & Founder"
   organization: "National Taipei University of Technology"
   order: 1
 
 - name: "Yu-Cheng Lung"
-  position: "MCP Researcher"
+  zh: "龍禹丞" 
+  position: "MCP Researcher & Co-Founder"
   organization: "Lunghwa University of Science and Technology"
   order: 2
 
 - name: "Yu-Xuan Lin"
-  position: "CV Researcher"
+  zh: "林雨萱"
+  position: "CV Researcher & Co-Founder"
   organization: "Lunghwa University of Science and Technology"
   order: 3
 
 - name: "Zong-Rong Wu"
+  zh: "吳宗融"
   position: "DL Researcher"
   organization: "National Yunlin University of Science and Technology"
   order: 4
 
-- name: "Liang-Zhen Chen"
-  position: "UI/UX Designer"
-  organization: "National Taipei University of Technology"
+- name: "Jia-Yi Li"
+  zh: "李家儀"
+  position: "DL Researcher"
+  organization: "National Pingtung University"
   order: 5
 
-- name: "Shan-Xi Yang"
-  position: "NodeRED Researcher"
-  organization: "National Formosa University"
+- name: "Liang-Zhen Chen"
+  zh: "陳亮禎"
+  position: "UI/UX Designer"
+  organization: "National Taipei University of Technology"
   order: 6
 
-- name: "Yi-You Sia"
-  position: "Junior Researcher"
-  organization: "Lunghwa University of Science and Technology"
+- name: "Shan-Xi Yang"
+  zh: "楊姍羲"
+  position: "Sensors Researcher"
+  organization: "National Formosa University"
   order: 7
 
-- name: "Chia-Wei Chen"
+- name: "Yi-You Sia"
+  zh: "夏翊佑"
   position: "Junior Researcher"
   organization: "Lunghwa University of Science and Technology"
   order: 8
+
+- name: "Chia-Wei Chen"
+  zh: "陳嘉維"
+  position: "Junior Researcher"
+  organization: "Lunghwa University of Science and Technology"
+  order: 9
 
