@@ -517,10 +517,11 @@ html {
 }
 
 .news-category-badge.is-announcement {
-    background: rgba(107, 114, 128, 0.12);  /* 灰 */
-    color: #374151;
-    border-color: rgba(107, 114, 128, 0.25);
+    background: rgba(255, 159, 67, 0.15);  /* 亮橘背景 */
+    color: #ff8800;                        /* 亮橘文字 */
+    border-color: rgba(255, 159, 67, 0.35);/* 亮橘邊框 */
 }
+
 /* 分頁器 */
 .news-pager {
     display: flex;
