@@ -174,9 +174,21 @@ html {
     50%, 100% { transform: translateX(100%); }
 }
 
-.lab-title {
+.lab-title .main-title {
     font-size: 4rem;
     font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.lab-title .sub-title {
+    font-size: 2.5rem;
+    font-weight: 400;
     margin-bottom: 1rem;
     background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
     -webkit-background-clip: text;
@@ -194,6 +206,7 @@ html {
 .lab-subtitle {
     font-size: 1.5rem;
     color: var(--tech-cyan);
+    margin-top: 0.5rem;
     margin-bottom: 1.5rem;
     font-weight: 300;
     letter-spacing: 3px;
@@ -685,6 +698,14 @@ html {
     font-size: 0.95rem;
 }
 
+.member-expertise {
+    color: #fbafb5;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
 .member-organization {
     color: rgba(201, 209, 217, 0.7);
     font-size: 0.9rem;
@@ -717,8 +738,12 @@ html {
         font-size: 2.2rem;
     }
     
-    .lab-title {
+    .lab-title .main-title {
         font-size: 3rem;
+    }
+
+    .lab-title .sub-title {
+        font-size: 2rem;
     }
     
     .lab-subtitle {
@@ -855,9 +880,14 @@ html {
     .lab-hero-container {
         padding: 1rem;
     }
-    
-    .lab-title {
+
+    .lab-title .main-title {
         font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+    .lab-title .sub-title {
+        font-size: 2rem;
         letter-spacing: 1px;
     }
     
@@ -888,4 +918,22 @@ html {
         width: 80px;
         height: 80px;
     }
+}
+
+.member-avatar, .default-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;   /* 或你的頭像寬度 */
+    height: 110px;  /* 或你的頭像高度 */
+    border-radius: 50%;
+    background: #232a33;
+    overflow: hidden;
+    position: relative;
+}
+
+.default-avatar i {
+    font-size: 2.8rem;
+    color: #64d2ff;
+    
 }

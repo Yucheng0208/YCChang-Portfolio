@@ -1,55 +1,120 @@
 # EMO Lab 團隊成員數據
-- name: "Yu-Cheng Chang"
+- name: "Chang Yu-Cheng"
   zh: "張育丞"
-  position: "Principal Investigator & Founder"
+  avatar: images/myphoto/myphoto2.jpg
+  position: "Leader & Founder"
+  expertise: "Multi-Modal Learning"
   organization: "National Taipei University of Technology"
   order: 1
 
-- name: "Yu-Cheng Lung"
-  zh: "龍禹丞" 
-  position: "MCP Researcher & Co-Founder"
+- name: "Lung Yu-Cheng"
+  zh: "龍禹丞"
+  avatar: "images/emo-lab/ourteam/Y.C.Lung.jpg"
+  position: "CTO & Co-Founder"
+  expertise: "Large Language Model"
   organization: "Lunghwa University of Science and Technology"
   order: 2
 
-- name: "Yu-Xuan Lin"
+- name: "Lin Yu-Xuan"
   zh: "林雨萱"
-  position: "CV Researcher & Co-Founder"
+  avatar: "images/emo-lab/ourteam/Y.X.Lin.jpg"
+  position: "PM & Co-Founder"
+  expertise: "Digital Images Processing"
   organization: "Lunghwa University of Science and Technology"
   order: 3
 
-- name: "Zong-Rong Wu"
+- name: "Wu Zong-Rong"
   zh: "吳宗融"
-  position: "DL Researcher"
+  avatar: "images/emo-lab/ourteam/Z.R.Wu.jpg"
+  position: "R&D Manager"
+  expertise: "Neural Networks"
   organization: "National Yunlin University of Science and Technology"
   order: 4
 
-- name: "Jia-Yi Li"
-  zh: "李家儀"
-  position: "DL Researcher"
-  organization: "National Pingtung University"
+- name: "Chen Liang-Zhen"
+  zh: "陳亮禎"
+  avatar: "images/emo-lab/ourteam/L.Z.Chen.jpg"
+  position: "UI/UX Designer"
+  expertise: "Network Security"
+  organization: "National Taipei University of Technology"
   order: 5
 
-- name: "Liang-Zhen Chen"
-  zh: "陳亮禎"
-  position: "UI/UX Designer"
-  organization: "National Taipei University of Technology"
+- name: "Li Jia-Yi"
+  zh: "李家儀"
+  avatar: "images/emo-lab/ourteam/J.Y.Li.jpg"
+  position: "Contact Person"
+  expertise: "Statistical Analysis"
+  organization: "National Pingtung University"
   order: 6
 
-- name: "Shan-Xi Yang"
-  zh: "楊姍羲"
-  position: "Sensors Researcher"
-  organization: "National Formosa University"
+- name: "Chang Zi-Qing"
+  zh: "張字青"
+  avatar: "images/emo-lab/ourteam/Z.Q.Chang.jpg"
+  position: "Engineer"
+  expertise: "Generative Network"
+  organization: "National Taipei University of Technology"
   order: 7
 
-- name: "Yi-You Sia"
-  zh: "夏翊佑"
-  position: "Junior Researcher"
-  organization: "Lunghwa University of Science and Technology"
+- name: "Yang Shan-Xi"
+  zh: "楊姍羲"
+  avatar: "images/emo-lab/ourteam/S.X.Yang.jpg"
+  position: "System Administrator"
+  expertise: "Automatic Control"
+  organization: "National Formosa University"
   order: 8
 
-- name: "Chia-Wei Chen"
+- name: "Chen Jia-Wei"
   zh: "陳嘉維"
-  position: "Junior Researcher"
+  avatar: "images/emo-lab/ourteam/C.W.Chen.jpg"
+  position: "Project Coordinator"
+  expertise: "TensorFlow Platform"
   organization: "Lunghwa University of Science and Technology"
   order: 9
 
+- name: "Kao Yi-Chen"
+  zh: "高苡宸"
+  avatar: "images/emo-lab/ourteam/Y.C.Kao.jpg"
+  position: "Engineer"
+  expertise: "Edge Computing"
+  organization: "National Taipei University of Technology"
+  order: 10
+
+- name: "Li Yen-Ye"
+  zh: "李研曄"
+  avatar: "images/emo-lab/ourteam/Y.Y.Li.jpg"
+  position: "Engineer"
+  expertise: "Sensor Fusion"
+  organization: "National Taipei University of Technology"
+  order: 11
+
+- name: "Gu Hong-Yuan"
+  zh: "辜弘沅"
+  avatar: "images/emo-lab/ourteam/H.Y.Gu.jpg"
+  position: "Assistant Engineer"
+  expertise: "Autonomous Systems"
+  organization: "National Chin-Yi University of Technology"
+  order: 12
+
+- name: "Sia Yi-You"
+  zh: "夏翊佑"
+  avatar: "images/emo-lab/ourteam/Y.Y.Sia.jpg"
+  position: "AI Assistant Engineer"
+  expertise: "Circuit Simulation"
+  organization: "Lunghwa University of Science and Technology"
+  order: 13
+
+- name: "Fan Chia-Yu"
+  zh: "范家瑜"
+  avatar: "images/emo-lab/ourteam/F.C.Yu.jpg"
+  position: "Computer Vision Intern"
+  expertise: "Electrical Wiring"
+  organization: "Taipei Municipal Songshan High School of Agriculture and Industry"
+  order: 14
+
+- name: "Wu Chen-Zhi"
+  zh: "吳晨知"
+  avatar: "images/emo-lab/ourteam/C.Z.Wu.jpg"
+  position: "Teaching Activities Coordinato"
+  expertise: "ESG & SDGs Implementation"
+  organization: "上杉夏海本然教育團隊"
+  order: 15

@@ -324,8 +324,9 @@
 
       memberCard.innerHTML = `
         <div class="member-avatar">${avatarHTML}</div>
-        <h3 class="member-name">${escapeHTML(member?.name) || 'Unknown'}<br>${escapeHTML(member?.zh) || ''}</h3>
+        <h3 class="member-name notranslate">${escapeHTML(member?.name) || 'Unknown'}<br>${escapeHTML(member?.zh) || ''}</h3>
         <div class="member-position">${escapeHTML(member?.position) || 'Team Member'}</div>
+        <div class="member-expertise">${escapeHTML(member?.expertise) || ''}</div>
         <div class="member-department">${escapeHTML(member?.department) || ''}</div>
         <div class="member-organization">${escapeHTML(member?.organization) || ''}</div>
       `;
@@ -344,10 +345,10 @@
 
     function showNoMembers() {
       membersContainer.innerHTML = `
-        <div class="loading-state">
-          <i class="fas fa-users"></i>
-          <p>No team members information available.</p>
-        </div>
+      <div class="loading-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;">
+        <i class="fas fa-users"></i>
+        <p>No team members information available.</p>
+      </div>
       `;
     }
   }

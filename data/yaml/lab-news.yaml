@@ -1,6 +1,16 @@
 # EMO Lab 最新消息數據
 
-- date: "2025-08-29"
+- date: "2025-08-31"
+  title: "A Year of Achievements for EMO Lab"
+  content: "As 2025 comes to a close, EMO Lab celebrates a year filled with growth, innovation, and outstanding accomplishments. We thank all team members and partners for their dedication and look forward to reaching new heights together in the coming year!"
+  category: "Announcement"
+
+- date: "2025-08-30"
+  title: "Second Place at 2025 捷運盃黑客松「設計創新 • AI 賦能」App 競賽 決賽"
+  content: "EMO Lab showcased a groundbreaking UI/UX design for iOS 26, integrating innovative RAG and MCP technologies. Our efforts were recognized with the Second Place (Runner-up) award at the 2025 捷運盃黑客松「設計創新 • AI 賦能」App 競賽 決賽."
+  category: "Competition"
+
+- date: "2025-08-25"
   title: "Merit Student Paper Award at MC / WASN 2025"
   content: "EMO Lab participated in the MC / WASN 2025 conference and received the Merit Student Paper Award for outstanding research contributions."
   category: "Conference"
@@ -12,12 +22,12 @@
 
 - date: "2025-03-15"
   title: "Awarded Merit at 2025 E化系統創新應用競賽"
-  content: "EMO Lab participated in the 2025 E-System Creative Application Competition and received a Merit Award for the project 'Intelligent Workshop Safety System Integrating Deep Learning and Real-Time Computer Vision.'"
+  content: "EMO Lab participated in the 2025 E化系統創新應用競賽 and received a Merit Award for the project 'Intelligent Workshop Safety System Integrating Deep Learning and Real-Time Computer Vision.'"
   category: "Competition"
 
 - date: "2025-03-15"
   title: "Second Place at 2025 E化系統創新應用競賽"
-  content: "EMO Lab participated in the 2025 E-System Creative Application Competition and won Second Place for the project 'Real-Time Multi-User English Spelling Translation Sign Language System Based on Skeleton Object Recognition.'"
+  content: "EMO Lab participated in the 2025 E化系統創新應用競賽 and won Second Place for the project 'Real-Time Multi-User English Spelling Translation Sign Language System Based on Skeleton Object Recognition.'"
   category: "Competition"
 
 
