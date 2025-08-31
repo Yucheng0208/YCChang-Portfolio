@@ -5,6 +5,7 @@
   position: "Leader & Founder"
   expertise: "Multi-Modal Learning"
   organization: "National Taipei University of Technology"
+  department: "Department of Computer Science and Information Engineering"
   order: 1
 
 - name: "Lung Yu-Cheng"
@@ -13,6 +14,7 @@
   position: "CTO & Co-Founder"
   expertise: "Large Language Model"
   organization: "Lunghwa University of Science and Technology"
+  department: "Department of Computer Information and Network Engineering"
   order: 2
 
 - name: "Lin Yu-Xuan"
@@ -21,6 +23,7 @@
   position: "PM & Co-Founder"
   expertise: "Digital Images Processing"
   organization: "Lunghwa University of Science and Technology"
+  department: "Department of Computer Information and Network Engineering"
   order: 3
 
 - name: "Wu Zong-Rong"
@@ -29,6 +32,7 @@
   position: "R&D Manager"
   expertise: "Neural Networks"
   organization: "National Yunlin University of Science and Technology"
+  department: "Department of Intelligence Data Science"
   order: 4
 
 - name: "Chen Liang-Zhen"
@@ -37,6 +41,7 @@
   position: "UI/UX Designer"
   expertise: "Network Security"
   organization: "National Taipei University of Technology"
+  department: "Department of Computer Science and Information Engineering"
   order: 5
 
 - name: "Li Jia-Yi"
@@ -45,6 +50,7 @@
   position: "Contact Person"
   expertise: "Statistical Analysis"
   organization: "National Pingtung University"
+  department: "Department of International Business"
   order: 6
 
 - name: "Chang Zi-Qing"
@@ -53,6 +59,7 @@
   position: "Engineer"
   expertise: "Generative Network"
   organization: "National Taipei University of Technology"
+  department: "Department of Computer Science and Information Engineering"
   order: 7
 
 - name: "Yang Shan-Xi"
@@ -61,6 +68,7 @@
   position: "System Administrator"
   expertise: "Automatic Control"
   organization: "National Formosa University"
+  department: "Department of Automatic Engineering"
   order: 8
 
 - name: "Chen Jia-Wei"
@@ -69,6 +77,7 @@
   position: "Project Coordinator"
   expertise: "TensorFlow Platform"
   organization: "Lunghwa University of Science and Technology"
+  department: "Department of Computer Information and Network Engineering"
   order: 9
 
 - name: "Kao Yi-Chen"
@@ -77,6 +86,7 @@
   position: "Engineer"
   expertise: "Edge Computing"
   organization: "National Taipei University of Technology"
+  department: "Institute of Aerospace and System Engineering"
   order: 10
 
 - name: "Li Yen-Ye"
@@ -85,6 +95,7 @@
   position: "Engineer"
   expertise: "Sensor Fusion"
   organization: "National Taipei University of Technology"
+  department: "Department of Electro-Optical Engineering"
   order: 11
 
 - name: "Gu Hong-Yuan"
@@ -93,6 +104,7 @@
   position: "Assistant Engineer"
   expertise: "Autonomous Systems"
   organization: "National Chin-Yi University of Technology"
+  department: "Department of Electrical Engineering"
   order: 12
 
 - name: "Sia Yi-You"
@@ -101,6 +113,7 @@
   position: "AI Assistant Engineer"
   expertise: "Circuit Simulation"
   organization: "Lunghwa University of Science and Technology"
+  department: "Department of Electronic Engineering (Junior College)"
   order: 13
 
 - name: "Fan Chia-Yu"
@@ -109,12 +122,13 @@
   position: "Computer Vision Intern"
   expertise: "Electrical Wiring"
   organization: "Taipei Municipal Songshan High School of Agriculture and Industry"
+  department: "Department of Electrical Engineering (Vocational High School)"
   order: 14
 
 - name: "Wu Chen-Zhi"
   zh: "吳晨知"
   avatar: "images/emo-lab/ourteam/C.Z.Wu.jpg"
-  position: "Teaching Activities Coordinato"
+  position: "Teaching Activities Coordinator"
   expertise: "ESG & SDGs Implementation"
   organization: "上杉夏海本然教育團隊"
   order: 15

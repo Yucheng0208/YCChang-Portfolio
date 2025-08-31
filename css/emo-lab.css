@@ -707,6 +707,12 @@ html {
 }
 
 .member-organization {
+    color: rgba(201, 209, 217, 0.857);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.member-department {
     color: rgba(201, 209, 217, 0.7);
     font-size: 0.9rem;
     font-style: italic;

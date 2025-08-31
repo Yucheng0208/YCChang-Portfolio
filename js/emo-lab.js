@@ -327,8 +327,8 @@
         <h3 class="member-name notranslate">${escapeHTML(member?.name) || 'Unknown'}<br>${escapeHTML(member?.zh) || ''}</h3>
         <div class="member-position">${escapeHTML(member?.position) || 'Team Member'}</div>
         <div class="member-expertise">${escapeHTML(member?.expertise) || ''}</div>
-        <div class="member-department">${escapeHTML(member?.department) || ''}</div>
         <div class="member-organization">${escapeHTML(member?.organization) || ''}</div>
+        <div class="member-department">${escapeHTML(member?.department) || ''}</div>
       `;
 
       return memberCard;
