@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>404 - Page Not Found | Yu-Cheng Chang</title>
+        
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/404.css">
+        <link rel="stylesheet" href="css/translate.css">
+        <link rel="stylesheet" href="css/all.min.css">
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="images/logo/logo.svg">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/logo/logo.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/logo/logo.png">
+        <link rel="shortcut icon" href="images/logo/logo.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/logo/logo.png">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.yucheng208.net/">
+        <meta property="og:title" content="404 - Page Not Found | Yu-Cheng Chang">
+        <meta property="og:description" content="The page you're looking for doesn't exist. Return to Yu-Cheng Chang's portfolio homepage.">
+        <meta property="og:image" content="https://www.yucheng208.net/images/logo/logo.png">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="https://www.yucheng208.net/">
+        <meta name="twitter:title" content="404 - Page Not Found | Yu-Cheng Chang">
+        <meta name="twitter:description" content="The page you're looking for doesn't exist. Return to Yu-Cheng Chang's portfolio homepage.">
+        <meta name="twitter:image" content="https://www.yucheng208.net/images/logo/logo.png">
+
+        <!-- 基本SEO -->
+        <meta name="description" content="The page you're looking for doesn't exist. Return to Yu-Cheng Chang's portfolio homepage.">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="theme-color" content="#0d1117">
+    </head>
+    <body>
+       
+        <!-- 404錯誤頁面內容 -->
+        <div class="error-container">
+            <div class="floating-elements"></div>
+            
+            <div class="error-content">
+                <div class="error-code">
+                    <span class="digit digit-1">4</span>
+                    <span class="digit digit-2">0</span>
+                    <span class="digit digit-3">4</span>
+                </div>
+                <h1 class="error-title">Oops! Page Not Found</h1>
+                <p class="error-message">
+                    The page you're looking for seems to have vanished into the digital void. 
+                    Don't worry though - even the best explorers sometimes take a wrong turn!
+                </p>
+                
+                <div class="error-actions">
+                    <div class="action-buttons">
+                        <a href="index.html" class="error-btn error-btn-primary">
+                            <i class="fas fa-home"></i>
+                            <span>Back to Home</span>
+                        </a>
+                        <a href="javascript:history.back()" class="error-btn error-btn-secondary">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Go Back</span>
+                        </a>
+                    </div>
+                    
+                    <div class="action-buttons" style="margin-top: 1rem;">
+                        <a href="honors.html" class="error-btn error-btn-secondary">
+                            <i class="fas fa-trophy"></i>
+                            <span>Honors</span>
+                        </a>
+                        <a href="publications.html" class="error-btn error-btn-secondary">
+                            <i class="fa-solid fa-book"></i>
+                            <span>Publications</span>
+                        </a>
+                        <a href="projects.html" class="error-btn error-btn-secondary">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>Projects</span>
+                        </a>
+                        <a href="works.html" class="error-btn error-btn-secondary">
+                            <i class="fa-solid fa-toolbox"></i>
+                            <span>Works</span>
+                        </a>
+                        <a href="highlights.html" class="error-btn error-btn-secondary">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>Highlights</span>
+                        </a>
+                        <a href="https://blog.yucheng208.net" class="error-btn error-btn-secondary">
+                            <i class="fab fa-blogger"></i>
+                            <span>Blog</span>
+                        </a>
+                        <a href="emo-lab.html" class="error-btn error-btn-secondary">
+                            <i class="fa-solid fa-flask"></i>
+                            <span>EMO Lab</span>
+                        </a>
+                        <a href="CV.pdf" class="error-btn error-btn-secondary">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>CV</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 多語系功能 -->
+        <div class="gtranslate_wrapper">
+            <!-- GTranslate會在這裡自動生成語言切換器 -->
+        </div>
+        <div aria-live="polite" aria-atomic="true" class="sr-only" id="translation-status"></div>
+
+        <!-- 回到頂部按鈕 -->
+        <a href="#" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+
+        <!-- 頁腳 -->
+        <footer class="site-footer">
+            <p class="notranslate">Copyright © <span id="current-year"></span> Yu-Cheng Chang. All Rights Reserved</p>
+        </footer>
+        
+        <!-- JavaScript Files -->
+        <script>
+            window.gtranslateSettings = {
+                default_language: "en",
+                languages: ["zh-TW", "zh-CN", "en", "ja", "ko", "ms", "vi"], 
+                wrapper_selector: ".gtranslate_wrapper", 
+                alt_flags: { en: "usa" }
+            };
+        </script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+        <script src="js/common.js"></script>
+        <script src="js/404.js"></script>
+    </body>
+</html>

@@ -1,0 +1,468 @@
+/*
+======================================================================
+                    404.CSS - 404錯誤頁面專用樣式
+======================================================================
+此檔案包含404錯誤頁面的所有樣式，包括：
+- 錯誤頁面容器和內容佈局
+- 404數字顯示效果
+- 按鈕和互動元素
+- 浮動動畫元素
+- 響應式設計
+======================================================================
+*/
+
+/* --- 404頁面主容器 --- */
+.error-container {
+    min-height: calc(100vh - var(--navbar-height) - 120px); /* 預留navbar和footer空間 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+    margin-top: var(--navbar-height); /* 為navbar留出空間 */
+}
+
+/* 背景漸層效果 */
+.error-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(100, 210, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(10, 132, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0; /* 確保在最底層 */
+}
+
+/* --- 錯誤內容區域 --- */
+.error-content {
+    position: relative;
+    z-index: 10; /* 確保內容在最上層 */
+    max-width: 600px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* 404數字顯示 */
+.error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #64d2ff; /* 直接使用純色，確保可見 */
+    margin: 0;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: inline-flex;
+    gap: 0.1em;
+    text-shadow: 0 0 20px rgba(100, 210, 255, 0.6), 0 0 40px rgba(100, 210, 255, 0.3);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.error-code:hover {
+    transform: scale(1.05);
+}
+
+/* 每個數字字符的樣式 */
+.error-code .digit {
+    display: inline-block;
+    animation: smooth-wave 3s ease-in-out infinite;
+    transform-origin: center bottom;
+    color: inherit;
+}
+
+.error-code .digit-1 {
+    animation-delay: 0s;
+}
+
+.error-code .digit-2 {
+    animation-delay: 0.5s;
+}
+
+.error-code .digit-3 {
+    animation-delay: 1s;
+}
+
+/* 錯誤標題 */
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 1rem 0;
+    line-height: 1.2;
+}
+
+/* 錯誤訊息 */
+.error-message {
+    font-size: 1.2rem;
+    color: rgba(201, 209, 217, 0.8);
+    margin: 1.5rem 0 2.5rem 0;
+    line-height: 1.6;
+}
+
+/* --- 行動按鈕區域 --- */
+.error-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 錯誤頁面按鈕樣式 */
+.error-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 主要按鈕樣式 */
+.error-btn-primary {
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-cyan));
+    color: #fff;
+}
+
+.error-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(10, 132, 255, 0.3);
+}
+
+/* 次要按鈕樣式 */
+.error-btn-secondary {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.error-btn-secondary:hover {
+    background: rgba(100, 210, 255, 0.1);
+    border-color: var(--tech-cyan);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* --- 浮動裝飾元素 --- */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1; /* 背景層 */
+}
+
+.floating-elements::before,
+.floating-elements::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(100, 210, 255, 0.08), rgba(10, 132, 255, 0.04)); /* 降低透明度 */
+    border-radius: 50%;
+    animation: floatMove 8s ease-in-out infinite;
+    z-index: 1;
+}
+
+.floating-elements::before {
+    top: 15%;
+    left: 5%;
+    animation-delay: -2s;
+    width: 100px;
+    height: 100px;
+}
+
+.floating-elements::after {
+    bottom: 15%;
+    right: 5%;
+    animation-delay: -4s;
+    width: 60px;
+    height: 60px;
+}
+
+/* --- 動畫定義 --- */
+@keyframes smooth-wave {
+    0%, 100% {
+        transform: translateY(0) scaleY(1) rotateZ(0deg);
+    }
+    33% {
+        transform: translateY(-25px) scaleY(1.2) rotateZ(3deg);
+    }
+    66% {
+        transform: translateY(-10px) scaleY(1.1) rotateZ(-3deg);
+    }
+}
+
+
+@keyframes floatMove {
+    0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.6;
+    }
+    25% {
+        transform: translateY(-40px) translateX(20px) rotate(90deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-20px) translateX(-30px) rotate(180deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-60px) translateX(10px) rotate(270deg);
+        opacity: 0.7;
+    }
+}
+
+@keyframes pulse {
+    0% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.05); 
+    }
+    100% { 
+        transform: scale(1); 
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 載入狀態樣式 --- */
+body:not(.loaded) .error-content {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+body.loaded .error-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* --- 頁面佈局調整 --- */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.site-footer {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* --- 支援舊瀏覽器的漸層文字 --- */
+@supports not (-webkit-background-clip: text) {
+    .error-code {
+        color: #64d2ff !important;
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+        text-shadow: 0 0 10px rgba(100, 210, 255, 0.5) !important; /* 添加清晰的外發光 */
+    }
+    
+    .error-code .digit {
+        color: #64d2ff !important;
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+    }
+}
+
+/* 為了確保在所有情況下都清晰可見，添加額外的後備樣式 */
+.error-code.fallback-style {
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+    text-shadow: 
+        0 0 10px rgba(100, 210, 255, 0.8),
+        2px 2px 0px rgba(10, 132, 255, 0.6) !important;
+}
+
+.error-code.fallback-style .digit {
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+/* --- 響應式設計 --- */
+@media (max-width: 768px) {
+    .error-container {
+        padding: 1.5rem;
+    }
+    
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    .error-message {
+        font-size: 1.1rem;
+        margin: 1rem 0 2rem 0;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .error-btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 280px;
+        padding: 14px 24px;
+    }
+    
+    .error-actions {
+        margin-top: 1.5rem;
+    }
+    
+    .floating-elements::before,
+    .floating-elements::after {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* 隱藏動態球球在小螢幕上以提升性能 */
+    .dynamic-floating-ball {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-container {
+        padding: 1rem;
+    }
+    
+    .error-code {
+        font-size: 4.5rem;
+    }
+    
+    .error-title {
+        font-size: 1.8rem;
+    }
+    
+    .error-message {
+        font-size: 1rem;
+        margin: 0.8rem 0 1.5rem 0;
+    }
+    
+    .error-btn {
+        font-size: 0.9rem;
+        padding: 12px 20px;
+    }
+    
+    .floating-elements::before,
+    .floating-elements::after {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 360px) {
+    .error-code {
+        font-size: 4rem;
+    }
+    
+    .error-title {
+        font-size: 1.6rem;
+    }
+    
+    .error-message {
+        font-size: 0.95rem;
+    }
+}
+
+/* --- 高對比度模式支援 --- */
+@media (prefers-contrast: high) {
+    .error-code {
+        color: #ffffff !important;
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+        text-shadow: none;
+    }
+    
+    .error-btn-secondary {
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .floating-elements::before,
+    .floating-elements::after {
+        display: none;
+    }
+}
+
+/* --- 減少動畫偏好支援 --- */
+@media (prefers-reduced-motion: reduce) {
+    .error-content,
+    .error-code,
+    .error-code .digit,
+    .error-btn,
+    .floating-elements::before,
+    .floating-elements::after,
+    .dynamic-floating-ball {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .error-code:hover {
+        transform: none;
+    }
+    
+    .error-btn:hover {
+        transform: none;
+    }
+}
+
+/* --- 特殊效果類別 --- */
+.pulse-animation {
+    animation: pulse 0.6s ease-out;
+}
+
+/* --- 無障礙改善 --- */
+.error-btn:focus {
+    outline: 2px solid var(--tech-cyan);
+    outline-offset: 2px;
+}
+
+.error-code:focus {
+    outline: 2px solid var(--tech-cyan);
+    outline-offset: 4px;
+    border-radius: 8px;
+}
