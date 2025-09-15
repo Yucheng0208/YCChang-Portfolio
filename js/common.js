@@ -173,7 +173,7 @@ window.Papa = window.Papa || {
 // 共用工具函數
 window.CommonUtils = {
     // 日期解析函數
-    parseWorkDate: function(dateString) {
+    parsejobDate: function(dateString) {
         if (!dateString) return { startDate: new Date(0), isPresent: false };
         
         const str = dateString.toLowerCase().trim();

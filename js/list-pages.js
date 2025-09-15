@@ -31,10 +31,10 @@ function initializeListPage(config) {
             allItems = window.jsyaml.load(yamlContent) || [];
             
             // 根據不同頁面類型進行排序
-            if (config.yamlPath.includes('works.yaml')) {
+            if (config.yamlPath.includes('jobs.yaml')) {
                 allItems.sort((a, b) => {
-                    const dateA = CommonUtils.parseWorkDate(a.date);
-                    const dateB = CommonUtils.parseWorkDate(b.date);
+                    const dateA = CommonUtils.parsejobDate(a.date);
+                    const dateB = CommonUtils.parsejobDate(b.date);
                     
                     if (dateA.isPresent && !dateB.isPresent) return -1;
                     if (!dateA.isPresent && dateB.isPresent) return 1;
@@ -163,10 +163,10 @@ function initializeListPage(config) {
         }
         
         // 對篩選後的結果重新排序
-        if (config.yamlPath.includes('works.yaml')) {
+        if (config.yamlPath.includes('jobs.yaml')) {
             tempFiltered.sort((a, b) => {
-                const dateA = CommonUtils.parseWorkDate(a.date);
-                const dateB = CommonUtils.parseWorkDate(b.date);
+                const dateA = CommonUtils.parsejobDate(a.date);
+                const dateB = CommonUtils.parsejobDate(b.date);
                 
                 if (dateA.isPresent && !dateB.isPresent) return -1;
                 if (!dateA.isPresent && dateB.isPresent) return 1;
@@ -388,30 +388,30 @@ function renderProjectRow(project, globalIndex) {
 
 }
 
-// 🔧 修正的 Works 渲染函數
-function renderWorkRow(work, globalIndex) {
+// 🔧 修正的 jobs 渲染函數
+function renderjobRow(job, globalIndex) {
     let linksHTML = '';
-    if (work.links && typeof work.links === 'object') {
-        const validLinks = Object.entries(work.links).filter(([_, url]) => url && String(url).trim() !== '');
+    if (job.links && typeof job.links === 'object') {
+        const validLinks = Object.entries(job.links).filter(([_, url]) => url && String(url).trim() !== '');
         if (validLinks.length > 0) {
             linksHTML = `<div class="action-buttons">${validLinks.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="action-btn">${name}</a>`).join('')}</div>`;
         }
     }
     
     // 更嚴格的 CRN 檢查
-    const crnValue = String(work.crn || '').trim();
+    const crnValue = String(job.crn || '').trim();
     const hasCRN = crnValue && crnValue !== '' && crnValue !== '""' && crnValue !== "''" && crnValue !== 'null' && crnValue !== 'undefined';
     
     // 添加分類標籤
-    const categoryBadge = createCategoryBadge(work.category);
+    const categoryBadge = createCategoryBadge(job.category);
     
     const row = document.createElement('tr');
     row.innerHTML = `
         <td data-label="#">${globalIndex}.</td>
-        <td data-label="Organization">${work.organization || ''} ${categoryBadge}</td>
-        <td data-label="Position"><strong>Position:</strong> ${work.position || ''}</td>
+        <td data-label="Organization">${job.organization || ''} ${categoryBadge}</td>
+        <td data-label="Position"><strong>Position:</strong> ${job.position || ''}</td>
         ${hasCRN ? `<td data-label="CRN"><strong>Company Registration Numbers:</strong> ${crnValue}</td>` : ''}
-        <td data-label="Date"><strong>Date:</strong> ${work.date || 'TBA'}</td>
+        <td data-label="Date"><strong>Date:</strong> ${job.date || 'TBA'}</td>
         ${linksHTML ? `<td data-label="Links">${linksHTML}</td>` : ''}
     `;
     return row;
@@ -488,19 +488,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     initializeListPage({ 
-        pageSelector: '.work-page', 
-        yamlPath: './data/yaml/works.yaml', 
-        tableBodyId: 'work-table-body', 
-        filterBarId: 'work-filter', 
-        searchInputId: 'work-search', 
-        noResultsId: 'no-results-work', 
-        paginationContainerId: 'pagination-container-work', 
-        pageInfoId: 'page-info-work', 
-        pageInputId: 'page-input-work', 
-        firstPageBtnId: 'first-page-work', 
-        prevPageBtnId: 'prev-page-work', 
-        nextPageBtnId: 'next-page-work', 
-        lastPageBtnId: 'last-page-work', 
-        renderRowFunction: renderWorkRow 
+        pageSelector: '.job-page', 
+        yamlPath: './data/yaml/jobs.yaml', 
+        tableBodyId: 'job-table-body', 
+        filterBarId: 'job-filter', 
+        searchInputId: 'job-search', 
+        noResultsId: 'no-results-job', 
+        paginationContainerId: 'pagination-container-job', 
+        pageInfoId: 'page-info-job', 
+        pageInputId: 'page-input-job', 
+        firstPageBtnId: 'first-page-job', 
+        prevPageBtnId: 'prev-page-job', 
+        nextPageBtnId: 'next-page-job', 
+        lastPageBtnId: 'last-page-job', 
+        renderRowFunction: renderjobRow 
     });
 });

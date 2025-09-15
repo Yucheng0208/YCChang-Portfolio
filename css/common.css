@@ -255,7 +255,7 @@ body.menu-open {
 #page-info-honor,
 #page-info-highlight,
 #page-info-project,
-#page-info-work {
+#page-info-job {
     font-size: 0.9rem;
     color: rgba(201, 209, 217, 0.8);
     line-height: 36px;
@@ -265,7 +265,7 @@ body.menu-open {
 #page-input-honor,
 #page-input-highlight,
 #page-input-project,
-#page-input-work {
+#page-input-job {
     width: 60px;
     text-align: center;
     background-color: var(--dark-bg);
@@ -289,8 +289,8 @@ body.menu-open {
 #page-input-highlight::-webkit-inner-spin-button,
 #page-input-project::-webkit-outer-spin-button,
 #page-input-project::-webkit-inner-spin-button,
-#page-input-work::-webkit-outer-spin-button,
-#page-input-work::-webkit-inner-spin-button {
+#page-input-job::-webkit-outer-spin-button,
+#page-input-job::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -727,7 +727,7 @@ body.menu-open {
     #page-info-honor,
     #page-info-highlight,
     #page-info-project,
-    #page-info-work {
+    #page-info-job {
         display: inline-block !important;
     }
 }
@@ -1247,10 +1247,10 @@ body.menu-open {
 
 /* 
    在您現有的 common.css 檔案最底部添加以下樣式
-   這些是分類標籤的樣式，用於 works 頁面顯示 Academic 和 Industry 分類
+   這些是分類標籤的樣式，用於 jobs 頁面顯示 Academic 和 Industry 分類
 */
 
-/* --- 12. Category Badge Styles for Works Page --- */
+/* --- 12. Category Badge Styles for jobs Page --- */
 .category-badge {
     display: inline-block;
     padding: 4px 12px;
@@ -1413,7 +1413,7 @@ body.menu-open {
 }
 
 
-/* Works 頁面分類 */
+/* jobs 頁面分類 */
 .category-academic {
     background-color: rgba(111, 66, 193, 0.2);
     color: #6f42c1;
@@ -1510,7 +1510,7 @@ body .page-container h1 i,
     color: inherit !important;
 }
 
-/* 如果 CSS 變數不work，使用具體顏色值 */
+/* 如果 CSS 變數不job，使用具體顏色值 */
 .page-container h1.fallback-gradient {
     background: linear-gradient(135deg, #0a84ff, #64d2ff) !important;
     -webkit-background-clip: text !important;
