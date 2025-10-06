@@ -9,6 +9,13 @@
 # - image: images/comingsoon.png
 #   title: WASN 2025
 #   description: Showcased research achievements in multimodal real-time international sign language translation.
+- image: images/events/2025-10-02.jpg
+  title: 教育部 國際發明展 金牌得獎學生代表接見活動 (2024 - 2025)
+  description: Earned awards for Taiwan at international invention exhibitions.
+
+- image: images/events/2025-09-15.jpg
+  title: 新北市立碧華國民中學 資訊科技課程 公開觀摩授課
+  description: Guided students to use Gemini for prompt engineering and application, assisting with after-class review.
 
 - image: images/events/2025-09-05.jpg
   title: 2026 ACE Prepare Meeting </br> IEEE ICCBE 2026 Event
