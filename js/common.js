@@ -274,7 +274,9 @@ window.CommonUtils = {
             'Ryan Chang\\*?', 'Ryan Chang', 'Chang Ryan\\*?', 'Chang Ryan',
             'Yu-Cheng (Ryan) Chang\\*?', 'Yu-Cheng (Ryan) Chang',
             'Ryan Yu-Cheng Chang\\*?', 'Ryan Yu-Cheng Chang',
-            '張育丞\\*?', '張育丞', '育丞 張\\*?', '育丞 張'
+            '張育丞\\*?', '張育丞', '育丞 張\\*?', '育丞 張', 
+            '張育丞老師', '張育丞先生', '張育丞研究員',
+            '張育丞 先生', '張育丞 老師', '張育丞 研究員'
         ];
         let highlightedText = text;
         namePatterns.forEach(pattern => {

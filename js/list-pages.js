@@ -267,14 +267,14 @@ function initializeListPage(config) {
     loadData();
 }
 
-// 🆕 創建分類標籤的輔助函數
+// 創建分類標籤的輔助函數
 function createCategoryBadge(category) {
     category = String(category).toLowerCase();
     if (!category) return '';
     return `<span class="category-badge category-${category}">${category.charAt(0).toUpperCase() + category.slice(1)}</span>`;
 }
 
-// 🔧 更新的 Publications 渲染函數
+// 更新的 Publications 渲染函數
 function renderPublicationRow(pub, globalIndex) {
     let linksHTML = '';
     if (pub.links && typeof pub.links === 'object') {
@@ -303,7 +303,7 @@ function renderPublicationRow(pub, globalIndex) {
     return row;
 }
 
-// 🔧 更新的 Honors 渲染函數
+// 更新的 Honors 渲染函數
 function renderHonorRow(honor, globalIndex) {
     let linksHTML = '';
     if (honor.links && typeof honor.links === 'object') {
@@ -323,6 +323,7 @@ function renderHonorRow(honor, globalIndex) {
         <td data-label="#">${globalIndex}.</td>
         <td data-label="Title">${highlightedTitle} ${categoryBadge}</td>
         ${honor.event ? `<td data-label="Event"><strong>Event:</strong> ${honor.event}</td>` : ''}
+        ${honor.issuedBy ? `<td data-label="Issued By"><strong>Issued By</strong> ${honor.issuedBy}</td>` : ''}
         ${honor.organizer ? `<td data-label="Organizer"><strong>Organizer:</strong> ${honor.organizer}</td>` : ''}
         ${honor.award ? `<td data-label="Award"><strong>Award:</strong> ${honor.award}</td>` : ''}
         ${honor.bonus ? `<td data-label="Bonus"><strong>Bonus:</strong> ${honor.bonus}</td>` : ''}
@@ -334,7 +335,7 @@ function renderHonorRow(honor, globalIndex) {
     return row;
 }
 
-// 🔧 更新的 Highlights 渲染函數
+// 更新的 Highlights 渲染函數
 function renderHighlightRow(highlight, globalIndex) {
     const location = highlight.localtion || highlight.location || '';
     let linksHTML = '';
@@ -360,7 +361,7 @@ function renderHighlightRow(highlight, globalIndex) {
     return row;
 }
 
-// 🔧 更新的 Projects 渲染函數
+// 更新的 Projects 渲染函數
 function renderProjectRow(project, globalIndex) {
     let linksHTML = '';
     if (project.links && typeof project.links === 'object') {
@@ -388,7 +389,7 @@ function renderProjectRow(project, globalIndex) {
 
 }
 
-// 🔧 修正的 jobs 渲染函數
+// 修正的 jobs 渲染函數
 function renderjobRow(job, globalIndex) {
     let linksHTML = '';
     if (job.links && typeof job.links === 'object') {

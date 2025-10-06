@@ -1,17 +1,37 @@
+- title: "跨越語言藩籬：由AI驅動的手語翻譯"
+  event: "2026年全國技專校院學生實務專題製作競賽暨成果展"
+  organizer: "教育部, 朝陽科技大學"
+  category: "Competition"
+  award: "Advanced to the National Finals"
+  members: "龍禹丞, 林雨萱, 陳嘉維"
+  advisors:  "蔡華文 教授, 張育丞 先生"
+  date: "October 1, 2025"
+  links:
+
+- title: "識食物者為俊傑：基於視覺辨識的記帳與採購建議系統"
+  event: "2025 總統盃黑客松"
+  organizer: "總統府, 行政院, 數位發展部, 環境部, 社團法人中華民國全國中小企業總會"
+  category: "Competition"
+  award: "Participation Award"
+  members: "張育丞*, 龍禹丞, 林雨萱, 楊姍羲, 吳宗融, 李家儀, 范家瑜, 錢鈺涵, 高苡宸, 李研曄"
+  date: "September 25, 2025"
+  links:
+
 - title: "Gemini Certified Educators"
-  event: "Google"
+  issuedBy: "Google"
   category: "Certification"
   date: "September 15, 2025"
   links:
 
 - title: "Google AI for K12 Educators"
-  event: "Google"
+  issuedBy: "Google"
   category: "Certification"
   date: "September 15, 2025"
   links:
 
 - title: "植基於多模態視覺感知網路於即時語意建構之手語轉譯研究"
   event: "20th Workshop on Wireless, Ad-Hoc and Sensor Networks (WASN 2025)"
+  issuedBy: "MC & WASN 2025"
   organizer: "National Taiwan University, Taipei City, Taiwan"
   category: "Other"
   award: "Honorable Mention Student Paper"
@@ -67,6 +87,7 @@
 
 - title: "Vision-based Real-time Sign Spelling System for Cross-lingual Translation using Neural Models"
   event: "2025 IEEE International Conference on Computation, Big-Data and Engineering (IEEE ICCBE 2025)"
+  issuedBy: "IEEE"
   organizer: "Tunku Abdul Rahman University of Management and Technology (TAR UMT), Penang Branch, Malaysia"
   category: "Other"
   award: "Best Conference Paper Award"
@@ -317,6 +338,7 @@
 
 - title: "Based-on Computer Vision Applications for Bus Stop Passenger Detection Systems"
   event: "3rd IEEE International Conference on Electronic Communications, Internet of Things and Big Data Conference 2023 (IEEE ICEIB 2023)"
+  issuedBy: "IEEE"
   organizer: "Asia University, Taichung City, Taiwan"
   category: "Other"
   award: "Best Conference Paper Award"
@@ -466,7 +488,7 @@
   links:
 
 - title: "工業配線 丙級 </br> Class C of Industrial Wiring"
-  event: "Ministry of Labor, Taiwan (R.O.C)"
+  issuedBy: "Ministry of Labor, Taiwan (R.O.C)"
   category: "Certification"
   date: “September 17, 2018"
   links:
