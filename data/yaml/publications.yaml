@@ -1,5 +1,15 @@
 # authorrole: Co-Author(s), First Author, Corresponding Author
 - category: "patent"
+  title: "自動降造消音系統"
+  authors: "李國憲, 錢威, 李威儒, 李凡羽, 李佳純, 陸思萱, 陸思萱, 姜宏亮, 張育丞, 陳桂嫻, 廖書漢, 張哲維"
+  venue: "中華民國專利證書 Patent Certificate of the Republic of China (ROC)"
+  patentnumber: "Utility Model Patent No. "
+  authorrole: "Creator"
+  patentterm: ""
+  date: "October 2025"
+  links:
+    
+- category: "patent"
   title: "太陽能板自動清洗裝置"
   authors: "林世偉, 康才華, 丘建青, 錢威, 張育丞"
   venue: "中華民國專利證書 Patent Certificate of the Republic of China (ROC)"
@@ -138,7 +148,7 @@
   links:
     DOI: "https://doi.org/10.1109/ICEIB57887.2023.10169919"
 
-- category: "journal"
+- category: "conference"
   title: "AI-DAS: An AI-based Driving Assistance System for Scooters for Traffic Accident Avoidance"
   authors: "Yen-Da Chen, Yu-Cheng Chang*"
   venue: "5th IEEE Eurasia Conference on Biomedical Engineering, Healthcare and Sustainability 2023 (IEEE ECBIOS 2023)"
