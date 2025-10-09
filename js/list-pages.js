@@ -324,6 +324,7 @@ function renderHonorRow(honor, globalIndex) {
         <td data-label="Title">${highlightedTitle} ${categoryBadge}</td>
         ${honor.event ? `<td data-label="Event"><strong>Event:</strong> ${honor.event}</td>` : ''}
         ${honor.issuedBy ? `<td data-label="Issued By"><strong>Issued By</strong> ${honor.issuedBy}</td>` : ''}
+        ${honor.institutions ? `<td data-label="Institutions"><strong>Institutions:</strong> ${honor.institutions}</td>` : ''}
         ${honor.organizer ? `<td data-label="Organizer"><strong>Organizer:</strong> ${honor.organizer}</td>` : ''}
         ${honor.award ? `<td data-label="Award"><strong>Award:</strong> ${honor.award}</td>` : ''}
         ${honor.bonus ? `<td data-label="Bonus"><strong>Bonus:</strong> ${honor.bonus}</td>` : ''}
