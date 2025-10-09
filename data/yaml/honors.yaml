@@ -1,10 +1,40 @@
+- title: "基於 YOLOv11 與手機鏡頭之智慧食物辨識與營養分析系統"
+  event: "第七屆大手攜小手智慧創新應用競賽"
+  organizer: "教育部, 教育部促進產學合作育才平臺 產學連結執行辦公室-國立臺灣科技大學, 南臺科技大學"
+  category: "Competition"
+  award: "進入書審階段"
+  members: "陳嘉維, 李睿洋"
+  advisors:  "蔡華文 教授, 張育丞 老師"
+  date: "November 29, 2025"
+  links:
+
+- title: "基於語音與視覺LLM之無人機控制與通訊系統"
+  event: "第七屆大手攜小手智慧創新應用競賽"
+  organizer: "教育部, 教育部促進產學合作育才平臺 產學連結執行辦公室-國立臺灣科技大學, 南臺科技大學"
+  category: "Competition"
+  award: "進入書審階段"
+  members: "楊姍羲, 夏翊祐, 錢玉涵"
+  advisors:  "陸思萱 教授, 張育丞 老師"
+  date: "November 29, 2025"
+  links:
+
+- title: "君子動手不動口:配合語意理解的視覺手語拼字系統"
+  event: "第七屆大手攜小手智慧創新應用競賽"
+  organizer: "教育部, 教育部促進產學合作育才平臺 產學連結執行辦公室-國立臺灣科技大學, 南臺科技大學"
+  category: "Competition"
+  award: "進入書審階段"
+  members: "龍禹丞, 林雨萱, 范家瑜"
+  advisors:  "錢威 教授, 張忠興 老師, 張育丞 老師 (Guest)"
+  date: "November 29, 2025"
+  links:
+
 - title: "跨越語言藩籬：由AI驅動的手語翻譯"
   event: "2026年全國技專校院學生實務專題製作競賽暨成果展"
   organizer: "教育部, 朝陽科技大學"
   category: "Competition"
-  award: "Advanced to the National Finals"
-  members: "陳嘉維, "
-  advisors:  "蔡華文 教授, 張育丞 先生"
+  award: "晉級全國決賽"
+  members: "龍禹丞, 林雨萱, 陳嘉維"
+  advisors:  "蔡華文 教授, 張育丞 老師"
   date: "October 1, 2025"
   links:
 
