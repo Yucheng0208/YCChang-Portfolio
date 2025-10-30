@@ -1,4 +1,24 @@
 # authorrole: Co-Author(s), First Author, Corresponding Author
+- category: "conference"
+  title: "Enhanced xPatch-xLSTM for Time Series Forecasting with GCN and Dish-TS"
+  authors: "Sung-Yu Wang, Shih-Hsuan Yang, and Yu-Cheng Chang"
+  venue: "The 34th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning (ESANN 2026)"
+  location: "Crowne Plaza Brugge, Burg 10, Brugge (Belgium)"
+  authorrole: "Co-Author"
+  date: "April 22-24, 2026"
+  links:
+    DOI: "#"
+
+- category: "conference"
+  title: "Attention Enhanced DUCK-Net for Lung Nodule Detection"
+  authors: "Lawrence Y. Deng, Xiang-Yann Lim, Tzu-Ching Lin, Heng-Hsiu Lin, Ming-Hsun Lee, Yu-Cheng Chang"
+  venue: "MIOT2026 (The 5th International Workshop on Multimedia and IoT: Networks, Systems and Applications)"
+  location: "JEN PENANG GEORGETOWN BY SHANGRI-LA, Penang Branch, Malaysia"
+  authorrole: "Co-Author"
+  date: "January 18-22, 2026"
+  links:
+    DOI: "#"
+
 - category: "patent"
   title: "自動降造消音系統"
   authors: "李國憲, 錢威, 李威儒, 李凡羽, 李佳純, 陸思萱, 陸思萱, 姜宏亮, 張育丞, 陳桂嫻, 廖書漢, 張哲維"
